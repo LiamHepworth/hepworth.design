@@ -1,0 +1,13 @@
+$backgroundColourDark: rgb(23, 23, 23);
+$lineColourLight: rgb(204, 204, 204);
+
+body {
+    background-image: url('assets/bg_grid.svg');
+    background-size: 135rem;
+    background-repeat: no-repeat;
+    background-color: $backgroundColourDark;
+    background-position: center top
+}
+
+
+
