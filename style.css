@@ -41,8 +41,8 @@ body {
 
 #print-markers {
   width: 100%;
-  height: 75vh;
-  margin: 12.5vh 0;
+  height: 60vh;
+  margin: 21vh 0;
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -111,5 +111,41 @@ body {
   -webkit-box-flex: 7;
       -ms-flex-positive: 7;
           flex-grow: 7;
+}
+
+#header-section {
+  padding: 3.2rem 2.1rem 0 2.1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+#home-header {
+  margin: 0;
+  color: #cccccc;
+  font-family: input-sans, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 2.3rem;
+  line-height: 3rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.burger-menu {
+  color: #cccccc;
+  font-weight: 700;
+  font-size: 2.3rem !important;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: .2rem;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */
