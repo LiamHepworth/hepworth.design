@@ -2,6 +2,8 @@ let pageMainSection = document.querySelector('#page-main-section');
 let headerSection = document.querySelector('#header-section');
 const burgerMenuMobile = document.querySelector('.burger-menu');
 
+let backgroundColourDark = 'rgb(23, 23, 23)';
+let backgroundColourBlue = 'rgb(0, 146, 189)';
 
 (function mobileMenuPopUp(){
     burgerMenuMobile.addEventListener('click', function(){
@@ -18,16 +20,24 @@ const burgerMenuMobile = document.querySelector('.burger-menu');
                 menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
                 menuList.appendChild(menuListItems[i])
             }
+
             pageMainSection.appendChild(menuList);
             menuList.classList.add('menu-list', 'vertical-center') 
         
             burgerMenuMobile.innerText = 'close';
 
-            // background colour changes?
-    }
-    
-    function hideMenu(){
+            document.body.style.backgroundColor = backgroundColourBlue;
+            document.body.style.backgroundImage = 'url("assets/bg_grid_light.svg")'
+            
+            
+        }
+        
+        function hideMenu(){
             clearPage(pageMainSection);
+
+            document.body.style.backgroundColor = backgroundColourDark;
+            document.body.style.backgroundImage = 'url("assets/bg_grid.svg")'
+            
             burgerMenuMobile.innerText = 'menu';
     }
     
@@ -66,5 +76,4 @@ function imageCreation(imageLocation, container){
 let projectList = []
 
 projectList[0] = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
-
-imageCreation(projectList[0].media[0], pageMainSection)
+// imageCreation(projectList[0].media[0], pageMainSection)
