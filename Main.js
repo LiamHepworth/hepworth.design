@@ -6,38 +6,31 @@ let backgroundColourDark = 'rgb(23, 23, 23)';
 let backgroundColourBlue = 'rgb(0, 146, 189)';
 
 (function mobileMenuPopUp(){
-    burgerMenuMobile.addEventListener('click', function(){
-    function showMenu(){
-            clearPage(pageMainSection);
-        
-            let menuList = document.createElement('ul');
-            let menuListNames = ['HOME', 'WORK', 'ABOUT', 'CONTACT'];
-            let menuListItems = [];
-        
-            for(let i = 0; i < 4; i++){
-                menuListItems[i] = document.createElement('li');
-                menuListItems[i].innerText = menuListNames[i];
-                menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
-                menuList.appendChild(menuListItems[i])
-            }
 
-            pageMainSection.appendChild(menuList);
-            menuList.classList.add('menu-list', 'vertical-center') 
-        
-            burgerMenuMobile.innerText = 'close';
-
-            document.body.style.backgroundColor = backgroundColourBlue;
-            document.body.style.backgroundImage = 'url("assets/bg_grid_light.svg")'
-            
-            
+        let menuContainer = document.createElement('div')
+        let menuList = document.createElement('ul');
+        let menuListNames = ['HOME', 'WORK', 'ABOUT', 'CONTACT'];
+        let menuListItems = [];
+    
+        for(let i = 0; i < 4; i++){
+            menuListItems[i] = document.createElement('li');
+            menuListItems[i].innerText = menuListNames[i];
+            menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
+            menuList.appendChild(menuListItems[i])
         }
         
-        function hideMenu(){
-            clearPage(pageMainSection);
+        menuContainer.appendChild(menuList);
+        menuContainer.classList.add('menu-container', 'vertical-center')
+        menuList.classList.add('menu-list', 'vertical-center') 
 
-            document.body.style.backgroundColor = backgroundColourDark;
-            document.body.style.backgroundImage = 'url("assets/bg_grid.svg")'
-            
+    burgerMenuMobile.addEventListener('click', function(){
+    function showMenu(){
+            pageMainSection.appendChild(menuContainer);
+            burgerMenuMobile.innerText = 'close';
+        }
+        
+        function hideMenu(){        
+            pageMainSection.removeChild(menuContainer); 
             burgerMenuMobile.innerText = 'menu';
     }
     
@@ -51,11 +44,9 @@ let backgroundColourBlue = 'rgb(0, 146, 189)';
     })
 })()
 
-
-
-function clearPage(containerName){
-    containerName.innerHTML = '';
-}
+// function clearPage(containerName){
+//     containerName.innerHTML = '';
+// }
 
 class Project {
     constructor(name, type, format, media, description) {
@@ -76,4 +67,4 @@ function imageCreation(imageLocation, container){
 let projectList = []
 
 projectList[0] = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
-// imageCreation(projectList[0].media[0], pageMainSection)
+imageCreation(projectList[0].media[0], pageMainSection)

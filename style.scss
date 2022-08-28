@@ -1,4 +1,5 @@
 $backgroundColourDark: rgb(23, 23, 23);
+$backgroundColourLight: rgb(0, 146, 189);
 $lineColourLight: rgb(204, 204, 204);
 $headerFooterHeight: 2.1rem;
 
@@ -20,6 +21,7 @@ body {
     display: flex;
     position: absolute;
     top: 0;
+    z-index: 1;
     
     div{
         width: 2rem;
@@ -49,6 +51,7 @@ body {
     align-content: space-between;
     column-gap: 50%;
     overflow: hidden;
+    z-index: 1;
 
     img{
         height: 3rem;
@@ -82,6 +85,7 @@ body {
     display: flex;
     position: absolute;
     bottom: 0;
+    z-index: 1;
 
     div{
         width: 2rem;
@@ -115,6 +119,7 @@ body {
     height: fit-content;
     padding-top: .2rem;
     cursor: pointer;
+    z-index: 1;
 }
 
 .basic-text{
@@ -127,22 +132,35 @@ body {
 .header{
     margin: 0;
     font-size: 2.3rem;
-    line-height: 3rem;  
+    line-height: 3rem; 
+    z-index: 1; 
 }
 
 .sub-header{
     font-size: 1.8rem;
 }
 
-.menu-list-items{
-    margin: auto;
-    list-style-type: none;
-    line-height: 6rem;  
+.menu-container{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(0, 146, 189);
+    background-image: url('assets/bg_grid_light.svg');
+    background-size: 135rem;
+    background-repeat: repeat;
+    background-position: center top;
 }
 
 .menu-list{
     text-align: center;
     padding: 0;
+}
+
+.menu-list-items{
+    margin: auto;
+    list-style-type: none;
+    line-height: 6rem;  
 }
 
 .vertical-center{
