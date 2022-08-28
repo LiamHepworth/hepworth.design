@@ -137,7 +137,7 @@ body {
 .menu-list-items{
     margin: auto;
     list-style-type: none;
-    line-height: 5rem;  
+    line-height: 6rem;  
 }
 
 .menu-list{
@@ -152,4 +152,9 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+img{
+    height: 350px;
+    margin: auto;
 }
