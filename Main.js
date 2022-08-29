@@ -51,9 +51,9 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
 
 })()
 
-// function clearPage(containerName){
-//     containerName.innerHTML = '';
-// }
+function clearPage(containerName){
+    containerName.innerHTML = '';
+}
 
 class Project {
     constructor(name, type, format, media, description) {
@@ -94,21 +94,26 @@ let projectList = []
 //test Projects  //////////
 
 projectOne = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
-projectOne.addProjectToList().thumbnailCreation(pageMainSection);
-
 projectTwo = new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description');
-projectTwo.addProjectToList().thumbnailCreation(pageMainSection);
 
 //test Projects END ////////////
 
 function displayWorkPage(){
     const workPageButton = document.querySelector('#work-button');
-    console.log(workPageButton)
-
+    
     workPageButton.addEventListener('click', function(){
+        // clearPage(pageMainSection);
+
         console.log('WORKING!!');
+        pageMainSection.classList.add('grid-container')
+        
+        
+        projectOne.addProjectToList().thumbnailCreation(pageMainSection);
+        projectTwo.addProjectToList().thumbnailCreation(pageMainSection);
     });
 };
+
+
 
 
 

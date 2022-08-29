@@ -3,6 +3,7 @@ $backgroundColourLight: rgb(0, 146, 189);
 $lineColourLight: rgb(204, 204, 204);
 $headerFooterHeight: 2.1rem;
 
+
 body {
     background-image: url('assets/bg_grid.svg');
     background-size: 135rem;
@@ -19,9 +20,9 @@ body {
     background-color: $backgroundColourDark;
     border-bottom: .2rem solid $lineColourLight;
     display: flex;
-    position: absolute;
+    position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     
     div{
         width: 2rem;
@@ -41,6 +42,7 @@ body {
 }
 
 #print-markers{
+    pointer-events: none;
     width: 100%;
     height: 60vh;
     margin: 21vh 0;
@@ -83,7 +85,7 @@ body {
     background-color: $backgroundColourDark;
     border-top: .2rem solid $lineColourLight;
     display: flex;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     z-index: 1;
 
@@ -172,7 +174,13 @@ body {
     transform: translate(-50%, -50%);
 }
 
-img{
-    height: 350px;
-    margin: auto;
+
+.grid-container{
+    display: grid;
+    padding: 2.5rem 0 5rem 0;
+    
+    img{
+        width: 80%;
+        margin: 1rem auto;
+    }
 }
