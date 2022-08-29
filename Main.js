@@ -9,12 +9,16 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
 
         let menuContainer = document.createElement('div')
         let menuList = document.createElement('ul');
+
         let menuListNames = ['HOME', 'WORK', 'ABOUT', 'CONTACT'];
+        let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button']
+
         let menuListItems = [];
     
         for(let i = 0; i < 4; i++){
             menuListItems[i] = document.createElement('li');
             menuListItems[i].innerText = menuListNames[i];
+            menuListItems[i].id = menuListIds[i];
             menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
             menuList.appendChild(menuListItems[i])
         }
@@ -27,6 +31,8 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
     function showMenu(){
             pageMainSection.appendChild(menuContainer);
             burgerMenuMobile.innerText = 'close';
+
+            displayWorkPage();
         }
         
         function hideMenu(){        
@@ -42,6 +48,7 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
         console.log('showing Menu');
     }
     })
+
 })()
 
 // function clearPage(containerName){
@@ -57,21 +64,51 @@ class Project {
         this.description = description;
     };
 
-    imageCreation(container){
+    addProjectToList(){
+        projectList.push(this);
+        return this
+    };
+    
+    thumbnailCreation(container){
         let img = new Image();
         img.src = this.media[0];
         container.appendChild(img);
+    }
+
+    carouselCreation(container){
+
+        let images = [];
+
+        for(let i = 0; i < this.media.length; i++){
+            images[i] = new Image();
+            images[i].src = this.media[i];
+            container.appendChild(images[i]);
+        }
     };
 
-    addProjectToList(){
-        projectList.push(this);
-    };
-}
+};
 
 
 let projectList = []
 
-testProject = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
-testProject.imageCreation(pageMainSection)
-testProject.addProjectToList();
+//test Projects  //////////
+
+projectOne = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
+projectOne.addProjectToList().thumbnailCreation(pageMainSection);
+
+projectTwo = new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description');
+projectTwo.addProjectToList().thumbnailCreation(pageMainSection);
+
+//test Projects END ////////////
+
+function displayWorkPage(){
+    const workPageButton = document.querySelector('#work-button');
+    console.log(workPageButton)
+
+    workPageButton.addEventListener('click', function(){
+        console.log('WORKING!!');
+    });
+};
+
+
 
