@@ -2,8 +2,8 @@ let pageMainSection = document.querySelector('#page-main-section');
 let headerSection = document.querySelector('#header-section');
 const burgerMenuMobile = document.querySelector('.burger-menu');
 
-let backgroundColourDark = 'rgb(23, 23, 23)';
-let backgroundColourBlue = 'rgb(0, 146, 189)';
+const backgroundColourDark = 'rgb(23, 23, 23)';
+const backgroundColourBlue = 'rgb(0, 146, 189)';
 
 (function mobileMenuPopUp(){
 
@@ -34,10 +34,10 @@ let backgroundColourBlue = 'rgb(0, 146, 189)';
             burgerMenuMobile.innerText = 'menu';
     }
     
-    if(burgerMenuMobile.innerText == 'close'){
+    if(burgerMenuMobile.innerText === 'close'){
         hideMenu();
         console.log('hiding Menu');
-    } else if(burgerMenuMobile.innerText == 'menu'){
+    } else if(burgerMenuMobile.innerText === 'menu'){
         showMenu();
         console.log('showing Menu');
     }
@@ -55,16 +55,23 @@ class Project {
         this.format = format;
         this.media = media;
         this.description = description;
-    }
+    };
+
+    imageCreation(container){
+        let img = new Image();
+        img.src = this.media[0];
+        container.appendChild(img);
+    };
+
+    addProjectToList(){
+        projectList.push(this);
+    };
 }
 
-function imageCreation(imageLocation, container){
-    let img = new Image();
-    img.src = imageLocation;
-    container.appendChild(img);
-}
 
 let projectList = []
 
-projectList[0] = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
-imageCreation(projectList[0].media[0], pageMainSection)
+testProject = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
+testProject.imageCreation(pageMainSection)
+testProject.addProjectToList();
+
