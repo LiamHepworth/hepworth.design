@@ -37,6 +37,7 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
             displayHomePage();
             displayWorkPage();
             displayAboutPage();
+            displayContactPage()
         }
         
     function hideMenu(){        
@@ -85,7 +86,6 @@ class Project {
             container.appendChild(images[i]);
         }
     };
-
 };
 
 

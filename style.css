@@ -247,7 +247,7 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 2.5rem auto;
   padding: 0 0 2.5rem 0;
 }
 
