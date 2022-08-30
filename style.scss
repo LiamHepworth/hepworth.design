@@ -1,7 +1,7 @@
 $backgroundColourDark: rgb(23, 23, 23);
 $backgroundColourBlue: rgb(0, 146, 189);
 $lineColourLight: rgb(204, 204, 204);
-$headerFooterHeight: 2.1rem;
+$headerFooterHeight: 2.4rem;
 
 .blue{
     background-color: $backgroundColourBlue;
@@ -129,7 +129,7 @@ body {
     padding: 3.2rem 2.1rem 0 2.1rem;
     display: flex;
     justify-content: space-between;
-    height: fit-content;
+    height: 13.6vh;
 }
 
 .burger-menu{
@@ -183,7 +183,7 @@ body {
 
 .grid-container{
     display: grid;
-    padding: 2.5rem 0 5rem 0;
+    padding: 1.5rem 0 5rem 0;
     
     img{
         width: 80%;
@@ -200,12 +200,12 @@ body {
     transform: translate(-50%, -50%);
 }
 
-// .generic-flex-container{
-//     // display: flex;
-//     // flex-flow: column;
-//     width: 100%;
-//     // height: fit-content;
-// }
+.generic-flex-container{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 78.5vh;
+}
 
 .description-text-container{
     height: fit-content;
@@ -214,13 +214,11 @@ body {
 .description-text{
     width: 75%;
     height: fit-content;
-    margin: 2.5rem auto 2.5rem auto;
+    margin: 0 auto 0 auto;
     padding: 0 0 2.5rem 0;
 }
 
 .grid-sections{
     background-color: $backgroundColourBlue;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
+    flex-grow: 1;
 }

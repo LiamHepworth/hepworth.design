@@ -29,7 +29,7 @@ body {
 }
 
 #top-bar {
-  height: 2.1rem;
+  height: 2.4rem;
   width: 100%;
   background-color: #171717;
   border-bottom: 0.2rem solid #cccccc;
@@ -106,7 +106,7 @@ body {
 }
 
 #bottom-bar {
-  height: 2.1rem;
+  height: 2.4rem;
   width: 100%;
   background-color: #171717;
   border-top: 0.2rem solid #cccccc;
@@ -145,9 +145,7 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 13.6vh;
 }
 
 .burger-menu {
@@ -209,7 +207,7 @@ body {
 .grid-container {
   display: -ms-grid;
   display: grid;
-  padding: 2.5rem 0 5rem 0;
+  padding: 1.5rem 0 5rem 0;
 }
 
 .grid-container img {
@@ -226,6 +224,18 @@ body {
           transform: translate(-50%, -50%);
 }
 
+.generic-flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  width: 100%;
+  height: 78.5vh;
+}
+
 .description-text-container {
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -237,14 +247,14 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  margin: 2.5rem auto 2.5rem auto;
+  margin: 0 auto 0 auto;
   padding: 0 0 2.5rem 0;
 }
 
 .grid-sections {
   background-color: #0092bd;
-  width: 100%;
-  height: 100vh;
-  position: fixed;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 /*# sourceMappingURL=style.css.map */
