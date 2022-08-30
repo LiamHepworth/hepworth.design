@@ -200,28 +200,27 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.generic-flex-container{
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-    height: 85vh;
-}
+// .generic-flex-container{
+//     // display: flex;
+//     // flex-flow: column;
+//     width: 100%;
+//     // height: fit-content;
+// }
 
 .description-text-container{
     height: fit-content;
 }
 
 .description-text{
-    overflow: hidden;
     width: 75%;
     height: fit-content;
-    margin: 2.5rem auto;
-    padding: 0 0 2.5rem;
+    margin: 2.5rem auto 2.5rem auto;
+    padding: 0 0 2.5rem 0;
 }
 
 .grid-sections{
     background-color: $backgroundColourBlue;
     width: 100%;
-    // height: 20rem;
-    flex-grow: 1;
+    height: 100vh;
+    position: fixed;
 }

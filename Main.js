@@ -103,6 +103,7 @@ function resetPage(containerName){
     burgerMenuMobile.innerText = 'menu';
     pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
     pageBody.classList.add('grid-dark')
+    pageMainSection.classList.remove('grid-container');
 }
 
 function displayHomePage(){
@@ -126,17 +127,17 @@ function displayWorkPage(){
     });
 };
 
-// function displayAboutPage(){
+function displayAboutPage(){
     const aboutPageButton = document.querySelector('#about-button');
 
-    // aboutPageButton.addEventListener('click', function(){
+    aboutPageButton.addEventListener('click', function(){
         resetPage(pageMainSection);
         console.log('about linked')
 
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-dark');
 
-        pageMainSection.className = 'generic-flex-container';
+        // pageMainSection.className = 'generic-flex-container';
 
         let aboutTextSection = document.createElement('div');
         aboutTextSection.classList.add('description-text-container')
@@ -150,5 +151,5 @@ function displayWorkPage(){
         let aboutBlueGridSection = document.createElement('div')
         aboutBlueGridSection.classList.add('blue', 'grid-light', 'grid-sections')
         pageMainSection.appendChild(aboutBlueGridSection);
-//     });
-// }
+    });
+}
