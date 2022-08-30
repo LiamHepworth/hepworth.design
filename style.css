@@ -1,9 +1,11 @@
 .blue {
   background-color: #0092bd;
+  height: auto;
 }
 
 .black {
   background-color: #171717;
+  height: auto;
 }
 
 .grid-dark {
@@ -23,6 +25,7 @@
 body {
   padding: 0;
   margin: 0;
+  height: 100vh;
 }
 
 #top-bar {
@@ -166,6 +169,9 @@ body {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .header {

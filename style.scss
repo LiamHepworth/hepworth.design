@@ -5,10 +5,12 @@ $headerFooterHeight: 2.1rem;
 
 .blue{
     background-color: $backgroundColourBlue;
+    height: auto;
 }
 
 .black{
     background-color: $backgroundColourDark;
+    height: auto;
 }
 
 .grid-dark{
@@ -26,12 +28,9 @@ $headerFooterHeight: 2.1rem;
 }
 
 body {
-    // background-image: url('assets/bg_grid.svg');
-    // background-size: 135rem;
-    // background-repeat: repeat;
-    // background-position: center top;
     padding: 0;
     margin: 0;
+    height: 100vh;
 }
 
 #top-bar{
@@ -149,6 +148,7 @@ body {
     font-family: input-sans, Helvetica, sans-serif;
     font-weight: 100;
     width: fit-content;
+    height: fit-content;
 }
 
 .header{

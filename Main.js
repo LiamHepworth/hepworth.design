@@ -1,4 +1,5 @@
 let pageMainSection = document.querySelector('#page-main-section');
+const pageBody = document.querySelector('body')
 const headerSection = document.querySelector('#header-section');
 const pageHeader = document.querySelector('#header')
 const burgerMenuMobile = document.querySelector('.burger-menu');
@@ -26,7 +27,7 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
     
     menuContainer.appendChild(menuList);
     menuContainer.classList.add('grid-light', 'blue', 'vertical-center', 'menu-container');
-    menuList.classList.add('vertical-center') 
+    menuList.classList.add('vertical-center', 'menu-list') 
 
     burgerMenuMobile.addEventListener('click', function(){
     function showMenu(){
@@ -101,6 +102,7 @@ function resetPage(containerName){
     containerName.innerHTML = '';
     burgerMenuMobile.innerText = 'menu';
     pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
+    pageBody.classList.add('grid-dark')
 }
 
 function displayHomePage(){
@@ -132,6 +134,20 @@ function displayAboutPage(){
         console.log('about linked')
 
         pageHeader.innerText = 'ABOUT';
+        pageBody.classList.remove('grid-dark')
+
+        let aboutTextSection = document.createElement('div')
+        pageMainSection.appendChild(aboutTextSection);
+
+        let aboutText = document.createElement('p')
+        aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
+        aboutTextSection.appendChild(aboutText);
+        aboutText.classList.add('basic-text')
+
+        let aboutBlueGridSection = document.createElement('div')
+        aboutBlueGridSection.classList.add('blue', 'grid-light')
+        pageMainSection.appendChild(aboutBlueGridSection);
+
     });
 
 }
