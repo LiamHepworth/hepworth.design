@@ -1,15 +1,35 @@
 $backgroundColourDark: rgb(23, 23, 23);
-$backgroundColourLight: rgb(0, 146, 189);
+$backgroundColourBlue: rgb(0, 146, 189);
 $lineColourLight: rgb(204, 204, 204);
 $headerFooterHeight: 2.1rem;
 
+.blue{
+    background-color: $backgroundColourBlue;
+}
 
-body {
+.black{
+    background-color: $backgroundColourDark;
+}
+
+.grid-dark{
     background-image: url('assets/bg_grid.svg');
     background-size: 135rem;
     background-repeat: repeat;
-    background-color: $backgroundColourDark;
     background-position: center top;
+}
+
+.grid-light{
+    background-image: url('assets/bg_grid_light.svg');
+    background-size: 135rem;
+    background-repeat: repeat;
+    background-position: center top;
+}
+
+body {
+    // background-image: url('assets/bg_grid.svg');
+    // background-size: 135rem;
+    // background-repeat: repeat;
+    // background-position: center top;
     padding: 0;
     margin: 0;
 }
@@ -147,11 +167,8 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: rgb(0, 146, 189);
-    background-image: url('assets/bg_grid_light.svg');
-    background-size: 135rem;
-    background-repeat: repeat;
-    background-position: center top;
+    position: sticky;
+    cursor: pointer;
 }
 
 .menu-list{
@@ -165,16 +182,6 @@ body {
     line-height: 6rem;  
 }
 
-.vertical-center{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-
 .grid-container{
     display: grid;
     padding: 2.5rem 0 5rem 0;
@@ -183,4 +190,13 @@ body {
         width: 80%;
         margin: 1rem auto;
     }
+}
+
+.vertical-center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

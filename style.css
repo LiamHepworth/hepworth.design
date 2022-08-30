@@ -1,9 +1,26 @@
-body {
+.blue {
+  background-color: #0092bd;
+}
+
+.black {
+  background-color: #171717;
+}
+
+.grid-dark {
   background-image: url("assets/bg_grid.svg");
   background-size: 135rem;
   background-repeat: repeat;
-  background-color: #171717;
   background-position: center top;
+}
+
+.grid-light {
+  background-image: url("assets/bg_grid_light.svg");
+  background-size: 135rem;
+  background-repeat: repeat;
+  background-position: center top;
+}
+
+body {
   padding: 0;
   margin: 0;
 }
@@ -167,11 +184,9 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #0092bd;
-  background-image: url("assets/bg_grid_light.svg");
-  background-size: 135rem;
-  background-repeat: repeat;
-  background-position: center top;
+  position: -webkit-sticky;
+  position: sticky;
+  cursor: pointer;
 }
 
 .menu-list {
@@ -185,15 +200,6 @@ body {
   line-height: 6rem;
 }
 
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
 .grid-container {
   display: -ms-grid;
   display: grid;
@@ -203,5 +209,14 @@ body {
 .grid-container img {
   width: 80%;
   margin: 1rem auto;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 /*# sourceMappingURL=style.css.map */

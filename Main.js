@@ -1,5 +1,6 @@
 let pageMainSection = document.querySelector('#page-main-section');
-let headerSection = document.querySelector('#header-section');
+const headerSection = document.querySelector('#header-section');
+const pageHeader = document.querySelector('#header')
 const burgerMenuMobile = document.querySelector('.burger-menu');
 
 const backgroundColourDark = 'rgb(23, 23, 23)';
@@ -7,37 +8,39 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
 
 (function mobileMenuPopUp(){
 
-        let menuContainer = document.createElement('div')
-        let menuList = document.createElement('ul');
+    let menuContainer = document.createElement('div')
+    let menuList = document.createElement('ul');
 
-        let menuListNames = ['HOME', 'WORK', 'ABOUT', 'CONTACT'];
-        let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button']
+    let menuListNames = ['HOME', 'WORK', 'ABOUT', 'CONTACT'];
+    let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button']
 
-        let menuListItems = [];
+    let menuListItems = [];           //the actual <li> elements
+
+    for(let i = 0; i < 4; i++){
+        menuListItems[i] = document.createElement('li');
+        menuListItems[i].innerText = menuListNames[i];
+        menuListItems[i].id = menuListIds[i];
+        menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
+        menuList.appendChild(menuListItems[i])
+    }
     
-        for(let i = 0; i < 4; i++){
-            menuListItems[i] = document.createElement('li');
-            menuListItems[i].innerText = menuListNames[i];
-            menuListItems[i].id = menuListIds[i];
-            menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
-            menuList.appendChild(menuListItems[i])
-        }
-        
-        menuContainer.appendChild(menuList);
-        menuContainer.classList.add('menu-container', 'vertical-center')
-        menuList.classList.add('menu-list', 'vertical-center') 
+    menuContainer.appendChild(menuList);
+    menuContainer.classList.add('grid-light', 'blue', 'vertical-center', 'menu-container');
+    menuList.classList.add('vertical-center') 
 
     burgerMenuMobile.addEventListener('click', function(){
     function showMenu(){
             pageMainSection.appendChild(menuContainer);
             burgerMenuMobile.innerText = 'close';
 
+            displayHomePage();
             displayWorkPage();
+            displayAboutPage();
         }
         
-        function hideMenu(){        
-            pageMainSection.removeChild(menuContainer); 
-            burgerMenuMobile.innerText = 'menu';
+    function hideMenu(){        
+        pageMainSection.removeChild(menuContainer); 
+        burgerMenuMobile.innerText = 'menu';
     }
     
     if(burgerMenuMobile.innerText === 'close'){
@@ -48,12 +51,8 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
         console.log('showing Menu');
     }
     })
-
 })()
 
-function clearPage(containerName){
-    containerName.innerHTML = '';
-}
 
 class Project {
     constructor(name, type, format, media, description) {
@@ -98,22 +97,41 @@ projectTwo = new Project('severe', 'poster', 'stills', ['projects/severe/image01
 
 //test Projects END ////////////
 
+function resetPage(containerName){
+    containerName.innerHTML = '';
+    burgerMenuMobile.innerText = 'menu';
+    pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
+}
+
+function displayHomePage(){
+    const homePageButton = document.querySelector('#home-button');
+    
+    homePageButton.addEventListener('click', function(){
+        resetPage(pageMainSection);
+    });
+};
+
 function displayWorkPage(){
     const workPageButton = document.querySelector('#work-button');
     
     workPageButton.addEventListener('click', function(){
-        // clearPage(pageMainSection);
-
-        console.log('WORKING!!');
-        pageMainSection.classList.add('grid-container')
+        resetPage(pageMainSection);
         
+        pageMainSection.classList.add('grid-container')
         
         projectOne.addProjectToList().thumbnailCreation(pageMainSection);
         projectTwo.addProjectToList().thumbnailCreation(pageMainSection);
     });
 };
 
+function displayAboutPage(){
+    const aboutPageButton = document.querySelector('#about-button');
 
+    aboutPageButton.addEventListener('click', function(){
+        resetPage(pageMainSection);
+        console.log('about linked')
 
+        pageHeader.innerText = 'ABOUT';
+    });
 
-
+}
