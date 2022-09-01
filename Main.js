@@ -108,11 +108,21 @@ function createBlueGridFiller(){
     return gridFiller;
 }
 
+// function checkState(){
+
+//     switch(e = PopStateEvent)
+// }
+
+window.addEventListener('popstate', e => {
+    console.log(e.state);
+})
+
 function displayHomePage(){
     const homePageButton = document.querySelector('#home-button');
     
     homePageButton.addEventListener('click', function(){
         resetPage(pageMainSection);
+        history.pushState('home', null, 'home');
     });
 };
 
@@ -121,6 +131,7 @@ function displayWorkPage(){
     
     workPageButton.addEventListener('click', function(){
         resetPage(pageMainSection);
+        history.pushState('work', null, 'work');
         
         pageMainSection.classList.add('grid-container')
 
