@@ -89,14 +89,10 @@ class Project {
 };
 
 
-let projectList = []
-
-//test Projects  //////////
-
-projectOne = new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description');
-projectTwo = new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description');
-
-//test Projects END ////////////
+let projectList = [
+    new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description'),
+    new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description')
+];
 
 function resetPage(containerName){
     containerName.innerHTML = '';
@@ -127,9 +123,12 @@ function displayWorkPage(){
         resetPage(pageMainSection);
         
         pageMainSection.classList.add('grid-container')
-        
-        projectOne.addProjectToList().thumbnailCreation(pageMainSection);
-        projectTwo.addProjectToList().thumbnailCreation(pageMainSection);
+
+        for(let i = 0; i < projectList.length; i++){
+            projectList[i].thumbnailCreation(pageMainSection);
+
+        }
+
     });
 };
 
