@@ -34,12 +34,27 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
             pageMainSection.appendChild(menuContainer);
             burgerMenuMobile.innerText = 'close';
 
-            displayHomePage();
-            displayWorkPage();
-            displayAboutPage();
-            displayContactPage()
-        }
-        
+            let homePageButton = document.querySelector('#home-button');
+            homePageButton.addEventListener('click', function(){
+                displayHomePage();
+            });
+
+            const workPageButton = document.querySelector('#work-button');
+            workPageButton.addEventListener('click', function(){
+                displayWorkPage();
+            });
+
+            const aboutPageButton = document.querySelector('#about-button');
+            aboutPageButton.addEventListener('click', function(){
+                displayAboutPage();
+            });
+
+            const contactPageButton = document.querySelector('#contact-button');
+            contactPageButton.addEventListener('click', function(){
+                displayContactPage()
+            });
+    }
+
     function hideMenu(){        
         pageMainSection.removeChild(menuContainer); 
         burgerMenuMobile.innerText = 'menu';
@@ -117,71 +132,52 @@ function createBlueGridFiller(){
     window.addEventListener('popstate', e => {
         console.log(e.state);
     
-        // if(e.state === 'home' || null){
-        //     displayHomePage()
-        // } else if(e.state === 'work'){
-        //     displayWorkPage()
-        // };
+        if(e.state === 'home' || null){
+            displayHomePage()
+        } else if(e.state === 'work'){
+            displayWorkPage()
+        };
     })
 })();
 
 function displayHomePage(){
-    const homePageButton = document.querySelector('#home-button');
-    
-    homePageButton.addEventListener('click', function(){
-        resetPage(pageMainSection);
-        history.pushState('home', null, '');
-    });
+    resetPage(pageMainSection);
+    history.pushState('home', null, '');
 };
 
 function displayWorkPage(){
-    const workPageButton = document.querySelector('#work-button');
+    resetPage(pageMainSection);
+    history.pushState('work', null, '');
     
-    workPageButton.addEventListener('click', function(){
-        
+    pageMainSection.classList.add('grid-container')
 
-        resetPage(pageMainSection);
-        history.pushState('work', null, '');
-        
-        pageMainSection.classList.add('grid-container')
+    for(let i = 0; i < projectList.length; i++){
+        projectList[i].thumbnailCreation(pageMainSection);
 
-        for(let i = 0; i < projectList.length; i++){
-            projectList[i].thumbnailCreation(pageMainSection);
-
-        }
-
-    });
+    }
 };
 
 function displayAboutPage(){
-    const aboutPageButton = document.querySelector('#about-button');
+    resetPage(pageMainSection);
+    console.log('about linked')
 
-    aboutPageButton.addEventListener('click', function(){
-        resetPage(pageMainSection);
-        console.log('about linked')
+    pageHeader.innerText = 'ABOUT';
+    pageBody.classList.remove('grid-dark');
 
-        pageHeader.innerText = 'ABOUT';
-        pageBody.classList.remove('grid-dark');
+    pageMainSection.className = 'generic-flex-container';
 
-        pageMainSection.className = 'generic-flex-container';
+    let aboutTextSection = document.createElement('div');
+    aboutTextSection.classList.add('description-text-container')
+    pageMainSection.appendChild(aboutTextSection);
 
-        let aboutTextSection = document.createElement('div');
-        aboutTextSection.classList.add('description-text-container')
-        pageMainSection.appendChild(aboutTextSection);
+    let aboutText = document.createElement('p')
+    aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
+    aboutText.classList.add('basic-text', 'description-text')
+    aboutTextSection.appendChild(aboutText);
 
-        let aboutText = document.createElement('p')
-        aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
-        aboutText.classList.add('basic-text', 'description-text')
-        aboutTextSection.appendChild(aboutText);
-
-        pageMainSection.appendChild(createBlueGridFiller());
-    });
+    pageMainSection.appendChild(createBlueGridFiller());
 }
 
 function displayContactPage(){
-    const contactPageButton = document.querySelector('#contact-button');
-    
-    contactPageButton.addEventListener('click', function(){
-        resetPage(pageMainSection);
-    });
+    resetPage(pageMainSection);
 };
