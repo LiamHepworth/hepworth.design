@@ -113,16 +113,24 @@ function createBlueGridFiller(){
 //     switch(e = PopStateEvent)
 // }
 
-window.addEventListener('popstate', e => {
-    console.log(e.state);
-})
+(function checkHistory(){
+    window.addEventListener('popstate', e => {
+        console.log(e.state);
+    
+        // if(e.state === 'home' || null){
+        //     displayHomePage()
+        // } else if(e.state === 'work'){
+        //     displayWorkPage()
+        // };
+    })
+})();
 
 function displayHomePage(){
     const homePageButton = document.querySelector('#home-button');
     
     homePageButton.addEventListener('click', function(){
         resetPage(pageMainSection);
-        history.pushState('home', null, 'home');
+        history.pushState('home', null, '');
     });
 };
 
@@ -130,8 +138,10 @@ function displayWorkPage(){
     const workPageButton = document.querySelector('#work-button');
     
     workPageButton.addEventListener('click', function(){
+        
+
         resetPage(pageMainSection);
-        history.pushState('work', null, 'work');
+        history.pushState('work', null, '');
         
         pageMainSection.classList.add('grid-container')
 
