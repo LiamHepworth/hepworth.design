@@ -37,21 +37,25 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
             let homePageButton = document.querySelector('#home-button');
             homePageButton.addEventListener('click', function(){
                 displayHomePage();
+                history.pushState('home', null, null);
             });
 
             const workPageButton = document.querySelector('#work-button');
             workPageButton.addEventListener('click', function(){
                 displayWorkPage();
+                history.pushState('work', null, null);
             });
-
+            
             const aboutPageButton = document.querySelector('#about-button');
             aboutPageButton.addEventListener('click', function(){
                 displayAboutPage();
+                history.pushState('about', null, null);
             });
-
+            
             const contactPageButton = document.querySelector('#contact-button');
             contactPageButton.addEventListener('click', function(){
                 displayContactPage()
+                history.pushState('contact', null, null);
             });
     }
 
@@ -128,26 +132,34 @@ function createBlueGridFiller(){
 //     switch(e = PopStateEvent)
 // }
 
-(function checkHistory(){
+// (function checkHistory(){
     window.addEventListener('popstate', e => {
         console.log(e.state);
     
-        if(e.state === 'home' || null){
-            displayHomePage()
-        } else if(e.state === 'work'){
-            displayWorkPage()
-        };
+        // if(e.state !== null){
+            if(e.state === 'home'){
+                displayHomePage()
+            } else if(e.state === 'work'){
+                displayWorkPage()
+            } else if(e.state === 'about'){
+                displayAboutPage()
+            } else if(e.state === 'contact'){
+                displayContactPage()
+            };
+        // } else {
+        //     displayHomePage();
+        // }
     })
-})();
+// })();
 
 function displayHomePage(){
     resetPage(pageMainSection);
-    history.pushState('home', null, '');
+
 };
 
 function displayWorkPage(){
     resetPage(pageMainSection);
-    history.pushState('work', null, '');
+
     
     pageMainSection.classList.add('grid-container')
 
@@ -159,7 +171,6 @@ function displayWorkPage(){
 
 function displayAboutPage(){
     resetPage(pageMainSection);
-    console.log('about linked')
 
     pageHeader.innerText = 'ABOUT';
     pageBody.classList.remove('grid-dark');
