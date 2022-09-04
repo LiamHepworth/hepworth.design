@@ -12,14 +12,14 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
     let menuContainer = document.createElement('div')
     let menuList = document.createElement('ul');
 
-    let menuListNames = ['HOME', 'WORK', 'ABOUT', 'CONTACT'];
+    let menuListNames = ['home', 'work', 'about', 'contact'];
     let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button']
 
     let menuListItems = [];           //the actual <li> elements
 
     for(let i = 0; i < 4; i++){
         menuListItems[i] = document.createElement('li');
-        menuListItems[i].innerText = menuListNames[i];
+        menuListItems[i].innerText = menuListNames[i].toUpperCase();
         menuListItems[i].id = menuListIds[i];
         menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
         menuList.appendChild(menuListItems[i])
@@ -31,32 +31,22 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
 
     burgerMenuMobile.addEventListener('click', function(){
     function showMenu(){
-            pageMainSection.appendChild(menuContainer);
-            burgerMenuMobile.innerText = 'close';
+        pageMainSection.appendChild(menuContainer);
+        burgerMenuMobile.innerText = 'close';
 
-            let homePageButton = document.querySelector('#home-button');
-            homePageButton.addEventListener('click', function(){
-                displayHomePage();
-                history.pushState('home', null, null);
-            });
+    
+        for(let i = 0; i < menuListNames.length; i++){
 
-            const workPageButton = document.querySelector('#work-button');
-            workPageButton.addEventListener('click', function(){
-                displayWorkPage();
-                history.pushState('work', null, null);
+            let el = {};
+            el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
+            console.log(el);
+
+            el[menuListNames[i]].addEventListener('click', function(){
+                displayFunctions[`${menuListNames[i]}`]();
             });
             
-            const aboutPageButton = document.querySelector('#about-button');
-            aboutPageButton.addEventListener('click', function(){
-                displayAboutPage();
-                history.pushState('about', null, null);
-            });
-            
-            const contactPageButton = document.querySelector('#contact-button');
-            contactPageButton.addEventListener('click', function(){
-                displayContactPage()
-                history.pushState('contact', null, null);
-            });
+            history.pushState(menuListNames[i], null, null);
+        }
     }
 
     function hideMenu(){        
@@ -138,13 +128,13 @@ function createBlueGridFiller(){
     
         // if(e.state !== null){
             if(e.state === 'home'){
-                displayHomePage()
+                displayFunctions.home()
             } else if(e.state === 'work'){
-                displayWorkPage()
+                displayFunctions.work()
             } else if(e.state === 'about'){
-                displayAboutPage()
+                displayFunctions.about()            
             } else if(e.state === 'contact'){
-                displayContactPage()
+                displayFunctions.contact()            
             };
         // } else {
         //     displayHomePage();
@@ -152,43 +142,46 @@ function createBlueGridFiller(){
     })
 // })();
 
-function displayHomePage(){
-    resetPage(pageMainSection);
+let displayFunctions = {
+    home: function displayHomePage(){
+        resetPage(pageMainSection);
+    }, 
 
-};
-
-function displayWorkPage(){
-    resetPage(pageMainSection);
-
+    work: function displayWorkPage(){
+        resetPage(pageMainSection);
     
-    pageMainSection.classList.add('grid-container')
+        
+        pageMainSection.classList.add('grid-container')
+    
+        for(let i = 0; i < projectList.length; i++){
+            projectList[i].thumbnailCreation(pageMainSection);
+    
+        }
+    },
 
-    for(let i = 0; i < projectList.length; i++){
-        projectList[i].thumbnailCreation(pageMainSection);
+    about: function displayAboutPage(){
+        resetPage(pageMainSection);
+    
+        pageHeader.innerText = 'ABOUT';
+        pageBody.classList.remove('grid-dark');
+    
+        pageMainSection.className = 'generic-flex-container';
+    
+        let aboutTextSection = document.createElement('div');
+        aboutTextSection.classList.add('description-text-container')
+        pageMainSection.appendChild(aboutTextSection);
+    
+        let aboutText = document.createElement('p')
+        aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
+        aboutText.classList.add('basic-text', 'description-text')
+        aboutTextSection.appendChild(aboutText);
+    
+        pageMainSection.appendChild(createBlueGridFiller());
+    }, 
 
+    contact: function displayContactPage(){
+        resetPage(pageMainSection);
     }
 };
 
-function displayAboutPage(){
-    resetPage(pageMainSection);
 
-    pageHeader.innerText = 'ABOUT';
-    pageBody.classList.remove('grid-dark');
-
-    pageMainSection.className = 'generic-flex-container';
-
-    let aboutTextSection = document.createElement('div');
-    aboutTextSection.classList.add('description-text-container')
-    pageMainSection.appendChild(aboutTextSection);
-
-    let aboutText = document.createElement('p')
-    aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
-    aboutText.classList.add('basic-text', 'description-text')
-    aboutTextSection.appendChild(aboutText);
-
-    pageMainSection.appendChild(createBlueGridFiller());
-}
-
-function displayContactPage(){
-    resetPage(pageMainSection);
-};
