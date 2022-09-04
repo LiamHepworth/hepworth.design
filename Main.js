@@ -35,18 +35,20 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
         burgerMenuMobile.innerText = 'close';
 
     
-        for(let i = 0; i < menuListNames.length; i++){
-
-            let el = {};
-            el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
-            console.log(el);
-
-            el[menuListNames[i]].addEventListener('click', function(){
-                displayFunctions[`${menuListNames[i]}`]();
-            });
-            
-            history.pushState(menuListNames[i], null, null);
-        }
+        (function displayButtonsAndHistoryStates(){
+            for(let i = 0; i < menuListNames.length; i++){
+    
+                let el = {};
+                el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
+                console.log(el);
+    
+                el[menuListNames[i]].addEventListener('click', function(){
+                    displayFunctions[`${menuListNames[i]}`]();
+                });
+    
+                history.pushState(menuListNames[i], null, null);
+            }
+        })()
     }
 
     function hideMenu(){        
@@ -117,30 +119,22 @@ function createBlueGridFiller(){
     return gridFiller;
 }
 
-// function checkState(){
 
-//     switch(e = PopStateEvent)
-// }
 
-// (function checkHistory(){
-    window.addEventListener('popstate', e => {
-        console.log(e.state);
-    
-        // if(e.state !== null){
-            if(e.state === 'home'){
-                displayFunctions.home()
-            } else if(e.state === 'work'){
-                displayFunctions.work()
-            } else if(e.state === 'about'){
-                displayFunctions.about()            
-            } else if(e.state === 'contact'){
-                displayFunctions.contact()            
-            };
-        // } else {
-        //     displayHomePage();
-        // }
-    })
-// })();
+window.addEventListener('popstate', e => {
+    console.log(e.state);
+
+        if(e.state === 'home'){
+            displayFunctions.home()
+        } else if(e.state === 'work'){
+            displayFunctions.work()
+        } else if(e.state === 'about'){
+            displayFunctions.about()            
+        } else if(e.state === 'contact'){
+            displayFunctions.contact()            
+        };
+})
+
 
 let displayFunctions = {
     home: function displayHomePage(){
