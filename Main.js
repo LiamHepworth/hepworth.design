@@ -7,6 +7,8 @@ const burgerMenuMobile = document.querySelector('.burger-menu');
 const backgroundColourDark = 'rgb(23, 23, 23)';
 const backgroundColourBlue = 'rgb(0, 146, 189)';
 
+let menuItemsAreClicked = false;
+
 (function mobileMenuPopUp(){
 
     let menuContainer = document.createElement('div')
@@ -29,27 +31,26 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
     menuContainer.classList.add('grid-light', 'blue', 'vertical-center', 'menu-container');
     menuList.classList.add('vertical-center', 'menu-list') 
 
-    burgerMenuMobile.addEventListener('click', function(){
-    function showMenu(){
+    burgerMenuMobile.addEventListener('click', function(e){
+        function showMenu(){
+
         pageMainSection.appendChild(menuContainer);
         burgerMenuMobile.innerText = 'close';
 
-    
-        (function displayButtonsAndHistoryStates(){
-            for(let i = 0; i < menuListNames.length; i++){
-    
-                let el = {};
-                el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
-                console.log(el);
-    
-                el[menuListNames[i]].addEventListener('click', function(){
-                    displayFunctions[`${menuListNames[i]}`]();
+        for(let i = 0; i < menuListNames.length; i++){
+
+            let el = {};
+            el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);  //adds menu elements to DOM and stores in object;
+
+            if(menuItemsAreClicked == false){
+                el[menuListNames[i]].addEventListener('click', function displayPageUpdateHistory(){
+                    menuItemsAreClicked = true;
+                    displayPage[`${menuListNames[i]}`](); //calls display function
+                    history.pushState(menuListNames[i], null, null);
                 });
-    
-                history.pushState(menuListNames[i], null, null);
-            }
-        })()
-    }
+            };
+        };
+    };
 
     function hideMenu(){        
         pageMainSection.removeChild(menuContainer); 
@@ -64,8 +65,7 @@ const backgroundColourBlue = 'rgb(0, 146, 189)';
         console.log('showing Menu');
     }
     })
-})()
-
+})();
 
 class Project {
     constructor(name, type, format, media, description) {
@@ -119,60 +119,62 @@ function createBlueGridFiller(){
     return gridFiller;
 }
 
-
-
-window.addEventListener('popstate', e => {
-    console.log(e.state);
-
-        if(e.state === 'home'){
-            displayFunctions.home()
+(function checkHistory(){
+    window.addEventListener('popstate', e => {
+        if(e.state === 'home' || e.state === null){
+            console.log('home');
+            displayPage.home();
         } else if(e.state === 'work'){
-            displayFunctions.work()
+            console.log('work');
+            displayPage.work();
         } else if(e.state === 'about'){
-            displayFunctions.about()            
+            console.log('about');
+            displayPage.about();            
         } else if(e.state === 'contact'){
-            displayFunctions.contact()            
+            console.log('contact');
+            displayPage.contact();            
+        } else {
+            displayPage.home();
+            return;
         };
-})
+    });
+})();
 
-
-let displayFunctions = {
+let displayPage = {
     home: function displayHomePage(){
         resetPage(pageMainSection);
     }, 
-
+    
     work: function displayWorkPage(){
         resetPage(pageMainSection);
-    
         
         pageMainSection.classList.add('grid-container')
-    
+        
         for(let i = 0; i < projectList.length; i++){
             projectList[i].thumbnailCreation(pageMainSection);
-    
         }
     },
-
+    
     about: function displayAboutPage(){
         resetPage(pageMainSection);
-    
+        
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-dark');
-    
+        
         pageMainSection.className = 'generic-flex-container';
-    
+        
         let aboutTextSection = document.createElement('div');
         aboutTextSection.classList.add('description-text-container')
         pageMainSection.appendChild(aboutTextSection);
-    
+        
         let aboutText = document.createElement('p')
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
         aboutText.classList.add('basic-text', 'description-text')
         aboutTextSection.appendChild(aboutText);
-    
+        
         pageMainSection.appendChild(createBlueGridFiller());
     }, 
-
+    
     contact: function displayContactPage(){
         resetPage(pageMainSection);
     }
