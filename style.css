@@ -257,4 +257,26 @@ body {
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
+
+.project-description-text-container {
+  height: 20vh;
+  overflow: hidden;
+  -webkit-transition: height .5s linear;
+  transition: height .5s linear;
+}
+
+.project-description-text-container .expanded {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: auto;
+}
+
+.project-description-text {
+  width: 80%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto auto 1rem auto;
+}
 /*# sourceMappingURL=style.css.map */

@@ -75,11 +75,6 @@ class Project {
         this.media = media;
         this.description = description;
     };
-
-    // addProjectToList(){
-    //     projectList.push(this);
-    //     return this
-    // };
     
     thumbnailCreation(container){
         let img = new Image();
@@ -88,7 +83,7 @@ class Project {
         container.appendChild(img);
     }
 
-    carouselCreation(container){
+    static carouselCreation(container){
 
         let images = [];
 
@@ -99,9 +94,6 @@ class Project {
         }
     };
 };
-
-// thumbnailDOM = []
-
 
 let projectList = [
     new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description'),
@@ -143,6 +135,16 @@ function createBlueGridFiller(){
     });
 })();
 
+function expandingSection(element){
+    let dropDownArrow = document.createElement('span');
+    dropDownArrow.innerText = 'expand_more'
+    dropDownArrow.classList.add('material-symbols-outlined');
+
+    dropDownArrow.addEventListener('click', function(){
+        element.classList.add('expansion');
+    });
+};
+
 let displayPage = {
     home: function displayHomePage(){
         resetPage(pageMainSection);
@@ -172,6 +174,20 @@ let displayPage = {
 
         resetPage(pageMainSection);
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
+
+        let textContainer = document.createElement('section');
+
+        let projectTypeText = document.createElement('p');
+        projectTypeText.innerText = `Project Type: ${projectList[projectIndex].type}`;
+        
+        let projectDescriptionText = document.createElement('p');
+        projectDescriptionText.innerText = `Description: 
+        
+        ${projectList[projectIndex].description}`;
+
+        expandingSection(textContainer);
+        
+        let imageContainer = document.createElement('section');
     },
     
     about: function displayAboutPage(){
@@ -198,5 +214,3 @@ let displayPage = {
         resetPage(pageMainSection);
     }
 };
-
-

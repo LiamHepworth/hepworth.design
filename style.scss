@@ -191,10 +191,6 @@ body {
     }
 }
 
-// .thumbnail{
-
-// }
-
 .vertical-center{
     margin: 0;
     position: absolute;
@@ -225,4 +221,21 @@ body {
 .grid-sections{
     background-color: $backgroundColourBlue;
     flex-grow: 1;
+}
+
+.project-description-text-container{
+    height: 20vh;
+    overflow: hidden;
+    transition: height .5s linear;
+}
+
+.project-description-text-container .expanded{
+    height: fit-content;
+    overflow: auto;
+}
+
+.project-description-text{
+    width: 80%;
+    height: fit-content;
+    margin: auto auto 1rem auto;
 }
