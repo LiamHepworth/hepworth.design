@@ -76,14 +76,15 @@ class Project {
         this.description = description;
     };
 
-    addProjectToList(){
-        projectList.push(this);
-        return this
-    };
+    // addProjectToList(){
+    //     projectList.push(this);
+    //     return this
+    // };
     
     thumbnailCreation(container){
         let img = new Image();
         img.src = this.media[0];
+        img.classList.add('thumbnail');
         container.appendChild(img);
     }
 
@@ -98,6 +99,8 @@ class Project {
         }
     };
 };
+
+// thumbnailDOM = []
 
 
 let projectList = [
@@ -151,8 +154,24 @@ let displayPage = {
         pageMainSection.classList.add('grid-container')
         
         for(let i = 0; i < projectList.length; i++){
-            projectList[i].thumbnailCreation(pageMainSection);
-        }
+            projectList[i].thumbnailCreation(pageMainSection);    
+        };
+
+        let thumbNails = document.querySelectorAll('.thumbnail');
+        
+        thumbNails.forEach(function(image){  
+            image.addEventListener('click', function(){
+                displayPage.project(Array.from(thumbNails).indexOf(image));
+            });
+        });
+    },
+
+    project: function displayProjectPage(projectIndex){
+        console.log('working');
+        console.log(projectIndex);
+
+        resetPage(pageMainSection);
+        pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
     },
     
     about: function displayAboutPage(){
