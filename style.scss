@@ -187,8 +187,10 @@ body {
 }
 
 .grid-container{
+    height: fit-content;
     display: grid;
     padding: 1.5rem 0 5rem 0;
+    margin-bottom: 8rem;
     
     img{
         width: 80%;
@@ -225,6 +227,7 @@ body {
 
 .grid-sections{
     background-color: $backgroundColourBlue;
+    height: 100rem;
 }
 
 .project-all-text-container{

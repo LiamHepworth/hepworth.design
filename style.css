@@ -209,9 +209,13 @@ body {
 }
 
 .grid-container {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   display: -ms-grid;
   display: grid;
   padding: 1.5rem 0 5rem 0;
+  margin-bottom: 8rem;
 }
 
 .grid-container img {
@@ -257,6 +261,7 @@ body {
 
 .grid-sections {
   background-color: #0092bd;
+  height: 100rem;
 }
 
 .project-all-text-container {
