@@ -1,7 +1,8 @@
-$backgroundColourDark: rgb(23, 23, 23);
+$backgroundColourDark: #171717;
 $backgroundColourBlue: rgb(0, 146, 189);
-$lineColourLight: rgb(204, 204, 204);
+$lineColourLight: #cccccc;
 $headerFooterHeight: 2.4rem;
+$mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);
 
 .blue{
     background-color: $backgroundColourBlue;
@@ -58,6 +59,10 @@ body {
         flex-grow: 7;
     }
 
+}
+
+#page-main-section{
+    height: 80vh;
 }
 
 #print-markers{
@@ -220,22 +225,49 @@ body {
 
 .grid-sections{
     background-color: $backgroundColourBlue;
-    flex-grow: 1;
+}
+
+.project-all-text-container{
+    height: fit-content;
+    text-align: center;
+    width: 100%;
 }
 
 .project-description-text-container{
-    height: 20vh;
+    height: 9rem;
     overflow: hidden;
     transition: height .5s linear;
+    text-align: left;
 }
 
-.project-description-text-container .expanded{
+.project-description-text-container :nth-child(2){
+    background-image: $mobileLinearGradient;
+    background-clip: text;
+    color: #ffffff00;
+}
+
+.project-description-text-container.expanded{
     height: fit-content;
     overflow: auto;
+    color: $lineColourLight;
 }
 
-.project-description-text{
+.project-text{
     width: 80%;
     height: fit-content;
     margin: auto auto 1rem auto;
+}
+
+.dropdown-arrow{
+    filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
+    transform: translate(0, -12px);
+    // font-weight: bold !important;
+    font-size: 30pt !important;
+    background-image: $backgroundColourDark; 
+    border-radius: 50%;
+}
+
+.project-image-container{
+    min-height: 55%;
+    max-height: fit-content;
 }
