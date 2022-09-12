@@ -127,11 +127,18 @@ function createBlueGridFiller(){
             displayPage.about();            
         } else if(e.state === 'contact'){
             console.log('contact');
-            displayPage.contact();            
+            displayPage.contact();          
         } else {
             displayPage.home();
             return;
         };
+
+        // for(let i = 0; i < projectList.length; i++){
+        //     if (e.state === projectList[i].toString()){
+        //         console.log('working' + i);
+        //         displayPage.project(i);
+        //     };
+        // }
     });
 })();
 
@@ -204,6 +211,9 @@ let displayPage = {
 
         projectList[projectIndex].carouselCreation(imageContainer);
         pageMainSection.appendChild(imageContainer);
+
+        // history.pushState(projectList[projectIndex], null, null)
+        // console.log(history)
     },
     
     about: function displayAboutPage(){
