@@ -214,13 +214,16 @@ body {
   height: fit-content;
   display: -ms-grid;
   display: grid;
-  padding: 1.5rem 0 5rem 0;
-  margin-bottom: 8rem;
+  padding: 3rem 0 5rem 0;
 }
 
 .grid-container img {
   width: 80%;
   margin: 1rem auto;
+}
+
+.work-page {
+  margin-bottom: 8rem;
 }
 
 .vertical-center {
@@ -250,7 +253,7 @@ body {
   height: fit-content;
 }
 
-.description-text {
+.description-text-container .description-text {
   width: 75%;
   height: -webkit-fit-content;
   height: -moz-fit-content;

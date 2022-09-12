@@ -188,14 +188,17 @@ body {
 .grid-container{
     height: fit-content;
     display: grid;
-    padding: 1.5rem 0 5rem 0;
-    margin-bottom: 8rem;
+    padding: 3rem 0 5rem 0;
     
     img{
         width: 80%;
         margin: 1rem auto;
     }
 }
+
+.work-page{
+    margin-bottom: 8rem;
+};
 
 .vertical-center{
     margin: 0;
@@ -241,24 +244,19 @@ body {
     overflow: hidden;
     transition: height .5s linear;
     text-align: left;
-    
-    .project-description-text-container :nth-child(2){
-        background-image: $mobileLinearGradient;
-        background-clip: text;
-        color: #ffffff00;
-    }  
-    
-    .project-description-text-container.expanded{
-        height: 100vh;
-        overflow: auto;
-        color: $lineColourLight;
-    }
 }
 
-.description-text-colour{
-    color: $lineColourLight !important;
+.project-description-text-container :nth-child(2){
+    background-image: $mobileLinearGradient;
+    background-clip: text;
+    color: #ffffff00;
 }
 
+.project-description-text-container.expanded{
+    height: fit-content;
+    overflow: auto;
+    color: $lineColourLight;
+}
 
 .project-text{
     width: 80%;

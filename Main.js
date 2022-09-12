@@ -83,7 +83,7 @@ class Project {
         container.appendChild(img);
     }
 
-    static carouselCreation(container){
+    carouselCreation(container){
 
         let images = [];
 
@@ -135,6 +135,19 @@ function createBlueGridFiller(){
     });
 })();
 
+function expandingSection(element, childIndex){
+    let dropDownArrow = document.createElement('span');
+    dropDownArrow.innerText = 'expand_more'
+    dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
+    
+    dropDownArrow.addEventListener('click', function(){
+        element.classList.add('expanded');
+        element.children[childIndex].style.color = '#cccccc';
+    });
+
+    return dropDownArrow;
+};
+
 
 let displayPage = {
     home: function displayHomePage(){
@@ -144,7 +157,7 @@ let displayPage = {
     work: function displayWorkPage(){
         resetPage(pageMainSection);
         
-        pageMainSection.classList.add('grid-container')
+        pageMainSection.classList.add('grid-container', 'work-page')
         
         for(let i = 0; i < projectList.length; i++){
             projectList[i].thumbnailCreation(pageMainSection);    
@@ -188,6 +201,9 @@ let displayPage = {
         
         let imageContainer = document.createElement('section');
         imageContainer.classList.add('grid-container', 'black', 'project-image-container');
+
+        projectList[projectIndex].carouselCreation(imageContainer);
+        pageMainSection.appendChild(imageContainer);
     },
     
     about: function displayAboutPage(){
@@ -215,29 +231,4 @@ let displayPage = {
     }
 };
 
-function expandingSection(element, childIndex){
-    let dropDownArrow = document.createElement('span');
-    dropDownArrow.innerText = 'expand_more'
-    dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
-    
-    dropDownArrow.addEventListener('click', function(){
-        element.classList.add('expanded');
-        element.children[childIndex].style.color = '#cccccc';
-    });
-
-    return dropDownArrow;
-};
-
-
-//test
-// let arrow = document.querySelector('.dropdown-arrow');
-// let desc = document.querySelector('.project-description-text-container');
-
-
-// arrow.addEventListener('click', function(){
-//     desc.classList.add('expanded');
-//     desc.children[1].style.color = '#cccccc';
-// })
-//test
-
-displayPage.project(0);
+// displayPage.project(0);
