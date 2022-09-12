@@ -11,7 +11,7 @@ let menuItemsAreClicked = false;
 
 (function mobileMenuPopUp(){
 
-    let menuContainer = document.createElement('div')
+    let menuContainer = document.createElement('nav')
     let menuList = document.createElement('ul');
 
     let menuListNames = ['home', 'work', 'about', 'contact'];
@@ -91,12 +91,12 @@ class Project {
             images[i] = new Image();
             images[i].src = this.media[i];
             container.appendChild(images[i]);
-        }
+        };
     };
 };
 
 let projectList = [
-    new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'standard placeholder description'),
+    new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.'),
     new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description')
 ];
 
@@ -135,15 +135,6 @@ function createBlueGridFiller(){
     });
 })();
 
-function expandingSection(element){
-    let dropDownArrow = document.createElement('span');
-    dropDownArrow.innerText = 'expand_more'
-    dropDownArrow.classList.add('material-symbols-outlined');
-
-    dropDownArrow.addEventListener('click', function(){
-        element.classList.add('expansion');
-    });
-};
 
 let displayPage = {
     home: function displayHomePage(){
@@ -175,19 +166,28 @@ let displayPage = {
         resetPage(pageMainSection);
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
 
-        let textContainer = document.createElement('section');
-
-        let projectTypeText = document.createElement('p');
-        projectTypeText.innerText = `Project Type: ${projectList[projectIndex].type}`;
+        let projectTextContainer = document.createElement('section');
+        projectTextContainer.classList.add('project-all-text-container')
         
-        let projectDescriptionText = document.createElement('p');
-        projectDescriptionText.innerText = `Description: 
+        let descriptionTextContainer = document.createElement('div')
+        descriptionTextContainer.classList.add('project-description-text-container');
+
+        let textTypeOfProject = document.createElement('p');
+        textTypeOfProject.innerText = `Project Type: ${projectList[projectIndex].type}`;
+        textTypeOfProject.classList.add('basic-text', 'project-text')
+        
+        let textProjectDescription = document.createElement('p');
+        textProjectDescription.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
+        textProjectDescription.classList.add('basic-text', 'project-text');
 
-        expandingSection(textContainer);
+        pageMainSection.appendChild(projectTextContainer);
+        projectTextContainer.append(descriptionTextContainer, expandingSection(descriptionTextContainer, 1));
+        descriptionTextContainer.append(textTypeOfProject, textProjectDescription);
         
         let imageContainer = document.createElement('section');
+        imageContainer.classList.add('grid-container', 'black', 'project-image-container');
     },
     
     about: function displayAboutPage(){
@@ -214,3 +214,30 @@ let displayPage = {
         resetPage(pageMainSection);
     }
 };
+
+function expandingSection(element, childIndex){
+    let dropDownArrow = document.createElement('span');
+    dropDownArrow.innerText = 'expand_more'
+    dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
+    
+    dropDownArrow.addEventListener('click', function(){
+        element.classList.add('expanded');
+        element.children[childIndex].style.color = '#cccccc';
+    });
+
+    return dropDownArrow;
+};
+
+
+//test
+// let arrow = document.querySelector('.dropdown-arrow');
+// let desc = document.querySelector('.project-description-text-container');
+
+
+// arrow.addEventListener('click', function(){
+//     desc.classList.add('expanded');
+//     desc.children[1].style.color = '#cccccc';
+// })
+//test
+
+displayPage.project(0);

@@ -3,6 +3,7 @@ $backgroundColourBlue: rgb(0, 146, 189);
 $lineColourLight: #cccccc;
 $headerFooterHeight: 2.4rem;
 $mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);
+$convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
 
 .blue{
     background-color: $backgroundColourBlue;
@@ -81,7 +82,7 @@ body {
 
     img{
         height: 3rem;
-        filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
+        filter: $convertSVGColour;
         margin: auto;
     }
 
@@ -126,8 +127,6 @@ body {
         width: auto;
         flex-grow: 7;
     }
-
-
 }
 
 #header-section{
@@ -216,14 +215,15 @@ body {
 
 .description-text-container{
     height: fit-content;
+    
+    .description-text{
+        width: 75%;
+        height: fit-content;
+        margin: 0 auto 2.5rem auto;
+        padding: 0 0 2.5rem 0;
+    }
 }
 
-.description-text{
-    width: 75%;
-    height: fit-content;
-    margin: 0 auto 2.5rem auto;
-    padding: 0 0 2.5rem 0;
-}
 
 .grid-sections{
     background-color: $backgroundColourBlue;
@@ -241,19 +241,24 @@ body {
     overflow: hidden;
     transition: height .5s linear;
     text-align: left;
+    
+    .project-description-text-container :nth-child(2){
+        background-image: $mobileLinearGradient;
+        background-clip: text;
+        color: #ffffff00;
+    }  
+    
+    .project-description-text-container.expanded{
+        height: 100vh;
+        overflow: auto;
+        color: $lineColourLight;
+    }
 }
 
-.project-description-text-container :nth-child(2){
-    background-image: $mobileLinearGradient;
-    background-clip: text;
-    color: #ffffff00;
+.description-text-colour{
+    color: $lineColourLight !important;
 }
 
-.project-description-text-container.expanded{
-    height: fit-content;
-    overflow: auto;
-    color: $lineColourLight;
-}
 
 .project-text{
     width: 80%;
@@ -262,9 +267,8 @@ body {
 }
 
 .dropdown-arrow{
-    filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
+    filter: $convertSVGColour;
     transform: translate(0, -12px);
-    // font-weight: bold !important;
     font-size: 30pt !important;
     background-image: $backgroundColourDark; 
     border-radius: 50%;
