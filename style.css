@@ -149,7 +149,7 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 13.6vh;
+  height: auto;
 }
 
 .burger-menu {
@@ -245,6 +245,7 @@ body {
           flex-flow: column;
   width: 100%;
   height: 78.5vh;
+  margin-top: 2rem;
 }
 
 .description-text-container {
@@ -281,6 +282,7 @@ body {
   -webkit-transition: height .5s linear;
   transition: height .5s linear;
   text-align: left;
+  margin-top: 0.8rem;
 }
 
 .project-description-text-container :nth-child(2) {

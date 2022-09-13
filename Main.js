@@ -96,7 +96,7 @@ class Project {
 };
 
 let projectList = [
-    new Project('unreal', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.'),
+    new Project('UNREAL TEST', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.'),
     new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description')
 ];
 
@@ -185,6 +185,7 @@ let displayPage = {
 
         resetPage(pageMainSection);
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
+        pageBody.classList.remove('grid-dark');
 
         let projectTextContainer = document.createElement('section');
         projectTextContainer.classList.add('project-all-text-container')
@@ -205,12 +206,18 @@ let displayPage = {
         pageMainSection.appendChild(projectTextContainer);
         projectTextContainer.append(descriptionTextContainer, expandingSection(descriptionTextContainer, 1));
         descriptionTextContainer.append(textTypeOfProject, textProjectDescription);
+
         
         let imageContainer = document.createElement('section');
-        imageContainer.classList.add('grid-container', 'black', 'project-image-container');
-
+        imageContainer.classList.add('grid-container', 'grid-dark', 'project-image-container');
+        
         projectList[projectIndex].carouselCreation(imageContainer);
         pageMainSection.appendChild(imageContainer);
+        
+        dropDownArrow.addEventListener('click', function(){
+            element.classList.remove('expanded');
+            element.children[childIndex].style.color = '#ffffff00';
+        });
 
         // history.pushState(projectList[projectIndex], null, null)
         // console.log(history)
@@ -241,4 +248,4 @@ let displayPage = {
     }
 };
 
-// displayPage.project(0);
+displayPage.project(0);
