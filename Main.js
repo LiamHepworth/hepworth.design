@@ -93,6 +93,11 @@ class Project {
             container.appendChild(images[i]);
         };
     };
+
+    pushHistory(){
+        console.log(this.name)
+        history.pushState(this.name, null, null);
+    }
 };
 
 let projectList = [
@@ -129,30 +134,40 @@ function createBlueGridFiller(){
             console.log('contact');
             displayPage.contact();          
         } else {
-            displayPage.home();
-            return;
+            // for(let i = 0; i < projectList.length; i++){
+            //     if (e.state === projectList[i].name){
+            //         console.log(projectList[i].name);
+            //         displayPage.project(i);
+            //     } ;
+            // }
+            // console.log(e.state)
         };
 
-        // for(let i = 0; i < projectList.length; i++){
-        //     if (e.state === projectList[i].toString()){
-        //         console.log('working' + i);
-        //         displayPage.project(i);
-        //     };
-        // }
+        return
+
     });
 })();
 
-function expandingSection(element, childIndex){
-    let dropDownArrow = document.createElement('span');
-    dropDownArrow.innerText = 'expand_more'
-    dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
-    
-    dropDownArrow.addEventListener('click', function(){
-        element.classList.add('expanded');
-        element.children[childIndex].style.color = '#cccccc';
-    });
+function expandingSection(arrowName, targetContainer, childIndex){
 
-    return dropDownArrow;
+    let arrowIsClicked = undefined;
+    
+    arrowName.addEventListener('click', function(){
+            if(arrowIsClicked == false || arrowIsClicked == undefined){
+                targetContainer.classList.add('expanded');
+                targetContainer.children[childIndex].style.color = '#cccccc';
+                arrowName.style.transform = 'rotate(180deg)';
+                arrowIsClicked = true;
+            } else if (arrowIsClicked == true){
+                targetContainer.classList.remove('expanded');
+                targetContainer.children[childIndex].style.color = '#ffffff00';
+                arrowName.style.transform = 'rotate(0deg)';
+                arrowIsClicked = false;
+            };
+        });
+
+    console.log(arrowIsClicked);
+    return arrowName;
 };
 
 
@@ -195,29 +210,31 @@ let displayPage = {
 
         let textTypeOfProject = document.createElement('p');
         textTypeOfProject.innerText = `Project Type: ${projectList[projectIndex].type}`;
-        textTypeOfProject.classList.add('basic-text', 'project-text')
+        textTypeOfProject.classList.add('body-text', 'project-text')
         
         let textProjectDescription = document.createElement('p');
         textProjectDescription.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
-        textProjectDescription.classList.add('basic-text', 'project-text');
+        textProjectDescription.classList.add('body-text', 'project-text');
+
+        let dropDownArrow = document.createElement('span');
+        dropDownArrow.innerText = 'expand_more'
+        dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
 
         pageMainSection.appendChild(projectTextContainer);
-        projectTextContainer.append(descriptionTextContainer, expandingSection(descriptionTextContainer, 1));
+        projectTextContainer.append(descriptionTextContainer, dropDownArrow);
         descriptionTextContainer.append(textTypeOfProject, textProjectDescription);
 
+        expandingSection(dropDownArrow, descriptionTextContainer, 1);
         
         let imageContainer = document.createElement('section');
         imageContainer.classList.add('grid-container', 'grid-dark', 'project-image-container');
         
         projectList[projectIndex].carouselCreation(imageContainer);
         pageMainSection.appendChild(imageContainer);
-        
-        dropDownArrow.addEventListener('click', function(){
-            element.classList.remove('expanded');
-            element.children[childIndex].style.color = '#ffffff00';
-        });
+
+        projectList[projectIndex].pushHistory()
 
         // history.pushState(projectList[projectIndex], null, null)
         // console.log(history)
@@ -237,7 +254,7 @@ let displayPage = {
         
         let aboutText = document.createElement('p')
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
-        aboutText.classList.add('basic-text', 'description-text')
+        aboutText.classList.add('body-text', 'description-text')
         aboutTextSection.appendChild(aboutText);
         
         pageMainSection.appendChild(createBlueGridFiller());
@@ -248,4 +265,4 @@ let displayPage = {
     }
 };
 
-displayPage.project(0);
+// displayPage.project(0);

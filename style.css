@@ -22,6 +22,11 @@
   background-position: center top;
 }
 
+.rotate-180 {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -166,7 +171,7 @@ body {
 
 .basic-text {
   color: #cccccc;
-  font-family: input-sans, Helvetica, sans-serif;
+  font-family: 'input-sans', Helvetica, sans-serif;
   font-weight: 100;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -174,6 +179,19 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.body-text {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #cccccc;
+  font-weight: 100;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  line-height: 1.5rem;
 }
 
 .header {

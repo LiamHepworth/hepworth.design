@@ -34,6 +34,10 @@ $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightn
 //     text-shadow: 0 0 5px $lineColourLight;
 // }
 
+.rotate-180{
+    transform: rotate(180deg);
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -154,10 +158,19 @@ body {
 
 .basic-text{
     color: $lineColourLight;
-    font-family: input-sans, Helvetica, sans-serif;
+    font-family: 'input-sans', Helvetica, sans-serif;
     font-weight: 100;
     width: fit-content;
     height: fit-content;
+}
+
+.body-text{
+    font-family: 'Space Grotesk', sans-serif;
+    color: $lineColourLight;
+    font-weight: 100;
+    width: fit-content;
+    height: fit-content;
+    line-height: 1.5rem;
 }
 
 .header{
