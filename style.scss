@@ -1,6 +1,7 @@
 $backgroundColourDark: #171717;
 $backgroundColourBlue: rgb(0, 146, 189);
 $lineColourLight: #cccccc;
+$textOuterGlow: #cccccc5b;
 $headerFooterHeight: 2.4rem;
 $mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);
 $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
@@ -28,6 +29,10 @@ $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightn
     background-repeat: repeat;
     background-position: center top;
 }
+
+// .text-glow{
+//     text-shadow: 0 0 5px $lineColourLight;
+// }
 
 body {
     padding: 0;
@@ -160,6 +165,7 @@ body {
     font-size: 2.3rem;
     line-height: 3rem; 
     z-index: 1; 
+    text-shadow: 0 0 30px $textOuterGlow;
 }
 
 .sub-header{
