@@ -42,7 +42,7 @@ let menuItemsAreClicked = false;
             let el = {};
             el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);  //adds menu elements to DOM and stores in object;
 
-            if(menuItemsAreClicked == false){
+            if(menuItemsAreClicked == false){  //prevents listener being re-applied every time the menu opens
                 el[menuListNames[i]].addEventListener('click', function displayPageUpdateHistory(){
                     menuItemsAreClicked = true;
                     displayPage[`${menuListNames[i]}`](); //calls display function
@@ -95,7 +95,7 @@ class Project {
     };
 
     pushHistory(){
-        console.log(this.name)
+        // console.log(this.name)
         history.pushState(this.name, null, null);
     }
 };
@@ -121,32 +121,38 @@ function createBlueGridFiller(){
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
-        if(e.state === 'home' || e.state === null){
-            console.log('home');
-            displayPage.home();
-        } else if(e.state === 'work'){
-            console.log('work');
-            displayPage.work();
-        } else if(e.state === 'about'){
-            console.log('about');
-            displayPage.about();            
-        } else if(e.state === 'contact'){
-            console.log('contact');
-            displayPage.contact();          
-        } else {
-            // for(let i = 0; i < projectList.length; i++){
-            //     if (e.state === projectList[i].name){
-            //         console.log(projectList[i].name);
-            //         displayPage.project(i);
-            //     } ;
-            // }
-            // console.log(e.state)
-        };
 
-        return
+        for(let i = 0; i < projectList.length; i++){
+            if(e.state === 'home' || e.state === null){
+                console.log('home');
+                displayPage.home();
+                return;
+            } else if(e.state === 'work'){
+                console.log('work');
+                displayPage.work();
+                return;
+            } else if(e.state === 'about'){
+                console.log('about');
+                displayPage.about();  
+                return;          
+            } else if(e.state === 'contact'){
+                console.log('contact');
+                displayPage.contact(); 
+                return;         
+            } else if(e.state === projectList[i].name){
+                console.log(projectList[i].name);
+                displayPage.project(i);
+                return
+            } else {
+                displayPage.home();
+                console.log('error recalling history state')
+                return;
+            } 
 
+        }
     });
 })();
+
 
 function expandingSection(arrowName, targetContainer, childIndex){
 
@@ -166,7 +172,6 @@ function expandingSection(arrowName, targetContainer, childIndex){
             };
         });
 
-    console.log(arrowIsClicked);
     return arrowName;
 };
 
@@ -189,14 +194,18 @@ let displayPage = {
         
         thumbNails.forEach(function(image){  
             image.addEventListener('click', function(){
-                displayPage.project(Array.from(thumbNails).indexOf(image));
+                console.log('clicked proj');
+
+                let currentPage = Array.from(thumbNails).indexOf(image)
+                console.log(currentPage);
+                displayPage.project(currentPage);
+
+                projectList[currentPage].pushHistory();
             });
         });
     },
 
     project: function displayProjectPage(projectIndex){
-        console.log('working');
-        console.log(projectIndex);
 
         resetPage(pageMainSection);
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
@@ -233,11 +242,6 @@ let displayPage = {
         
         projectList[projectIndex].carouselCreation(imageContainer);
         pageMainSection.appendChild(imageContainer);
-
-        projectList[projectIndex].pushHistory()
-
-        // history.pushState(projectList[projectIndex], null, null)
-        // console.log(history)
     },
     
     about: function displayAboutPage(){
