@@ -111,45 +111,36 @@ function resetPage(containerName){
     pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
     pageBody.classList.add('grid-dark')
     pageMainSection.classList.remove('grid-container', 'generic-flex-container');
-}
+};
 
 function createBlueGridFiller(){
     let gridFiller = document.createElement('div');
     gridFiller.classList.add('blue', 'grid-light', 'grid-sections');
     return gridFiller;
-}
+};
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
 
+        console.log(e.state);
+
         for(let i = 0; i < projectList.length; i++){
-            if(e.state === 'home' || e.state === null){
-                console.log('home');
+            if(e.state === 'home' || e.state === null || e.state === undefined){
                 displayPage.home();
                 return;
             } else if(e.state === 'work'){
-                console.log('work');
                 displayPage.work();
                 return;
             } else if(e.state === 'about'){
-                console.log('about');
                 displayPage.about();  
                 return;          
             } else if(e.state === 'contact'){
-                console.log('contact');
                 displayPage.contact(); 
                 return;         
             } else if(e.state === projectList[i].name){
-                console.log(projectList[i].name);
                 displayPage.project(i);
-                return
-            } else {
-                displayPage.home();
-                console.log('error recalling history state')
-                return;
-            } 
-
-        }
+            };
+        };
     });
 })();
 
@@ -206,6 +197,8 @@ let displayPage = {
     },
 
     project: function displayProjectPage(projectIndex){
+
+        window.scrollTo(0, 0);
 
         resetPage(pageMainSection);
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
