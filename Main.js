@@ -94,9 +94,9 @@ class Project {
         };
     };
 
-    pushHistory(){
-        // console.log(this.name)
+    pushProjectPageHistory(){
         history.pushState(this.name, null, null);
+        resetScrollPosition();
     }
 };
 
@@ -144,7 +144,6 @@ function createBlueGridFiller(){
     });
 })();
 
-
 function expandingSection(arrowName, targetContainer, childIndex){
 
     let arrowIsClicked = undefined;
@@ -166,6 +165,10 @@ function expandingSection(arrowName, targetContainer, childIndex){
     return arrowName;
 };
 
+function resetScrollPosition(){
+    window.scrollTo(0, 0);
+    console.log('scroll to top')
+}
 
 let displayPage = {
     home: function displayHomePage(){
@@ -191,16 +194,15 @@ let displayPage = {
                 console.log(currentPage);
                 displayPage.project(currentPage);
 
-                projectList[currentPage].pushHistory();
+                projectList[currentPage].pushProjectPageHistory();
             });
         });
     },
 
     project: function displayProjectPage(projectIndex){
 
-        window.scrollTo(0, 0);
-
         resetPage(pageMainSection);
+
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
         pageBody.classList.remove('grid-dark');
 
@@ -261,5 +263,3 @@ let displayPage = {
         resetPage(pageMainSection);
     }
 };
-
-// displayPage.project(0);
