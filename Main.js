@@ -286,15 +286,18 @@ let displayPage = {
         
         // let emailLabel = document.createElement('label')
         let emailInput = document.createElement('input');
-        setAttributes(emailInput, {placeholder: 'email', name: 'emailInput'})
+        setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email'});
         
         // let subjectLabel = document.createElement('label')
         let subjectInput = document.createElement('input');
+        setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject'});
         
         // let messageLabel = document.createElement('label')
         let messageInput = document.createElement('input');
+        setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message'});
         
         let submitButton = document.createElement('input');
+        setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
         
         contactForm.append(emailInput, subjectInput, messageInput, submitButton);
         
