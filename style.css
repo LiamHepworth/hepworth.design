@@ -147,7 +147,8 @@ body {
 }
 
 #header-section {
-  padding: 3.2rem 2.1rem 0 2.1rem;
+  padding: 0 2.1rem 0 2.1rem;
+  padding-top: 3.2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -274,12 +275,11 @@ body {
 }
 
 .description-text-container .description-text {
-  width: 75%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   margin: 0 auto 2.5rem auto;
-  padding: 0 0 2.5rem 0;
+  padding: 0 2.1rem 0 2.1rem;
 }
 
 .grid-sections {
@@ -320,7 +320,8 @@ body {
 }
 
 .project-text {
-  width: 80%;
+  width: auto;
+  padding: 0 2.1rem 0 2.1rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;

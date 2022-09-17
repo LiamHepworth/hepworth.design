@@ -97,7 +97,7 @@ class Project {
     pushProjectPageHistory(){
         history.pushState(this.name, null, null);
         resetScrollPosition();
-    }
+    };
 };
 
 let projectList = [
@@ -169,6 +169,12 @@ function resetScrollPosition(){
     window.scrollTo(0, 0);
     console.log('scroll to top')
 }
+
+function setAttributes(el, attrs) {
+    for(var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    };
+};
 
 let displayPage = {
     home: function displayHomePage(){
@@ -261,5 +267,42 @@ let displayPage = {
     
     contact: function displayContactPage(){
         resetPage(pageMainSection);
+        console.log('displaying contact page');
+
+        pageHeader.innerText = 'CONTACT';
+        pageBody.classList.remove('grid-dark');
+        pageMainSection.className = 'generic-flex-container';
+
+        let contactFormContainer = document.createElement('div');
+        contactFormContainer.classList.add('description-text-container')
+        pageMainSection.appendChild(contactFormContainer);
+
+        let contactDescription = document.createElement('p');
+        contactDescription.classList.add('body-text', 'description-text')
+        contactDescription.innerText = ("If you've made it this far, I'd love to hear from you. Drop me a line below.")
+        contactFormContainer.appendChild(contactDescription);
+        
+        let contactForm = document.createElement('form');
+        
+        // let emailLabel = document.createElement('label')
+        let emailInput = document.createElement('input');
+        setAttributes(emailInput, {placeholder: 'email', name: 'emailInput'})
+        
+        // let subjectLabel = document.createElement('label')
+        let subjectInput = document.createElement('input');
+        
+        // let messageLabel = document.createElement('label')
+        let messageInput = document.createElement('input');
+        
+        let submitButton = document.createElement('input');
+        
+        contactForm.append(emailInput, subjectInput, messageInput, submitButton);
+        
+        contactFormContainer.appendChild(contactForm);
+
+
+        pageMainSection.appendChild(createBlueGridFiller());
     }
 };
+
+displayPage.contact();

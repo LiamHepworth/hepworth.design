@@ -5,7 +5,7 @@ $textOuterGlow: #cccccc5b;
 $headerFooterHeight: 2.4rem;
 $mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);
 $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
-
+$standardContainerPadding: 0 2.1rem 0 2.1rem;
 .blue{
     background-color: $backgroundColourBlue;
     height: auto;
@@ -139,10 +139,10 @@ body {
 }
 
 #header-section{
-    padding: 3.2rem 2.1rem 0 2.1rem;
+    padding: $standardContainerPadding;
+    padding-top: 3.2rem;
     display: flex;
     justify-content: space-between;
-    // height: 13.6vh;
     height: auto;
 }
 
@@ -241,10 +241,9 @@ body {
     height: fit-content;
     
     .description-text{
-        width: 75%;
         height: fit-content;
         margin: 0 auto 2.5rem auto;
-        padding: 0 0 2.5rem 0;
+        padding: $standardContainerPadding;
     }
 }
 
@@ -281,7 +280,8 @@ body {
 }
 
 .project-text{
-    width: 80%;
+    width: auto;
+    padding: $standardContainerPadding;
     height: fit-content;
     margin: auto auto 1rem auto;
 }
