@@ -283,17 +283,15 @@ let displayPage = {
         contactFormContainer.appendChild(contactDescription);
         
         let contactForm = document.createElement('form');
+        contactForm.id = 'contact-form'
         
-        // let emailLabel = document.createElement('label')
         let emailInput = document.createElement('input');
         setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email'});
         
-        // let subjectLabel = document.createElement('label')
         let subjectInput = document.createElement('input');
         setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject'});
         
-        // let messageLabel = document.createElement('label')
-        let messageInput = document.createElement('input');
+        let messageInput = document.createElement('textarea');
         setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message'});
         
         let submitButton = document.createElement('input');
