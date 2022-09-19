@@ -283,14 +283,11 @@ let displayPage = {
         contactFormContainer.appendChild(contactDescription);
         
         let contactForm = document.createElement('form');
-        contactForm.id = 'contact-form'
-        contactForm.action = 'https://formsubmit.co/80ca32f4e9acd49c7ce1361df5b9e12a';
-        contactForm.method = 'POST';
+        setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
         
         let emailInput = document.createElement('input');
         setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email'});
 
-        
         let subjectInput = document.createElement('input');
         setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject'});
         
@@ -299,25 +296,44 @@ let displayPage = {
         
         let submitButton = document.createElement('input');
         setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
-
-        // submitButton.addEventListener('click', function(){
-        //     setTimeout(() => {
-        //     window.alert('thankyou for your message')
-        // }, "2500")
-        // });
         
         let afterSubmission = document.createElement('input');
         setAttributes(afterSubmission, {type: 'hidden', name: '_next', value: "http://127.0.0.1:5500/Home.html"});
-
-
 
         contactForm.append(emailInput, subjectInput, messageInput, submitButton, afterSubmission);
         
         contactFormContainer.appendChild(contactForm);
 
-
         pageMainSection.appendChild(createBlueGridFiller());
+
+        contactForm.addEventListener('submit', (e) =>{
+            e.preventDefault;
+
+            let mail = {
+                email: emailInput.value,
+                subject: subjectInput.value,
+                message: messageInput.value
+            };
+
+            console.log(mail)
+
+            fetch("https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: mail.email,
+                    subject: mail.subject, 
+                    message: mail.message
+                })
+                })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error));
+        })
     }
-};
+}
 
 displayPage.contact();
