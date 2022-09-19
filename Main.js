@@ -294,19 +294,20 @@ let displayPage = {
         let messageInput = document.createElement('textarea');
         setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message'});
         
+        let honeyPot = document.createElement('input')
+        setAttributes(honeyPot, {type: 'hidden', name: '_honey', style: 'display: none;'});
+        
         let submitButton = document.createElement('input');
         setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
-        
-        let afterSubmission = document.createElement('input');
-        setAttributes(afterSubmission, {type: 'hidden', name: '_next', value: "http://127.0.0.1:5500/Home.html"});
 
-        contactForm.append(emailInput, subjectInput, messageInput, submitButton, afterSubmission);
+        contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         
         contactFormContainer.appendChild(contactForm);
 
         pageMainSection.appendChild(createBlueGridFiller());
 
         contactForm.addEventListener('submit', (e) =>{
+
             e.preventDefault;
 
             let mail = {
@@ -314,8 +315,6 @@ let displayPage = {
                 subject: subjectInput.value,
                 message: messageInput.value
             };
-
-            console.log(mail)
 
             fetch("https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a", {
                 method: "POST",
@@ -329,11 +328,17 @@ let displayPage = {
                     message: mail.message
                 })
                 })
-            .then(response => response.json())
-            .then(data => console.log(data))
+                .then((response) =>{
+                    if(response.status==200){
+                        alert('Message sent succesfully!');
+                    } else {
+                        alert('Something went wrong');
+                    }
+                })
+                .then(displayPage.contact())
             .catch(error => console.log(error));
         })
     }
-}
+};
 
-displayPage.contact();
+// displayPage.contact();
