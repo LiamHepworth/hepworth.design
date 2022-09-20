@@ -67,6 +67,79 @@ let menuItemsAreClicked = false;
     })
 })();
 
+(function checkHistory(){
+    window.addEventListener('popstate', e => {
+
+        console.log(e.state);
+
+        for(let i = 0; i < projectList.length; i++){
+            if(e.state === 'home' || e.state === null || e.state === undefined){
+                displayPage.home();
+                return;
+            } else if(e.state === 'work'){
+                displayPage.work();
+                return;
+            } else if(e.state === 'about'){
+                displayPage.about();  
+                return;          
+            } else if(e.state === 'contact'){
+                displayPage.contact(); 
+                return;         
+            } else if(e.state === projectList[i].name){
+                displayPage.project(i);
+            };
+        };
+    });
+})();
+
+let helperFunc = {
+    resetPage: (containerName) => {
+        containerName.innerHTML = '';
+        burgerMenuMobile.innerText = 'menu';
+        pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
+        pageBody.classList.add('grid-dark')
+        pageMainSection.classList.remove('grid-container', 'generic-flex-container');    
+    },
+
+    createBlueGridFiller: () => {
+        let gridFiller = document.createElement('div');
+        gridFiller.classList.add('blue', 'grid-light', 'grid-sections');
+        return gridFiller;    
+    }, 
+
+    expandingSection: (arrowName, targetContainer, childIndex) => {
+        let arrowIsClicked = undefined;
+    
+        arrowName.addEventListener('click', function(){
+                if(arrowIsClicked == false || arrowIsClicked == undefined){
+                    targetContainer.classList.add('expanded');
+                    targetContainer.children[childIndex].style.color = '#cccccc';
+                    arrowName.style.transform = 'rotate(180deg)';
+                    arrowIsClicked = true;
+                } else if (arrowIsClicked == true){
+                    targetContainer.classList.remove('expanded');
+                    targetContainer.children[childIndex].style.color = '#ffffff00';
+                    arrowName.style.transform = 'rotate(0deg)';
+                    arrowIsClicked = false;
+                };
+            });
+    
+        return arrowName;    
+    }, 
+
+    resetScrollPosition: () => {
+        window.scrollTo(0, 0);
+        console.log('scroll to top');    
+    }, 
+
+    setAttributes: (el, attrs) => {
+        for(var key in attrs) {
+            el.setAttribute(key, attrs[key]);
+          };
+      
+    }
+}
+
 class Project {
     constructor(name, type, format, media, description) {
         this.name = name;
@@ -96,7 +169,7 @@ class Project {
 
     pushProjectPageHistory(){
         history.pushState(this.name, null, null);
-        resetScrollPosition();
+        helperFunc.resetScrollPosition();
     };
 };
 
@@ -105,84 +178,13 @@ let projectList = [
     new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description')
 ];
 
-function resetPage(containerName){
-    containerName.innerHTML = '';
-    burgerMenuMobile.innerText = 'menu';
-    pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
-    pageBody.classList.add('grid-dark')
-    pageMainSection.classList.remove('grid-container', 'generic-flex-container');
-};
-
-function createBlueGridFiller(){
-    let gridFiller = document.createElement('div');
-    gridFiller.classList.add('blue', 'grid-light', 'grid-sections');
-    return gridFiller;
-};
-
-(function checkHistory(){
-    window.addEventListener('popstate', e => {
-
-        console.log(e.state);
-
-        for(let i = 0; i < projectList.length; i++){
-            if(e.state === 'home' || e.state === null || e.state === undefined){
-                displayPage.home();
-                return;
-            } else if(e.state === 'work'){
-                displayPage.work();
-                return;
-            } else if(e.state === 'about'){
-                displayPage.about();  
-                return;          
-            } else if(e.state === 'contact'){
-                displayPage.contact(); 
-                return;         
-            } else if(e.state === projectList[i].name){
-                displayPage.project(i);
-            };
-        };
-    });
-})();
-
-function expandingSection(arrowName, targetContainer, childIndex){
-
-    let arrowIsClicked = undefined;
-    
-    arrowName.addEventListener('click', function(){
-            if(arrowIsClicked == false || arrowIsClicked == undefined){
-                targetContainer.classList.add('expanded');
-                targetContainer.children[childIndex].style.color = '#cccccc';
-                arrowName.style.transform = 'rotate(180deg)';
-                arrowIsClicked = true;
-            } else if (arrowIsClicked == true){
-                targetContainer.classList.remove('expanded');
-                targetContainer.children[childIndex].style.color = '#ffffff00';
-                arrowName.style.transform = 'rotate(0deg)';
-                arrowIsClicked = false;
-            };
-        });
-
-    return arrowName;
-};
-
-function resetScrollPosition(){
-    window.scrollTo(0, 0);
-    console.log('scroll to top')
-}
-
-function setAttributes(el, attrs) {
-    for(var key in attrs) {
-      el.setAttribute(key, attrs[key]);
-    };
-};
-
 let displayPage = {
     home: function displayHomePage(){
-        resetPage(pageMainSection);
+        helperFunc.resetPage(pageMainSection);
     }, 
     
     work: function displayWorkPage(){
-        resetPage(pageMainSection);
+        helperFunc.resetPage(pageMainSection);
         
         pageMainSection.classList.add('grid-container', 'work-page')
         
@@ -207,7 +209,7 @@ let displayPage = {
 
     project: function displayProjectPage(projectIndex){
 
-        resetPage(pageMainSection);
+        helperFunc.resetPage(pageMainSection);
 
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
         pageBody.classList.remove('grid-dark');
@@ -236,7 +238,7 @@ let displayPage = {
         projectTextContainer.append(descriptionTextContainer, dropDownArrow);
         descriptionTextContainer.append(textTypeOfProject, textProjectDescription);
 
-        expandingSection(dropDownArrow, descriptionTextContainer, 1);
+        helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1);
         
         let imageContainer = document.createElement('section');
         imageContainer.classList.add('grid-container', 'grid-dark', 'project-image-container');
@@ -246,7 +248,7 @@ let displayPage = {
     },
     
     about: function displayAboutPage(){
-        resetPage(pageMainSection);
+        helperFunc.resetPage(pageMainSection);
         
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-dark');
@@ -262,11 +264,11 @@ let displayPage = {
         aboutText.classList.add('body-text', 'description-text')
         aboutTextSection.appendChild(aboutText);
         
-        pageMainSection.appendChild(createBlueGridFiller());
+        pageMainSection.appendChild(helperFunc.createBlueGridFiller());
     }, 
     
     contact: function displayContactPage(){
-        resetPage(pageMainSection);
+        helperFunc.resetPage(pageMainSection);
         console.log('displaying contact page');
 
         pageHeader.innerText = 'CONTACT';
@@ -283,28 +285,28 @@ let displayPage = {
         contactFormContainer.appendChild(contactDescription);
         
         let contactForm = document.createElement('form');
-        setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
+        helperFunc.setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
         
         let emailInput = document.createElement('input');
-        setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email'});
+        helperFunc.setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email', required: true});
 
         let subjectInput = document.createElement('input');
-        setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject'});
+        helperFunc.setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject', required: true});
         
         let messageInput = document.createElement('textarea');
-        setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message'});
+        helperFunc.setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message', required: true});
         
         let honeyPot = document.createElement('input')
-        setAttributes(honeyPot, {type: 'hidden', name: '_honey', style: 'display: none;'});
+        helperFunc.setAttributes(honeyPot, {type: 'hidden', name: '_honey', style: 'display: none;'});
         
         let submitButton = document.createElement('input');
-        setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
+        helperFunc.setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         
         contactFormContainer.appendChild(contactForm);
 
-        pageMainSection.appendChild(createBlueGridFiller());
+        pageMainSection.appendChild(helperFunc.createBlueGridFiller());
 
         contactForm.addEventListener('submit', (e) =>{
 
@@ -341,4 +343,4 @@ let displayPage = {
     }
 };
 
-// displayPage.contact();
+// displayPage.project(1);
