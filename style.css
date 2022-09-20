@@ -315,6 +315,7 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  margin-bottom: 1rem;
   overflow: auto;
   color: #cccccc;
 }
@@ -339,7 +340,7 @@ body {
 }
 
 .project-image-container {
-  min-height: 55%;
+  min-height: 80%;
   max-height: -webkit-fit-content;
   max-height: -moz-fit-content;
   max-height: fit-content;

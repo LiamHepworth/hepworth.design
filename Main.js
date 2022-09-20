@@ -98,7 +98,7 @@ let helperFunc = {
         burgerMenuMobile.innerText = 'menu';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
         pageBody.classList.add('grid-dark')
-        pageMainSection.classList.remove('grid-container', 'generic-flex-container');    
+        pageMainSection.classList.remove('grid-container', 'generic-flex-container', 'work-page');    
     },
 
     createBlueGridFiller: () => {
@@ -112,8 +112,8 @@ let helperFunc = {
     
         arrowName.addEventListener('click', function(){
                 if(arrowIsClicked == false || arrowIsClicked == undefined){
-                    targetContainer.classList.add('expanded');
-                    targetContainer.children[childIndex].style.color = '#cccccc';
+                    targetContainer.classList.add('expanded');                        //fit content, auto overflow
+                    targetContainer.children[childIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
                     arrowName.style.transform = 'rotate(180deg)';
                     arrowIsClicked = true;
                 } else if (arrowIsClicked == true){
@@ -124,7 +124,7 @@ let helperFunc = {
                 };
             });
     
-        return arrowName;    
+        return arrowName;                                                            
     }, 
 
     resetScrollPosition: () => {
@@ -216,38 +216,37 @@ let displayPage = {
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
         pageBody.classList.remove('grid-dark');
 
-        let projectTextContainer = document.createElement('section');
+        let projectTextContainer = document.createElement('section');                           //creates a container for the whole text/button top section.
         projectTextContainer.classList.add('project-all-text-container')
         
-        let descriptionTextContainer = document.createElement('div')
+        let descriptionTextContainer = document.createElement('div')                            //creates an expandable container for all project text.
         descriptionTextContainer.classList.add('project-description-text-container');
 
-        let textTypeOfProject = document.createElement('p');
+        let textTypeOfProject = document.createElement('p');                                     //project type
         textTypeOfProject.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;  // '\u00A0' adds a space
         textTypeOfProject.classList.add('body-text', 'project-text') 
+
+        let textProjectDescription = document.createElement('p');                               //project description
+        textProjectDescription.innerText = `Description: 
+        
+        ${projectList[projectIndex].description}`;
+        textProjectDescription.classList.add('body-text', 'project-text');
         
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more'
         dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
         
         pageMainSection.appendChild(projectTextContainer);
-        projectTextContainer.append(descriptionTextContainer, dropDownArrow);
+        projectTextContainer.appendChild(descriptionTextContainer);
         descriptionTextContainer.append(textTypeOfProject);
-        // descriptionTextContainer.append(textProjectDescription);
-
-        if(projectList[projectIndex].description !== null){
-            let textProjectDescription = document.createElement('p');
-            textProjectDescription.innerText = `Description: 
-            
-            ${projectList[projectIndex].description}`;
-    
-            textProjectDescription.classList.add('body-text', 'project-text');
-            descriptionTextContainer.insertBefore(textProjectDescription, descriptionTextContainer.children[3]);
-
-            helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1);
+        
+        if(projectList[projectIndex].description !== null){                                   //resize if no desc
+            descriptionTextContainer.append(textProjectDescription);
+            projectTextContainer.appendChild(helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1));
+        } else if(projectList[projectIndex].description === null){
+            descriptionTextContainer.classList.add('expanded');
         };
 
-        
         let imageContainer = document.createElement('section');
         imageContainer.classList.add('grid-container', 'grid-dark', 'project-image-container');
         
@@ -351,4 +350,4 @@ let displayPage = {
     }
 };
 
-// displayPage.project(1);
+displayPage.project(1);

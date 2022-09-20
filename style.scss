@@ -271,6 +271,7 @@ body {
 
 .project-description-text-container.expanded{
     height: fit-content;
+    margin-bottom: 1rem;
     overflow: auto;
     color: $lineColourLight;
 }
@@ -291,8 +292,8 @@ body {
 }
 
 .project-image-container{
-    min-height: 55%;
-    max-height: fit-content;
+        min-height: 80%;
+        max-height: fit-content;
 }
 
 #contact-form{
