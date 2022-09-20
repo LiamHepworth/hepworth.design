@@ -141,17 +141,18 @@ let helperFunc = {
 }
 
 class Project {
-    constructor(name, type, format, media, description) {
+    constructor(name, type, images, video, embeddedContent, description) {
         this.name = name;
         this.type = type;
-        this.format = format;
-        this.media = media;
+        this.images = images;
+        this.video = video;
+        this.embeddedContent = embeddedContent;
         this.description = description;
     };
     
     thumbnailCreation(container){
         let img = new Image();
-        img.src = this.media[0];
+        img.src = this.images[0];
         img.classList.add('thumbnail');
         container.appendChild(img);
     }
@@ -160,9 +161,9 @@ class Project {
 
         let images = [];
 
-        for(let i = 0; i < this.media.length; i++){
+        for(let i = 0; i < this.images.length; i++){
             images[i] = new Image();
-            images[i].src = this.media[i];
+            images[i].src = this.images[i];
             container.appendChild(images[i]);
         };
     };
@@ -171,11 +172,12 @@ class Project {
         history.pushState(this.name, null, null);
         helperFunc.resetScrollPosition();
     };
+
 };
 
 let projectList = [
-    new Project('UNREAL TEST', 'poster', 'stills', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.'),
-    new Project('severe', 'poster', 'stills', ['projects/severe/image01.jpg'], 'severe placeholder description')
+    new Project('UNREAL TEST', 'poster', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.'),
+    new Project('severe', 'poster', ['projects/severe/image01.jpg'], null, null, null)
 ];
 
 let displayPage = {
@@ -221,24 +223,30 @@ let displayPage = {
         descriptionTextContainer.classList.add('project-description-text-container');
 
         let textTypeOfProject = document.createElement('p');
-        textTypeOfProject.innerText = `Project Type: ${projectList[projectIndex].type}`;
-        textTypeOfProject.classList.add('body-text', 'project-text')
+        textTypeOfProject.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;  // '\u00A0' adds a space
+        textTypeOfProject.classList.add('body-text', 'project-text') 
         
-        let textProjectDescription = document.createElement('p');
-        textProjectDescription.innerText = `Description: 
-        
-        ${projectList[projectIndex].description}`;
-        textProjectDescription.classList.add('body-text', 'project-text');
-
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more'
         dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
-
+        
         pageMainSection.appendChild(projectTextContainer);
         projectTextContainer.append(descriptionTextContainer, dropDownArrow);
-        descriptionTextContainer.append(textTypeOfProject, textProjectDescription);
+        descriptionTextContainer.append(textTypeOfProject);
+        // descriptionTextContainer.append(textProjectDescription);
 
-        helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1);
+        if(projectList[projectIndex].description !== null){
+            let textProjectDescription = document.createElement('p');
+            textProjectDescription.innerText = `Description: 
+            
+            ${projectList[projectIndex].description}`;
+    
+            textProjectDescription.classList.add('body-text', 'project-text');
+            descriptionTextContainer.insertBefore(textProjectDescription, descriptionTextContainer.children[3]);
+
+            helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1);
+        };
+
         
         let imageContainer = document.createElement('section');
         imageContainer.classList.add('grid-container', 'grid-dark', 'project-image-container');
