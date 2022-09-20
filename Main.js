@@ -98,7 +98,7 @@ let helperFunc = {
         burgerMenuMobile.innerText = 'menu';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
         pageBody.classList.add('grid-dark')
-        pageMainSection.classList.remove('grid-container', 'generic-flex-container', 'work-page');    
+        pageMainSection.classList.remove('grid-container', 'generic-flex-container');    
     },
 
     createBlueGridFiller: () => {
@@ -141,21 +141,22 @@ let helperFunc = {
 }
 
 class Project {
-    constructor(name, type, images, video, embeddedContent, description) {
+    constructor(name, type, images, video, embeddedContent, description, thumbnail) {
         this.name = name;
         this.type = type;
         this.images = images;
         this.video = video;
         this.embeddedContent = embeddedContent;
         this.description = description;
+        this.thumbnail = thumbnail;
     };
     
     thumbnailCreation(container){
-        let img = new Image();
-        img.src = this.images[0];
-        img.classList.add('thumbnail');
-        container.appendChild(img);
-    }
+        let thumbnail = new Image();
+        thumbnail.src = this.thumbnail;
+        thumbnail.classList.add('thumbnail');
+        container.appendChild(thumbnail);
+    };
 
     carouselCreation(container){
 
@@ -176,8 +177,9 @@ class Project {
 };
 
 let projectList = [
-    new Project('UNREAL TEST', 'poster', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.'),
-    new Project('severe', 'poster', ['projects/severe/image01.jpg'], null, null, null)
+    new Project('UNREAL TEST', 'poster', ['projects/unreal/image01.png', 'projects/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.', 'projects/unreal/image01.png'),
+    new Project('severe', 'poster', ['projects/severe/image01.jpg'], null, null, null,'projects/severe/image01.jpg'),
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, 'projects/video-test/test01.mp4', null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', 'projects/unreal/image01.png')
 ];
 
 let displayPage = {
@@ -188,7 +190,7 @@ let displayPage = {
     work: function displayWorkPage(){
         helperFunc.resetPage(pageMainSection);
         
-        pageMainSection.classList.add('grid-container', 'work-page')
+        pageMainSection.classList.add('grid-container');
         
         for(let i = 0; i < projectList.length; i++){
             projectList[i].thumbnailCreation(pageMainSection);    
@@ -196,11 +198,11 @@ let displayPage = {
 
         let thumbNails = document.querySelectorAll('.thumbnail');
         
-        thumbNails.forEach(function(image){  
-            image.addEventListener('click', function(){
+        thumbNails.forEach(function(thumbnail){  
+            thumbnail.addEventListener('click', function(){
                 console.log('clicked proj');
 
-                let currentPage = Array.from(thumbNails).indexOf(image)
+                let currentPage = Array.from(thumbNails).indexOf(thumbnail)
                 console.log(currentPage);
                 displayPage.project(currentPage);
 

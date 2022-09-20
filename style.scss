@@ -68,7 +68,7 @@ body {
 }
 
 #page-main-section{
-    height: 80vh;
+    min-height: 80vh;
 }
 
 #print-markers{
@@ -202,6 +202,7 @@ body {
 }
 
 .grid-container{
+    min-height: 80%;
     height: fit-content;
     display: grid;
     padding: 3rem 0 5rem 0;
@@ -242,7 +243,6 @@ body {
         padding: $standardContainerPadding;
     }
 }
-
 
 .grid-sections{
     background-color: $backgroundColourBlue;
@@ -292,8 +292,9 @@ body {
 }
 
 .project-image-container{
-        min-height: 80%;
-        max-height: fit-content;
+    min-height: 65vh;
+    height: fit-content;
+    overflow: hidden;
 }
 
 #contact-form{

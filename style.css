@@ -66,7 +66,7 @@ body {
 }
 
 #page-main-section {
-  height: 80vh;
+  min-height: 80vh;
 }
 
 #print-markers {
@@ -229,6 +229,7 @@ body {
 }
 
 .grid-container {
+  min-height: 80%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -340,10 +341,11 @@ body {
 }
 
 .project-image-container {
-  min-height: 80%;
-  max-height: -webkit-fit-content;
-  max-height: -moz-fit-content;
-  max-height: fit-content;
+  min-height: 65vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: hidden;
 }
 
 #contact-form {
