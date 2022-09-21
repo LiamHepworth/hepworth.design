@@ -160,51 +160,39 @@ class Project {
 
     carouselCreation(container){
 
-        if(this.videos !== null){
+        function createVideos(index, item){
+            let video = document.createElement('video');
+            helperFunc.setAttributes(video, {autoplay: 'autoplay', loop: true, muted: true, controls: true});
 
-            if(this.videos.length > 1){
-                console.log('more than one')
+            video.classList.add('videos');
 
-                // this.videos.forEach(() => {
-                //     // container.appendChild(video);
-                // });
-
-                for(let i = 0; i <this.videos.length; i++){
-                    console.log('working');
-
-                    let video = document.createElement('video');
-                    helperFunc.setAttributes(video, {autoplay: true, loop: true, muted: true, controls: true});
-
-                    video.classList.add('videos');
-
-                    let source = document.createElement('source');
-                    helperFunc.setAttributes(source, {src: this.videos[i], type:'video/mp4'});
-                    
-                    video.appendChild(source);
-                    container.appendChild(video)
-                }
-
-
-            // } else {
-            //     console.log('less than one')
-            //         let video = document.createElement('video');
-            //         let source = document.createElement('source');
-            //         helperFunc.setAttributes(source, {src: this.videos, type:'video/mp4', alt: 'project video'});
-            //         video.appendChild(source);
-            //         video.classList.add('videos');
-            //         video.appendChild(source);
-            // };
-            } 
+            let source = document.createElement('source');
+            helperFunc.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
             
-        } 
+            video.appendChild(source);
+            container.appendChild(video)
 
-        // let imageStore = [];
-        
-        // for(let i = 0; i < this.images.length; i++){
-        //     imageStore[i] = new Image();
-        //     imageStore[i].src = this.images[i];
-        //     container.appendChild(imageStore[i]);
-        // }; 
+            video.play();
+        }
+
+        if(this.videos !== null){
+            if(this.videos.length > 1){
+                for(let i = 0; i <this.videos.length; i++){
+                    createVideos(i, this)
+                } 
+            } else if (this.videos.length = 1) {
+                createVideos(0, this)
+            };
+        } else if(this.images !== null){
+            let imageStore = [];
+            
+            for(let i = 0; i < this.images.length; i++){
+                    imageStore[i] = new Image();
+                    imageStore[i].src = this.images[i];
+                    container.appendChild(imageStore[i]);
+                }; 
+        }
+          
     };
 
     pushProjectPageHistory(){
@@ -217,7 +205,7 @@ class Project {
 let projectList = [
     new Project('UNREAL TEST', 'poster', ['/projects/unreal/image01.png', '/projects/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
-    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4', '/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png')
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png')
 ]; 
 
 let displayPage = {
