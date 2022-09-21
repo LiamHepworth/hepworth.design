@@ -243,6 +243,12 @@ body {
   margin: 1rem auto;
 }
 
+.grid-container .videos {
+  width: 80%;
+  height: auto;
+  margin: 1rem auto;
+}
+
 .work-page {
   margin-bottom: 8rem;
 }
