@@ -170,15 +170,21 @@ class Project {
 
         function createVideos(index, item){
             let video = document.createElement('video');
-            helperFunc.setAttributes(video, {autoplay: 'autoplay', loop: true, muted: true, controls: true});
+            helperFunc.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
 
             video.classList.add('videos');
 
             let source = document.createElement('source');
             helperFunc.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
+
+            video.oncanplay = () => {
+                video.muted = true;
+                video.play();
+            }
             
             video.appendChild(source);
             container.appendChild(video)
+
         }
 
         if(this.videos !== null){
