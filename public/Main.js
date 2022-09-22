@@ -11,6 +11,8 @@ let menuItemsAreClicked = false;
 
 (function mobileMenuPopUp(){
 
+    let oldHeader = ''
+
     let menuContainer = document.createElement('nav')
     let menuList = document.createElement('ul');
 
@@ -34,8 +36,12 @@ let menuItemsAreClicked = false;
     burgerMenuMobile.addEventListener('click', function(e){
         function showMenu(){
 
+        oldHeader = pageHeader.innerText
+        
         pageMainSection.appendChild(menuContainer);
         burgerMenuMobile.innerText = 'close';
+        pageHeader.innerText = 'MENU';
+
 
         for(let i = 0; i < menuListNames.length; i++){
 
@@ -50,11 +56,13 @@ let menuItemsAreClicked = false;
                 });
             };
         };
+
     };
 
     function hideMenu(){        
         pageMainSection.removeChild(menuContainer); 
         burgerMenuMobile.innerText = 'menu';
+        pageHeader.innerText = oldHeader;
     }
     
     if(burgerMenuMobile.innerText === 'close'){
@@ -171,8 +179,6 @@ class Project {
             
             video.appendChild(source);
             container.appendChild(video)
-
-            video.play();
         }
 
         if(this.videos !== null){
