@@ -176,7 +176,7 @@ class Project {
 
             let source = document.createElement('source');
             helperFunc.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
-
+            
             video.oncanplay = () => {
                 video.muted = true;
                 video.play();
@@ -184,7 +184,7 @@ class Project {
             
             video.appendChild(source);
             container.appendChild(video)
-
+            
         }
 
         if(this.videos !== null){
