@@ -1,11 +1,5 @@
-$backgroundColourDark: #171717;
-$backgroundColourBlue: rgb(0, 146, 189);
-$lineColourLight: #cccccc;
-$textOuterGlow: #cccccc5b;
-$headerFooterHeight: 2.4rem;
-$mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);
-$convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
-$standardContainerPadding: 0 2.1rem 0 2.1rem;
+@import "variables";
+
 .blue{
     background-color: $backgroundColourBlue;
     height: auto;
@@ -135,7 +129,7 @@ body {
 }
 
 #header-section{
-    padding: $standardContainerPadding;
+    padding: $primaryContainerLeftRightPadding;
     padding-top: 3.2rem;
     display: flex;
     justify-content: space-between;
@@ -246,7 +240,7 @@ body {
     .description-text{
         height: fit-content;
         margin: 0 auto 2.5rem auto;
-        padding: $standardContainerPadding;
+        padding: $primaryContainerLeftRightPadding;
     }
 }
 
@@ -284,7 +278,7 @@ body {
 
 .project-text{
     width: auto;
-    padding: $standardContainerPadding;
+    padding: $primaryContainerLeftRightPadding;
     height: fit-content;
     margin: auto auto 1rem auto;
 }
@@ -307,7 +301,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: $standardContainerPadding;
+    padding: $primaryContainerLeftRightPadding;
     align-items: stretch;
     margin-bottom: 2rem;
     
