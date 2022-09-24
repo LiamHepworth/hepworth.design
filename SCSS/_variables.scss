@@ -9,6 +9,17 @@ $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightn
 $primaryContainerLeftRightPadding: 0 2.1rem 0 2.1rem;
 $headerFooterHeight: 2.4rem;
 
+//text styles:
+
+$inputSans: 'input-sans', Helvetica, sans-serif;
+$spaceGrotesk: 'Space Grotesk', Helvetica, sans-serif;
+
+$headerTextSize: 2.3rem;
+$headerLineHeight: 3rem;
+
+
+$bodyLineHeight: $headerLineHeight * 0.5;
+
 //other styling:
 $mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);
 $borderStrokeWidth: 3px;

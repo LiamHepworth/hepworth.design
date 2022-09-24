@@ -25,7 +25,7 @@ let menuItemsAreClicked = false;
         menuListItems[i] = document.createElement('li');
         menuListItems[i].innerText = menuListNames[i].toUpperCase();
         menuListItems[i].id = menuListIds[i];
-        menuListItems[i].classList.add('basic-text', 'sub-header', 'menu-list-items');
+        menuListItems[i].classList.add('headers', 'sub-header', 'menu-list-items');
         menuList.appendChild(menuListItems[i])
     }
     
@@ -390,4 +390,4 @@ let displayPage = {
     }
 };
 
-// displayPage.project(2);
+displayPage.project(0);
