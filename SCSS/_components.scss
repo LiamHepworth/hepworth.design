@@ -7,3 +7,48 @@
 .black{
     background-color: $bgColourDark;
 }
+
+//bg grids 
+
+.grid-background{
+    background-image: url('/assets/bg_grid.svg');
+    background-size: 135rem;
+    background-repeat: repeat;
+    background-position: center top;
+}
+
+.grid-light{
+    background-image: url('/assets/bg_grid_light.svg');
+}
+
+//top and bottom bar decorations
+
+.bar{
+    height: $headerFooterHeight;
+    width: 100%;
+    background-color: $bgColourDark;
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    
+    div{
+        width: 2rem;
+        flex-grow: .5;
+    }
+
+    div:nth-child(2){
+        border: solid $lineColourLight;
+        border-width: 0 $borderStrokeWidth;
+        flex-grow: 7;
+    }
+}
+
+.top-bar{
+    top: 0;
+    border-bottom: $borderStrokeWidth solid $lineColourLight;
+}
+
+.bottom-bar{
+    bottom: 0;
+    border-top: $borderStrokeWidth solid $lineColourLight;
+}

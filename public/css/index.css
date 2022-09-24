@@ -1,37 +1,10 @@
-.blue {
-  background-color: rgb(0, 146, 189);
-}
-
-.black {
-  background-color: #171717;
-}
-
-.blue {
-  background-color: rgb(0, 146, 189);
-  height: auto;
-}
-
-.black {
-  background-color: #171717;
-  height: auto;
-}
-
-.grid-dark {
-  background-image: url("/assets/bg_grid.svg");
-  background-size: 135rem;
-  background-repeat: repeat;
-  background-position: center top;
-}
-
-.grid-light {
-  background-image: url("/assets/bg_grid_light.svg");
-  background-size: 135rem;
-  background-repeat: repeat;
-  background-position: center top;
-}
-
-.rotate-180 {
-  transform: rotate(180deg);
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 body {
@@ -40,28 +13,51 @@ body {
   height: 100vh;
 }
 
-#top-bar {
+.blue {
+  background-color: rgb(0, 146, 189);
+}
+
+.black {
+  background-color: #171717;
+}
+
+.grid-background {
+  background-image: url("/assets/bg_grid.svg");
+  background-size: 135rem;
+  background-repeat: repeat;
+  background-position: center top;
+}
+
+.grid-light {
+  background-image: url("/assets/bg_grid_light.svg");
+}
+
+.bar {
   height: 2.4rem;
   width: 100%;
   background-color: #171717;
-  border-bottom: 0.2rem solid #cccccc;
   display: flex;
   position: fixed;
-  top: 0;
   z-index: 2;
 }
-#top-bar div {
+.bar div {
   width: 2rem;
   flex-grow: 0.5;
 }
-#top-bar div:nth-child(2) {
-  background-color: #171717;
-  border-width: 0 0.2rem 0 0.2rem;
-  border-style: solid;
-  border-color: #cccccc;
-  height: auto;
-  width: auto;
+.bar div:nth-child(2) {
+  border: solid #cccccc;
+  border-width: 0 3px;
   flex-grow: 7;
+}
+
+.top-bar {
+  top: 0;
+  border-bottom: 3px solid #cccccc;
+}
+
+.bottom-bar {
+  bottom: 0;
+  border-top: 3px solid #cccccc;
 }
 
 #page-main-section {

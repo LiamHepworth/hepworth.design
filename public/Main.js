@@ -30,7 +30,7 @@ let menuItemsAreClicked = false;
     }
     
     menuContainer.appendChild(menuList);
-    menuContainer.classList.add('grid-light', 'blue', 'vertical-center', 'menu-container');
+    menuContainer.classList.add('grid-background', 'grid-light', 'blue', 'vertical-center', 'menu-container');
     menuList.classList.add('vertical-center', 'menu-list') 
 
     burgerMenuMobile.addEventListener('click', function(e){
@@ -105,13 +105,13 @@ let helperFunc = {
         containerName.innerHTML = '';
         burgerMenuMobile.innerText = 'menu';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
-        pageBody.classList.add('grid-dark')
+        pageBody.classList.add('grid-background');
         pageMainSection.classList.remove('grid-container', 'generic-flex-container');    
     },
 
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-light', 'grid-sections');
+        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-sections');
         return gridFiller;    
     }, 
 
@@ -254,7 +254,7 @@ let displayPage = {
         helperFunc.resetPage(pageMainSection);
 
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
-        pageBody.classList.remove('grid-dark');
+        pageBody.classList.remove('grid-background');
 
         let projectTextContainer = document.createElement('section');                           //creates a container for the whole text/button top section.
         projectTextContainer.classList.add('project-all-text-container')
@@ -288,7 +288,7 @@ let displayPage = {
         };
 
         let imageContainer = document.createElement('section');
-        imageContainer.classList.add('grid-container', 'grid-dark', 'project-image-container');
+        imageContainer.classList.add('grid-container', 'grid-background', 'project-image-container');
         
         projectList[projectIndex].carouselCreation(imageContainer);
         pageMainSection.appendChild(imageContainer);
@@ -298,7 +298,7 @@ let displayPage = {
         helperFunc.resetPage(pageMainSection);
         
         pageHeader.innerText = 'ABOUT';
-        pageBody.classList.remove('grid-dark');
+        pageBody.classList.remove('grid-background');
         
         pageMainSection.className = 'generic-flex-container';
         
@@ -319,7 +319,7 @@ let displayPage = {
         console.log('displaying contact page');
 
         pageHeader.innerText = 'CONTACT';
-        pageBody.classList.remove('grid-dark');
+        pageBody.classList.remove('grid-background');
         pageMainSection.className = 'generic-flex-container';
 
         let contactFormContainer = document.createElement('div');

@@ -4,66 +4,7 @@
 
 @import "components";
 
-.blue{
-    background-color: $bgColourBlue;
-    height: auto;
-}
-
-.black{
-    background-color: $bgColourDark;
-    height: auto;
-}
-
-.grid-dark{
-    background-image: url('/assets/bg_grid.svg');
-    background-size: 135rem;
-    background-repeat: repeat;
-    background-position: center top;
-}
-
-.grid-light{
-    background-image: url('/assets/bg_grid_light.svg');
-    background-size: 135rem;
-    background-repeat: repeat;
-    background-position: center top;
-}
-
-.rotate-180{
-    transform: rotate(180deg);
-}
-
-body {
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-}
-
-#top-bar{
-    height: $headerFooterHeight;
-    width: 100%;
-    background-color: $bgColourDark;
-    border-bottom: .2rem solid $lineColourLight;
-    display: flex;
-    position: fixed;
-    top: 0;
-    z-index: 2;
-    
-    div{
-        width: 2rem;
-        flex-grow: .5;
-    }
-
-    div:nth-child(2){
-        background-color: $bgColourDark;
-        border-width: 0 .2rem 0 .2rem;
-        border-style: solid;
-        border-color: $lineColourLight;
-        height: auto;
-        width: auto;
-        flex-grow: 7;
-    }
-
-}
+// @import "utilities";
 
 #page-main-section{
     min-height: 80vh;
