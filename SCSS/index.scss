@@ -1,12 +1,16 @@
 @import "variables";
 
+@import "base";
+
+@import "components";
+
 .blue{
-    background-color: $backgroundColourBlue;
+    background-color: $bgColourBlue;
     height: auto;
 }
 
 .black{
-    background-color: $backgroundColourDark;
+    background-color: $bgColourDark;
     height: auto;
 }
 
@@ -37,7 +41,7 @@ body {
 #top-bar{
     height: $headerFooterHeight;
     width: 100%;
-    background-color: $backgroundColourDark;
+    background-color: $bgColourDark;
     border-bottom: .2rem solid $lineColourLight;
     display: flex;
     position: fixed;
@@ -50,7 +54,7 @@ body {
     }
 
     div:nth-child(2){
-        background-color: $backgroundColourDark;
+        background-color: $bgColourDark;
         border-width: 0 .2rem 0 .2rem;
         border-style: solid;
         border-color: $lineColourLight;
@@ -105,7 +109,7 @@ body {
 #bottom-bar{
     height: $headerFooterHeight;
     width: 100%;
-    background-color: $backgroundColourDark;
+    background-color: $bgColourDark;
     border-top: .2rem solid $lineColourLight;
     display: flex;
     position: fixed;
@@ -118,7 +122,7 @@ body {
     }
     
     div:nth-child(2){
-        background-color: $backgroundColourDark;
+        background-color: $bgColourDark;
         border-width: 0 .2rem 0 .2rem;
         border-style: solid;
         border-color: $lineColourLight;
@@ -245,7 +249,7 @@ body {
 }
 
 .grid-sections{
-    background-color: $backgroundColourBlue;
+    background-color: $bgColourBlue;
     height: 100rem;
 }
 
@@ -287,7 +291,7 @@ body {
     filter: $convertSVGColour;
     transform: translate(0, -12px);
     font-size: 30pt !important;
-    background-image: $backgroundColourDark; 
+    background-image: $bgColourDark; 
     border-radius: 50%;
 }
 
