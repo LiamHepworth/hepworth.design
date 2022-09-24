@@ -86,9 +86,10 @@
 }
 
 #header-section{
-    margin: $containerSidePadding;
+    margin: $containerSideMargins;
     margin-top: 3.2rem;
     margin-bottom: 1rem;
+    padding: 0 $containerPadding;
     display: flex;
     justify-content: space-between;
 }
@@ -108,22 +109,6 @@
     }
 }
 
-// .grid-sections{
-//     background-color: $bgColourBlue;
-//     height: 100rem;
-// }
-
-.grid-filler{
-    background-color: $bgColourBlue;
-    flex-grow: 1;
-}
-
-.project-all-text-container{
-    height: fit-content;
-    text-align: center;
-    width: 100%;
-}
-
 .project-description-text-container{
     height: 9rem;
     overflow: hidden;
@@ -132,7 +117,7 @@
     margin-top: 0.8rem;
 
     width: auto;
-    padding: $containerSidePadding;
+    padding: $containerSideMargins;
 }
 
 .project-description-text-container :nth-child(2){

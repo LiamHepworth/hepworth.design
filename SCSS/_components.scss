@@ -67,10 +67,29 @@
     flex-flow: column;
 }
 
+.outer-content-container{
+    height: fit-content;
+    text-align: center;
+    width: 100%;
+}
+
 .content-container{
     height: fit-content;
-    margin: 0 auto 2.5rem auto;
-    padding: $containerSidePadding;
+    margin: $containerSideMargins;
+    margin-bottom: 2.5rem;
+    padding: $containerPadding;
+    text-align: left;
+}
+
+.expanding-text-container{
+    height: 9rem;
+    overflow: hidden;
+    transition: height .5s linear;
+    text-align: left;
+    width: auto;
+    margin: $containerSideMargins;
+    padding: $containerPadding;
+    margin-top: 0.8rem;
 }
 
 

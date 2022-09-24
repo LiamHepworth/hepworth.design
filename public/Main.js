@@ -110,7 +110,7 @@ let helperFunc = {
 
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-filler');
+        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grow');
         return gridFiller;    
     }, 
 
@@ -256,7 +256,7 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         let projectTextContainer = document.createElement('section');                           //creates a container for the whole text/button top section.
-        projectTextContainer.classList.add('project-all-text-container')
+        projectTextContainer.classList.add('outer-content-container')
         
         let descriptionTextContainer = document.createElement('div')                            //creates an expandable container for all project text.
         descriptionTextContainer.classList.add('project-description-text-container');
@@ -389,4 +389,4 @@ let displayPage = {
     }
 };
 
-displayPage.about();
+displayPage.project(0);

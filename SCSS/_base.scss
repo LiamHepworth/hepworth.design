@@ -19,6 +19,11 @@ body {
     // height: 100vh;
 }
 
+#page-contents{
+    height: 100vh;
+}
+
+//ensures flex-grow functions correctly on about/contact pages
 #page-main-section{
     height: calc(100vh - (($headerFooterHeight + 20px) * 2));
 }
