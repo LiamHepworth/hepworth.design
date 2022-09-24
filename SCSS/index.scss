@@ -118,12 +118,12 @@
 
     width: auto;
     padding: $containerSideMargins;
-}
 
-.project-description-text-container :nth-child(2){
-    background-image: $mobileLinearGradient;
-    background-clip: text;
-    color: #ffffff00;
+    :nth-child(2){
+        background-image: $mobileLinearGradient;
+        background-clip: text;
+        color: #ffffff00;
+    }
 }
 
 .project-description-text-container.expanded{

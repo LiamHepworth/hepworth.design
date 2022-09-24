@@ -93,17 +93,6 @@ body {
   text-align: left;
 }
 
-.expanding-text-container {
-  height: 9rem;
-  overflow: hidden;
-  transition: height 0.5s linear;
-  text-align: left;
-  width: auto;
-  margin: 0 2.1rem 0 2.1rem;
-  padding: 0.5rem;
-  margin-top: 0.8rem;
-}
-
 .rotate-180 {
   transform: rotate(180deg);
 }
@@ -219,7 +208,6 @@ body {
   width: auto;
   padding: 0 2.1rem 0 2.1rem;
 }
-
 .project-description-text-container :nth-child(2) {
   background-image: linear-gradient(180deg, #cccccc 10%, rgba(204, 204, 204, 0) 18%);
   background-clip: text;
