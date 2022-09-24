@@ -6,8 +6,9 @@ $textOuterGlow: #cccccc5b;
 $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);  
 
 //spacing:
-$primaryContainerLeftRightPadding: 0 2.1rem 0 2.1rem;
+$containerSidePadding: 0 2.1rem 0 2.1rem;
 $headerFooterHeight: 2.4rem;
+
 
 //text styles:
 
@@ -17,8 +18,8 @@ $spaceGrotesk: 'Space Grotesk', Helvetica, sans-serif;
 $headerTextSize: 2.3rem;
 $headerLineHeight: 3rem;
 
-
-$bodyLineHeight: $headerLineHeight * 0.5;
+$bodyTextSize: 1rem;
+$bodyLineHeight: $headerLineHeight 1.5rem;
 
 //other styling:
 $mobileLinearGradient: linear-gradient(180deg, $lineColourLight 10%, rgba(204,204,204,0) 18%);

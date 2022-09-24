@@ -25,12 +25,12 @@ let menuItemsAreClicked = false;
         menuListItems[i] = document.createElement('li');
         menuListItems[i].innerText = menuListNames[i].toUpperCase();
         menuListItems[i].id = menuListIds[i];
-        menuListItems[i].classList.add('headers', 'sub-header', 'menu-list-items');
+        menuListItems[i].classList.add('header', 'sub-header', 'menu-list-items');
         menuList.appendChild(menuListItems[i])
     }
     
     menuContainer.appendChild(menuList);
-    menuContainer.classList.add('grid-background', 'grid-light', 'blue', 'vertical-center', 'menu-container');
+    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container');
     menuList.classList.add('vertical-center', 'menu-list') 
 
     burgerMenuMobile.addEventListener('click', function(e){
@@ -42,7 +42,6 @@ let menuItemsAreClicked = false;
         burgerMenuMobile.innerText = 'close';
         pageHeader.innerText = 'MENU';
 
-
         for(let i = 0; i < menuListNames.length; i++){
 
             let el = {};
@@ -51,7 +50,7 @@ let menuItemsAreClicked = false;
             if(menuItemsAreClicked == false){  //prevents listener being re-applied every time the menu opens
                 el[menuListNames[i]].addEventListener('click', function displayPageUpdateHistory(){
                     menuItemsAreClicked = true;
-                    displayPage[`${menuListNames[i]}`](); //calls display function
+                    displayPage[menuListNames[i]](); //calls display function
                     history.pushState(menuListNames[i], null, null);
                 });
             };
@@ -106,7 +105,7 @@ let helperFunc = {
         burgerMenuMobile.innerText = 'menu';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
         pageBody.classList.add('grid-background');
-        pageMainSection.classList.remove('grid-container', 'generic-flex-container');    
+        pageMainSection.classList.remove('grid-container', 'column-flex-container');    
     },
 
     createBlueGridFiller: () => {
@@ -300,10 +299,10 @@ let displayPage = {
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
         
-        pageMainSection.className = 'generic-flex-container';
+        pageMainSection.className = 'column-flex-container';
         
         let aboutTextSection = document.createElement('div');
-        aboutTextSection.classList.add('description-text-container')
+        aboutTextSection.classList.add('text-container')
         pageMainSection.appendChild(aboutTextSection);
         
         let aboutText = document.createElement('p')
@@ -320,10 +319,10 @@ let displayPage = {
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
-        pageMainSection.className = 'generic-flex-container';
+        pageMainSection.className = 'column-flex-container';
 
         let contactFormContainer = document.createElement('div');
-        contactFormContainer.classList.add('description-text-container')
+        contactFormContainer.classList.add('text-container')
         pageMainSection.appendChild(contactFormContainer);
 
         let contactDescription = document.createElement('p');
@@ -390,4 +389,4 @@ let displayPage = {
     }
 };
 
-displayPage.project(0);
+displayPage.about();
