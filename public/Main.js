@@ -110,7 +110,7 @@ let helperFunc = {
 
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-sections');
+        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-filler');
         return gridFiller;    
     }, 
 
@@ -302,12 +302,12 @@ let displayPage = {
         pageMainSection.className = 'column-flex-container';
         
         let aboutTextSection = document.createElement('div');
-        aboutTextSection.classList.add('text-container')
+        aboutTextSection.classList.add('content-container')
         pageMainSection.appendChild(aboutTextSection);
         
         let aboutText = document.createElement('p')
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
-        aboutText.classList.add('body-text', 'description-text')
+        aboutText.classList.add('body-text')
         aboutTextSection.appendChild(aboutText);
         
         pageMainSection.appendChild(helperFunc.createBlueGridFiller());
@@ -322,11 +322,11 @@ let displayPage = {
         pageMainSection.className = 'column-flex-container';
 
         let contactFormContainer = document.createElement('div');
-        contactFormContainer.classList.add('text-container')
+        contactFormContainer.classList.add('content-container')
         pageMainSection.appendChild(contactFormContainer);
 
         let contactDescription = document.createElement('p');
-        contactDescription.classList.add('body-text', 'description-text')
+        contactDescription.classList.add('body-text')
         contactDescription.innerText = ("If you've made it this far, I'd love to hear from you. Drop me a line below.")
         contactFormContainer.appendChild(contactDescription);
         

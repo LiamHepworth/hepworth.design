@@ -108,9 +108,14 @@
     }
 }
 
-.grid-sections{
+// .grid-sections{
+//     background-color: $bgColourBlue;
+//     height: 100rem;
+// }
+
+.grid-filler{
     background-color: $bgColourBlue;
-    height: 100rem;
+    flex-grow: 1;
 }
 
 .project-all-text-container{
