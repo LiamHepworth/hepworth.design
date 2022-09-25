@@ -58,9 +58,9 @@ body {
 }
 
 .grid-container {
-  height: fit-content;
+  height: calc(100vh - (2.4rem + 40px) * 2);
+  min-height: fit-content;
   display: grid;
-  padding-bottom: 4rem;
 }
 .grid-container img {
   width: 80%;
@@ -118,7 +118,9 @@ body {
 
 .project-image-container {
   padding-top: 1rem;
+  padding-bottom: 5rem;
   min-height: fit-content;
+  text-align: center;
 }
 
 .menu-container {
@@ -166,6 +168,11 @@ body {
   padding: 0.3rem;
   height: 7rem;
   border: none;
+}
+
+.work-page-container {
+  height: fit-content;
+  padding-bottom: 4rem;
 }
 
 .dropdown-arrow {
@@ -258,4 +265,8 @@ body {
 
 .grow {
   flex-grow: 1;
+}
+
+.static {
+  position: fixed;
 }/*# sourceMappingURL=index.css.map */

@@ -9,7 +9,7 @@ let helperFunc = {
         burgerMenuMobile.innerText = 'menu';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
         pageBody.classList.add('grid-background');
-        pageMainSection.classList.remove('grid-container', 'column-flex-container');    
+        pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
     },
 
     createBlueGridFiller: () => {
@@ -62,13 +62,11 @@ let helperFunc = {
     let menuList = document.createElement('ul');
 
     let menuListNames = ['home', 'work', 'about', 'contact'];
-    let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button'];
     let menuListElements = []; //to store DOM <li> elements      
 
     for(let i = 0; i < menuListNames.length; i++){
         menuListElements[i] = document.createElement('li');
         menuListElements[i].innerText = menuListNames[i].toUpperCase();
-        // menuListElements[i].id = menuListIds[i];
         menuListElements[i].id = 'menu-item'
         menuListElements[i].classList.add('header', 'sub-header', 'menu-list-items');
         menuList.appendChild(menuListElements[i])
@@ -86,7 +84,9 @@ let helperFunc = {
         function showMenu(){
             
             oldHeader = pageHeader.innerText //store old header to re-apply if menu is closed
+
             pageMainSection.appendChild(menuContainer);
+
             burgerMenuMobile.innerText = 'close';
             pageHeader.innerText = 'MENU';
 
@@ -219,7 +219,7 @@ let displayPage = {
     work: function displayWorkPage(){
 
         helperFunc.resetPage(pageMainSection);
-        pageMainSection.classList.add('grid-container');
+        pageMainSection.classList.add('grid-container', 'work-page-container');
         
         for(let i = 0; i < projectList.length; i++){
             projectList[i].thumbnailCreation(pageMainSection);    //create thumbnails to display
@@ -239,6 +239,7 @@ let displayPage = {
     project: function displayProjectPage(projectIndex){
 
         helperFunc.resetPage(pageMainSection);
+        pageMainSection.classList.add('grid-container');
 
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
         pageBody.classList.remove('grid-background');
@@ -282,7 +283,7 @@ let displayPage = {
 
         //create container for carousel of images, create carousel, append
         let imageContainer = document.createElement('section');
-        imageContainer.classList.add('grid-container', 'grid-background', 'project-image-container');
+        imageContainer.classList.add('grid-background', 'project-image-container');
         
         projectList[projectIndex].carouselCreation(imageContainer);
         pageMainSection.appendChild(imageContainer);
@@ -383,4 +384,4 @@ let displayPage = {
     }
 };
 
-displayPage.project(0);
+// displayPage.project(1);

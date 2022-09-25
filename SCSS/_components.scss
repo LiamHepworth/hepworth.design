@@ -46,9 +46,10 @@
 //containers:
 
 .grid-container{
-    height: fit-content;
+    height: $viewportHeight;
+    min-height: fit-content;
     display: grid;
-    padding-bottom: 4rem;
+    // padding-bottom: 4rem;
     
     img{
         width: 80%;
@@ -110,7 +111,9 @@
 
 .project-image-container{
     padding-top: 1rem;
+    padding-bottom: 5rem;
     min-height: fit-content;
+    text-align: center;
 }
 
 .menu-container{
@@ -162,6 +165,11 @@
         height: 7rem;
         border: none; 
     }
+}
+
+.work-page-container{
+    height: fit-content;
+    padding-bottom: 4rem;
 }
 
 //assets:
