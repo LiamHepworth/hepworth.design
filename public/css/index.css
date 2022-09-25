@@ -10,15 +10,12 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 body {
   padding: 0;
   margin: 0;
+  height: 100vh;
 }
 
 #page-contents {
   min-height: 100vh;
   height: fit-content;
-}
-
-#page-main-section {
-  min-height: calc(100vh - (2.4rem + 40px) * 2);
 }
 
 .blue {
@@ -46,7 +43,6 @@ body {
   font-size: 2.3rem;
   line-height: 3rem;
   text-shadow: 0 0 10px rgba(204, 204, 204, 0.3568627451);
-  padding-right: 0.5rem;
   z-index: 1;
 }
 
@@ -69,6 +65,7 @@ body {
 .grid-container img {
   width: 80%;
   margin: 1rem auto;
+  height: auto;
 }
 .grid-container .videos {
   width: 80%;
@@ -79,6 +76,7 @@ body {
 .column-flex-container {
   display: flex;
   flex-flow: column;
+  min-height: calc(100vh - (2.4rem + 40px) * 2);
 }
 
 .outer-content-container {
@@ -120,53 +118,62 @@ body {
 
 .project-image-container {
   padding-top: 1rem;
-  height: fit-content;
-  overflow: hidden;
+  min-height: fit-content;
 }
 
-.rotate-180 {
-  transform: rotate(180deg);
-}
-
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.grow {
-  flex-grow: 1;
-}
-
-.bar {
-  height: 2.4rem;
+.menu-container {
+  height: 100%;
   width: 100%;
-  background-color: #171717;
+  cursor: pointer;
+}
+.menu-container .menu-list {
+  text-align: center;
+}
+.menu-container .menu-list .menu-list-items {
+  list-style-type: none;
+  line-height: 6rem;
+}
+
+#header-section {
+  margin: 0 2.1rem 0 2.1rem;
+  margin-top: 3.2rem;
+  margin-bottom: 1rem;
   display: flex;
-  position: fixed;
-  z-index: 2;
-}
-.bar div {
-  width: 2rem;
-  flex-grow: 0.5;
-}
-.bar div:nth-child(2) {
-  border: solid #cccccc;
-  border-width: 0 3px;
-  flex-grow: 7;
+  justify-content: space-between;
 }
 
-.top-bar {
-  top: 0;
-  border-bottom: 3px solid #cccccc;
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 2rem 0;
+}
+#contact-form input {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12pt;
+  background-color: #cccccc;
+  margin: 0.5rem 0;
+  padding: 0.3rem;
+  height: 2rem;
+  border: none;
+}
+#contact-form textarea {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12pt;
+  background-color: #cccccc;
+  margin: 0.5rem 0;
+  padding: 0.3rem;
+  height: 7rem;
+  border: none;
 }
 
-.bottom-bar {
-  bottom: 0;
-  border-top: 3px solid #cccccc;
+.dropdown-arrow {
+  filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
+  font-size: 30pt !important;
+  background-image: #171717;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 #print-markers {
@@ -208,57 +215,47 @@ body {
   z-index: 1;
 }
 
-#header-section {
-  margin: 0 2.1rem 0 2.1rem;
-  margin-top: 3.2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.menu-container {
-  height: 100%;
+.bar {
+  height: 2.4rem;
   width: 100%;
-  cursor: pointer;
-}
-.menu-container .menu-list {
-  text-align: center;
-}
-.menu-container .menu-list .menu-list-items {
-  list-style-type: none;
-  line-height: 6rem;
-}
-
-.dropdown-arrow {
-  filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
-  font-size: 30pt !important;
-  background-image: #171717;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-#contact-form {
+  background-color: #171717;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  margin: 2rem 0;
+  position: fixed;
+  z-index: 2;
 }
-#contact-form input {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 12pt;
-  background-color: #cccccc;
-  margin: 0.5rem 0;
-  padding: 0.3rem;
-  height: 2rem;
-  border: none;
+.bar div {
+  width: 2rem;
+  flex-grow: 0.5;
 }
-#contact-form textarea {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 12pt;
-  background-color: #cccccc;
-  margin: 0.5rem 0;
-  padding: 0.3rem;
-  height: 7rem;
-  border: none;
+.bar div:nth-child(2) {
+  border: solid #cccccc;
+  border-width: 0 3px;
+  flex-grow: 7;
+}
+
+.top-bar {
+  top: 0;
+  border-bottom: 3px solid #cccccc;
+}
+
+.bottom-bar {
+  bottom: 0;
+  border-top: 3px solid #cccccc;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.grow {
+  flex-grow: 1;
 }/*# sourceMappingURL=index.css.map */

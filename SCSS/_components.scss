@@ -29,7 +29,6 @@
     font-size: $headerTextSize;
     line-height: $headerLineHeight; 
     text-shadow: 0 0 10px $textOuterGlow;
-    padding-right: $containerPadding;
     z-index: 1; 
 }
 
@@ -45,6 +44,7 @@
 }
 
 //containers:
+
 .grid-container{
     height: fit-content;
     display: grid;
@@ -53,6 +53,7 @@
     img{
         width: 80%;
         margin: 1rem auto;
+        height: auto;
     }
     
     .videos{
@@ -65,6 +66,7 @@
 .column-flex-container{
     display: flex;
     flex-flow: column;
+    min-height: $viewportHeight;
 }
 
 .outer-content-container{
@@ -80,7 +82,6 @@
 }
 
 .expanding-text-container{
-    // height: auto;
     height: 7.5rem;
     overflow: hidden;
     text-align: left;
@@ -109,9 +110,143 @@
 
 .project-image-container{
     padding-top: 1rem;
-    height: fit-content;
-    overflow: hidden;
+    min-height: fit-content;
 }
 
+.menu-container{
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    
+    .menu-list{
+        text-align: center;
+        
+        .menu-list-items{
+            list-style-type: none;
+            line-height: 6rem;  
+        }
+    }
+}
 
+#header-section{
+    margin: $containerSideMargins;
+    margin-top: 3.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#contact-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 2rem 0;
+    
+    input{
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 12pt;
+        background-color: $lineColourLight;
+        margin: .5rem 0;
+        padding: .3rem;
+        height: 2rem;
+        border: none;
+    };
+    
+    textarea{
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 12pt;
+        background-color: $lineColourLight;
+        margin: .5rem 0;
+        padding: .3rem;
+        height: 7rem;
+        border: none; 
+    }
+}
+
+//assets:
+
+.dropdown-arrow{
+    filter: $convertSVGColour;
+    font-size: 30pt !important;
+    background-image: $bgColourDark; 
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#print-markers{
+    pointer-events: none;
+    width: 100%;
+    height: 60vh;
+    margin-top: 21vh;
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    column-gap: 50%;
+    z-index: 1;
+
+    img{
+        height: 3rem;
+        filter: $convertSVGColour;
+    }
+
+    img:nth-child(1){
+        margin-left: -1.45rem;
+    }
+    
+    img:nth-child(2){
+        margin-right: -1.45rem;
+    }
+    
+    img:nth-child(3){
+        margin-left: -1.45rem;
+    }
+
+    img:nth-child(4){
+        margin-right: -1.45rem;
+    }
+}  
+
+.burger-menu{
+    color: $lineColourLight;
+    font-weight: 700;
+    font-size: $headerTextSize !important;
+    padding-top: .2rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
+//misc/decoration:
+
+.bar{
+    height: $headerFooterHeight;
+    width: 100%;
+    background-color: $bgColourDark;
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    
+    div{
+        width: 2rem;
+        flex-grow: .5;
+    }
+
+    div:nth-child(2){
+        border: solid $lineColourLight;
+        border-width: 0 $borderStrokeWidth;
+        flex-grow: 7;
+    }
+}
+
+.top-bar{
+    top: 0;
+    border-bottom: $borderStrokeWidth solid $lineColourLight;
+}
+
+.bottom-bar{
+    bottom: 0;
+    border-top: $borderStrokeWidth solid $lineColourLight;
+}
 
