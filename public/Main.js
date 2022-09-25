@@ -1,84 +1,79 @@
 let pageMainSection = document.querySelector('#page-main-section');
 const pageBody = document.querySelector('body')
-const headerSection = document.querySelector('#header-section');
 const pageHeader = document.querySelector('#header')
 const burgerMenuMobile = document.querySelector('.burger-menu');
-
-const backgroundColourDark = 'rgb(23, 23, 23)';
-const backgroundColourBlue = 'rgb(0, 146, 189)';
 
 let menuItemsAreClicked = false;
 
 (function mobileMenuPopUp(){
 
+    //header value storage, set to null, used when showMenu is called.
     let oldHeader = ''
 
     let menuContainer = document.createElement('nav')
     let menuList = document.createElement('ul');
 
     let menuListNames = ['home', 'work', 'about', 'contact'];
-    let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button']
-
-    let menuListItems = [];           //the actual <li> elements
+    let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button'];
+    let menuListElements = []; //to store DOM <li> elements      
 
     for(let i = 0; i < 4; i++){
-        menuListItems[i] = document.createElement('li');
-        menuListItems[i].innerText = menuListNames[i].toUpperCase();
-        menuListItems[i].id = menuListIds[i];
-        menuListItems[i].classList.add('header', 'sub-header', 'menu-list-items');
-        menuList.appendChild(menuListItems[i])
+        menuListElements[i] = document.createElement('li');
+        menuListElements[i].innerText = menuListNames[i].toUpperCase();
+        menuListElements[i].id = menuListIds[i];
+        menuListElements[i].classList.add('header', 'sub-header', 'menu-list-items');
+        menuList.appendChild(menuListElements[i])
     }
     
     menuContainer.appendChild(menuList);
     menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container');
     menuList.classList.add('vertical-center', 'menu-list') 
 
+    //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
         function showMenu(){
 
-        oldHeader = pageHeader.innerText
-        
-        pageMainSection.appendChild(menuContainer);
-        burgerMenuMobile.innerText = 'close';
-        pageHeader.innerText = 'MENU';
+            //store old header to re-apply if menu is closed
+            oldHeader = pageHeader.innerText
+            
+            pageMainSection.appendChild(menuContainer);
+            burgerMenuMobile.innerText = 'close';
+            pageHeader.innerText = 'MENU';
 
-        for(let i = 0; i < menuListNames.length; i++){
-
-            let el = {};
-            el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);  //adds menu elements to DOM and stores in object;
-
-            if(menuItemsAreClicked == false){  //prevents listener being re-applied every time the menu opens
-                el[menuListNames[i]].addEventListener('click', function displayPageUpdateHistory(){
-                    menuItemsAreClicked = true;
-                    displayPage[menuListNames[i]](); //calls display function
-                    history.pushState(menuListNames[i], null, null);
-                });
+            for(let i = 0; i < menuListNames.length; i++){
+                //uses the ID of menu items to add them to the DOM and store them in an object
+                let el = {};
+                el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
+                //if statement prevents listener being re-applied every time the menu opens
+                if(menuItemsAreClicked == false){  
+                    el[menuListNames[i]].addEventListener('click', () => {
+                        menuItemsAreClicked = true;
+                        displayPage[menuListNames[i]](); //calls display function
+                        history.pushState(menuListNames[i], null, null);
+                    });
+                };
             };
         };
 
-    };
-
-    function hideMenu(){        
-        pageMainSection.removeChild(menuContainer); 
-        burgerMenuMobile.innerText = 'menu';
-        pageHeader.innerText = oldHeader;
-    }
-    
-    if(burgerMenuMobile.innerText === 'close'){
-        hideMenu();
-        console.log('hiding Menu');
-    } else if(burgerMenuMobile.innerText === 'menu'){
-        showMenu();
-        console.log('showing Menu');
-    }
-    })
+        function hideMenu(){        
+            pageMainSection.removeChild(menuContainer); 
+            burgerMenuMobile.innerText = 'menu';
+            pageHeader.innerText = oldHeader;
+        }
+        
+        if(burgerMenuMobile.innerText === 'close'){
+            hideMenu();
+            console.log('hiding Menu');
+        } else if(burgerMenuMobile.innerText === 'menu'){
+            showMenu();
+            console.log('showing Menu');
+        };
+    });
 })();
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
-
-        console.log(e.state);
-
+        //loop is used to determine if e.state matches the name of any of the projects in the list
         for(let i = 0; i < projectList.length; i++){
             if(e.state === 'home' || e.state === null || e.state === undefined){
                 displayPage.home();
@@ -114,15 +109,15 @@ let helperFunc = {
         return gridFiller;    
     }, 
 
-    expandingSection: (arrowName, targetContainer, childIndex) => {
+    expandingSection: (arrowName, targetContainer, childIndex) => {  //childIndex lets you determine which child container you actually want to expand
         let arrowIsClicked = undefined;
     
         arrowName.addEventListener('click', function(){
                 if(arrowIsClicked == false || arrowIsClicked == undefined){
                     targetContainer.classList.add('expanded');                        //fit content, auto overflow
                     targetContainer.children[childIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
-                    arrowName.style.transform = 'rotate(180deg)';
-                    arrowIsClicked = true;
+                    arrowName.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
+                    arrowIsClicked = true;                                            //switches to true so that when arrow is clicked, the following code runs:
                 } else if (arrowIsClicked == true){
                     targetContainer.classList.remove('expanded');
                     targetContainer.children[childIndex].style.color = '#ffffff00';
@@ -198,10 +193,10 @@ class Project {
             let imageStore = [];
             
             for(let i = 0; i < this.images.length; i++){
-                    imageStore[i] = new Image();
-                    imageStore[i].src = this.images[i];
-                    container.appendChild(imageStore[i]);
-                }; 
+                imageStore[i] = new Image();
+                imageStore[i].src = this.images[i];
+                container.appendChild(imageStore[i]);
+            }; 
         }
           
     };
