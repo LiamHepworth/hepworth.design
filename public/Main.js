@@ -3,97 +3,6 @@ const pageBody = document.querySelector('body')
 const pageHeader = document.querySelector('#header')
 const burgerMenuMobile = document.querySelector('.burger-menu');
 
-let menuItemsAreClicked = false;
-
-(function mobileMenuPopUp(){
-
-    //header value storage, set to null, used when showMenu is called.
-    let oldHeader = ''
-
-    let menuContainer = document.createElement('nav')
-    let menuList = document.createElement('ul');
-
-    let menuListNames = ['home', 'work', 'about', 'contact'];
-    let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button'];
-    let menuListElements = []; //to store DOM <li> elements      
-
-    for(let i = 0; i < 4; i++){
-        menuListElements[i] = document.createElement('li');
-        menuListElements[i].innerText = menuListNames[i].toUpperCase();
-        menuListElements[i].id = menuListIds[i];
-        menuListElements[i].classList.add('header', 'sub-header', 'menu-list-items');
-        menuList.appendChild(menuListElements[i])
-    }
-    
-    menuContainer.appendChild(menuList);
-    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container');
-    menuList.classList.add('vertical-center', 'menu-list') 
-
-    //when burger menu is clicked
-    burgerMenuMobile.addEventListener('click', function(e){
-        function showMenu(){
-
-            //store old header to re-apply if menu is closed
-            oldHeader = pageHeader.innerText
-            
-            pageMainSection.appendChild(menuContainer);
-            burgerMenuMobile.innerText = 'close';
-            pageHeader.innerText = 'MENU';
-
-            for(let i = 0; i < menuListNames.length; i++){
-                //uses the ID of menu items to add them to the DOM and store them in an object
-                let el = {};
-                el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
-                //if statement prevents listener being re-applied every time the menu opens
-                if(menuItemsAreClicked == false){  
-                    el[menuListNames[i]].addEventListener('click', () => {
-                        menuItemsAreClicked = true;
-                        displayPage[menuListNames[i]](); //calls display function
-                        history.pushState(menuListNames[i], null, null);
-                    });
-                };
-            };
-        };
-
-        function hideMenu(){        
-            pageMainSection.removeChild(menuContainer); 
-            burgerMenuMobile.innerText = 'menu';
-            pageHeader.innerText = oldHeader;
-        }
-        
-        if(burgerMenuMobile.innerText === 'close'){
-            hideMenu();
-            console.log('hiding Menu');
-        } else if(burgerMenuMobile.innerText === 'menu'){
-            showMenu();
-            console.log('showing Menu');
-        };
-    });
-})();
-
-(function checkHistory(){
-    window.addEventListener('popstate', e => {
-        //loop is used to determine if e.state matches the name of any of the projects in the list
-        for(let i = 0; i < projectList.length; i++){
-            if(e.state === 'home' || e.state === null || e.state === undefined){
-                displayPage.home();
-                return;
-            } else if(e.state === 'work'){
-                displayPage.work();
-                return;
-            } else if(e.state === 'about'){
-                displayPage.about();  
-                return;          
-            } else if(e.state === 'contact'){
-                displayPage.contact(); 
-                return;         
-            } else if(e.state === projectList[i].name){
-                displayPage.project(i);
-            };
-        };
-    });
-})();
-
 let helperFunc = {
     resetPage: (containerName) => {
         containerName.innerHTML = '';
@@ -140,7 +49,98 @@ let helperFunc = {
           };
       
     }
-}
+};
+
+(function mobileMenuPopUp(){
+    
+    let menuItemsAreClicked = false;
+
+    //header value storage, set to null, used when showMenu is called.
+    let oldHeader = ''
+
+    let menuContainer = document.createElement('nav')
+    let menuList = document.createElement('ul');
+
+    let menuListNames = ['home', 'work', 'about', 'contact'];
+    let menuListIds = ['home-button', 'work-button', 'about-button', 'contact-button'];
+    let menuListElements = []; //to store DOM <li> elements      
+
+    for(let i = 0; i < menuListNames.length; i++){
+        menuListElements[i] = document.createElement('li');
+        menuListElements[i].innerText = menuListNames[i].toUpperCase();
+        menuListElements[i].id = menuListIds[i];
+        menuListElements[i].classList.add('header', 'sub-header', 'menu-list-items');
+        menuList.appendChild(menuListElements[i])
+    }
+    
+    menuContainer.appendChild(menuList);
+    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container');
+    menuList.classList.add('vertical-center', 'menu-list') 
+
+    //when burger menu is clicked
+    burgerMenuMobile.addEventListener('click', function(e){
+        function showMenu(){
+
+            //store old header to re-apply if menu is closed
+            oldHeader = pageHeader.innerText
+            
+            pageMainSection.appendChild(menuContainer);
+            burgerMenuMobile.innerText = 'close';
+            pageHeader.innerText = 'MENU';
+
+            for(let i = 0; i < menuListNames.length; i++){
+
+                //uses the ID of menu items to add them to the DOM
+                let el = {};
+                el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
+
+                //if statement prevents listener being re-applied every time the menu opens
+                if(menuItemsAreClicked == false){  
+                    el[menuListNames[i]].addEventListener('click', () => {
+                        menuItemsAreClicked = true;
+                        displayPage[menuListNames[i]](); //calls display function
+                        history.pushState(menuListNames[i], null, null);
+                    });
+                };
+            };
+        };
+
+        function hideMenu(){        
+            pageMainSection.removeChild(menuContainer); 
+            burgerMenuMobile.innerText = 'menu';
+            pageHeader.innerText = oldHeader;
+        }
+        
+        if(burgerMenuMobile.innerText === 'close'){
+            hideMenu();
+        } else if(burgerMenuMobile.innerText === 'menu'){
+            showMenu();
+        };
+    });
+})();
+
+(function checkHistory(){
+    window.addEventListener('popstate', e => {
+        //loop is used to determine if e.state matches the name of any of the projects in the list
+        for(let i = 0; i < projectList.length; i++){
+            if(e.state === 'home' || e.state === null || e.state === undefined){
+                displayPage.home();
+                return;
+            } else if(e.state === 'work'){
+                displayPage.work();
+                return;
+            } else if(e.state === 'about'){
+                displayPage.about();  
+                return;          
+            } else if(e.state === 'contact'){
+                displayPage.contact(); 
+                return;         
+            } else if(e.state === projectList[i].name){
+                displayPage.project(i);
+            };
+        };
+    });
+})();
 
 class Project {
     constructor(name, type, images, videos, embeddedContent, description, thumbnail) {
@@ -171,14 +171,13 @@ class Project {
             let source = document.createElement('source');
             helperFunc.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
             
-            video.oncanplay = () => {
+            video.oncanplay = () => {  //ensures video autoplays when page is fully loaded
                 video.muted = true;
                 video.play();
             }
             
             video.appendChild(source);
             container.appendChild(video)
-            
         }
 
         if(this.videos !== null){
@@ -220,19 +219,19 @@ let displayPage = {
     }, 
     
     work: function displayWorkPage(){
+
         helperFunc.resetPage(pageMainSection);
-        
         pageMainSection.classList.add('grid-container');
         
         for(let i = 0; i < projectList.length; i++){
-            projectList[i].thumbnailCreation(pageMainSection);    
+            projectList[i].thumbnailCreation(pageMainSection);    //create thumbnails to display
         };
 
         let thumbNails = document.querySelectorAll('.thumbnail');
+        // console.log(thumbNails)
         
         thumbNails.forEach(function(thumbnail){  
             thumbnail.addEventListener('click', function(){
-                console.log('clicked proj');
 
                 let currentPage = Array.from(thumbNails).indexOf(thumbnail)
                 console.log(currentPage);
