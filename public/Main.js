@@ -259,7 +259,7 @@ let displayPage = {
         projectTextContainer.classList.add('outer-content-container')
         
         let descriptionTextContainer = document.createElement('div')                            //creates an expandable container for all project text.
-        descriptionTextContainer.classList.add('project-description-text-container');
+        descriptionTextContainer.classList.add('expanding-text-container');
 
         let textTypeOfProject = document.createElement('p');                                     //project type
         textTypeOfProject.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;  // '\u00A0' adds a space

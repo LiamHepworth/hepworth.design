@@ -89,7 +89,7 @@
     margin: $containerSideMargins;
     margin-top: 3.2rem;
     margin-bottom: 1rem;
-    padding: 0 $containerPadding;
+    // padding: 0 $containerPadding;
     display: flex;
     justify-content: space-between;
 }
@@ -109,33 +109,8 @@
     }
 }
 
-.project-description-text-container{
-    height: 9rem;
-    overflow: hidden;
-    transition: height .5s linear;
-    text-align: left;
-    margin-top: 0.8rem;
-
-    width: auto;
-    padding: $containerSideMargins;
-
-    :nth-child(2){
-        background-image: $mobileLinearGradient;
-        background-clip: text;
-        color: #ffffff00;
-    }
-}
-
-.project-description-text-container.expanded{
-    height: fit-content;
-    margin-bottom: 1rem;
-    overflow: auto;
-    color: $lineColourLight;
-}
-
 .dropdown-arrow{
     filter: $convertSVGColour;
-    transform: translate(0, -12px);
     font-size: 30pt !important;
     background-image: $bgColourDark; 
     border-radius: 50%;

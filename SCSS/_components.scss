@@ -29,6 +29,7 @@
     font-size: $headerTextSize;
     line-height: $headerLineHeight; 
     text-shadow: 0 0 10px $textOuterGlow;
+    padding-right: $containerPadding;
     z-index: 1; 
 }
 
@@ -68,7 +69,6 @@
 }
 
 .outer-content-container{
-    height: fit-content;
     text-align: center;
     width: 100%;
 }
@@ -77,8 +77,35 @@
     height: fit-content;
     margin: $containerSideMargins;
     margin-bottom: 2.5rem;
-    padding: $containerPadding;
     text-align: left;
+}
+
+.expanding-text-container{
+    // height: auto;
+    height: 7.5rem;
+    overflow: hidden;
+    text-align: left;
+    width: auto;
+    margin: $containerSideMargins;
+    transition: height .5s linear;
+
+    :nth-child(2){
+        background-image: $mobileLinearGradient;
+        background-clip: text;
+        color: #ffffff00;
+        min-height: 35rem;       //to set the gradient appropriately
+    }
+}
+
+.expanding-text-container.expanded{
+    height: fit-content;
+    margin-bottom: 1rem;
+    overflow: auto;
+    color: $lineColourLight;
+    
+    :nth-child(2){
+        min-height: auto;
+    }
 }
 
 
