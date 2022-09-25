@@ -229,10 +229,8 @@ let displayPage = {
         
         thumbNails.forEach((thumbnail) => {
             thumbnail.addEventListener('click', function () {
-
                 let currentPage = Array.from(thumbNails).indexOf(thumbnail);
                 displayPage.project(currentPage);
-
                 projectList[currentPage].pushProjectPageHistory();
             });
         });
@@ -245,30 +243,36 @@ let displayPage = {
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
         pageBody.classList.remove('grid-background');
 
-        let projectTextContainer = document.createElement('section');                           //creates a container for the whole text/button top section.
+        //create outer container for expandable section, which includes text + dropdown button
+        let projectTextContainer = document.createElement('section');     
         projectTextContainer.classList.add('outer-content-container')
-        
-        let descriptionTextContainer = document.createElement('div')                            //creates an expandable container for all project text.
+
+        //create container for just the text
+        let descriptionTextContainer = document.createElement('div')
         descriptionTextContainer.classList.add('expanding-text-container');
 
-        let textTypeOfProject = document.createElement('p');                                     //project type
-        textTypeOfProject.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;  // '\u00A0' adds a space
+        //project type, '\u00A0' adds a space when adding innerText
+        let textTypeOfProject = document.createElement('p');                                     
+        textTypeOfProject.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
         textTypeOfProject.classList.add('body-text', 'project-text') 
 
-        let textProjectDescription = document.createElement('p');                               //project description
+        //project description
+        let textProjectDescription = document.createElement('p');                               
         textProjectDescription.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
         textProjectDescription.classList.add('body-text', 'project-text');
         
+        //drop-down button
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more'
         dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
-        
+
         pageMainSection.appendChild(projectTextContainer);
         projectTextContainer.appendChild(descriptionTextContainer);
         descriptionTextContainer.append(textTypeOfProject);
         
+        //check if project object has a .description, if not, apply different styling.
         if(projectList[projectIndex].description !== null){                                   //resize if no desc
             descriptionTextContainer.append(textProjectDescription);
             projectTextContainer.appendChild(helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1));
@@ -276,6 +280,7 @@ let displayPage = {
             descriptionTextContainer.classList.add('expanded');
         };
 
+        //create container for carousel of images, create carousel, append
         let imageContainer = document.createElement('section');
         imageContainer.classList.add('grid-container', 'grid-background', 'project-image-container');
         
@@ -320,6 +325,7 @@ let displayPage = {
         contactDescription.innerText = ("If you've made it this far, I'd love to hear from you. Drop me a line below.")
         contactFormContainer.appendChild(contactDescription);
         
+        //create form and set attributes
         let contactForm = document.createElement('form');
         helperFunc.setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
         
@@ -339,9 +345,7 @@ let displayPage = {
         helperFunc.setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
-        
         contactFormContainer.appendChild(contactForm);
-
         pageMainSection.appendChild(helperFunc.createBlueGridFiller());
 
         contactForm.addEventListener('submit', (e) =>{
@@ -379,4 +383,4 @@ let displayPage = {
     }
 };
 
-// displayPage.project(1);
+displayPage.project(0);
