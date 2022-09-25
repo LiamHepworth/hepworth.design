@@ -68,7 +68,8 @@ let helperFunc = {
     for(let i = 0; i < menuListNames.length; i++){
         menuListElements[i] = document.createElement('li');
         menuListElements[i].innerText = menuListNames[i].toUpperCase();
-        menuListElements[i].id = menuListIds[i];
+        // menuListElements[i].id = menuListIds[i];
+        menuListElements[i].id = 'menu-item'
         menuListElements[i].classList.add('header', 'sub-header', 'menu-list-items');
         menuList.appendChild(menuListElements[i])
     }
@@ -79,30 +80,27 @@ let helperFunc = {
 
     //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
-        function showMenu(){
+        
+        let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
-            //store old header to re-apply if menu is closed
-            oldHeader = pageHeader.innerText
+        function showMenu(){
             
+            oldHeader = pageHeader.innerText //store old header to re-apply if menu is closed
             pageMainSection.appendChild(menuContainer);
             burgerMenuMobile.innerText = 'close';
             pageHeader.innerText = 'MENU';
 
-            for(let i = 0; i < menuListNames.length; i++){
-
-                //uses the ID of menu items to add them to the DOM
-                let el = {};
-                el[menuListNames[i]] = document.querySelector(`#${menuListNames[i]}-button`);
-
-                //if statement prevents listener being re-applied every time the menu opens
-                if(menuItemsAreClicked == false){  
-                    el[menuListNames[i]].addEventListener('click', () => {
-                        menuItemsAreClicked = true;
-                        displayPage[menuListNames[i]](); //calls display function
-                        history.pushState(menuListNames[i], null, null);
+            if(menuItemsAreClicked == false){
+                menuDOMElements.forEach((el) => {
+                    el.addEventListener('click', () => {
+                        menuItemsAreClicked = true;  //prevents listener being applied twice
+                        let ind = Array.from(menuDOMElements).indexOf(el);
+                        displayPage[menuListNames[ind]]();
+                        history.pushState(menuListNames[ind], null, null);
+                        return;
                     });
-                };
-            };
+                });
+            }
         };
 
         function hideMenu(){        
@@ -228,13 +226,11 @@ let displayPage = {
         };
 
         let thumbNails = document.querySelectorAll('.thumbnail');
-        // console.log(thumbNails)
         
-        thumbNails.forEach(function(thumbnail){  
-            thumbnail.addEventListener('click', function(){
+        thumbNails.forEach((thumbnail) => {
+            thumbnail.addEventListener('click', function () {
 
-                let currentPage = Array.from(thumbNails).indexOf(thumbnail)
-                console.log(currentPage);
+                let currentPage = Array.from(thumbNails).indexOf(thumbnail);
                 displayPage.project(currentPage);
 
                 projectList[currentPage].pushProjectPageHistory();
