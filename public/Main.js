@@ -1,6 +1,6 @@
 let pageMainSection = document.querySelector('#page-main-section');
-const pageBody = document.querySelector('body')
-const pageHeader = document.querySelector('#header')
+const pageBody = document.querySelector('body');
+const pageHeader = document.querySelector('#header');
 const burgerMenuMobile = document.querySelector('.burger-menu');
 
 let helperFunc = {
@@ -9,6 +9,7 @@ let helperFunc = {
         burgerMenuMobile.innerText = 'menu';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
         pageBody.classList.add('grid-background');
+        pageBody.classList.remove('noScroll');
         pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
     },
 
@@ -73,22 +74,22 @@ let helperFunc = {
     }
     
     menuContainer.appendChild(menuList);
-    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container');
+    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container', 'static');
     menuList.classList.add('vertical-center', 'menu-list') 
 
     //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
-        
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         function showMenu(){
-            
             oldHeader = pageHeader.innerText //store old header to re-apply if menu is closed
-
             pageMainSection.appendChild(menuContainer);
-
             burgerMenuMobile.innerText = 'close';
             pageHeader.innerText = 'MENU';
+
+            //ensure you can't scroll beneath menu overlay
+            pageBody.classList.add('noScroll');
+            helperFunc.resetScrollPosition();
 
             if(menuItemsAreClicked == false){
                 menuDOMElements.forEach((el) => {
@@ -107,7 +108,8 @@ let helperFunc = {
             pageMainSection.removeChild(menuContainer); 
             burgerMenuMobile.innerText = 'menu';
             pageHeader.innerText = oldHeader;
-        }
+            pageBody.classList.remove('noScroll');
+        };
         
         if(burgerMenuMobile.innerText === 'close'){
             hideMenu();
@@ -384,4 +386,4 @@ let displayPage = {
     }
 };
 
-// displayPage.project(1);
+displayPage.work();

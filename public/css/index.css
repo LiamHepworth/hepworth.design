@@ -267,6 +267,7 @@ body {
   flex-grow: 1;
 }
 
-.static {
-  position: fixed;
+.noScroll {
+  height: 100vh !important;
+  overflow: hidden !important;
 }/*# sourceMappingURL=index.css.map */
