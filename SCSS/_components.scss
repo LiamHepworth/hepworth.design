@@ -46,10 +46,9 @@
 
 //containers:
 .grid-container{
-    min-height: 80%;
     height: fit-content;
     display: grid;
-    // padding: 3rem 0 5rem 0;
+    padding-bottom: 4rem;
     
     img{
         width: 80%;
@@ -93,7 +92,7 @@
         background-image: $mobileLinearGradient;
         background-clip: text;
         color: #ffffff00;
-        min-height: 35rem;       //to set the gradient appropriately
+        min-height: 35rem;       //to smooth out the gradient appropriately
     }
 }
 
@@ -108,6 +107,11 @@
     }
 }
 
+.project-image-container{
+    padding-top: 1rem;
+    height: fit-content;
+    overflow: hidden;
+}
 
 
 

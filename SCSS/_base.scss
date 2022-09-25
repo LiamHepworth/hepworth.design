@@ -20,10 +20,11 @@ body {
 }
 
 #page-contents{
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
 }
 
 //ensures flex-grow functions correctly on about/contact pages
 #page-main-section{
-    height: calc(100vh - (($headerFooterHeight + 20px) * 2));
+    min-height: calc(100vh - (($headerFooterHeight + 40px) * 2));
 }

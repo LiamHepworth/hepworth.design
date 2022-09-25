@@ -13,11 +13,12 @@ body {
 }
 
 #page-contents {
-  height: 100vh;
+  min-height: 100vh;
+  height: fit-content;
 }
 
 #page-main-section {
-  height: calc(100vh - (2.4rem + 20px) * 2);
+  min-height: calc(100vh - (2.4rem + 40px) * 2);
 }
 
 .blue {
@@ -61,9 +62,9 @@ body {
 }
 
 .grid-container {
-  min-height: 80%;
   height: fit-content;
   display: grid;
+  padding-bottom: 4rem;
 }
 .grid-container img {
   width: 80%;
@@ -115,6 +116,12 @@ body {
 }
 .expanding-text-container.expanded :nth-child(2) {
   min-height: auto;
+}
+
+.project-image-container {
+  padding-top: 1rem;
+  height: fit-content;
+  overflow: hidden;
 }
 
 .rotate-180 {
@@ -227,12 +234,7 @@ body {
   font-size: 30pt !important;
   background-image: #171717;
   border-radius: 50%;
-}
-
-.project-image-container {
-  min-height: 65vh;
-  height: fit-content;
-  overflow: hidden;
+  cursor: pointer;
 }
 
 #contact-form {

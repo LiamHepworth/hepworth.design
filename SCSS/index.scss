@@ -114,12 +114,7 @@
     font-size: 30pt !important;
     background-image: $bgColourDark; 
     border-radius: 50%;
-}
-
-.project-image-container{
-    min-height: 65vh;
-    height: fit-content;
-    overflow: hidden;
+    cursor: pointer;
 }
 
 #contact-form{
