@@ -123,10 +123,14 @@
 }
 
 .menu-container{
-    height: 100%;
-    width: 100%;
     cursor: pointer;
+    height: 0;
+    width: 100%;
     z-index: 1;
+    top: 0;
+    left: 0;
+    transition: height .5s ease-in-out;
+    overflow: hidden;
     
     .menu-list{
         text-align: center;
@@ -254,7 +258,7 @@
     background-color: $bgColourDark;
     display: flex;
     position: fixed;
-    z-index: 2;
+    z-index: 5;
     
     div{
         width: 2rem;

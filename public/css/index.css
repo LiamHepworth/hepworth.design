@@ -129,10 +129,14 @@ body {
 }
 
 .menu-container {
-  height: 100%;
-  width: 100%;
   cursor: pointer;
+  height: 0;
+  width: 100%;
   z-index: 1;
+  top: 0;
+  left: 0;
+  transition: height 0.5s ease-in-out;
+  overflow: hidden;
 }
 .menu-container .menu-list {
   text-align: center;
@@ -247,7 +251,7 @@ body {
   background-color: #171717;
   display: flex;
   position: fixed;
-  z-index: 2;
+  z-index: 5;
 }
 .bar div {
   width: 2rem;

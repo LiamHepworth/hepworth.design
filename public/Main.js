@@ -98,6 +98,7 @@ let helperFunc = {
 
         function showMenu(){
             oldHeader = pageHeader.innerText //store old header to re-apply if menu is closed
+
             pageMainSection.appendChild(menuContainer);
             burgerMenuMobile.innerText = 'close';
             pageHeader.innerText = 'MENU';
@@ -120,16 +121,18 @@ let helperFunc = {
         };
 
         function hideMenu(){        
-            pageMainSection.removeChild(menuContainer); 
             burgerMenuMobile.innerText = 'menu';
             pageHeader.innerText = oldHeader;
+            // pageMainSection.removeChild(menuContainer); 
             pageBody.classList.remove('noScroll');
         };
         
         if(burgerMenuMobile.innerText === 'close'){
+            menuContainer.style.height = '0';
             hideMenu();
         } else if(burgerMenuMobile.innerText === 'menu'){
             showMenu();
+            menuContainer.style.height = '100%';
         };
     });
 })();
@@ -219,7 +222,6 @@ class Project {
         history.pushState(this.name, null, null);
         helperFunc.resetScrollPosition();
     };
-
 };
 
 let projectList = [
@@ -410,4 +412,4 @@ let displayPage = {
     }
 };
 
-displayPage.about();
+// displayPage.about();
