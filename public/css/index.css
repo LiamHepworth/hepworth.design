@@ -213,13 +213,18 @@ body {
   margin-right: -1.45rem;
 }
 
-.burger-menu {
+.basic-icon {
   color: #cccccc;
   font-weight: 700;
   font-size: 2.3rem !important;
   padding-top: 0.2rem;
   cursor: pointer;
   z-index: 1;
+}
+
+.basic-icon.larger-icon {
+  height: 2rem;
+  width: auto;
 }
 
 .bar {

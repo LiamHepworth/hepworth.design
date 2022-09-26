@@ -1,0 +1,22 @@
+{
+  "name": "hepworth.design-portfolio",
+  "version": "1.0.0",
+  "description": "Personal design portfolio for Liam Hepworth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamHepworth/Hepworth.design-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiamHepworth/Hepworth.design-portfolio/issues"
+  },
+  "homepage": "https://github.com/LiamHepworth/Hepworth.design-portfolio#readme",
+  "dependencies": {
+    "feather-icons": "^4.29.0"
+  }
+}

@@ -1,7 +1,7 @@
 let pageMainSection = document.querySelector('#page-main-section');
 const pageBody = document.querySelector('body');
 const pageHeader = document.querySelector('#header');
-const burgerMenuMobile = document.querySelector('.burger-menu');
+const burgerMenuMobile = document.querySelector('.basic-icon');
 
 let helperFunc = {
     resetPage: (containerName) => {
@@ -49,6 +49,26 @@ let helperFunc = {
             el.setAttribute(key, attrs[key]);
           };
       
+    },
+
+    createLinkedIcon: (iconName, URL, containerName) => {
+        //create link
+        let link = document.createElement('a')
+        link.href = URL;
+
+        //create SVG 
+        let icon = document.createElement('svg')
+        link.appendChild(icon)
+        helperFunc.setAttributes(icon, {'data-feather': iconName, 'class': 'basic-icon larger-icon'})
+
+        //append SVG to link, link to page
+        containerName.appendChild(link); 
+        link.appendChild(icon);
+
+        //ensure feather SVG data is updated when the page completes loading;
+        window.addEventListener('load', () => {
+            feather.replace(); 
+        })
     }
 };
 
@@ -307,8 +327,11 @@ let displayPage = {
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
         aboutText.classList.add('body-text')
         aboutTextSection.appendChild(aboutText);
+
+        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', aboutTextSection);
         
         pageMainSection.appendChild(helperFunc.createBlueGridFiller());
+
     }, 
     
     contact: function displayContactPage(){
@@ -386,4 +409,4 @@ let displayPage = {
     }
 };
 
-displayPage.work();
+displayPage.about();

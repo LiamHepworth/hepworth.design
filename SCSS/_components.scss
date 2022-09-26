@@ -217,13 +217,18 @@
     }
 }  
 
-.burger-menu{
+.basic-icon{
     color: $lineColourLight;
     font-weight: 700;
     font-size: $headerTextSize !important;
     padding-top: .2rem;
     cursor: pointer;
     z-index: 1;
+}
+
+.basic-icon.larger-icon{
+    height: 2rem;
+    width: auto;
 }
 
 //misc/decoration:
