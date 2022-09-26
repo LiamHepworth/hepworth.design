@@ -7,6 +7,7 @@ $convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightn
 
 //spacing:
 $containerSideMargins: 0 2.1rem 0 2.1rem;
+$conatinerBottomMargin: 1.8rem;
 $containerPadding: 0.5rem;
 $headerFooterHeight: 2.4rem;
 $viewportHeight: calc(100vh - (($headerFooterHeight + 40px) * 2));

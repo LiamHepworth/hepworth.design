@@ -54,7 +54,7 @@ let helperFunc = {
     createLinkedIcon: (iconName, URL, containerName) => {
         //create link
         let link = document.createElement('a')
-        link.href = URL;
+        helperFunc.setAttributes(link, {'href': URL, 'class': 'basic-icon larger-icon link-container'})
 
         //create SVG 
         let icon = document.createElement('svg')
@@ -64,11 +64,6 @@ let helperFunc = {
         //append SVG to link, link to page
         containerName.appendChild(link); 
         link.appendChild(icon);
-
-        //ensure feather SVG data is updated when the page completes loading;
-        window.addEventListener('load', () => {
-            feather.replace(); 
-        })
     }
 };
 
@@ -328,10 +323,16 @@ let displayPage = {
         aboutText.classList.add('body-text')
         aboutTextSection.appendChild(aboutText);
 
-        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', aboutTextSection);
+        let linkSection = document.createElement('div');
+        linkSection.classList.add('content-container');
+        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
+        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
         
+        pageMainSection.appendChild(linkSection);
         pageMainSection.appendChild(helperFunc.createBlueGridFiller());
-
+        
+        //ensure feather SVG data is updated when the page completes loading;
+        feather.replace(); 
     }, 
     
     contact: function displayContactPage(){

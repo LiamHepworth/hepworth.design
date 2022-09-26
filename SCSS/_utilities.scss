@@ -11,11 +11,21 @@
     transform: translate(-50%, -50%);
 }
 
+.noScroll{
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+//flexbox utils:
+
 .grow{
     flex-grow: 1;
 }
 
-.noScroll{
-    height: 100vh !important;
-    overflow: hidden !important;
+.space-between{
+    justify-content: space-between;
+}
+
+.space-evenly{
+    justify-content: space-evenly;
 }
