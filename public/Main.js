@@ -123,13 +123,13 @@ let helperFunc = {
         function hideMenu(){        
             burgerMenuMobile.innerText = 'menu';
             pageHeader.innerText = oldHeader;
-            // pageMainSection.removeChild(menuContainer); 
+            pageMainSection.removeChild(menuContainer); 
             pageBody.classList.remove('noScroll');
         };
         
         if(burgerMenuMobile.innerText === 'close'){
             menuContainer.style.height = '0';
-            hideMenu();
+            setTimeout(hideMenu, 500);
         } else if(burgerMenuMobile.innerText === 'menu'){
             showMenu();
             menuContainer.style.height = '100%';
