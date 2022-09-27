@@ -121,11 +121,10 @@ let helperFunc = {
 
         (function showMenu(){
             pageMainSection.appendChild(menuContainer);
-
             //ensure you can't scroll beneath menu overlay
             pageBody.classList.add('noScroll');
             helperFunc.resetScrollPosition();
-
+            
             //adding listeners to each of the menu options
             if(menuItemsAreClicked == false){
                 menuDOMElements.forEach((el) => {
@@ -133,14 +132,13 @@ let helperFunc = {
                         menuItemsAreClicked = true;  //prevents listener being applied twice
                         let ind = Array.from(menuDOMElements).indexOf(el);
                         helperFunc.menuAnimation('clear');
-                        setTimeout(displayPage[menuListNames[ind]], 500);
+                        setTimeout(displayPage[menuListNames[ind]], 300);
                         history.pushState(menuListNames[ind], null, null);
                         return;
                     });
                 });
             };
         })();
-
         helperFunc.menuAnimation('play');
     });
     
@@ -150,7 +148,7 @@ let helperFunc = {
             pageMainSection.removeChild(menuContainer);
         };
         helperFunc.menuAnimation('clear');
-        setTimeout(hideMenu, 500);
+        setTimeout(hideMenu, 300);
     });       
 })();
 

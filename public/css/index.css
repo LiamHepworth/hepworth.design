@@ -5,12 +5,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  overflow-x: hidden;
 }
 
 body {
   padding: 0;
   margin: 0;
   height: 100vh;
+  position: relative;
 }
 
 #page-contents {
@@ -134,9 +136,9 @@ body {
   z-index: 1;
   position: absolute;
   top: 0;
-  left: 100vw;
-  transition: left 0.5s ease-in-out;
-  overflow: hidden;
+  left: 100%;
+  transition: left 0.2s ease-in-out;
+  overflow-x: hidden;
 }
 .menu-container .menu-list {
   text-align: center;
@@ -147,7 +149,7 @@ body {
 }
 
 .menu-appear {
-  left: 0vw;
+  left: 0%;
 }
 
 .header-section {
@@ -290,6 +292,7 @@ body {
 
 .noScroll {
   height: 100vh !important;
+  width: 100vw;
   overflow: hidden !important;
 }
 

@@ -128,9 +128,9 @@
     z-index: 1;
     position: absolute;
     top: 0;
-    left: 100vw;
-    transition: left .5s ease-in-out;
-    overflow: hidden;
+    left: 100%;
+    transition: left .2s ease-in-out;
+    overflow-x: hidden;
     
     .menu-list{
         text-align: center;
@@ -143,7 +143,7 @@
 }
 
 .menu-appear{
-    left: 0vw;
+    left: 0%;
 }
 
 .header-section{
