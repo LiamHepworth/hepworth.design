@@ -2,9 +2,20 @@ let pageMainSection = document.querySelector('#page-main-section');
 const pageBody = document.querySelector('body');
 const pageHeader = document.querySelector('#header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
+const menuContainer = document.createElement('nav');
+
 
 let helperFunc = {
+    menuAnimation: (input) => {
+        if(input === 'clear'){
+            menuContainer.classList.remove('menu-appear');
+        } else if(input === 'play'){
+            menuContainer.classList.add('menu-appear');
+        };
+    },
+
     resetPage: (containerName) => {
+        helperFunc.menuAnimation('clear');
         containerName.innerHTML = '';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN';
         pageBody.classList.add('grid-background');
@@ -70,7 +81,6 @@ let helperFunc = {
     
     let menuItemsAreClicked = false;
 
-    let menuContainer = document.createElement('nav')
     menuContainer.classList.add('vertical-center', 'blue', 'grid-background', 'grid-light', 'menu-container', 'static');
 
     const menuHeaderSection = document.createElement('div');
@@ -109,7 +119,7 @@ let helperFunc = {
         
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
-        function showMenu(){
+        (function showMenu(){
             pageMainSection.appendChild(menuContainer);
 
             //ensure you can't scroll beneath menu overlay
@@ -122,23 +132,23 @@ let helperFunc = {
                     el.addEventListener('click', () => {
                         menuItemsAreClicked = true;  //prevents listener being applied twice
                         let ind = Array.from(menuDOMElements).indexOf(el);
-                        displayPage[menuListNames[ind]]();
+                        helperFunc.menuAnimation('clear');
+                        setTimeout(displayPage[menuListNames[ind]], 500);
                         history.pushState(menuListNames[ind], null, null);
                         return;
                     });
                 });
-            }
-        };
+            };
+        })();
 
-        showMenu();
-        menuContainer.classList.add('menu-appear');
+        helperFunc.menuAnimation('play');
 
         closeMenuMobile.addEventListener('click', function(){
             function hideMenu(){
-                pageMainSection.removeChild(menuContainer); 
                 pageBody.classList.remove('noScroll');
+                pageMainSection.removeChild(menuContainer);
             };
-            menuContainer.classList.remove('menu-appear');
+            helperFunc.menuAnimation('clear');
             setTimeout(hideMenu, 500);
         });       
     });
