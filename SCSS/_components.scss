@@ -125,11 +125,11 @@
     cursor: pointer;
     height: 100vh;
     width: 100%;
-    margin-left: 100vw;
     z-index: 1;
+    position: absolute;
     top: 0;
-    left: 0;
-    transition: margin .5s ease-in-out;
+    left: 100vw;
+    transition: left .5s ease-in-out;
     overflow: hidden;
     
     .menu-list{
@@ -143,7 +143,7 @@
 }
 
 .menu-appear{
-    margin-left: 0vw;
+    left: 0vw;
 }
 
 .header-section{
@@ -153,7 +153,6 @@
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    // z-index: 2;
 }
 
 #contact-form{

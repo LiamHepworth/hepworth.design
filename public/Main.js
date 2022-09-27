@@ -81,7 +81,7 @@ let helperFunc = {
     
     let menuItemsAreClicked = false;
 
-    menuContainer.classList.add('vertical-center', 'blue', 'grid-background', 'grid-light', 'menu-container', 'static');
+    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
 
     const menuHeaderSection = document.createElement('div');
     menuHeaderSection.className = 'header-section';
@@ -142,16 +142,16 @@ let helperFunc = {
         })();
 
         helperFunc.menuAnimation('play');
-
-        closeMenuMobile.addEventListener('click', function(){
-            function hideMenu(){
-                pageBody.classList.remove('noScroll');
-                pageMainSection.removeChild(menuContainer);
-            };
-            helperFunc.menuAnimation('clear');
-            setTimeout(hideMenu, 500);
-        });       
     });
+    
+    closeMenuMobile.addEventListener('click', function(){
+        function hideMenu(){
+            pageBody.classList.remove('noScroll');
+            pageMainSection.removeChild(menuContainer);
+        };
+        helperFunc.menuAnimation('clear');
+        setTimeout(hideMenu, 500);
+    });       
 })();
 
 (function checkHistory(){
