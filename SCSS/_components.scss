@@ -124,12 +124,13 @@
 
 .menu-container{
     cursor: pointer;
-    height: 0;
+    height: 100vh;
     width: 100%;
+    margin-left: 100vw;
     z-index: 1;
     top: 0;
     left: 0;
-    transition: height .5s ease-in-out;
+    transition: margin .5s ease-in-out;
     overflow: hidden;
     
     .menu-list{
@@ -140,6 +141,10 @@
             line-height: 6rem;  
         }
     }
+}
+
+.menu-appear{
+    margin-left: 0vw;
 }
 
 #header-section{

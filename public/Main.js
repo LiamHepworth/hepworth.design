@@ -75,25 +75,29 @@ let helperFunc = {
     let oldHeader = ''
 
     let menuContainer = document.createElement('nav')
+    menuContainer.classList.add('vertical-center', 'blue', 'grid-background', 'grid-light', 'menu-container', 'static');
     let menuList = document.createElement('ul');
+    menuList.classList.add('vertical-center', 'menu-list') 
 
     let menuListNames = ['home', 'work', 'about', 'contact'];
-    let menuListElements = []; //to store DOM <li> elements      
+    let menuListElements = []; //to store DOM <li> elements     
 
+    //create, set attributes for, and append menu elements
     for(let i = 0; i < menuListNames.length; i++){
         menuListElements[i] = document.createElement('li');
         menuListElements[i].innerText = menuListNames[i].toUpperCase();
-        menuListElements[i].id = 'menu-item'
-        menuListElements[i].classList.add('header', 'sub-header', 'menu-list-items');
+        helperFunc.setAttributes(menuListElements[i], {
+            'id': 'menu-item',
+            'class': 'header sub-header menu-list-items'
+        });
         menuList.appendChild(menuListElements[i])
-    }
+    };
     
     menuContainer.appendChild(menuList);
-    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'vertical-center', 'menu-container', 'static');
-    menuList.classList.add('vertical-center', 'menu-list') 
 
     //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
+        
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         function showMenu(){
@@ -128,11 +132,11 @@ let helperFunc = {
         };
         
         if(burgerMenuMobile.innerText === 'close'){
-            menuContainer.style.height = '0';
+            menuContainer.classList.remove('menu-appear');
             setTimeout(hideMenu, 500);
         } else if(burgerMenuMobile.innerText === 'menu'){
             showMenu();
-            menuContainer.style.height = '100%';
+            menuContainer.classList.add('menu-appear');
         };
     });
 })();
