@@ -1,13 +1,12 @@
 let pageMainSection = document.querySelector('#page-main-section');
 const pageBody = document.querySelector('body');
 const pageHeader = document.querySelector('#header');
-const burgerMenuMobile = document.querySelector('.basic-icon');
+const burgerMenuMobile = document.querySelector('#burger-menu');
 
 let helperFunc = {
     resetPage: (containerName) => {
         containerName.innerHTML = '';
-        burgerMenuMobile.innerText = 'menu';
-        pageHeader.innerText = 'HEPWORTH.\n DESIGN' ;
+        pageHeader.innerText = 'HEPWORTH.\n DESIGN';
         pageBody.classList.add('grid-background');
         pageBody.classList.remove('noScroll');
         pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
@@ -71,11 +70,20 @@ let helperFunc = {
     
     let menuItemsAreClicked = false;
 
-    //header value storage, set to null, used when showMenu is called.
-    let oldHeader = ''
-
     let menuContainer = document.createElement('nav')
     menuContainer.classList.add('vertical-center', 'blue', 'grid-background', 'grid-light', 'menu-container', 'static');
+
+    const menuHeaderSection = document.createElement('div');
+    menuHeaderSection.className = 'header-section';
+    
+    const menuHeader = document.createElement('h1');
+    menuHeader.className = 'header';
+    menuHeader.innerText = 'MENU';
+    
+    const closeMenuMobile = document.createElement('span');
+    closeMenuMobile.innerText = 'close';
+    closeMenuMobile.classList.add('material-symbols-outlined', 'basic-icon');
+
     let menuList = document.createElement('ul');
     menuList.classList.add('vertical-center', 'menu-list') 
 
@@ -93,7 +101,8 @@ let helperFunc = {
         menuList.appendChild(menuListElements[i])
     };
     
-    menuContainer.appendChild(menuList);
+    menuHeaderSection.append(menuHeader, closeMenuMobile);
+    menuContainer.append(menuHeaderSection, menuList);
 
     //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
@@ -101,16 +110,13 @@ let helperFunc = {
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         function showMenu(){
-            oldHeader = pageHeader.innerText //store old header to re-apply if menu is closed
-
             pageMainSection.appendChild(menuContainer);
-            burgerMenuMobile.innerText = 'close';
-            pageHeader.innerText = 'MENU';
 
             //ensure you can't scroll beneath menu overlay
             pageBody.classList.add('noScroll');
             helperFunc.resetScrollPosition();
 
+            //adding listeners to each of the menu options
             if(menuItemsAreClicked == false){
                 menuDOMElements.forEach((el) => {
                     el.addEventListener('click', () => {
@@ -124,20 +130,17 @@ let helperFunc = {
             }
         };
 
-        function hideMenu(){        
-            burgerMenuMobile.innerText = 'menu';
-            pageHeader.innerText = oldHeader;
-            pageMainSection.removeChild(menuContainer); 
-            pageBody.classList.remove('noScroll');
-        };
-        
-        if(burgerMenuMobile.innerText === 'close'){
+        showMenu();
+        menuContainer.classList.add('menu-appear');
+
+        closeMenuMobile.addEventListener('click', function(){
+            function hideMenu(){
+                pageMainSection.removeChild(menuContainer); 
+                pageBody.classList.remove('noScroll');
+            };
             menuContainer.classList.remove('menu-appear');
             setTimeout(hideMenu, 500);
-        } else if(burgerMenuMobile.innerText === 'menu'){
-            showMenu();
-            menuContainer.classList.add('menu-appear');
-        };
+        });       
     });
 })();
 

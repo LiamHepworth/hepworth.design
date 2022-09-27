@@ -29,7 +29,7 @@
     font-size: $headerTextSize;
     line-height: $headerLineHeight; 
     text-shadow: 0 0 10px $textOuterGlow;
-    z-index: 1; 
+    // z-index: 1; 
 }
 
 .sub-header{
@@ -86,7 +86,6 @@
     text-align: center;
     width: 100%;
 }
-
 
 .expanding-text-container{
     height: 7.5rem;
@@ -147,14 +146,14 @@
     margin-left: 0vw;
 }
 
-#header-section{
+.header-section{
     margin: $containerSideMargins;
     margin-top: 3.2rem;
     margin-bottom: $conatinerBottomMargin;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    z-index: 2;
+    // z-index: 2;
 }
 
 #contact-form{

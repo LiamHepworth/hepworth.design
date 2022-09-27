@@ -43,7 +43,6 @@ body {
   font-size: 2.3rem;
   line-height: 3rem;
   text-shadow: 0 0 10px rgba(204, 204, 204, 0.3568627451);
-  z-index: 1;
 }
 
 .sub-header {
@@ -151,14 +150,13 @@ body {
   margin-left: 0vw;
 }
 
-#header-section {
+.header-section {
   margin: 0 2.1rem 0 2.1rem;
   margin-top: 3.2rem;
   margin-bottom: 1.8rem;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  z-index: 2;
 }
 
 #contact-form {
