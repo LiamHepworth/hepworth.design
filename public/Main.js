@@ -1,5 +1,6 @@
-let pageMainSection = document.querySelector('#page-main-section');
+const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
+let pageMainSection = document.querySelector('#page-main-section');
 const pageHeader = document.querySelector('#header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
@@ -15,6 +16,8 @@ let helperFunc = {
     },
 
     resetPage: (containerName) => {
+        fullPage.style.overflow = 'visible'
+        pageBody.style.overflow = 'visible'
         helperFunc.menuAnimation('clear');
         containerName.innerHTML = '';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN';
@@ -64,7 +67,7 @@ let helperFunc = {
     createLinkedIcon: (iconName, URL, containerName) => {
         //create link
         let link = document.createElement('a')
-        helperFunc.setAttributes(link, {'href': URL, 'class': 'basic-icon larger-icon link-container'})
+        helperFunc.setAttributes(link, {'href': URL, 'class': 'link-container'})
 
         //create SVG 
         let icon = document.createElement('svg')
@@ -116,7 +119,10 @@ let helperFunc = {
 
     //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
-        
+
+        fullPage.style.overflow = 'hidden'
+        pageBody.style.overflow = 'hidden'
+
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         (function showMenu(){
@@ -146,6 +152,8 @@ let helperFunc = {
         function hideMenu(){
             pageBody.classList.remove('noScroll');
             pageMainSection.removeChild(menuContainer);
+            fullPage.style.overflow = 'visible'
+            pageBody.style.overflow = 'visible'
         };
         helperFunc.menuAnimation('clear');
         setTimeout(hideMenu, 300);
