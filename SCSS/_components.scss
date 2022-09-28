@@ -29,7 +29,8 @@
     font-size: $headerTextSize;
     line-height: $headerLineHeight; 
     text-shadow: 0 0 10px $textOuterGlow;
-    // z-index: 1; 
+    max-width: 15rem;
+    overflow-wrap: break-word;
 }
 
 .sub-header{
@@ -206,7 +207,8 @@
     pointer-events: none;
     width: 100%;
     height: 60vh;
-    margin-top: 21vh;
+    top: 19.5vh;
+    // margin-top: 21vh;
     position: fixed;
     display: flex;
     flex-wrap: wrap;
@@ -285,3 +287,48 @@
     border-top: $borderStrokeWidth solid $lineColourLight;
 }
 
+
+@media (min-width: 800px){
+    // .black{
+    //     background-color: gray;
+    // }
+
+    //text elements:
+
+    // .header{
+
+    // }
+
+    //assets
+}
+
+@media (min-width: 1080px){
+    // .black{
+    //     background-color: darkblue;
+    // }
+
+    //text elements:
+
+    .header{
+        max-width: fit-content;
+        overflow-wrap: normal;
+        font-size: calc($headerTextSize * 1.6);
+        line-height: $headerLineHeight; 
+        margin: 0 auto;
+    }
+
+    //containers
+
+    .header-section{
+        margin: 0;
+        position: relative;
+        top: calc(50vh - $headerFooterHeight);
+        text-align: center;
+    }
+
+    //assets
+
+    #burger-menu{
+        display: none;
+    }
+}

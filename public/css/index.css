@@ -44,6 +44,8 @@ body {
   font-size: 2.3rem;
   line-height: 3rem;
   text-shadow: 0 0 10px rgba(204, 204, 204, 0.3568627451);
+  max-width: 15rem;
+  overflow-wrap: break-word;
 }
 
 .sub-header {
@@ -207,7 +209,7 @@ body {
   pointer-events: none;
   width: 100%;
   height: 60vh;
-  margin-top: 21vh;
+  top: 19.5vh;
   position: fixed;
   display: flex;
   flex-wrap: wrap;
@@ -277,6 +279,24 @@ body {
   border-top: 3px solid #cccccc;
 }
 
+@media (min-width: 1080px) {
+  .header {
+    max-width: fit-content;
+    overflow-wrap: normal;
+    font-size: 3.68rem;
+    line-height: 3rem;
+    margin: 0 auto;
+  }
+  .header-section {
+    margin: 0;
+    position: relative;
+    top: calc(50vh - 2.4rem);
+    text-align: center;
+  }
+  #burger-menu {
+    display: none;
+  }
+}
 .rotate-180 {
   transform: rotate(180deg);
 }
