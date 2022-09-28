@@ -10,11 +10,9 @@ let helperFunc = {
     menuAnimation: (input) => {
         if(input === 'clear'){
             menuContainer.classList.remove('menu-appear');
-            fullPage.style.overflow = 'visible' 
-            pageBody.style.overflow = 'visible'
             pageBody.classList.remove('noScroll');
         } else if(input === 'play'){
-            //hiding overflow to ensure scroll bars don't appear
+            //hiding overflow to ensure scroll bars don't appear, removed on resetPage and hideMenu()
             fullPage.style.overflow = 'hidden'                 
             pageBody.style.overflow = 'hidden'
             pageBody.classList.add('noScroll');
@@ -25,6 +23,8 @@ let helperFunc = {
 
     resetPage: (containerName) => {
         helperFunc.menuAnimation('clear');
+        fullPage.style.overflow = 'visible'                 
+        pageBody.style.overflow = 'visible'
         containerName.innerHTML = '';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN';
         pageBody.classList.add('grid-background');
@@ -157,6 +157,8 @@ let helperFunc = {
     closeMenuMobile.addEventListener('click', function(){
         function hideMenu(){
             pageMainSection.removeChild(menuContainer);
+            fullPage.style.overflow = 'visible'                 
+            pageBody.style.overflow = 'visible'
         };
         helperFunc.menuAnimation('clear');
         setTimeout(hideMenu, 300);
