@@ -10,19 +10,24 @@ let helperFunc = {
     menuAnimation: (input) => {
         if(input === 'clear'){
             menuContainer.classList.remove('menu-appear');
+            fullPage.style.overflow = 'visible' 
+            pageBody.style.overflow = 'visible'
+            pageBody.classList.remove('noScroll');
         } else if(input === 'play'){
+            //hiding overflow to ensure scroll bars don't appear
+            fullPage.style.overflow = 'hidden'                 
+            pageBody.style.overflow = 'hidden'
+            pageBody.classList.add('noScroll');
+            helperFunc.resetScrollPosition();
             menuContainer.classList.add('menu-appear');
         };
     },
 
     resetPage: (containerName) => {
-        fullPage.style.overflow = 'visible'
-        pageBody.style.overflow = 'visible'
         helperFunc.menuAnimation('clear');
         containerName.innerHTML = '';
         pageHeader.innerText = 'HEPWORTH.\n DESIGN';
         pageBody.classList.add('grid-background');
-        pageBody.classList.remove('noScroll');
         pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
     },
 
@@ -81,9 +86,10 @@ let helperFunc = {
 };
 
 (function mobileMenuPopUp(){
-    
-    let menuItemsAreClicked = false;
+    //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
+    let menuItemsAreClicked = false;  
 
+    //creating and styling DOM elements
     menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
 
     const menuHeaderSection = document.createElement('div');
@@ -103,7 +109,6 @@ let helperFunc = {
     let menuListNames = ['home', 'work', 'about', 'contact'];
     let menuListElements = []; //to store DOM <li> elements     
 
-    //create, set attributes for, and append menu elements
     for(let i = 0; i < menuListNames.length; i++){
         menuListElements[i] = document.createElement('li');
         menuListElements[i].innerText = menuListNames[i].toUpperCase();
@@ -114,30 +119,31 @@ let helperFunc = {
         menuList.appendChild(menuListElements[i])
     };
     
+    //appending DOM elements to the menu container
     menuHeaderSection.append(menuHeader, closeMenuMobile);
     menuContainer.append(menuHeaderSection, menuList);
 
     //when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
-
-        fullPage.style.overflow = 'hidden'
-        pageBody.style.overflow = 'hidden'
-
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         (function showMenu(){
+            //appending menu container to the page
             pageMainSection.appendChild(menuContainer);
-            //ensure you can't scroll beneath menu overlay
-            pageBody.classList.add('noScroll');
-            helperFunc.resetScrollPosition();
             
             //adding listeners to each of the menu options
             if(menuItemsAreClicked == false){
                 menuDOMElements.forEach((el) => {
                     el.addEventListener('click', () => {
-                        menuItemsAreClicked = true;  //prevents listener being applied twice
+                        //prevents listener being applied twice
+                        menuItemsAreClicked = true;  
+
+                        //gets the index of whatever el was clicked
                         let ind = Array.from(menuDOMElements).indexOf(el);
+
+                        //ensures that if an item is clicked, the menu slides away, doesn't disappear
                         helperFunc.menuAnimation('clear');
+
                         setTimeout(displayPage[menuListNames[ind]], 300);
                         history.pushState(menuListNames[ind], null, null);
                         return;
@@ -150,10 +156,7 @@ let helperFunc = {
     
     closeMenuMobile.addEventListener('click', function(){
         function hideMenu(){
-            pageBody.classList.remove('noScroll');
             pageMainSection.removeChild(menuContainer);
-            fullPage.style.overflow = 'visible'
-            pageBody.style.overflow = 'visible'
         };
         helperFunc.menuAnimation('clear');
         setTimeout(hideMenu, 300);
@@ -202,7 +205,6 @@ class Project {
     };
 
     carouselCreation(container){
-
         function createVideos(index, item){
             let video = document.createElement('video');
             helperFunc.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
@@ -219,7 +221,7 @@ class Project {
             
             video.appendChild(source);
             container.appendChild(video)
-        }
+        };
 
         if(this.videos !== null){
             if(this.videos.length > 1){
@@ -231,7 +233,6 @@ class Project {
             };
         } else if(this.images !== null){
             let imageStore = [];
-            
             for(let i = 0; i < this.images.length; i++){
                 imageStore[i] = new Image();
                 imageStore[i].src = this.images[i];
@@ -259,7 +260,6 @@ let displayPage = {
     }, 
     
     work: function displayWorkPage(){
-
         helperFunc.resetPage(pageMainSection);
         pageMainSection.classList.add('grid-container', 'work-page-container');
         
@@ -279,7 +279,6 @@ let displayPage = {
     },
 
     project: function displayProjectPage(projectIndex){
-
         helperFunc.resetPage(pageMainSection);
         pageMainSection.classList.add('grid-container');
 
@@ -287,48 +286,48 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         //create outer container for expandable section, which includes text + dropdown button
-        let projectTextContainer = document.createElement('section');     
-        projectTextContainer.classList.add('outer-content-container')
+        let projectTextOuterContainer = document.createElement('section');     
+        projectTextOuterContainer.classList.add('outer-content-container')
 
         //create container for just the text
-        let descriptionTextContainer = document.createElement('div')
-        descriptionTextContainer.classList.add('expanding-text-container');
+        let projectTextContainer = document.createElement('div')
+        projectTextContainer.classList.add('expanding-text-container');
 
         //project type, '\u00A0' adds a space when adding innerText
-        let textTypeOfProject = document.createElement('p');                                     
-        textTypeOfProject.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
-        textTypeOfProject.classList.add('body-text', 'project-text') 
+        let projectTypeText = document.createElement('p');                                     
+        projectTypeText.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
+        projectTypeText.classList.add('body-text', 'project-text') 
 
         //project description
-        let textProjectDescription = document.createElement('p');                               
-        textProjectDescription.innerText = `Description: 
+        let projectDescriptionText = document.createElement('p');                               
+        projectDescriptionText.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
-        textProjectDescription.classList.add('body-text', 'project-text');
+        projectDescriptionText.classList.add('body-text', 'project-text');
         
         //drop-down button
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more'
         dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
 
-        pageMainSection.appendChild(projectTextContainer);
-        projectTextContainer.appendChild(descriptionTextContainer);
-        descriptionTextContainer.append(textTypeOfProject);
+        pageMainSection.appendChild(projectTextOuterContainer);
+        projectTextOuterContainer.appendChild(projectTextContainer);
+        projectTextContainer.append(projectTypeText);
         
         //check if project object has a .description, if not, apply different styling.
         if(projectList[projectIndex].description !== null){                                   //resize if no desc
-            descriptionTextContainer.append(textProjectDescription);
-            projectTextContainer.appendChild(helperFunc.expandingSection(dropDownArrow, descriptionTextContainer, 1));
+            projectTextContainer.append(projectDescriptionText);
+            projectTextOuterContainer.appendChild(helperFunc.expandingSection(dropDownArrow, projectTextContainer, 1));
         } else if(projectList[projectIndex].description === null){
-            descriptionTextContainer.classList.add('expanded');
+            projectTextContainer.classList.add('expanded');
         };
 
         //create container for carousel of images, create carousel, append
-        let imageContainer = document.createElement('section');
-        imageContainer.classList.add('grid-background', 'project-image-container');
+        let projectImageContainer = document.createElement('section');
+        projectImageContainer.classList.add('grid-background', 'project-image-container');
         
-        projectList[projectIndex].carouselCreation(imageContainer);
-        pageMainSection.appendChild(imageContainer);
+        projectList[projectIndex].carouselCreation(projectImageContainer);
+        pageMainSection.appendChild(projectImageContainer);
     },
     
     about: function displayAboutPage(){
