@@ -87,43 +87,58 @@ let helperFunc = {
 
 (function mobileMenuPopUp(){
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
-    let menuItemsAreClicked = false;  
-
-    //creating and styling DOM elements
-    menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
-
-    const menuHeaderSection = document.createElement('div');
-    menuHeaderSection.className = 'header-section';
-    
-    const menuHeader = document.createElement('h1');
-    menuHeader.className = 'header';
-    menuHeader.innerText = 'MENU';
-    
-    const closeMenuMobile = document.createElement('span');
-    closeMenuMobile.innerText = 'close';
-    closeMenuMobile.classList.add('material-symbols-outlined', 'basic-icon');
-
-    let menuList = document.createElement('ul');
-    menuList.classList.add('vertical-center', 'menu-list') 
+    let menuItemsAreClicked = false; 
 
     let menuListNames = ['home', 'work', 'about', 'contact'];
-    let menuListElements = []; //to store DOM <li> elements     
+    let menuListElements = []; //to store DOM <li> elements  
 
-    for(let i = 0; i < menuListNames.length; i++){
-        menuListElements[i] = document.createElement('li');
-        menuListElements[i].innerText = menuListNames[i].toUpperCase();
-        helperFunc.setAttributes(menuListElements[i], {
-            'id': 'menu-item',
-            'class': 'header sub-header menu-list-items'
-        });
-        menuList.appendChild(menuListElements[i])
-    };
+    let menuList;
+    let closeMenuMobile;
+
+    function createMenuEls(){
+        for(let i = 0; i < menuListNames.length; i++){
+            menuListElements[i] = document.createElement('li');
+            menuListElements[i].innerText = menuListNames[i].toUpperCase();
+            helperFunc.setAttributes(menuListElements[i], {
+                'id': 'menu-item',
+                'class': 'header sub-header menu-list-items'
+            });
+            menuList.appendChild(menuListElements[i])
+        };
+    }
+
+    if(window.innerWidth < 1080){
+        console.log('mobile')
+
+        //creating and styling DOM elements
+        menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
     
-    //appending DOM elements to the menu container
-    menuHeaderSection.append(menuHeader, closeMenuMobile);
-    menuContainer.append(menuHeaderSection, menuList);
+        const menuHeaderSection = document.createElement('div');
+        menuHeaderSection.className = 'header-section';
+        
+        const menuHeader = document.createElement('h1');
+        menuHeader.className = 'header';
+        menuHeader.innerText = 'MENU';
+        
+        closeMenuMobile = document.createElement('span');
+        closeMenuMobile.innerText = 'close';
+        closeMenuMobile.classList.add('material-symbols-outlined', 'basic-icon');
+    
+        menuList = document.createElement('ul');
+        menuList.classList.add('vertical-center', 'menu-list') 
 
-    //when burger menu is clicked
+        createMenuEls();
+
+        //appending DOM elements to the menu container
+        menuHeaderSection.append(menuHeader, closeMenuMobile);
+        menuContainer.append(menuHeaderSection, menuList);
+    } else if(window.innerWidth >= 1080){
+        console.log('desktop')
+    }; 
+    
+    
+
+    // when burger menu is clicked
     burgerMenuMobile.addEventListener('click', function(e){
         let menuDOMElements = menuList.querySelectorAll('#menu-item');
 
@@ -164,6 +179,10 @@ let helperFunc = {
         setTimeout(hideMenu, 300);
     });       
 })();
+
+// (function desktopMenu(){
+
+// })();
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
