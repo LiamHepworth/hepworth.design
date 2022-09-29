@@ -283,7 +283,7 @@ body {
   .header {
     max-width: fit-content;
     overflow-wrap: normal;
-    font-size: 3.68rem;
+    font-size: 4.6rem;
     line-height: 3rem;
     margin: 0 auto;
   }
@@ -297,34 +297,57 @@ body {
     display: none;
   }
   .bar {
-    height: 3rem;
+    height: 3.4rem;
   }
-  .bar ul {
+  .bar nav {
     width: 90vw;
     height: 100%;
     margin: auto;
-    padding: auto 2rem;
+  }
+  .bar ul {
     display: flex;
+    align-items: flex-start;
   }
   .bar ul li {
     flex: 1;
     text-align: left;
     width: 5rem;
-    height: 100%;
+    font-family: "input-sans", Helvetica, sans-serif;
+    font-size: 1.2rem;
+    height: 3.4rem;
     list-style-type: none;
-    padding: 12px 1.5rem;
+    padding: 0 1.5rem;
     border-left: solid #cccccc;
     border-width: 0 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(0, 146, 189);
+    background: linear-gradient(90deg, rgb(0, 146, 189) 0%, rgb(0, 146, 189) 42%, rgb(23, 23, 23) 70%, rgb(23, 23, 23) 100%);
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: 350%;
+    transition: background-position 0.5s ease-out;
   }
   .bar ul li:nth-child(4) {
     border-right: solid #cccccc;
   }
   .bar ul li:hover {
-    background-color: rgb(0, 146, 189);
+    background-position: 0%;
+  }
+  .bar ul a {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
   }
   .bottom-bar {
     bottom: 0;
     border-top: 3px solid #cccccc;
+  }
+}
+@media (min-width: 1600px) {
+  .header {
+    font-size: 6.44rem;
   }
 }
 .rotate-180 {

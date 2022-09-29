@@ -12,7 +12,7 @@ $containerPadding: 0.5rem;
 $headerFooterHeight: 2.4rem;
 $viewportHeight: calc(100vh - (($headerFooterHeight + 40px) * 2));
 
-$headerFooterHeightDesktop: calc($headerFooterHeight + .6rem);
+$headerFooterHeightDesktop: calc($headerFooterHeight + 1rem);
 
 
 //text styles:
