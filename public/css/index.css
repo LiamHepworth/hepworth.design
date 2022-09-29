@@ -20,7 +20,7 @@ body {
 }
 
 .blue {
-  background-color: rgb(0, 146, 189);
+  background-color: #0092bd;
 }
 
 .black {
@@ -299,6 +299,10 @@ body {
   .bar {
     height: 3.4rem;
   }
+  .bar div:nth-child(2) {
+    width: 90vw;
+    flex-grow: 0;
+  }
   .bar nav {
     width: 90vw;
     height: 100%;
@@ -310,19 +314,18 @@ body {
   }
   .bar ul li {
     flex: 1;
-    text-align: left;
-    width: 5rem;
-    font-family: "input-sans", Helvetica, sans-serif;
-    font-size: 1.2rem;
-    height: 3.4rem;
     list-style-type: none;
+    height: 3.4rem;
     padding: 0 1.5rem;
-    border-left: solid #cccccc;
-    border-width: 0 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgb(0, 146, 189);
+    text-align: left;
+    font-family: "input-sans", Helvetica, sans-serif;
+    font-size: 1.2rem;
+    border-left: solid #cccccc;
+    border-width: 0 3px;
+    background: #171717;
     background: linear-gradient(90deg, rgb(0, 146, 189) 0%, rgb(0, 146, 189) 42%, rgb(23, 23, 23) 70%, rgb(23, 23, 23) 100%);
     background-position: 100%;
     background-repeat: no-repeat;
@@ -338,7 +341,7 @@ body {
   .bar ul a {
     display: inline-block;
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 0.5rem;
   }
   .bottom-bar {
     bottom: 0;

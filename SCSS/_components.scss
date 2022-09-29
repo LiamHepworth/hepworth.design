@@ -335,37 +335,41 @@
 
         height: $headerFooterHeightDesktop;
 
+        div:nth-child(2){
+            width: 90vw;
+            flex-grow: 0;
+        }
+
         nav{
             width: 90vw;
             height: 100%;
             margin: auto;
         }
+        
 
         ul{
-            // padding: auto 2rem;
             display: flex;
             align-items: flex-start;
 
             li{
                 flex: 1;
-                text-align: left;
-                width: 5rem;
-                font-family: $inputSans;
-                font-size: calc($bodyTextSize * 1.2);
-                height: $headerFooterHeightDesktop;
                 list-style-type: none;
+                height: $headerFooterHeightDesktop;
                 padding: 0 1.5rem;
-                border-left: solid $lineColourLight;
-                border-width: 0 $borderStrokeWidth;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-
-                background: rgb(0,146,189);
-                background: linear-gradient(90deg, rgba(0,146,189,1) 0%, rgba(0,146,189,1) 42%, rgba(23,23,23,1) 70%, rgba(23,23,23,1) 100%);                background-position: 100%;
+                text-align: left;
+                font-family: $inputSans;
+                font-size: calc($bodyTextSize * 1.2);
+                border-left: solid $lineColourLight;
+                border-width: 0 $borderStrokeWidth;
+                
+                background: $bgColourDark;
+                background: $menuItemsGradient;              
+                background-position: 100%;
                 background-repeat: no-repeat;
                 background-size: 350%;
-
                 transition: background-position .5s ease-out;
             }
 
@@ -380,7 +384,7 @@
             a{
                 display: inline-block;
                 padding: 0;
-                margin: 0;
+                margin: 0 0 0 .5rem;
             }
         }
     }
