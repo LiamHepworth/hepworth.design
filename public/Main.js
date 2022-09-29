@@ -31,6 +31,10 @@ let helperFunc = {
         pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
     },
 
+    clearContainer: (containerName) => {
+        containerName.innerHTML = ''
+    },
+
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grow');
@@ -92,17 +96,14 @@ let helperFunc = {
     let menuListNames = ['home', 'work', 'about', 'contact'];
     let menuListElements = []; //to store DOM <li> elements  
 
-    let menuList;
+    let menuList = document.createElement('ul');
     let closeMenuMobile;
 
     function createMenuEls(){
         for(let i = 0; i < menuListNames.length; i++){
             menuListElements[i] = document.createElement('li');
             menuListElements[i].innerText = menuListNames[i].toUpperCase();
-            helperFunc.setAttributes(menuListElements[i], {
-                'id': 'menu-item',
-                'class': 'header sub-header menu-list-items'
-            });
+            menuListElements[i].setAttribute('id', 'menu-item')
             menuList.appendChild(menuListElements[i])
         };
     }
@@ -124,16 +125,33 @@ let helperFunc = {
         closeMenuMobile.innerText = 'close';
         closeMenuMobile.classList.add('material-symbols-outlined', 'basic-icon');
     
-        menuList = document.createElement('ul');
         menuList.classList.add('vertical-center', 'menu-list') 
 
         createMenuEls();
 
+        menuListElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
+
         //appending DOM elements to the menu container
         menuHeaderSection.append(menuHeader, closeMenuMobile);
         menuContainer.append(menuHeaderSection, menuList);
+
     } else if(window.innerWidth >= 1080){
         console.log('desktop')
+        let bottomNavBar = document.querySelector('.bar.bottom-bar');
+        helperFunc.clearContainer(bottomNavBar);
+        bottomNavBar.appendChild(menuContainer);
+        menuContainer.appendChild(menuList);
+
+        createMenuEls();
+        console.log(menuListElements)
+        menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
+
+
+        let linkSection = document.createElement('span');
+        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
+        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
+
+        menuListElements[3].appendChild(linkSection);
     }; 
     
     
