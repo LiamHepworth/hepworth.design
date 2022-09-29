@@ -89,7 +89,7 @@ let helperFunc = {
     }
 };
 
-(function mobileMenuPopUp(){
+(function navCreation(){
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
     let menuItemsAreClicked = false; 
 
@@ -98,6 +98,8 @@ let helperFunc = {
 
     let menuList = document.createElement('ul');
     let closeMenuMobile;
+
+    let menuDOMElements;
 
     function createMenuEls(){
         for(let i = 0; i < menuListNames.length; i++){
@@ -128,6 +130,7 @@ let helperFunc = {
         menuList.classList.add('vertical-center', 'menu-list') 
 
         createMenuEls();
+        menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         menuListElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
@@ -135,7 +138,27 @@ let helperFunc = {
         menuHeaderSection.append(menuHeader, closeMenuMobile);
         menuContainer.append(menuHeaderSection, menuList);
 
+        burgerMenuMobile.addEventListener('click', function(e){
+            (function showMenu(){
+                //appending menu container to the page
+                pageMainSection.appendChild(menuContainer);
+                makeMenuItemsClickable();
+            })();
+            helperFunc.menuAnimation('play');
+        });
+        
+        closeMenuMobile.addEventListener('click', function(){
+            function hideMenu(){
+                pageMainSection.removeChild(menuContainer);
+                fullPage.style.overflow = 'visible'                 
+                pageBody.style.overflow = 'visible'
+            };
+            helperFunc.menuAnimation('clear');
+            setTimeout(hideMenu, 300);
+        }); 
+
     } else if(window.innerWidth >= 1080){
+
         console.log('desktop')
         let bottomNavBar = document.querySelector('.bar.bottom-bar');
         helperFunc.clearContainer(bottomNavBar);
@@ -143,64 +166,38 @@ let helperFunc = {
         menuContainer.appendChild(menuList);
 
         createMenuEls();
+        menuDOMElements = menuList.querySelectorAll('#menu-item');
+
         console.log(menuListElements)
         menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
-
 
         let linkSection = document.createElement('span');
         helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
         helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
 
         menuListElements[3].appendChild(linkSection);
+        makeMenuItemsClickable();
     }; 
-    
-    
 
-    // when burger menu is clicked
-    burgerMenuMobile.addEventListener('click', function(e){
-        let menuDOMElements = menuList.querySelectorAll('#menu-item');
-
-        (function showMenu(){
-            //appending menu container to the page
-            pageMainSection.appendChild(menuContainer);
-            
-            //adding listeners to each of the menu options
-            if(menuItemsAreClicked == false){
-                menuDOMElements.forEach((el) => {
-                    el.addEventListener('click', () => {
-                        //prevents listener being applied twice
-                        menuItemsAreClicked = true;  
-
-                        //gets the index of whatever el was clicked
-                        let ind = Array.from(menuDOMElements).indexOf(el);
-
-                        //ensures that if an item is clicked, the menu slides away, doesn't disappear
-                        helperFunc.menuAnimation('clear');
-
-                        setTimeout(displayPage[menuListNames[ind]], 300);
-                        history.pushState(menuListNames[ind], null, null);
-                        return;
-                    });
+    function makeMenuItemsClickable(){
+        if(menuItemsAreClicked == false){
+            menuDOMElements.forEach((el) => {
+                el.addEventListener('click', () => {
+                    //prevents listener being applied twice
+                    menuItemsAreClicked = true;  
+                    //gets the index of whatever el was clicked
+                    let ind = Array.from(menuDOMElements).indexOf(el);
+                    //ensures that if an item is clicked, the menu slides away, doesn't disappear
+                    helperFunc.menuAnimation('clear');
+                    setTimeout(displayPage[menuListNames[ind]], 300);
+                    history.pushState(menuListNames[ind], null, null);
+                    return;
                 });
-            };
-        })();
-        helperFunc.menuAnimation('play');
-    });
-    
-    closeMenuMobile.addEventListener('click', function(){
-        function hideMenu(){
-            pageMainSection.removeChild(menuContainer);
-            fullPage.style.overflow = 'visible'                 
-            pageBody.style.overflow = 'visible'
+            });
         };
-        helperFunc.menuAnimation('clear');
-        setTimeout(hideMenu, 300);
-    });       
+    }    
 })();
 
-// (function desktopMenu(){
-
-// })();
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
