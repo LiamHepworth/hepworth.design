@@ -5,7 +5,6 @@ const pageHeader = document.querySelector('#header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 
-
 let helperFunc = {
     menuAnimation: (input) => {
         if(input === 'clear'){
@@ -26,7 +25,7 @@ let helperFunc = {
         fullPage.style.overflow = 'visible'                 
         pageBody.style.overflow = 'visible'
         containerName.innerHTML = '';
-        pageHeader.innerText = 'HEPWORTH.\n DESIGN';
+        pageHeader.innerText = 'HEPWORTH.DESIGN';
         pageBody.classList.add('grid-background');
         pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
     },
@@ -86,10 +85,19 @@ let helperFunc = {
         //append SVG to link, link to page
         containerName.appendChild(link); 
         link.appendChild(icon);
+    },
+
+    getRange: (start, int, end) => {
+            if(start <= int && int <= end){
+                // console.log(int + ' is in range')
+                return true;
+            }else{
+                return false
+            };
     }
 };
 
-(function navCreation(){
+function navCreation(){
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
     let menuItemsAreClicked = false; 
 
@@ -196,8 +204,9 @@ let helperFunc = {
             });
         };
     }    
-})();
+};
 
+navCreation();
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
@@ -469,5 +478,33 @@ let displayPage = {
         })
     }
 };
+
+// let breakPoints = {
+//     mobile: helperFunc.getRange(1, window.innerWidth, 800),
+//     smallScreen: helperFunc.getRange(800, window.innerWidth, 1080),
+//     largeScreen: helperFunc.getRange(1080, window.innerWidth, 2500)
+// };
+
+window.addEventListener('resize', () => {    //need to clear desktop nav, mobile Nav loses functionality
+    // if(helperFunc.getRange(1, window.innerWidth, 800) === true){
+    //     console.log('MOBILE TRUE')
+    //     navCreation();
+    //     return
+    // } else if(helperFunc.getRange(800, window.innerWidth, 1080) === true){
+    //     console.log('Small Screen TRUE')
+    //     navCreation();
+    //     return
+    // } else if(helperFunc.getRange(1080, window.innerWidth, 2500) === true){
+    //     console.log('Large Screen TRUE')
+    //     navCreation();
+    //     return
+    // }
+
+    if(window.innerWidth < 800){
+        console.log('mobile')
+    } else if (window.innerWidth > 800){
+        console.log('desktop')
+    }
+});
 
 // displayPage.about();

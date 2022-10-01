@@ -331,6 +331,7 @@ body {
     background-repeat: no-repeat;
     background-size: 350%;
     transition: background-position 0.5s ease-out;
+    cursor: pointer;
   }
   .bar ul li:nth-child(4) {
     border-right: solid #cccccc;

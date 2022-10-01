@@ -371,6 +371,8 @@
                 background-repeat: no-repeat;
                 background-size: 350%;
                 transition: background-position .5s ease-out;
+
+                cursor: pointer;
             }
 
             li:nth-child(4){
