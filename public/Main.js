@@ -4,6 +4,7 @@ let pageMainSection = document.querySelector('#page-main-section');
 const pageHeader = document.querySelector('#header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
+const bottomNavBar = document.querySelector('.bar.bottom-bar');
 
 let helperFunc = {
     menuAnimation: (input) => {
@@ -87,15 +88,16 @@ let helperFunc = {
         link.appendChild(icon);
     },
 
-    getRange: (start, int, end) => {
-            if(start <= int && int <= end){
-                // console.log(int + ' is in range')
-                return true;
-            }else{
-                return false
-            };
-    }
+    // getRange: (start, int, end) => {
+    //         if(start <= int && int <= end){
+    //             // console.log(int + ' is in range')
+    //             return true;
+    //         }else{
+    //             return false
+    //         };
+    // }
 };
+
 
 function navCreation(){
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
@@ -168,7 +170,6 @@ function navCreation(){
     } else if(window.innerWidth >= 1080){
 
         console.log('desktop')
-        let bottomNavBar = document.querySelector('.bar.bottom-bar');
         helperFunc.clearContainer(bottomNavBar);
         bottomNavBar.appendChild(menuContainer);
         menuContainer.appendChild(menuList);
@@ -479,32 +480,37 @@ let displayPage = {
     }
 };
 
-// let breakPoints = {
-//     mobile: helperFunc.getRange(1, window.innerWidth, 800),
-//     smallScreen: helperFunc.getRange(800, window.innerWidth, 1080),
-//     largeScreen: helperFunc.getRange(1080, window.innerWidth, 2500)
-// };
+//define variable to call function
+let wait;  
 
-window.addEventListener('resize', () => {    //need to clear desktop nav, mobile Nav loses functionality
-    // if(helperFunc.getRange(1, window.innerWidth, 800) === true){
-    //     console.log('MOBILE TRUE')
-    //     navCreation();
-    //     return
-    // } else if(helperFunc.getRange(800, window.innerWidth, 1080) === true){
-    //     console.log('Small Screen TRUE')
-    //     navCreation();
-    //     return
-    // } else if(helperFunc.getRange(1080, window.innerWidth, 2500) === true){
-    //     console.log('Large Screen TRUE')
-    //     navCreation();
-    //     return
-    // }
+//define function
+function resizedWindow(){       
+    console.log('resized');
 
-    if(window.innerWidth < 800){
-        console.log('mobile')
-    } else if (window.innerWidth > 800){
-        console.log('desktop')
+    menuContainer.innerHTML = '';
+    // navCreation();
+
+    if(window.innerWidth < 1080){
+        bottomNavBar.innerHTML = '';
+        for(let i = 0; i < 3; i++){
+            bottomNavBar.appendChild(document.createElement('div'))
+        }
+        navCreation();
+    } else{
+        bottomNavBar.innerHTML = '';
+        navCreation();
     }
-});
+}
+
+window.onresize = ()=>{
+    //every time the window size changes, clear the timeout
+    clearTimeout(wait); 
+
+    //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
+    wait = setTimeout(function() {
+        resizedWindow();
+    }, 100);            
+}
+
 
 // displayPage.about();
