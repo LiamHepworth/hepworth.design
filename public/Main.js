@@ -86,18 +86,8 @@ let helperFunc = {
         //append SVG to link, link to page
         containerName.appendChild(link); 
         link.appendChild(icon);
-    },
-
-    // getRange: (start, int, end) => {
-    //         if(start <= int && int <= end){
-    //             // console.log(int + ' is in range')
-    //             return true;
-    //         }else{
-    //             return false
-    //         };
-    // }
+    }
 };
-
 
 function navCreation(){
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
@@ -118,11 +108,9 @@ function navCreation(){
             menuListElements[i].setAttribute('id', 'menu-item')
             menuList.appendChild(menuListElements[i])
         };
-    }
+    };
 
-    if(window.innerWidth < 1080){
-        console.log('mobile')
-
+    function mobileNav(){
         //creating and styling DOM elements
         menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
     
@@ -166,10 +154,9 @@ function navCreation(){
             helperFunc.menuAnimation('clear');
             setTimeout(hideMenu, 300);
         }); 
+    };
 
-    } else if(window.innerWidth >= 1080){
-
-        console.log('desktop')
+    function desktopNav(){
         helperFunc.clearContainer(bottomNavBar);
         bottomNavBar.appendChild(menuContainer);
         menuContainer.appendChild(menuList);
@@ -186,6 +173,15 @@ function navCreation(){
 
         menuListElements[3].appendChild(linkSection);
         makeMenuItemsClickable();
+    };
+
+    if(window.innerWidth < 1080){
+        console.log('mobile')
+        mobileNav();
+
+    } else if(window.innerWidth >= 1080){
+        console.log('desktop')
+        desktopNav();
     }; 
 
     function makeMenuItemsClickable(){
@@ -204,10 +200,82 @@ function navCreation(){
                 });
             });
         };
-    }    
+    };  
 };
 
+(function resizeNav(){
+    // define variable to call function
+    let wait; 
+
+    //define function to call on resize
+    function resizedWindow(){       
+    console.log('resized');
+
+    if(window.innerWidth < 1080){
+        console.log('mobile')
+        bottomNavBar.innerHTML = '';
+        for(let i = 0; i < 3; i++){
+            bottomNavBar.appendChild(document.createElement('div'))
+        }
+
+    } else if(window.innerWidth >= 1080){
+        console.log('desktop')
+        bottomNavBar.innerHTML = '';
+        bottomNavBar.appendChild(menuContainer);
+        menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
+    }; 
+
+    }
+
+    window.addEventListener('resize', () => {
+    //every time the window size changes, clear the timeout
+    clearTimeout(wait); 
+
+    //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
+    wait = setTimeout(function() {
+        resizedWindow();
+    }, 100);  
+
+    })
+})();
+
 navCreation();
+
+// function resizeNav(){
+//     //define variable to call function
+//     let wait;  
+    
+//     //define function to call on resize
+//     function resizedWindow(){       
+//         console.log('resized');
+    
+//         // menuContainer.innerHTML = '';
+//         // navCreation();
+    
+//         if(window.innerWidth < 1080){
+//             bottomNavBar.innerHTML = '';
+//             for(let i = 0; i < 3; i++){
+//                 bottomNavBar.appendChild(document.createElement('div'))
+//             }
+//             navCreation()
+//         } else{
+//             bottomNavBar.innerHTML = '';
+//             navCreation()
+//         }
+//     }
+    
+//     window.onresize = ()=>{
+//         //every time the window size changes, clear the timeout
+//         clearTimeout(wait); 
+    
+//         //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
+//         wait = setTimeout(function() {
+//             resizedWindow();
+//         }, 100);            
+//     };
+// };
+
+// resizeNav();
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
@@ -479,38 +547,5 @@ let displayPage = {
         })
     }
 };
-
-//define variable to call function
-let wait;  
-
-//define function
-function resizedWindow(){       
-    console.log('resized');
-
-    menuContainer.innerHTML = '';
-    // navCreation();
-
-    if(window.innerWidth < 1080){
-        bottomNavBar.innerHTML = '';
-        for(let i = 0; i < 3; i++){
-            bottomNavBar.appendChild(document.createElement('div'))
-        }
-        navCreation();
-    } else{
-        bottomNavBar.innerHTML = '';
-        navCreation();
-    }
-}
-
-window.onresize = ()=>{
-    //every time the window size changes, clear the timeout
-    clearTimeout(wait); 
-
-    //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
-    wait = setTimeout(function() {
-        resizedWindow();
-    }, 100);            
-}
-
 
 // displayPage.about();
