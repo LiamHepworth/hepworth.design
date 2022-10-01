@@ -90,23 +90,31 @@ let helperFunc = {
 };
 
 function navCreation(){
+    
+    let navItems = {
+        menuList: document.createElement('ul'),
+        menuListNames:['home', 'work', 'about', 'contact'],
+        menuElements: [], //to store DOM <li> elements  
+        // menuDOMElements: menuList.querySelectorAll('#menu-item'),
+
+        closeMenu: document.createElement('span'),
+    }
+
+    console.log(navItems.menuList);
+
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
     let menuItemsAreClicked = false; 
-
-    let menuListNames = ['home', 'work', 'about', 'contact'];
-    let menuListElements = []; //to store DOM <li> elements  
-
-    let menuList = document.createElement('ul');
+    // let menuList = document.createElement('ul');
     let closeMenuMobile;
 
-    let menuDOMElements;
+    // let menuDOMElements;
 
-    function createMenuEls(){
-        for(let i = 0; i < menuListNames.length; i++){
-            menuListElements[i] = document.createElement('li');
-            menuListElements[i].innerText = menuListNames[i].toUpperCase();
-            menuListElements[i].setAttribute('id', 'menu-item')
-            menuList.appendChild(menuListElements[i])
+    function newListCreation(newItemNames, itemArray, container){
+        for(let i = 0; i < newItemNames.length; i++){
+            itemArray[i] = document.createElement('li');
+            itemArray[i].innerText = newItemNames[i].toUpperCase();
+            itemArray[i].setAttribute('id', 'menu-item')
+            container.appendChild(itemArray[i]);
         };
     };
 
@@ -125,16 +133,16 @@ function navCreation(){
         closeMenuMobile.innerText = 'close';
         closeMenuMobile.classList.add('material-symbols-outlined', 'basic-icon');
     
-        menuList.classList.add('vertical-center', 'menu-list') 
+        navItems.menuList.classList.add('vertical-center', 'menu-list') 
 
-        createMenuEls();
-        menuDOMElements = menuList.querySelectorAll('#menu-item');
+        newListCreation(navItems.menuListNames, navItems.menuElements, navItems.menuList);
+        // menuDOMElements = menuList.querySelectorAll('#menu-item');
 
-        menuListElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
+        navItems.menuElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
         //appending DOM elements to the menu container
         menuHeaderSection.append(menuHeader, closeMenuMobile);
-        menuContainer.append(menuHeaderSection, menuList);
+        menuContainer.append(menuHeaderSection, navItems.menuList);
 
         burgerMenuMobile.addEventListener('click', function(e){
             (function showMenu(){
@@ -161,8 +169,8 @@ function navCreation(){
         bottomNavBar.appendChild(menuContainer);
         menuContainer.appendChild(menuList);
 
-        createMenuEls();
-        menuDOMElements = menuList.querySelectorAll('#menu-item');
+        newListCreation();
+        // menuDOMElements = menuList.querySelectorAll('#menu-item');
 
         console.log(menuListElements)
         menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
@@ -186,7 +194,7 @@ function navCreation(){
 
     function makeMenuItemsClickable(){
         if(menuItemsAreClicked == false){
-            menuDOMElements.forEach((el) => {
+            navItems.menuElements.forEach((el) => {
                 el.addEventListener('click', () => {
                     //prevents listener being applied twice
                     menuItemsAreClicked = true;  
@@ -203,79 +211,43 @@ function navCreation(){
     };  
 };
 
-(function resizeNav(){
-    // define variable to call function
-    let wait; 
+// (function resizeNav(){
+//     // define variable to call function
+//     let wait; 
 
-    //define function to call on resize
-    function resizedWindow(){       
-    console.log('resized');
-
-    if(window.innerWidth < 1080){
-        console.log('mobile')
-        bottomNavBar.innerHTML = '';
-        for(let i = 0; i < 3; i++){
-            bottomNavBar.appendChild(document.createElement('div'))
-        }
-
-    } else if(window.innerWidth >= 1080){
-        console.log('desktop')
-        bottomNavBar.innerHTML = '';
-        bottomNavBar.appendChild(menuContainer);
-        menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
-    }; 
-
-    }
-
-    window.addEventListener('resize', () => {
-    //every time the window size changes, clear the timeout
-    clearTimeout(wait); 
-
-    //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
-    wait = setTimeout(function() {
-        resizedWindow();
-    }, 100);  
-
-    })
-})();
-
-navCreation();
-
-// function resizeNav(){
-//     //define variable to call function
-//     let wait;  
-    
 //     //define function to call on resize
 //     function resizedWindow(){       
-//         console.log('resized');
-    
-//         // menuContainer.innerHTML = '';
-//         // navCreation();
-    
-//         if(window.innerWidth < 1080){
-//             bottomNavBar.innerHTML = '';
-//             for(let i = 0; i < 3; i++){
-//                 bottomNavBar.appendChild(document.createElement('div'))
-//             }
-//             navCreation()
-//         } else{
-//             bottomNavBar.innerHTML = '';
-//             navCreation()
-//         }
-//     }
-    
-//     window.onresize = ()=>{
-//         //every time the window size changes, clear the timeout
-//         clearTimeout(wait); 
-    
-//         //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
-//         wait = setTimeout(function() {
-//             resizedWindow();
-//         }, 100);            
-//     };
-// };
+//     console.log('resized');
 
-// resizeNav();
+//     if(window.innerWidth < 1080){
+//         console.log('mobile')
+//         bottomNavBar.innerHTML = '';
+//         for(let i = 0; i < 3; i++){
+//             bottomNavBar.appendChild(document.createElement('div'))
+//         }
+
+//     } else if(window.innerWidth >= 1080){
+//         console.log('desktop')
+//         bottomNavBar.innerHTML = '';
+//         bottomNavBar.appendChild(menuContainer);
+//         menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
+//     }; 
+
+//     }
+
+//     window.addEventListener('resize', () => {
+//     //every time the window size changes, clear the timeout
+//     clearTimeout(wait); 
+
+//     //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
+//     wait = setTimeout(function() {
+//         resizedWindow();
+//     }, 100);  
+
+//     })
+// })();
+
+navCreation();
 
 (function checkHistory(){
     window.addEventListener('popstate', e => {
