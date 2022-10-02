@@ -89,25 +89,30 @@ let helperFunc = {
     }
 };
 
+// let navComps = {
+//     headerSection: document.createElement('div'),
+//     menuHeader: document.createElement('h1'),
+
+//     menuList: document.createElement('ul'),
+//     menuListNames:['home', 'work', 'about', 'contact'],
+//     menuElements: [], //to store DOM <li> elements  
+//     closeMenu: document.createElement('span'),
+// }
+
 function navCreation(){
-    
-    let navItems = {
-        menuList: document.createElement('ul'),
-        menuListNames:['home', 'work', 'about', 'contact'],
-        menuElements: [], //to store DOM <li> elements  
-        // menuDOMElements: menuList.querySelectorAll('#menu-item'),
-
-        closeMenu: document.createElement('span'),
-    }
-
-    console.log(navItems.menuList);
 
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
     let menuItemsAreClicked = false; 
-    // let menuList = document.createElement('ul');
-    let closeMenuMobile;
+    
+    let navComps = {
+        headerSection: document.createElement('div'),
+        menuHeader: document.createElement('h1'),
 
-    // let menuDOMElements;
+        menuList: document.createElement('ul'),
+        menuListNames:['home', 'work', 'about', 'contact'],
+        menuElements: [], //to store DOM <li> elements  
+        closeMenu: document.createElement('span'),
+    }
 
     function newListCreation(newItemNames, itemArray, container){
         for(let i = 0; i < newItemNames.length; i++){
@@ -118,31 +123,33 @@ function navCreation(){
         };
     };
 
+    function clearClasses(object) {
+        for(let property in object){
+            if(object[property].nodeName !== undefined){
+                object[property].classList = ''
+            };
+        };
+    };
+
     function mobileNav(){
         //creating and styling DOM elements
         menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
-    
-        const menuHeaderSection = document.createElement('div');
-        menuHeaderSection.className = 'header-section';
+        navComps.headerSection.className = 'header-section';
         
-        const menuHeader = document.createElement('h1');
-        menuHeader.className = 'header';
-        menuHeader.innerText = 'MENU';
+        navComps.menuHeader.className = 'header';
+        navComps.menuHeader.innerText = 'MENU';
         
-        closeMenuMobile = document.createElement('span');
-        closeMenuMobile.innerText = 'close';
-        closeMenuMobile.classList.add('material-symbols-outlined', 'basic-icon');
+        navComps.closeMenu.innerText = 'close';
+        navComps.closeMenu.classList.add('material-symbols-outlined', 'basic-icon');
     
-        navItems.menuList.classList.add('vertical-center', 'menu-list') 
+        navComps.menuList.classList.add('vertical-center', 'menu-list') 
 
-        newListCreation(navItems.menuListNames, navItems.menuElements, navItems.menuList);
-        // menuDOMElements = menuList.querySelectorAll('#menu-item');
-
-        navItems.menuElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
+        newListCreation(navComps.menuListNames, navComps.menuElements, navComps.menuList);
+        navComps.menuElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
         //appending DOM elements to the menu container
-        menuHeaderSection.append(menuHeader, closeMenuMobile);
-        menuContainer.append(menuHeaderSection, navItems.menuList);
+        navComps.headerSection.append(navComps.menuHeader, navComps.closeMenu);
+        menuContainer.append(navComps.headerSection, navComps.menuList);
 
         burgerMenuMobile.addEventListener('click', function(e){
             (function showMenu(){
@@ -153,7 +160,7 @@ function navCreation(){
             helperFunc.menuAnimation('play');
         });
         
-        closeMenuMobile.addEventListener('click', function(){
+        navComps.closeMenu.addEventListener('click', function(){
             function hideMenu(){
                 pageMainSection.removeChild(menuContainer);
                 fullPage.style.overflow = 'visible'                 
@@ -194,7 +201,7 @@ function navCreation(){
 
     function makeMenuItemsClickable(){
         if(menuItemsAreClicked == false){
-            navItems.menuElements.forEach((el) => {
+            navComps.menuElements.forEach((el) => {
                 el.addEventListener('click', () => {
                     //prevents listener being applied twice
                     menuItemsAreClicked = true;  
