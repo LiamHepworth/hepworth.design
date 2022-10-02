@@ -94,16 +94,19 @@ function navCreation(){
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
     let menuItemsAreClicked = false; 
     const menuListNames = ['home', 'work', 'about', 'contact']
-    
-    const navObj = {
+
+    const navHead = {
         headerSection: document.createElement('div'),
         menuHeader: document.createElement('h1'),
         closeMenu: document.createElement('span'),
-
+    }
+    
+    const navList = {
         menuList: document.createElement('ul'),
         menuListItems: [], //to store <li> elements 
-        linkSection: document.createElement('span'),
     };
+
+    const linkSection = document.createElement('span');
 
     function newListCreation(itemNames, itemArray, container){
         for(let i = 0; i < itemNames.length; i++){
@@ -114,34 +117,40 @@ function navCreation(){
         };
     };
 
-    newListCreation(menuListNames, navObj.menuListItems, navObj.menuList);
+    newListCreation(menuListNames, navList.menuListItems, navList.menuList);
 
     function clearClasses(object) {
         for(let property in object){
-            if(object[property].nodeName !== undefined){
-                object[property].classList = ''
-            };
+            object[property].classList = ''
         };
     };
 
+    function displayObjects (object, displayStyle){
+        for(let property in object){
+            object[property].style.display = displayStyle;
+        }
+    }
+
     function mobileNav(){
 
-        clearClasses(navObj);
+        clearClasses(navList);
+        linkSection.style.display = 'none';
+        displayObjects(navHead, 'flex');
 
         //creating and styling DOM elements
         menuContainer.className = 'blue grid-background grid-light menu-container static';
 
-        navObj.headerSection.className = 'header-section';
+        navHead.headerSection.className = 'header-section';
         
-        navObj.menuHeader.className = 'header';
-        navObj.menuHeader.innerText = 'MENU';
+        navHead.menuHeader.className = 'header';
+        navHead.menuHeader.innerText = 'MENU';
         
-        navObj.closeMenu.className = 'material-symbols-outlined basic-icon';
-        navObj.closeMenu.innerText = 'close';
+        navHead.closeMenu.className = 'material-symbols-outlined basic-icon';
+        navHead.closeMenu.innerText = 'close';
     
-        navObj.menuList.className = 'vertical-center menu-list' 
+        navList.menuList.className = 'vertical-center menu-list' 
 
-        navObj.menuListItems.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
+        navList.menuListItems.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
         burgerMenuMobile.addEventListener('click', function(e){
             (function showMenu(){
@@ -152,7 +161,7 @@ function navCreation(){
             helperFunc.menuAnimation('play');
         });
         
-        navObj.closeMenu.addEventListener('click', function(){
+        navHead.closeMenu.addEventListener('click', function(){
             function hideMenu(){
                 pageMainSection.removeChild(menuContainer);
                 fullPage.style.overflow = 'visible'                 
@@ -163,25 +172,31 @@ function navCreation(){
         }); 
 
         //appending DOM elements to the menu container
-        navObj.headerSection.append(navObj.menuHeader, navObj.closeMenu);
-        menuContainer.append(navObj.headerSection, navObj.menuList);
+
+        if(menuContainer.innerHTML === ''){
+            navHead.headerSection.append(navHead.menuHeader, navHead.closeMenu);
+            menuContainer.append(navHead.headerSection, navList.menuList);
+        }
     };
 
     function desktopNav(){
 
-        clearClasses(navObj);
+        displayObjects(navHead, 'none')
+        linkSection.style.display = 'flex';
+        clearClasses(navList);
+        clearClasses(navHead);
         helperFunc.clearContainer(bottomNavBar);
+        
+        navList.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
 
-        navObj.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
-
-        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', navObj.linkSection);
-        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', navObj.linkSection);
+        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
+        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
 
         makeMenuItemsClickable();
 
         bottomNavBar.appendChild(menuContainer);
-        menuContainer.appendChild(navObj.menuList);
-        navObj.menuListItems[3].appendChild(navObj.linkSection);
+        menuContainer.appendChild(navList.menuList);
+        navList.menuListItems[3].appendChild(linkSection);
     };
 
     if(window.innerWidth < 1080){
@@ -192,14 +207,24 @@ function navCreation(){
         desktopNav();
     }; 
 
+    window.addEventListener('resize', () => {
+        if(window.innerWidth < 1080){
+            console.log('mobile')
+            mobileNav();
+        } else if(window.innerWidth >= 1080){
+            console.log('desktop')
+            desktopNav();
+        }; 
+    });
+
     function makeMenuItemsClickable(){
         if(menuItemsAreClicked == false){
-            navObj.menuListItems.forEach((el) => {
+            navList.menuListItems.forEach((el) => {
                 el.addEventListener('click', () => {
                     //prevents listener being applied twice
                     menuItemsAreClicked = true;  
                     //gets the index of whatever el was clicked
-                    let ind = Array.from(menuDOMElements).indexOf(el);
+                    let ind = Array.from(navList.menuListItems).indexOf(el);
                     //ensures that if an item is clicked, the menu slides away, doesn't disappear
                     helperFunc.menuAnimation('clear');
                     setTimeout(displayPage[menuListNames[ind]], 300);
