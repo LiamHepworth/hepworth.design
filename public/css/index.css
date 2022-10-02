@@ -268,6 +268,9 @@ body {
   border-width: 0 3px;
   flex-grow: 7;
 }
+.bar ul {
+  display: none;
+}
 
 .top-bar {
   top: 0;
@@ -301,10 +304,6 @@ body {
   }
   .bar {
     height: 3.4rem;
-  }
-  .bar div:nth-child(2) {
-    width: 90vw;
-    flex-grow: 0;
   }
   .bar nav {
     display: block;
@@ -350,6 +349,10 @@ body {
     display: inline-block;
     padding: 0;
     margin: 0 0 0 0.5rem;
+  }
+  .top-bar div:nth-child(2) {
+    width: 90vw;
+    flex-grow: 0;
   }
   .bottom-bar {
     bottom: 0;

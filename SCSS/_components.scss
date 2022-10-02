@@ -275,6 +275,10 @@
         border-width: 0 $borderStrokeWidth;
         flex-grow: 7;
     }
+
+    ul{
+        display: none;
+    }
 }
 
 .top-bar{
@@ -307,9 +311,6 @@
 // }
 
 @media (min-width: 1080px){
-    // .black{
-    //     background-color: darkblue;
-    // }
 
     //text elements:
     .header{
@@ -334,18 +335,12 @@
     }
 
     //nav
-
     .bar{
 
         height: $headerFooterHeightDesktop;
 
-        div:nth-child(2){
-            width: 90vw;
-            flex-grow: 0;
-        }
-
         nav{
-            display:block;
+            display: block;
             width: 90vw;
             height: 100%;
             margin: auto;
@@ -353,7 +348,6 @@
             top: 0;
             left: 0;
         }
-        
 
         ul{
             display: flex;
@@ -396,6 +390,13 @@
                 padding: 0;
                 margin: 0 0 0 .5rem;
             }
+        }
+    }
+
+    .top-bar{
+        div:nth-child(2){
+            width: 90vw;
+            flex-grow: 0;
         }
     }
 

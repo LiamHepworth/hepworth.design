@@ -73,7 +73,7 @@ let helperFunc = {
       
     },
 
-    createLinkedIcon: (iconName, URL) => {
+    createLinkedIcon: (iconName, URL, container) => {
         //create link
         let link = document.createElement('a')
         helperFunc.setAttributes(link, {'href': URL, 'class': 'link-container'})
@@ -87,10 +87,12 @@ let helperFunc = {
     }
 };
 
-function navCreation(){
+const socialLinks = {
+    instagram: helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en'),
+    linkedIn: helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/')
+}
 
-    //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
-    // let menuItemsAreClicked = false; 
+function navCreation(){
 
     const menuListNames = ['home', 'work', 'about', 'contact']
 
@@ -106,11 +108,6 @@ function navCreation(){
     };
 
     const linkSection = document.createElement('span');
-
-    const navLinks = {
-        instagram: helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en'),
-        linkedIn: helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/')
-    }
 
     function newListCreation(itemNames, itemArray, container){
         for(let i = 0; i < itemNames.length; i++){
@@ -132,11 +129,9 @@ function navCreation(){
     function clearClasses(object) {
         for(let property in object){
             object[property].className = ''
-            console.log(object[property].length)
     
             if(object[property].length > 1){
                 for(let i = 0; i < object[property].length; i++){
-                    console.log(object[property][i])
                     object[property][i].className = '';
                 }
             }
@@ -164,13 +159,11 @@ function navCreation(){
 
         navList.menuListItems.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
-        burgerMenuMobile.addEventListener('click', function(e){
+        burgerMenuMobile.addEventListener('click', function(){
             (function showMenu(){
-                //appending menu container to the page
                 pageMainSection.appendChild(menuContainer);
-                // makeMenuItemsClickable();
+                helperFunc.menuAnimation('play');
             })();
-            helperFunc.menuAnimation('play');
         });
         
         navHead.closeMenu.addEventListener('click', function(){
@@ -186,7 +179,6 @@ function navCreation(){
         //appending DOM elements to the menu container
         navHead.headerSection.append(navHead.menuHeader, navHead.closeMenu);
         menuContainer.append(navHead.headerSection, navList.menuList);
-
     };
 
     function desktopNav(){
@@ -194,28 +186,17 @@ function navCreation(){
         displayObjects(navHead, 'none')
         linkSection.style.display = 'flex';
         clearClasses(navList);
-        clearClasses(navHead);
-        // helperFunc.clearContainer(bottomNavBar);
 
         navList.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
 
-        // makeMenuItemsClickable();
-
         bottomNavBar.appendChild(menuContainer);
         menuContainer.appendChild(navList.menuList);
-        linkSection.append(navLinks.instagram, navLinks.linkedIn);
-        navList.menuListItems[3].appendChild(linkSection);
+
+        navList.menuListItems[3].appendChild(linkSection); 
+        linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
     };
 
-    if(window.innerWidth < 1080){
-        console.log('mobile')
-        mobileNav();
-    } else if(window.innerWidth >= 1080){
-        console.log('desktop')
-        desktopNav();
-    }; 
-
-    window.addEventListener('resize', () => {
+    function displayNav(){
         if(window.innerWidth < 1080){
             console.log('mobile')
             mobileNav();
@@ -223,28 +204,32 @@ function navCreation(){
             console.log('desktop')
             desktopNav();
         }; 
+    };
+
+    displayNav()
+
+    window.addEventListener('resize', () => {
+        displayNav()
+        //update SVG's
+        feather.replace();
     });
 
     function makeMenuItemsClickable(){
-        // if(menuItemsAreClicked == false){
-            navList.menuListItems.forEach((el) => {
-                el.addEventListener('click', () => {
-                    //prevents listener being applied twice
-                    // menuItemsAreClicked = true;  
-                    //gets the index of whatever el was clicked
-                    let ind = Array.from(navList.menuListItems).indexOf(el);
-                    //ensures that if an item is clicked, the menu slides away, doesn't disappear
-                    helperFunc.menuAnimation('clear');
-                    setTimeout(displayPage[menuListNames[ind]], 300);
-                    history.pushState(menuListNames[ind], null, null);
-                    return;
-                });
+        navList.menuListItems.forEach((el) => {
+            el.addEventListener('click', () => {
+                //gets the index of whatever el was clicked
+                let ind = Array.from(navList.menuListItems).indexOf(el);
+                //ensures that if an item is clicked, the menu slides away, doesn't disappear
+                helperFunc.menuAnimation('clear');
+                setTimeout(displayPage[menuListNames[ind]], 300);
+                history.pushState(menuListNames[ind], null, null);
+                return;
             });
-        // };
+        });
     };  
 
     makeMenuItemsClickable();
-
+     
 };
 
 // (function resizeNav(){
@@ -471,14 +456,17 @@ let displayPage = {
 
         let linkSection = document.createElement('div');
         linkSection.classList.add('content-container');
-        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
-        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
-        
-        pageMainSection.appendChild(linkSection);
+
+        if(window.innerWidth < 1080){
+            linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
+            pageMainSection.appendChild(linkSection);
+
+            feather.replace(); 
+        }
+
         pageMainSection.appendChild(helperFunc.createBlueGridFiller());
         
-        //ensure feather SVG data is updated when the page completes loading;
-        feather.replace(); 
+        // //ensure feather SVG data is updated when the page completes loading;
     }, 
     
     contact: function displayContactPage(){
@@ -555,5 +543,10 @@ let displayPage = {
         })
     }
 };
+
+// window.addEventListener('onload', () => {
+//     // feather.replace()
+//     console.log('xxx')
+// })
 
 // displayPage.about();
