@@ -69,6 +69,16 @@ let helperFunc = {
         link.appendChild(icon)
 
         return link
+    },
+
+    pageHeaderToggle: (hasId) => {
+        if(hasId === false){
+            pageHeader.removeAttribute('id');
+        } else if(hasId === true){
+            pageHeader.setAttribute('id', 'header')
+        } else {
+            pageHeader.id = 'header';
+        }
     }
 };
 
@@ -431,16 +441,37 @@ let displayPage = {
         let linkSection = document.createElement('div');
         linkSection.classList.add('content-container');
 
-        if(window.innerWidth < 1080){
-            linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
-            pageMainSection.appendChild(linkSection);
+        let gridFiller = helperFunc.createBlueGridFiller()
+        pageMainSection.appendChild(gridFiller);
 
-            feather.replace(); 
+        function appendLinks(){
+            linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
+            pageMainSection.insertBefore(linkSection, gridFiller)
+            feather.replace(); //updates icons as SVG's
+        };
+
+        appendLinks();
+
+        //define a variable to hold timeout function
+        let time; 
+
+        //call once resize is complete
+        function resizedWindow(){
+            if(window.innerWidth < 1080){
+                appendLinks();
+            };
         }
 
-        pageMainSection.appendChild(helperFunc.createBlueGridFiller());
-        
-        // //ensure feather SVG data is updated when the page completes loading;
+        //on resize, clear existing timeout function
+        window.onresize = function() {
+            clearTimeout(time);
+            //then, call the function again with a 1ms buffer to prevent it running until resize end. 
+            time = setTimeout(function() {
+                resizedWindow();
+            }, 100);
+        };
+
+
     }, 
     
     contact: function displayContactPage(){
