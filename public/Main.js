@@ -7,22 +7,7 @@ const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 
 let helperFunc = {
-    menuAnimation: (input) => {
-        if(input === 'clear'){
-            menuContainer.classList.remove('menu-appear');
-            pageBody.classList.remove('noScroll');
-        } else if(input === 'play'){
-            //hiding overflow to ensure scroll bars don't appear, removed on resetPage and hideMenu()
-            fullPage.style.overflow = 'hidden'                 
-            pageBody.style.overflow = 'hidden'
-            pageBody.classList.add('noScroll');
-            helperFunc.resetScrollPosition();
-            menuContainer.classList.add('menu-appear');
-        };
-    },
-
     resetPage: (containerName) => {
-        helperFunc.menuAnimation('clear');
         fullPage.style.overflow = 'visible'                 
         pageBody.style.overflow = 'visible'
         containerName.innerHTML = '';
@@ -94,14 +79,17 @@ const socialLinks = {
 
 function navCreation(){
 
+    //name/text for each menu item
     const menuListNames = ['home', 'work', 'about', 'contact']
 
+    //nav header elements
     const navHead = {
         headerSection: document.createElement('div'),
         menuHeader: document.createElement('h1'),
         closeMenu: document.createElement('span'),
     }
     
+    //main list and list items for nav
     const navList = {
         menuList: document.createElement('ul'),
         menuListItems: [], //to store <li> elements 
@@ -109,23 +97,24 @@ function navCreation(){
 
     const linkSection = document.createElement('span');
 
-    function newListCreation(itemNames, itemArray, container){
-        for(let i = 0; i < itemNames.length; i++){
-            itemArray[i] = document.createElement('li');
-            itemArray[i].innerText = itemNames[i].toUpperCase();
-            itemArray[i].setAttribute('id', 'menu-item')
-            container.appendChild(itemArray[i]);
+    //create the list items for the nav
+    (function menuListCreation(){
+        for(let i = 0; i < menuListNames.length; i++){
+            navList.menuListItems[i] = document.createElement('li');
+            navList.menuListItems[i].innerText = menuListNames[i].toUpperCase();
+            navList.menuListItems[i].setAttribute('id', 'menu-item')
+            navList.menuList.appendChild(navList.menuListItems[i]);
         };
-    };
+    })();
 
-    newListCreation(menuListNames, navList.menuListItems, navList.menuList);
-
-    function displayObjects (object, displayStyle){
+    //toggle the display of elements which are stored in an object
+    function displayEl (object, displayStyle){
         for(let property in object){
             object[property].style.display = displayStyle;
         }
     }
 
+    //clear the classList of elements in an object
     function clearClasses(object) {
         for(let property in object){
             object[property].className = ''
@@ -138,13 +127,29 @@ function navCreation(){
         };
     };
 
+    function menuAnimation(input){
+        if(input === 'clear'){
+            menuContainer.classList.remove('menu-appear');
+            pageBody.style.overflow = 'visible',
+            pageBody.classList.remove('noScroll');
+        } else if(input === 'play'){
+            //hiding overflow to ensure scroll bars don't appear, removed on resetPage and hideMenu()
+            fullPage.style.overflow = 'hidden'                 
+            pageBody.style.overflow = 'hidden'
+            pageBody.classList.add('noScroll');
+            helperFunc.resetScrollPosition();
+            menuContainer.classList.add('menu-appear');
+        };
+    }
+
     function mobileNav(){
 
+        //clear list elements classList, hide links, show header section
         clearClasses(navList);
         linkSection.style.display = 'none';
-        displayObjects(navHead, 'flex');
+        displayEl(navHead, 'flex');
 
-        //creating and styling DOM elements
+        // creating and styling DOM elements
         menuContainer.className = 'blue grid-background grid-light menu-container static';
 
         navHead.headerSection.className = 'header-section';
@@ -159,43 +164,46 @@ function navCreation(){
 
         navList.menuListItems.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
-        burgerMenuMobile.addEventListener('click', function(){
-            (function showMenu(){
-                pageMainSection.appendChild(menuContainer);
-                helperFunc.menuAnimation('play');
-            })();
-        });
-        
-        navHead.closeMenu.addEventListener('click', function(){
-            function hideMenu(){
-                pageMainSection.removeChild(menuContainer);
-                fullPage.style.overflow = 'visible'                 
-                pageBody.style.overflow = 'visible'
-            };
-            helperFunc.menuAnimation('clear');
-            setTimeout(hideMenu, 300);
-        }); 
-
         //appending DOM elements to the menu container
         navHead.headerSection.append(navHead.menuHeader, navHead.closeMenu);
         menuContainer.append(navHead.headerSection, navList.menuList);
     };
 
+    //show mobile menu on burgermenu click
+    burgerMenuMobile.addEventListener('click', function(){
+        (function showMenu(){
+            pageMainSection.appendChild(menuContainer);
+        })();
+        menuAnimation('play');
+    });
+    
+    //hide menu on close button click
+    navHead.closeMenu.addEventListener('click', function(){
+        function hideMenu(){
+            pageMainSection.removeChild(menuContainer);
+        };
+        menuAnimation('clear');
+        setTimeout(hideMenu, 300);
+    }); 
+
     function desktopNav(){
 
-        displayObjects(navHead, 'none')
-        linkSection.style.display = 'flex';
+        //clear list elements classList, show links, hide header section
         clearClasses(navList);
+        linkSection.style.display = 'flex';
+        displayEl(navHead, 'none')
 
+        //apply new classes to list items
         navList.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
 
+        //append elements
         bottomNavBar.appendChild(menuContainer);
         menuContainer.appendChild(navList.menuList);
-
         navList.menuListItems[3].appendChild(linkSection); 
         linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
     };
 
+    //display the nav style which corresponds to the screen size
     function displayNav(){
         if(window.innerWidth < 1080){
             console.log('mobile')
@@ -208,20 +216,23 @@ function navCreation(){
 
     displayNav()
 
+    //check screen size
     window.addEventListener('resize', () => {
         displayNav()
         //update SVG's
         feather.replace();
     });
 
+    //add a listener to each list item which leads to it's corresponding page
     function makeMenuItemsClickable(){
         navList.menuListItems.forEach((el) => {
             el.addEventListener('click', () => {
                 //gets the index of whatever el was clicked
                 let ind = Array.from(navList.menuListItems).indexOf(el);
                 //ensures that if an item is clicked, the menu slides away, doesn't disappear
-                helperFunc.menuAnimation('clear');
+                menuAnimation('clear');
                 setTimeout(displayPage[menuListNames[ind]], 300);
+                //push history state
                 history.pushState(menuListNames[ind], null, null);
                 return;
             });
@@ -229,44 +240,7 @@ function navCreation(){
     };  
 
     makeMenuItemsClickable();
-     
 };
-
-// (function resizeNav(){
-//     // define variable to call function
-//     let wait; 
-
-//     //define function to call on resize
-//     function resizedWindow(){       
-//     console.log('resized');
-
-//     if(window.innerWidth < 1080){
-//         console.log('mobile')
-//         bottomNavBar.innerHTML = '';
-//         for(let i = 0; i < 3; i++){
-//             bottomNavBar.appendChild(document.createElement('div'))
-//         }
-
-//     } else if(window.innerWidth >= 1080){
-//         console.log('desktop')
-//         bottomNavBar.innerHTML = '';
-//         bottomNavBar.appendChild(menuContainer);
-//         menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
-//     }; 
-
-//     }
-
-//     window.addEventListener('resize', () => {
-//     //every time the window size changes, clear the timeout
-//     clearTimeout(wait); 
-
-//     //buffer for .1s to prevent resizedWindow function from firing until window has stopped resizing
-//     wait = setTimeout(function() {
-//         resizedWindow();
-//     }, 100);  
-
-//     })
-// })();
 
 navCreation();
 
@@ -543,10 +517,3 @@ let displayPage = {
         })
     }
 };
-
-// window.addEventListener('onload', () => {
-//     // feather.replace()
-//     console.log('xxx')
-// })
-
-// displayPage.about();
