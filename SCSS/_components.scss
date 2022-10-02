@@ -285,6 +285,10 @@
 .bottom-bar{
     bottom: 0;
     border-top: $borderStrokeWidth solid $lineColourLight;
+
+    nav{
+        display: none;
+    }
 }
 
 
@@ -341,6 +345,7 @@
         }
 
         nav{
+            display:block;
             width: 90vw;
             height: 100%;
             margin: auto;
@@ -397,6 +402,10 @@
     .bottom-bar{
         bottom: 0;
         border-top: $borderStrokeWidth solid $lineColourLight;
+
+        div{
+            display: none;
+        }
     }
 }
 

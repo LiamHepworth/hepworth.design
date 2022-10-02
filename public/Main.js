@@ -73,26 +73,25 @@ let helperFunc = {
       
     },
 
-    createLinkedIcon: (iconName, URL, containerName) => {
+    createLinkedIcon: (iconName, URL) => {
         //create link
         let link = document.createElement('a')
         helperFunc.setAttributes(link, {'href': URL, 'class': 'link-container'})
 
         //create SVG 
         let icon = document.createElement('svg')
-        link.appendChild(icon)
         helperFunc.setAttributes(icon, {'data-feather': iconName, 'class': 'basic-icon larger-icon'})
+        link.appendChild(icon)
 
-        //append SVG to link, link to page
-        containerName.appendChild(link); 
-        link.appendChild(icon);
+        return link
     }
 };
 
 function navCreation(){
 
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
-    let menuItemsAreClicked = false; 
+    // let menuItemsAreClicked = false; 
+
     const menuListNames = ['home', 'work', 'about', 'contact']
 
     const navHead = {
@@ -108,6 +107,11 @@ function navCreation(){
 
     const linkSection = document.createElement('span');
 
+    const navLinks = {
+        instagram: helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en'),
+        linkedIn: helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/')
+    }
+
     function newListCreation(itemNames, itemArray, container){
         for(let i = 0; i < itemNames.length; i++){
             itemArray[i] = document.createElement('li');
@@ -119,8 +123,6 @@ function navCreation(){
 
     newListCreation(menuListNames, navList.menuListItems, navList.menuList);
 
-
-
     function displayObjects (object, displayStyle){
         for(let property in object){
             object[property].style.display = displayStyle;
@@ -129,13 +131,13 @@ function navCreation(){
 
     function clearClasses(object) {
         for(let property in object){
-            object[property].classList = ''
+            object[property].className = ''
             console.log(object[property].length)
     
             if(object[property].length > 1){
                 for(let i = 0; i < object[property].length; i++){
                     console.log(object[property][i])
-                    object[property][i].classList = '';
+                    object[property][i].className = '';
                 }
             }
         };
@@ -166,7 +168,7 @@ function navCreation(){
             (function showMenu(){
                 //appending menu container to the page
                 pageMainSection.appendChild(menuContainer);
-                makeMenuItemsClickable();
+                // makeMenuItemsClickable();
             })();
             helperFunc.menuAnimation('play');
         });
@@ -182,11 +184,9 @@ function navCreation(){
         }); 
 
         //appending DOM elements to the menu container
+        navHead.headerSection.append(navHead.menuHeader, navHead.closeMenu);
+        menuContainer.append(navHead.headerSection, navList.menuList);
 
-        if(menuContainer.innerHTML === ''){
-            navHead.headerSection.append(navHead.menuHeader, navHead.closeMenu);
-            menuContainer.append(navHead.headerSection, navList.menuList);
-        }
     };
 
     function desktopNav(){
@@ -195,17 +195,15 @@ function navCreation(){
         linkSection.style.display = 'flex';
         clearClasses(navList);
         clearClasses(navHead);
-        helperFunc.clearContainer(bottomNavBar);
+        // helperFunc.clearContainer(bottomNavBar);
 
         navList.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
 
-        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
-        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
-
-        makeMenuItemsClickable();
+        // makeMenuItemsClickable();
 
         bottomNavBar.appendChild(menuContainer);
         menuContainer.appendChild(navList.menuList);
+        linkSection.append(navLinks.instagram, navLinks.linkedIn);
         navList.menuListItems[3].appendChild(linkSection);
     };
 
@@ -228,11 +226,11 @@ function navCreation(){
     });
 
     function makeMenuItemsClickable(){
-        if(menuItemsAreClicked == false){
+        // if(menuItemsAreClicked == false){
             navList.menuListItems.forEach((el) => {
                 el.addEventListener('click', () => {
                     //prevents listener being applied twice
-                    menuItemsAreClicked = true;  
+                    // menuItemsAreClicked = true;  
                     //gets the index of whatever el was clicked
                     let ind = Array.from(navList.menuListItems).indexOf(el);
                     //ensures that if an item is clicked, the menu slides away, doesn't disappear
@@ -242,8 +240,11 @@ function navCreation(){
                     return;
                 });
             });
-        };
+        // };
     };  
+
+    makeMenuItemsClickable();
+
 };
 
 // (function resizeNav(){

@@ -278,6 +278,9 @@ body {
   bottom: 0;
   border-top: 3px solid #cccccc;
 }
+.bottom-bar nav {
+  display: none;
+}
 
 @media (min-width: 1080px) {
   .header {
@@ -304,6 +307,7 @@ body {
     flex-grow: 0;
   }
   .bar nav {
+    display: block;
     width: 90vw;
     height: 100%;
     margin: auto;
@@ -350,6 +354,9 @@ body {
   .bottom-bar {
     bottom: 0;
     border-top: 3px solid #cccccc;
+  }
+  .bottom-bar div {
+    display: none;
   }
 }
 @media (min-width: 1600px) {
