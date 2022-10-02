@@ -67,7 +67,7 @@ let helperFunc = {
     }, 
 
     setAttributes: (el, attrs) => {
-        for(var key in attrs) {
+        for(let key in attrs) {
             el.setAttribute(key, attrs[key]);
           };
       
@@ -89,39 +89,32 @@ let helperFunc = {
     }
 };
 
-// let navComps = {
-//     headerSection: document.createElement('div'),
-//     menuHeader: document.createElement('h1'),
-
-//     menuList: document.createElement('ul'),
-//     menuListNames:['home', 'work', 'about', 'contact'],
-//     menuElements: [], //to store DOM <li> elements  
-//     closeMenu: document.createElement('span'),
-// }
-
 function navCreation(){
 
     //ensures history doesn't get pushed more than once per page/eventListener is only added once to menu icon
     let menuItemsAreClicked = false; 
+    const menuListNames = ['home', 'work', 'about', 'contact']
     
-    let navComps = {
+    const navObj = {
         headerSection: document.createElement('div'),
         menuHeader: document.createElement('h1'),
+        closeMenu: document.createElement('span'),
 
         menuList: document.createElement('ul'),
-        menuListNames:['home', 'work', 'about', 'contact'],
-        menuElements: [], //to store DOM <li> elements  
-        closeMenu: document.createElement('span'),
-    }
+        menuListItems: [], //to store <li> elements 
+        linkSection: document.createElement('span'),
+    };
 
-    function newListCreation(newItemNames, itemArray, container){
-        for(let i = 0; i < newItemNames.length; i++){
+    function newListCreation(itemNames, itemArray, container){
+        for(let i = 0; i < itemNames.length; i++){
             itemArray[i] = document.createElement('li');
-            itemArray[i].innerText = newItemNames[i].toUpperCase();
+            itemArray[i].innerText = itemNames[i].toUpperCase();
             itemArray[i].setAttribute('id', 'menu-item')
             container.appendChild(itemArray[i]);
         };
     };
+
+    newListCreation(menuListNames, navObj.menuListItems, navObj.menuList);
 
     function clearClasses(object) {
         for(let property in object){
@@ -132,24 +125,23 @@ function navCreation(){
     };
 
     function mobileNav(){
+
+        clearClasses(navObj);
+
         //creating and styling DOM elements
-        menuContainer.classList.add('blue', 'grid-background', 'grid-light', 'menu-container', 'static');
-        navComps.headerSection.className = 'header-section';
+        menuContainer.className = 'blue grid-background grid-light menu-container static';
+
+        navObj.headerSection.className = 'header-section';
         
-        navComps.menuHeader.className = 'header';
-        navComps.menuHeader.innerText = 'MENU';
+        navObj.menuHeader.className = 'header';
+        navObj.menuHeader.innerText = 'MENU';
         
-        navComps.closeMenu.innerText = 'close';
-        navComps.closeMenu.classList.add('material-symbols-outlined', 'basic-icon');
+        navObj.closeMenu.className = 'material-symbols-outlined basic-icon';
+        navObj.closeMenu.innerText = 'close';
     
-        navComps.menuList.classList.add('vertical-center', 'menu-list') 
+        navObj.menuList.className = 'vertical-center menu-list' 
 
-        newListCreation(navComps.menuListNames, navComps.menuElements, navComps.menuList);
-        navComps.menuElements.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
-
-        //appending DOM elements to the menu container
-        navComps.headerSection.append(navComps.menuHeader, navComps.closeMenu);
-        menuContainer.append(navComps.headerSection, navComps.menuList);
+        navObj.menuListItems.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
         burgerMenuMobile.addEventListener('click', function(e){
             (function showMenu(){
@@ -160,7 +152,7 @@ function navCreation(){
             helperFunc.menuAnimation('play');
         });
         
-        navComps.closeMenu.addEventListener('click', function(){
+        navObj.closeMenu.addEventListener('click', function(){
             function hideMenu(){
                 pageMainSection.removeChild(menuContainer);
                 fullPage.style.overflow = 'visible'                 
@@ -169,31 +161,32 @@ function navCreation(){
             helperFunc.menuAnimation('clear');
             setTimeout(hideMenu, 300);
         }); 
+
+        //appending DOM elements to the menu container
+        navObj.headerSection.append(navObj.menuHeader, navObj.closeMenu);
+        menuContainer.append(navObj.headerSection, navObj.menuList);
     };
 
     function desktopNav(){
+
+        clearClasses(navObj);
         helperFunc.clearContainer(bottomNavBar);
-        bottomNavBar.appendChild(menuContainer);
-        menuContainer.appendChild(menuList);
 
-        newListCreation();
-        // menuDOMElements = menuList.querySelectorAll('#menu-item');
+        navObj.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
 
-        console.log(menuListElements)
-        menuListElements.forEach(el => el.setAttribute('class', 'body-text')) 
+        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', navObj.linkSection);
+        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', navObj.linkSection);
 
-        let linkSection = document.createElement('span');
-        helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
-        helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/', linkSection);
-
-        menuListElements[3].appendChild(linkSection);
         makeMenuItemsClickable();
+
+        bottomNavBar.appendChild(menuContainer);
+        menuContainer.appendChild(navObj.menuList);
+        navObj.menuListItems[3].appendChild(navObj.linkSection);
     };
 
     if(window.innerWidth < 1080){
         console.log('mobile')
         mobileNav();
-
     } else if(window.innerWidth >= 1080){
         console.log('desktop')
         desktopNav();
@@ -201,7 +194,7 @@ function navCreation(){
 
     function makeMenuItemsClickable(){
         if(menuItemsAreClicked == false){
-            navComps.menuElements.forEach((el) => {
+            navObj.menuListItems.forEach((el) => {
                 el.addEventListener('click', () => {
                     //prevents listener being applied twice
                     menuItemsAreClicked = true;  
