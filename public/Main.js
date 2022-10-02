@@ -119,17 +119,27 @@ function navCreation(){
 
     newListCreation(menuListNames, navList.menuListItems, navList.menuList);
 
-    function clearClasses(object) {
-        for(let property in object){
-            object[property].classList = ''
-        };
-    };
+
 
     function displayObjects (object, displayStyle){
         for(let property in object){
             object[property].style.display = displayStyle;
         }
     }
+
+    function clearClasses(object) {
+        for(let property in object){
+            object[property].classList = ''
+            console.log(object[property].length)
+    
+            if(object[property].length > 1){
+                for(let i = 0; i < object[property].length; i++){
+                    console.log(object[property][i])
+                    object[property][i].classList = '';
+                }
+            }
+        };
+    };
 
     function mobileNav(){
 
@@ -186,7 +196,7 @@ function navCreation(){
         clearClasses(navList);
         clearClasses(navHead);
         helperFunc.clearContainer(bottomNavBar);
-        
+
         navList.menuListItems.forEach(el => el.setAttribute('class', 'body-text')) 
 
         helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en', linkSection);
