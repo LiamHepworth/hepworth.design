@@ -1,7 +1,7 @@
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
 let pageMainSection = document.querySelector('#page-main-section');
-const pageHeader = document.querySelector('#header');
+const pageHeader = document.querySelector('.header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
@@ -13,7 +13,7 @@ let helperFunc = {
         containerName.innerHTML = '';
         pageHeader.innerText = 'HEPWORTH.DESIGN';
         pageBody.classList.add('grid-background');
-        pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container');    
+        pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container'); 
     },
 
     clearContainer: (containerName) => {
@@ -58,7 +58,7 @@ let helperFunc = {
       
     },
 
-    createLinkedIcon: (iconName, URL, container) => {
+    createLinkedIcon: (iconName, URL) => {
         //create link
         let link = document.createElement('a')
         helperFunc.setAttributes(link, {'href': URL, 'class': 'link-container'})
@@ -71,13 +71,13 @@ let helperFunc = {
         return link
     },
 
-    pageHeaderToggle: (hasId) => {
+    elementHasId: (element, hasId, idName) => {
         if(hasId === false){
-            pageHeader.removeAttribute('id');
+            element.removeAttribute('id');
         } else if(hasId === true){
-            pageHeader.setAttribute('id', 'header')
+            element.setAttribute('id', idName)
         } else {
-            pageHeader.id = 'header';
+            element.id = idName;
         }
     }
 };
@@ -342,17 +342,23 @@ class Project {
 let projectList = [
     new Project('UNREAL TEST', 'poster', ['/projects/unreal/image01.png', '/projects/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
+    new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
+    new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
     new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png')
 ]; 
 
 let displayPage = {
     home: function displayHomePage(){
         helperFunc.resetPage(pageMainSection);
+        helperFunc.elementHasId(pageHeader, true, 'primary-header');
     }, 
     
     work: function displayWorkPage(){
         helperFunc.resetPage(pageMainSection);
-        pageMainSection.classList.add('grid-container', 'work-page-container');
+        helperFunc.elementHasId(pageHeader, true, 'primary-header');
+        pageMainSection.classList.add('grid-container', 'masonry-grid', 'work-page-container');
         
         for(let i = 0; i < projectList.length; i++){
             projectList[i].thumbnailCreation(pageMainSection);    //create thumbnails to display
@@ -371,6 +377,7 @@ let displayPage = {
 
     project: function displayProjectPage(projectIndex){
         helperFunc.resetPage(pageMainSection);
+        helperFunc.elementHasId(pageHeader, false);
         pageMainSection.classList.add('grid-container');
 
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
@@ -423,6 +430,7 @@ let displayPage = {
     
     about: function displayAboutPage(){
         helperFunc.resetPage(pageMainSection);
+        helperFunc.elementHasId(pageHeader, false);
         
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
@@ -450,24 +458,26 @@ let displayPage = {
             feather.replace(); //updates icons as SVG's
         };
 
-        appendLinks();
-
         //define a variable to hold timeout function
         let time; 
 
         //call once resize is complete
-        function resizedWindow(){
+        function checkWinSize(){
             if(window.innerWidth < 1080){
                 appendLinks();
+            }else{
+                return
             };
         }
+
+        checkWinSize();
 
         //on resize, clear existing timeout function
         window.onresize = function() {
             clearTimeout(time);
             //then, call the function again with a 1ms buffer to prevent it running until resize end. 
             time = setTimeout(function() {
-                resizedWindow();
+                checkWinSize();
             }, 100);
         };
 
@@ -476,7 +486,7 @@ let displayPage = {
     
     contact: function displayContactPage(){
         helperFunc.resetPage(pageMainSection);
-        console.log('displaying contact page');
+        helperFunc.elementHasId(pageHeader, false);
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');

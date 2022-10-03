@@ -208,7 +208,7 @@ body {
 
 #print-markers {
   pointer-events: none;
-  width: 100%;
+  width: 100vw;
   height: 60vh;
   top: 19.5vh;
   position: fixed;
@@ -287,21 +287,45 @@ body {
 }
 
 @media (min-width: 1080px) {
-  .header {
+  #primary-header {
     max-width: fit-content;
     overflow-wrap: normal;
-    font-size: 4.6rem;
+    font-size: 5.29rem;
     line-height: 3rem;
     margin: 0 auto;
   }
   .header-section {
     margin: 0;
     position: relative;
-    top: calc(50vh - 2.4rem);
+    top: 11rem;
     text-align: center;
+    pointer-events: none;
+    user-select: none;
+  }
+  .grid-container.masonry-grid {
+    align-self: center;
+    grid-template-columns: repeat(2, 37vw);
+    gap: 3rem;
+    margin-top: 17.5rem;
+    padding: 0 1rem;
+  }
+  .grid-container.masonry-grid img {
+    width: 100%;
+    margin: 0%;
   }
   #burger-menu {
     display: none;
+  }
+  #print-markers {
+    width: 90vw;
+    height: 70vh;
+    text-align: center;
+    margin: auto;
+    top: 9.6rem;
+    left: 5vw;
+  }
+  #print-markers img {
+    height: 5rem;
   }
   .bar {
     height: 3.4rem;
@@ -361,11 +385,6 @@ body {
   }
   .bottom-bar div {
     display: none;
-  }
-}
-@media (min-width: 1600px) {
-  .header {
-    font-size: 6.44rem;
   }
 }
 .rotate-180 {
