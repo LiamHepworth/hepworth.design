@@ -430,4 +430,8 @@ body {
 
 .space-evenly {
   justify-content: space-evenly;
+}
+
+.solid-blue {
+  background: #0092bd !important;
 }/*# sourceMappingURL=index.css.map */

@@ -79,6 +79,22 @@ let helperFunc = {
         } else {
             element.id = idName;
         }
+    },
+
+    blueMenuBar: (pageIndex) => {
+        if(window.innerWidth > 1080){
+            let container = menuContainer.children;
+            let nav = container[container.length -1]
+            let listItem = nav.children[pageIndex]
+    
+            for(let i = 0; i < 4; i++){
+                if(i == pageIndex){
+                    listItem.classList.add('solid-blue')
+                } else {
+                    nav.children[i].classList.remove('solid-blue')
+                }
+            }
+        }
     }
 };
 
@@ -346,19 +362,21 @@ let projectList = [
     new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
     new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
-    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png')
 ]; 
 
 let displayPage = {
     home: function displayHomePage(){
         helperFunc.resetPage(pageMainSection);
         helperFunc.elementHasId(pageHeader, true, 'primary-header');
+        helperFunc.blueMenuBar(0);
     }, 
     
     work: function displayWorkPage(){
         helperFunc.resetPage(pageMainSection);
         helperFunc.elementHasId(pageHeader, true, 'primary-header');
+        helperFunc.blueMenuBar(1);
         pageMainSection.classList.add('grid-container', 'two-column', 'work-page-container');
         
         for(let i = 0; i < projectList.length; i++){
@@ -379,6 +397,7 @@ let displayPage = {
     project: function displayProjectPage(projectIndex){
         helperFunc.resetPage(pageMainSection);
         helperFunc.elementHasId(pageHeader, false);
+        helperFunc.blueMenuBar(1);
         pageMainSection.classList.add('grid-container');
 
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
@@ -432,6 +451,7 @@ let displayPage = {
     about: function displayAboutPage(){
         helperFunc.resetPage(pageMainSection);
         helperFunc.elementHasId(pageHeader, false);
+        helperFunc.blueMenuBar(2);
         
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
@@ -488,6 +508,7 @@ let displayPage = {
     contact: function displayContactPage(){
         helperFunc.resetPage(pageMainSection);
         helperFunc.elementHasId(pageHeader, false);
+        helperFunc.blueMenuBar(3);
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
