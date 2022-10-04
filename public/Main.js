@@ -362,24 +362,24 @@ let projectList = [
 ]; 
 
 let displayPage = {
-    home: function displayHomePage(){
+    home: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, true, 'primary-header');
         util.blueMenuBar(0);
     }, 
     
-    work: function displayWorkPage(){
+    work: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, true, 'primary-header');
         util.blueMenuBar(1);
         pageMainSection.classList.add('grid-container', 'two-column', 'work-page-container');
-        
-        for(let i = 0; i < projectList.length; i++){
-            projectList[i].thumbnailCreation(pageMainSection);    //create thumbnails to display
+
+        for (let i = 0; i < projectList.length; i++) {
+            projectList[i].thumbnailCreation(pageMainSection); //create thumbnails to display
         };
 
         let thumbNails = document.querySelectorAll('.thumbnail');
-        
+
         thumbNails.forEach((thumbnail) => {
             thumbnail.addEventListener('click', function () {
                 let currentPage = Array.from(thumbNails).indexOf(thumbnail);
@@ -389,7 +389,7 @@ let displayPage = {
         });
     },
 
-    project: function displayProjectPage(projectIndex){
+    project: (projectIndex) => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, false);
         util.blueMenuBar(1);
@@ -399,100 +399,100 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         //create outer container for expandable section, which includes text + dropdown button
-        let projectTextOuterContainer = document.createElement('section');     
-        projectTextOuterContainer.classList.add('outer-content-container')
+        let projectTextOuterContainer = document.createElement('section');
+        projectTextOuterContainer.classList.add('outer-content-container');
 
         //create container for just the text
-        let projectTextContainer = document.createElement('div')
+        let projectTextContainer = document.createElement('div');
         projectTextContainer.classList.add('expanding-text-container');
 
         //project type text, '\u00A0' adds a space when adding innerText
-        let projectTypeText = document.createElement('p');                                     
+        let projectTypeText = document.createElement('p');
         projectTypeText.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
-        projectTypeText.classList.add('body-text', 'project-text') 
+        projectTypeText.classList.add('body-text', 'project-text');
 
         //project description text
-        let projectDescriptionText = document.createElement('p');                               
+        let projectDescriptionText = document.createElement('p');
         projectDescriptionText.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
         projectDescriptionText.classList.add('body-text', 'project-text');
-        
+
         //drop-down button
         let dropDownArrow = document.createElement('span');
-        dropDownArrow.innerText = 'expand_more'
+        dropDownArrow.innerText = 'expand_more';
         dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
 
         pageMainSection.appendChild(projectTextOuterContainer);
         projectTextOuterContainer.appendChild(projectTextContainer);
         projectTextContainer.append(projectTypeText);
-        
+
         //check if project object has a .description, if not, apply different styling.
-        if(projectList[projectIndex].description !== null){                                   //resize if no desc
+        if (projectList[projectIndex].description !== null) { //resize if no desc
             projectTextContainer.append(projectDescriptionText);
             projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
-        } else if(projectList[projectIndex].description === null){
+        } else if (projectList[projectIndex].description === null) {
             projectTextContainer.classList.add('expanded');
         };
 
         //create container for carousel of images, create carousel, append
         let projectImageContainer = document.createElement('section');
         projectImageContainer.classList.add('grid-background', 'project-image-container');
-        
+
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageMainSection.appendChild(projectImageContainer);
     },
     
-    about: function displayAboutPage(){
+    about: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, false);
         util.blueMenuBar(2);
-        
+
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
-        
+
         pageMainSection.className = 'column-flex-container';
-        
+
         let aboutTextSection = document.createElement('div');
-        aboutTextSection.classList.add('content-container')
+        aboutTextSection.classList.add('content-container');
         pageMainSection.appendChild(aboutTextSection);
-        
-        let aboutText = document.createElement('p')
-        aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ')
-        aboutText.classList.add('body-text')
+
+        let aboutText = document.createElement('p');
+        aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ');
+        aboutText.classList.add('body-text');
         aboutTextSection.appendChild(aboutText);
 
         let linkSection = document.createElement('div');
         linkSection.classList.add('content-container');
 
-        let gridFiller = util.createBlueGridFiller()
+        let gridFiller = util.createBlueGridFiller();
         pageMainSection.appendChild(gridFiller);
 
-        function appendLinks(){
+        function appendLinks() {
             linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
-            pageMainSection.insertBefore(linkSection, gridFiller)
+            pageMainSection.insertBefore(linkSection, gridFiller);
             feather.replace(); //updates icons as SVG's
         };
 
         //define a variable to hold timeout function
-        let time; 
+        let time;
 
         //call once resize is complete
-        function checkWinSize(){
-            if(window.innerWidth < 1080){
+        function checkWinSize() {
+            if (window.innerWidth < 1080) {
                 appendLinks();
-            }else{
-                return
+            } else {
+                return;
             };
         }
 
         checkWinSize();
 
         //on resize, clear existing timeout function
-        window.onresize = function() {
+        window.onresize = function () {
             clearTimeout(time);
             //then, call the function again with a 1ms buffer to prevent it running until resize end. 
-            time = setTimeout(function() {
+            time = setTimeout(function () {
                 checkWinSize();
             }, 100);
         };
@@ -500,7 +500,7 @@ let displayPage = {
 
     }, 
     
-    contact: function displayContactPage(){
+    contact: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, false);
         util.blueMenuBar(3);
@@ -510,38 +510,38 @@ let displayPage = {
         pageMainSection.className = 'column-flex-container';
 
         let contactFormContainer = document.createElement('div');
-        contactFormContainer.classList.add('content-container')
+        contactFormContainer.classList.add('content-container');
         pageMainSection.appendChild(contactFormContainer);
 
         let contactDescription = document.createElement('p');
-        contactDescription.classList.add('body-text')
-        contactDescription.innerText = ("If you've made it this far, I'd love to hear from you. Drop me a line below.")
+        contactDescription.classList.add('body-text');
+        contactDescription.innerText = ("If you've made it this far, I'd love to hear from you. Drop me a line below.");
         contactFormContainer.appendChild(contactDescription);
-        
+
         //create form and set attributes
         let contactForm = document.createElement('form');
-        util.setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
-        
+        util.setAttributes(contactForm, { id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST' });
+
         let emailInput = document.createElement('input');
-        util.setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email', required: true});
+        util.setAttributes(emailInput, { placeholder: 'Email', type: 'email', id: 'email-input', name: 'email', required: true });
 
         let subjectInput = document.createElement('input');
-        util.setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject', required: true});
-        
+        util.setAttributes(subjectInput, { placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject', required: true });
+
         let messageInput = document.createElement('textarea');
-        util.setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message', required: true});
-        
-        let honeyPot = document.createElement('input')
-        util.setAttributes(honeyPot, {type: 'hidden', name: '_honey', style: 'display: none;'});
-        
+        util.setAttributes(messageInput, { placeholder: 'Message', type: 'text', id: 'message-input', name: 'message', required: true });
+
+        let honeyPot = document.createElement('input');
+        util.setAttributes(honeyPot, { type: 'hidden', name: '_honey', style: 'display: none;' });
+
         let submitButton = document.createElement('input');
-        util.setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
+        util.setAttributes(submitButton, { type: 'submit', value: 'Send', id: 'submit-button', name: 'submit' });
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         contactFormContainer.appendChild(contactForm);
         pageMainSection.appendChild(util.createBlueGridFiller());
 
-        contactForm.addEventListener('submit', (e) =>{
+        contactForm.addEventListener('submit', (e) => {
 
             e.preventDefault;
 
@@ -553,25 +553,25 @@ let displayPage = {
 
             fetch("https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a", {
                 method: "POST",
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     email: mail.email,
-                    subject: mail.subject, 
+                    subject: mail.subject,
                     message: mail.message
                 })
-                })
-                .then((response) =>{
-                    if(response.status==200){
+            })
+                .then((response) => {
+                    if (response.status == 200) {
                         alert('Message sent succesfully!');
                     } else {
                         alert('Something went wrong');
                     }
                 })
                 .then(displayPage.contact())
-            .catch(error => console.log(error));
-        })
+                .catch(error => console.log(error));
+        });
     }
 };

@@ -206,6 +206,7 @@ body {
   font-size: 30pt !important;
   background-image: #171717;
   border-radius: 50%;
+  user-select: none;
   cursor: pointer;
 }
 
