@@ -159,12 +159,19 @@ function navCreation(){
 
     function menuAnimation(input){
         if(input === 'clear'){
-            menuContainer.classList.remove('menu-appear');
-            fullPage.style.overflow = 'visible'                 
-            pageBody.style.overflow = 'visible'
-            pageBody.classList.remove('noScroll');
+
+            function hideMenu(){
+                pageMainSection.removeChild(menuContainer);
+                pageBody.classList.remove('noScroll');
+                fullPage.style.overflow = 'visible'                 
+                pageBody.style.overflow = 'visible'
+            };
+            setTimeout(menuContainer.classList.remove('menu-appear'), 300);
+            setTimeout(hideMenu, 300);
+
         } else if(input === 'play'){
             //hiding overflow to ensure scroll bars don't appear, removed on resetPage and hideMenu()
+            pageMainSection.appendChild(menuContainer);
             fullPage.style.overflow = 'hidden'                 
             pageBody.style.overflow = 'hidden'
             pageBody.classList.add('noScroll');
@@ -202,19 +209,12 @@ function navCreation(){
 
     //show mobile menu on burgermenu click
     burgerMenuMobile.addEventListener('click', function(){
-        (function showMenu(){
-            pageMainSection.appendChild(menuContainer);
-        })();
         menuAnimation('play');
     });
     
     //hide menu on close button click
     navHead.closeMenu.addEventListener('click', function(){
-        function hideMenu(){
-            pageMainSection.removeChild(menuContainer);
-        };
         menuAnimation('clear');
-        setTimeout(hideMenu, 300);
     }); 
 
     function desktopNav(){
