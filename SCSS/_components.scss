@@ -23,13 +23,16 @@
 
 //text elements:
 
+#primary-header{
+    max-width: 15rem;
+}
+
 .header{
     color: $lineColourLight;
     font-family: $inputSans;
     font-size: $headerTextSize;
     line-height: $headerLineHeight; 
     text-shadow: 0 0 10px $textOuterGlow;
-    max-width: 15rem;
     overflow-wrap: break-word;
 }
 
@@ -47,7 +50,7 @@
 //containers:
 
 .grid-container{
-    height: $viewportHeight;
+    // height: $viewportHeight;
     min-height: fit-content;
     display: grid;
     
@@ -59,8 +62,8 @@
     
     .videos{
         width: 80%;
-        height: auto;
         margin: 1rem auto;
+        height: auto;
     }
 }
 
@@ -85,10 +88,11 @@
 .outer-content-container{
     text-align: center;
     width: 100%;
+    height: fit-content;
 }
 
 .expanding-text-container{
-    height: 7.5rem;
+    max-height: 7.5rem;
     overflow: hidden;
     text-align: left;
     width: auto;
@@ -104,7 +108,7 @@
 }
 
 .expanding-text-container.expanded{
-    height: fit-content;
+    max-height: fit-content;
     margin-bottom: 1rem;
     overflow: auto;
     color: $lineColourLight;
@@ -452,5 +456,3 @@
         gap: 5rem;
     }
 }
-
-

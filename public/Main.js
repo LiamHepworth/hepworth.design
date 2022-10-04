@@ -1,23 +1,19 @@
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
-let pageMainSection = document.querySelector('#page-main-section');
+const pageMainSection = document.querySelector('#page-main-section');
 const pageHeader = document.querySelector('.header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 
-let helperFunc = {
+let util = {
     resetPage: (containerName) => {
-        fullPage.style.overflow = 'visible'                 
-        pageBody.style.overflow = 'visible'
         containerName.innerHTML = '';
+        fullPage.style.overflow = 'visible'                 
         pageHeader.innerText = 'HEPWORTH.DESIGN';
+        pageBody.style.overflow = 'visible'
         pageBody.classList.add('grid-background');
-        pageMainSection.classList.remove('grid-container', 'column-flex-container', 'work-page-container'); 
-    },
-
-    clearContainer: (containerName) => {
-        containerName.innerHTML = ''
+        pageMainSection.className = '';
     },
 
     createBlueGridFiller: () => {
@@ -26,29 +22,28 @@ let helperFunc = {
         return gridFiller;    
     }, 
 
-    expandingSection: (arrowName, targetContainer, childIndex) => {  //childIndex lets you determine which child container you actually want to expand
+    expandingSection: (trigger, outerContainer, innerContainerIndex) => {  //innerContainerIndex lets you determine which child container you actually want to expand
         let arrowIsClicked = undefined;
     
-        arrowName.addEventListener('click', function(){
+        trigger.addEventListener('click', function(){
                 if(arrowIsClicked == false || arrowIsClicked == undefined){
-                    targetContainer.classList.add('expanded');                        //fit content, auto overflow
-                    targetContainer.children[childIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
-                    arrowName.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
+                    outerContainer.classList.add('expanded');                        //fit content, auto overflow
+                    outerContainer.children[innerContainerIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
+                    trigger.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
                     arrowIsClicked = true;                                            //switches to true so that when arrow is clicked, the following code runs:
                 } else if (arrowIsClicked == true){
-                    targetContainer.classList.remove('expanded');
-                    targetContainer.children[childIndex].style.color = '#ffffff00';
-                    arrowName.style.transform = 'rotate(0deg)';
+                    outerContainer.classList.remove('expanded');
+                    outerContainer.children[innerContainerIndex].style.color = '#ffffff00';
+                    trigger.style.transform = 'rotate(0deg)';
                     arrowIsClicked = false;
                 };
             });
     
-        return arrowName;                                                            
+        return trigger;                                                            
     }, 
 
     resetScrollPosition: () => {
         window.scrollTo(0, 0);
-        console.log('scroll to top');    
     }, 
 
     setAttributes: (el, attrs) => {
@@ -61,11 +56,11 @@ let helperFunc = {
     createLinkedIcon: (iconName, URL) => {
         //create link
         let link = document.createElement('a')
-        helperFunc.setAttributes(link, {'href': URL, 'class': 'link-container'})
+        util.setAttributes(link, {'href': URL, 'class': 'link-container'})
 
         //create SVG 
         let icon = document.createElement('svg')
-        helperFunc.setAttributes(icon, {'data-feather': iconName, 'class': 'basic-icon larger-icon'})
+        util.setAttributes(icon, {'data-feather': iconName, 'class': 'basic-icon larger-icon'})
         link.appendChild(icon)
 
         return link
@@ -99,8 +94,8 @@ let helperFunc = {
 };
 
 const socialLinks = {
-    instagram: helperFunc.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en'),
-    linkedIn: helperFunc.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/')
+    instagram: util.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en'),
+    linkedIn: util.createLinkedIcon('linkedin', 'https://www.linkedin.com/in/liam-moses-b64754182/')
 }
 
 function navCreation(){
@@ -134,7 +129,7 @@ function navCreation(){
     })();
 
     //toggle the display of elements which are stored in an object
-    function displayEl (object, displayStyle){
+    function displayEl(object, displayStyle){
         for(let property in object){
             object[property].style.display = displayStyle;
         }
@@ -164,7 +159,7 @@ function navCreation(){
             fullPage.style.overflow = 'hidden'                 
             pageBody.style.overflow = 'hidden'
             pageBody.classList.add('noScroll');
-            helperFunc.resetScrollPosition();
+            util.resetScrollPosition();
             menuContainer.classList.add('menu-appear');
         };
     }
@@ -177,7 +172,7 @@ function navCreation(){
         displayEl(navHead, 'flex');
 
         // creating and styling DOM elements
-        menuContainer.className = 'blue grid-background grid-light menu-container static';
+        menuContainer.className = 'blue grid-background grid-light menu-container';
 
         navHead.headerSection.className = 'header-section';
         
@@ -315,12 +310,12 @@ class Project {
     carouselCreation(container){
         function createVideos(index, item){
             let video = document.createElement('video');
-            helperFunc.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
+            util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
 
             video.classList.add('videos');
 
             let source = document.createElement('source');
-            helperFunc.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
+            util.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
             
             video.oncanplay = () => {  //ensures video autoplays when page is fully loaded
                 video.muted = true;
@@ -352,7 +347,7 @@ class Project {
 
     pushProjectPageHistory(){
         history.pushState(this.name, null, null);
-        helperFunc.resetScrollPosition();
+        util.resetScrollPosition();
     };
 };
 
@@ -368,15 +363,15 @@ let projectList = [
 
 let displayPage = {
     home: function displayHomePage(){
-        helperFunc.resetPage(pageMainSection);
-        helperFunc.elementHasId(pageHeader, true, 'primary-header');
-        helperFunc.blueMenuBar(0);
+        util.resetPage(pageMainSection);
+        util.elementHasId(pageHeader, true, 'primary-header');
+        util.blueMenuBar(0);
     }, 
     
     work: function displayWorkPage(){
-        helperFunc.resetPage(pageMainSection);
-        helperFunc.elementHasId(pageHeader, true, 'primary-header');
-        helperFunc.blueMenuBar(1);
+        util.resetPage(pageMainSection);
+        util.elementHasId(pageHeader, true, 'primary-header');
+        util.blueMenuBar(1);
         pageMainSection.classList.add('grid-container', 'two-column', 'work-page-container');
         
         for(let i = 0; i < projectList.length; i++){
@@ -395,9 +390,9 @@ let displayPage = {
     },
 
     project: function displayProjectPage(projectIndex){
-        helperFunc.resetPage(pageMainSection);
-        helperFunc.elementHasId(pageHeader, false);
-        helperFunc.blueMenuBar(1);
+        util.resetPage(pageMainSection);
+        util.elementHasId(pageHeader, false);
+        util.blueMenuBar(1);
         pageMainSection.classList.add('grid-container');
 
         pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
@@ -411,12 +406,12 @@ let displayPage = {
         let projectTextContainer = document.createElement('div')
         projectTextContainer.classList.add('expanding-text-container');
 
-        //project type, '\u00A0' adds a space when adding innerText
+        //project type text, '\u00A0' adds a space when adding innerText
         let projectTypeText = document.createElement('p');                                     
         projectTypeText.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
         projectTypeText.classList.add('body-text', 'project-text') 
 
-        //project description
+        //project description text
         let projectDescriptionText = document.createElement('p');                               
         projectDescriptionText.innerText = `Description: 
         
@@ -435,7 +430,7 @@ let displayPage = {
         //check if project object has a .description, if not, apply different styling.
         if(projectList[projectIndex].description !== null){                                   //resize if no desc
             projectTextContainer.append(projectDescriptionText);
-            projectTextOuterContainer.appendChild(helperFunc.expandingSection(dropDownArrow, projectTextContainer, 1));
+            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
         } else if(projectList[projectIndex].description === null){
             projectTextContainer.classList.add('expanded');
         };
@@ -449,9 +444,9 @@ let displayPage = {
     },
     
     about: function displayAboutPage(){
-        helperFunc.resetPage(pageMainSection);
-        helperFunc.elementHasId(pageHeader, false);
-        helperFunc.blueMenuBar(2);
+        util.resetPage(pageMainSection);
+        util.elementHasId(pageHeader, false);
+        util.blueMenuBar(2);
         
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
@@ -470,7 +465,7 @@ let displayPage = {
         let linkSection = document.createElement('div');
         linkSection.classList.add('content-container');
 
-        let gridFiller = helperFunc.createBlueGridFiller()
+        let gridFiller = util.createBlueGridFiller()
         pageMainSection.appendChild(gridFiller);
 
         function appendLinks(){
@@ -506,9 +501,9 @@ let displayPage = {
     }, 
     
     contact: function displayContactPage(){
-        helperFunc.resetPage(pageMainSection);
-        helperFunc.elementHasId(pageHeader, false);
-        helperFunc.blueMenuBar(3);
+        util.resetPage(pageMainSection);
+        util.elementHasId(pageHeader, false);
+        util.blueMenuBar(3);
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
@@ -525,26 +520,26 @@ let displayPage = {
         
         //create form and set attributes
         let contactForm = document.createElement('form');
-        helperFunc.setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
+        util.setAttributes(contactForm, {id: 'contact-form', action: 'https://formsubmit.co/ajax/80ca32f4e9acd49c7ce1361df5b9e12a', method: 'POST'});
         
         let emailInput = document.createElement('input');
-        helperFunc.setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email', required: true});
+        util.setAttributes(emailInput, {placeholder: 'Email', type: 'email', id: 'email-input', name: 'email', required: true});
 
         let subjectInput = document.createElement('input');
-        helperFunc.setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject', required: true});
+        util.setAttributes(subjectInput, {placeholder: 'Subject', type: 'text', id: 'subject-input', name: 'subject', required: true});
         
         let messageInput = document.createElement('textarea');
-        helperFunc.setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message', required: true});
+        util.setAttributes(messageInput, {placeholder: 'Message', type: 'text', id: 'message-input', name: 'message', required: true});
         
         let honeyPot = document.createElement('input')
-        helperFunc.setAttributes(honeyPot, {type: 'hidden', name: '_honey', style: 'display: none;'});
+        util.setAttributes(honeyPot, {type: 'hidden', name: '_honey', style: 'display: none;'});
         
         let submitButton = document.createElement('input');
-        helperFunc.setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
+        util.setAttributes(submitButton, {type: 'submit', value: 'Send', id: 'submit-button', name: 'submit'});
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         contactFormContainer.appendChild(contactForm);
-        pageMainSection.appendChild(helperFunc.createBlueGridFiller());
+        pageMainSection.appendChild(util.createBlueGridFiller());
 
         contactForm.addEventListener('submit', (e) =>{
 

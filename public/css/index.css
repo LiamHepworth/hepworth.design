@@ -38,13 +38,16 @@ body {
   background-image: url("/assets/bg_grid_light.svg");
 }
 
+#primary-header {
+  max-width: 15rem;
+}
+
 .header {
   color: #cccccc;
   font-family: "input-sans", Helvetica, sans-serif;
   font-size: 2.3rem;
   line-height: 3rem;
   text-shadow: 0 0 10px rgba(204, 204, 204, 0.3568627451);
-  max-width: 15rem;
   overflow-wrap: break-word;
 }
 
@@ -60,7 +63,6 @@ body {
 }
 
 .grid-container {
-  height: calc(100vh - (2.4rem + 40px) * 2);
   min-height: fit-content;
   display: grid;
 }
@@ -71,8 +73,8 @@ body {
 }
 .grid-container .videos {
   width: 80%;
-  height: auto;
   margin: 1rem auto;
+  height: auto;
 }
 
 .column-flex-container {
@@ -96,10 +98,11 @@ body {
 .outer-content-container {
   text-align: center;
   width: 100%;
+  height: fit-content;
 }
 
 .expanding-text-container {
-  height: 7.5rem;
+  max-height: 7.5rem;
   overflow: hidden;
   text-align: left;
   width: auto;
@@ -114,7 +117,7 @@ body {
 }
 
 .expanding-text-container.expanded {
-  height: fit-content;
+  max-height: fit-content;
   margin-bottom: 1rem;
   overflow: auto;
   color: #cccccc;
