@@ -1,6 +1,7 @@
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
 const pageMainSection = document.querySelector('#page-main-section');
+const pageHeaderSection = document.querySelector('#header-section');
 const pageHeader = document.querySelector('.header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
@@ -20,8 +21,8 @@ let util = {
         pageHeader.innerText = headerText;
         burgerMenuMobile.innerText = menuStatus;
 
-        headerSection.append(pageHeader, burgerMenuMobile)
-        container.appendChild(headerSection)
+        pageHeaderSection.append(pageHeader, burgerMenuMobile)
+        container.appendChild(pageHeaderSection)
     },
 
     createBlueGridFiller: () => {
@@ -373,12 +374,14 @@ let displayPage = {
     home: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, true, 'primary-header');
+        util.appendHeader('HEPWORTH.DESIGN', 'menu', pageMainSection);
         util.blueMenuBar(0);
     }, 
     
     work: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, true, 'primary-header');
+        util.appendHeader('HEPWORTH.DESIGN', 'menu', pageMainSection);
         util.blueMenuBar(1);
         pageMainSection.classList.add('grid-container', 'two-column', 'work-page-container');
 
@@ -400,10 +403,11 @@ let displayPage = {
     project: (projectIndex) => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, false);
+        util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageMainSection);
+
         util.blueMenuBar(1);
         pageMainSection.classList.add('grid-container');
 
-        pageHeader.innerText = projectList[projectIndex].name.toUpperCase();
         pageBody.classList.remove('grid-background');
 
         //create outer container for expandable section, which includes text + dropdown button
@@ -454,6 +458,8 @@ let displayPage = {
     about: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, false);
+        util.appendHeader('ABOUT', 'menu', pageMainSection);
+
         util.blueMenuBar(2);
 
         pageHeader.innerText = 'ABOUT';
@@ -511,6 +517,8 @@ let displayPage = {
     contact: () => {
         util.resetPage(pageMainSection);
         util.elementHasId(pageHeader, false);
+        util.appendHeader('CONTACT', 'menu', pageMainSection);
+
         util.blueMenuBar(3);
 
         pageHeader.innerText = 'CONTACT';

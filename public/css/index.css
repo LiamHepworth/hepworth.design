@@ -65,17 +65,18 @@ body {
 .grid-container {
   min-height: fit-content;
   display: grid;
-  padding: 0 2.1rem 0 2.1rem;
 }
 .grid-container img {
-  width: 100%;
+  width: 80%;
   margin: 1rem auto;
   height: auto;
+  padding: 0 2.1rem 0 2.1rem;
 }
 .grid-container .videos {
-  width: 100%;
+  width: 80%;
   margin: 1rem auto;
   height: auto;
+  padding: 0 2.1rem 0 2.1rem;
 }
 
 .column-flex-container {

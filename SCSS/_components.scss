@@ -53,18 +53,19 @@
 .grid-container{
     min-height: fit-content;
     display: grid;
-    padding: $containerSideMargins;
     
     img{
-        width: 100%;
+        width: 80%;
         margin: 1rem auto;
         height: auto;
+        padding: $containerSideMargins;
     }
     
     .videos{
-        width: 100%;
+        width: 80%;
         margin: 1rem auto;
         height: auto;
+        padding: $containerSideMargins;
     }
 }
 
