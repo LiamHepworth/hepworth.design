@@ -65,14 +65,15 @@ body {
 .grid-container {
   min-height: fit-content;
   display: grid;
+  padding: 0 2.1rem 0 2.1rem;
 }
 .grid-container img {
-  width: 80%;
+  width: 100%;
   margin: 1rem auto;
   height: auto;
 }
 .grid-container .videos {
-  width: 80%;
+  width: 100%;
   margin: 1rem auto;
   height: auto;
 }
@@ -424,6 +425,10 @@ body {
   overflow: hidden !important;
 }
 
+.solid-blue {
+  background: #0092bd !important;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -436,6 +441,6 @@ body {
   justify-content: space-evenly;
 }
 
-.solid-blue {
-  background: #0092bd !important;
+.top-padding {
+  margin-top: 3.2rem;
 }/*# sourceMappingURL=index.css.map */

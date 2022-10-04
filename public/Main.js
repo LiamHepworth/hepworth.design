@@ -16,6 +16,14 @@ let util = {
         pageMainSection.className = '';
     },
 
+    appendHeader: (headerText, menuStatus, container) => {
+        pageHeader.innerText = headerText;
+        burgerMenuMobile.innerText = menuStatus;
+
+        headerSection.append(pageHeader, burgerMenuMobile)
+        container.appendChild(headerSection)
+    },
+
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grow');

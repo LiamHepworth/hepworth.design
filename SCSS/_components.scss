@@ -24,6 +24,7 @@
 //text elements:
 
 #primary-header{
+    //limits width of header for homepage
     max-width: 15rem;
 }
 
@@ -50,18 +51,18 @@
 //containers:
 
 .grid-container{
-    // height: $viewportHeight;
     min-height: fit-content;
     display: grid;
+    padding: $containerSideMargins;
     
     img{
-        width: 80%;
+        width: 100%;
         margin: 1rem auto;
         height: auto;
     }
     
     .videos{
-        width: 80%;
+        width: 100%;
         margin: 1rem auto;
         height: auto;
     }
@@ -78,7 +79,7 @@
     flex-flow: row;
 }
 
-.content-container{
+.content-container{  //standard content container
     height: fit-content;
     margin: $containerSideMargins;
     margin-bottom: $conatinerBottomMargin;
