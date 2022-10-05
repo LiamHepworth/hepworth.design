@@ -450,14 +450,21 @@ let displayPage = {
         projectTextOuterContainer.appendChild(projectTextContainer);
         projectTextContainer.append(projectType);
 
-        //check if project object has a .description, if not, apply different styling.
-        if (projectList[projectIndex].description !== null) { //if project contains a description
+        if(window.innerWidth > 1080){
             projectTextContainer.append(projectDescription);
-            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
-        } else if (projectList[projectIndex].description === null) {  //if project doesn't contain a description
-            projectTextContainer.style.marginBottom = '3rem';
             projectTextContainer.classList.add('expanded');
-        };
+            projectDescription.style.color = 'rgb(204, 204, 204)';
+            desktopPageLayout();
+        }else{
+            //check if project object has a .description, if not, apply different styling.
+            if (projectList[projectIndex].description !== null) { //if project contains a description
+                projectTextContainer.append(projectDescription);
+                projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
+            } else if (projectList[projectIndex].description === null) {  //if project doesn't contain a description
+                projectTextContainer.style.marginBottom = '3rem';
+                projectTextContainer.classList.add('expanded');
+            };
+        }
 
         //create container for carousel of images, create carousel, append
         let projectImageContainer = document.createElement('section');
@@ -466,7 +473,6 @@ let displayPage = {
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
 
-        desktopPageLayout();
     },
     
     about: () => {
@@ -612,7 +618,7 @@ function desktopPageLayout(){
     pageContents.className = 'row-flex-container'
 
     pageContents.className = 'grid-container two-cols-25-75 top-padding'
-    pageSectionOne.className = 'b-right proj-padding'
+    pageSectionOne.className = 'b-right proj-text-container'
 
     pageHeaderSection.className = 'page-header-section'
 }
