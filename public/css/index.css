@@ -242,6 +242,10 @@ body {
   margin-right: -1.45rem;
 }
 
+#burger-menu {
+  margin-left: 1.5rem;
+}
+
 .basic-icon {
   color: #cccccc;
   font-weight: 700;
@@ -298,6 +302,7 @@ body {
     align-items: center;
     grid-template-columns: repeat(2, 40vw);
     gap: 2rem;
+    margin-top: 0;
     margin-bottom: 8rem;
     padding: 0 1rem;
   }
@@ -315,15 +320,16 @@ body {
     margin: 0 auto;
   }
   .header-section {
-    margin: 0;
+    margin: 0 auto;
     position: relative;
     top: 11rem;
     text-align: center;
     pointer-events: none;
     user-select: none;
+    width: fit-content;
   }
   .grid-container.two-column {
-    margin-top: 17.5rem;
+    margin-top: 7.4rem;
     grid-template-columns: repeat(2, 37vw);
     gap: 3rem;
   }

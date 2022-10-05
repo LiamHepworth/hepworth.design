@@ -246,6 +246,10 @@
     }
 }  
 
+#burger-menu{
+    margin-left: 1.5rem;
+}
+
 .basic-icon{
     color: $lineColourLight;
     font-weight: 700;
@@ -311,6 +315,7 @@
         grid-template-columns: repeat(2, 40vw);
         gap: 2rem;
 
+        margin-top: 0;
         margin-bottom: 8rem;
         padding: 0 1rem;
 
@@ -334,16 +339,17 @@
 
     // containers
     .header-section{
-        margin: 0;
+        margin: 0 auto;
         position: relative;
         top: calc(13.4rem - $headerFooterHeight);
         text-align: center;
         pointer-events: none;
         user-select: none;
+        width: fit-content;
     }
 
     .grid-container.two-column{
-        margin-top: 17.5rem;
+        margin-top: calc($headerFooterHeight + 5rem);
         grid-template-columns: repeat(2, 37vw);
         gap: 3rem;
     }
