@@ -389,7 +389,8 @@ let displayPage = {
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         util.blueMenuBar(1);
         
-        pageSectionTwo.classList.add('grid-container', 'two-column', 'work-page-container');
+        pageSectionOne.classList.add('work-header-container');
+        pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
 
         for (let i = 0; i < projectList.length; i++) {
             projectList[i].thumbnailCreation(pageSectionTwo); //create thumbnails to display
@@ -464,6 +465,8 @@ let displayPage = {
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
+
+        desktopPageLayout();
     },
     
     about: () => {
@@ -604,3 +607,14 @@ let displayPage = {
         });
     }
 };
+
+function desktopPageLayout(){
+    pageContents.className = 'row-flex-container'
+
+    pageContents.className = 'grid-container two-cols-25-75 top-padding'
+    pageSectionOne.className = 'b-right proj-padding'
+
+    pageHeaderSection.className = 'page-header-section'
+}
+
+displayPage.project(0);

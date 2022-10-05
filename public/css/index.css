@@ -2,6 +2,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   margin: 0;
   padding: 0;
   border: 0;
+  box-sizing: border-box;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -296,7 +297,7 @@ body {
 }
 
 @media (min-width: 720px) {
-  .grid-container.two-column {
+  .gallery {
     align-self: center;
     align-items: center;
     grid-template-columns: repeat(2, 40vw);
@@ -305,9 +306,10 @@ body {
     margin-bottom: 8rem;
     padding: 0 1rem;
   }
-  .grid-container.two-column img {
+  .gallery img {
     width: 100%;
     margin: 0;
+    padding: 0;
   }
 }
 @media (min-width: 1080px) {
@@ -327,21 +329,29 @@ body {
     user-select: none;
     width: fit-content;
   }
-  .grid-container.two-column {
-    margin-top: 7.4rem;
+  .expanding-text-container {
+    margin: 0;
+  }
+  .page-header-section {
+    margin-bottom: 1.8rem;
+  }
+  .gallery {
     grid-template-columns: repeat(2, 37vw);
     gap: 3rem;
+  }
+  .work-header-container {
+    height: 18rem;
   }
   #burger-menu {
     display: none;
   }
   #print-markers {
-    width: 90vw;
+    width: 92vw;
     height: 70vh;
     text-align: center;
     margin: auto;
     top: 9.6rem;
-    left: 5vw;
+    left: 4vw;
   }
   #print-markers img {
     height: 5rem;
@@ -407,7 +417,7 @@ body {
   }
 }
 @media (min-width: 2500px) {
-  .grid-container.two-column {
+  .grid-container.gallery {
     margin-top: 17.5rem;
     grid-template-columns: repeat(3, 25vw);
     gap: 5rem;
@@ -439,6 +449,16 @@ body {
   min-height: calc(100vh - (2.4rem + 40px) * 2);
 }
 
+.b-right {
+  border-right: 3px solid #cccccc;
+}
+
+.proj-padding {
+  padding-top: 20vh;
+  padding-left: 8vw;
+  padding-right: 2vw;
+}
+
 .grow {
   flex-grow: 2;
 }
@@ -453,4 +473,8 @@ body {
 
 .top-padding {
   margin-top: 3.2rem;
+}
+
+.two-cols-25-75 {
+  grid-template-columns: 27.6vw auto;
 }/*# sourceMappingURL=index.css.map */
