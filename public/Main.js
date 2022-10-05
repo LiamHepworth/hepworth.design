@@ -17,6 +17,7 @@ let util = {
         pageBody.style.overflow = 'visible'
         pageBody.classList.add('grid-background');
         pageSectionOne.className = '';
+        pageSectionTwo.className = '';
     },
 
     appendHeader: (headerText, menuStatus, container) => {
@@ -374,6 +375,7 @@ let projectList = [
 let displayPage = {
     home: () => {
         util.resetPage(pageSectionOne);
+        util.resetPage(pageSectionTwo);
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         util.blueMenuBar(0);
@@ -381,21 +383,24 @@ let displayPage = {
     
     work: () => {
         util.resetPage(pageSectionOne);
+        util.resetPage(pageSectionTwo);
+
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         util.blueMenuBar(1);
-        pageSectionOne.classList.add('grid-container', 'two-column', 'work-page-container');
+        
+        pageSectionTwo.classList.add('grid-container', 'two-column', 'work-page-container');
 
         for (let i = 0; i < projectList.length; i++) {
-            projectList[i].thumbnailCreation(pageSectionOne); //create thumbnails to display
+            projectList[i].thumbnailCreation(pageSectionTwo); //create thumbnails to display
         };
 
         let thumbNails = document.querySelectorAll('.thumbnail');
 
-        thumbNails.forEach((thumbnail) => {
+        thumbNails.forEach((thumbnail) => {                   //add a listener to each thumbNail
             thumbnail.addEventListener('click', function () {
-                let currentPage = Array.from(thumbNails).indexOf(thumbnail);
-                displayPage.project(currentPage);
+                let currentPage = Array.from(thumbNails).indexOf(thumbnail);       //get the index of the current project from its' nodeList
+                displayPage.project(currentPage);                                  //display the selected page
                 projectList[currentPage].pushProjectPageHistory();
             });
         });
@@ -403,12 +408,16 @@ let displayPage = {
 
     project: (projectIndex) => {
         util.resetPage(pageSectionOne);
+        util.resetPage(pageSectionTwo);
+
         util.elementHasId(pageHeader, false);
         util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
 
         util.blueMenuBar(1);
-        pageSectionOne.classList.add('grid-container');
 
+        pageSectionTwo.classList.add('grid-container', 'grow');
+
+        //hide the grid background
         pageBody.classList.remove('grid-background');
 
         //create outer container for expandable section, which includes text + dropdown button
@@ -420,16 +429,16 @@ let displayPage = {
         projectTextContainer.classList.add('expanding-text-container');
 
         //project type text, '\u00A0' adds a space when adding innerText
-        let projectTypeText = document.createElement('p');
-        projectTypeText.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
-        projectTypeText.classList.add('body-text', 'project-text');
+        let projectType = document.createElement('p');
+        projectType.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
+        projectType.classList.add('body-text', 'project-text');
 
         //project description text
-        let projectDescriptionText = document.createElement('p');
-        projectDescriptionText.innerText = `Description: 
+        let projectDescription = document.createElement('p');
+        projectDescription.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
-        projectDescriptionText.classList.add('body-text', 'project-text');
+        projectDescription.classList.add('body-text', 'project-text');
 
         //drop-down button
         let dropDownArrow = document.createElement('span');
@@ -438,13 +447,14 @@ let displayPage = {
 
         pageSectionOne.appendChild(projectTextOuterContainer);
         projectTextOuterContainer.appendChild(projectTextContainer);
-        projectTextContainer.append(projectTypeText);
+        projectTextContainer.append(projectType);
 
         //check if project object has a .description, if not, apply different styling.
-        if (projectList[projectIndex].description !== null) { //resize if no desc
-            projectTextContainer.append(projectDescriptionText);
+        if (projectList[projectIndex].description !== null) { //if project contains a description
+            projectTextContainer.append(projectDescription);
             projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
-        } else if (projectList[projectIndex].description === null) {
+        } else if (projectList[projectIndex].description === null) {  //if project doesn't contain a description
+            projectTextContainer.style.marginBottom = '3rem';
             projectTextContainer.classList.add('expanded');
         };
 
@@ -453,11 +463,13 @@ let displayPage = {
         projectImageContainer.classList.add('grid-background', 'project-image-container');
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
-        pageSectionOne.appendChild(projectImageContainer);
+        pageSectionTwo.appendChild(projectImageContainer);
     },
     
     about: () => {
         util.resetPage(pageSectionOne);
+        util.resetPage(pageSectionTwo);
+
         util.elementHasId(pageHeader, false);
         util.appendHeader('ABOUT', 'menu', pageSectionOne);
 
@@ -466,7 +478,7 @@ let displayPage = {
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
 
-        pageSectionOne.className = 'column-flex-container';
+        pageSectionTwo.className = 'column-flex-container grow';
 
         let aboutTextSection = document.createElement('div');
         aboutTextSection.classList.add('content-container');
@@ -481,7 +493,7 @@ let displayPage = {
         linkSection.classList.add('content-container');
 
         let gridFiller = util.createBlueGridFiller();
-        pageSectionOne.appendChild(gridFiller);
+        pageSectionTwo.appendChild(gridFiller);
 
         function appendLinks() {
             linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
@@ -524,7 +536,7 @@ let displayPage = {
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
-        pageSectionOne.className = 'column-flex-container';
+        pageSectionOne.className = 'column-flex-container grow';
 
         let contactFormContainer = document.createElement('div');
         contactFormContainer.classList.add('content-container');

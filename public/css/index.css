@@ -82,7 +82,6 @@ body {
 .column-flex-container {
   display: flex;
   flex-flow: column;
-  min-height: calc(100vh - (2.4rem + 40px) * 2);
 }
 
 .row-flex-container {
@@ -436,8 +435,12 @@ body {
   background: #0092bd !important;
 }
 
+.vh-height {
+  min-height: calc(100vh - (2.4rem + 40px) * 2);
+}
+
 .grow {
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 .space-between {

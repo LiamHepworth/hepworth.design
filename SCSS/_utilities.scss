@@ -20,10 +20,14 @@
     background: $bgColourBlue !important;
 }
 
+.vh-height{
+    min-height: $viewportHeight;
+}
+
 //flexbox utils:
 
 .grow{
-    flex-grow: 1;
+    flex-grow: 2;
 }
 
 .space-between{
