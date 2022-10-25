@@ -73,8 +73,8 @@ let util = {
         //create SVG 
         let icon = document.createElement('svg')
         util.setAttributes(icon, {'data-feather': iconName, 'class': 'basic-icon larger-icon'})
-        link.appendChild(icon)
 
+        link.appendChild(icon)
         return link
     },
 
@@ -112,10 +112,10 @@ const socialLinks = {
 
 function navCreation(){
 
-    //name/text for each menu item
+    //name+text for each menu item
     const menuListNames = ['home', 'work', 'about', 'contact']
 
-    //nav header elements
+    //mobile nav header elements
     const navHead = {
         headerSection: document.createElement('div'),
         menuHeader: document.createElement('h1'),
@@ -148,7 +148,7 @@ function navCreation(){
     }
 
     //clear the classList of elements in an object
-    function clearClasses(object) {
+    function clearObjectClasses(object) {
         for(let property in object){
             object[property].className = ''
     
@@ -172,7 +172,7 @@ function navCreation(){
             setTimeout(hideMenu, 300);
 
         } else if(input === 'play'){
-            //hiding overflow to ensure scroll bars don't appear, removed on resetPage and hideMenu()
+            //hiding overflow to ensure scroll bars don't appear, removed on resetPage() and hideMenu()
             pageContents.appendChild(menuContainer);
             fullPage.style.overflow = 'hidden'                 
             pageBody.style.overflow = 'hidden'
@@ -185,7 +185,7 @@ function navCreation(){
     function mobileNav(){
 
         //clear list elements classList, hide links, show header section
-        clearClasses(navList);
+        clearObjectClasses(navList);
         linkSection.style.display = 'none';
         displayEl(navHead, 'flex');
 
@@ -221,8 +221,8 @@ function navCreation(){
 
     function desktopNav(){
 
-        //clear list elements classList, show links, hide header section
-        clearClasses(navList);
+        //clear list elements classList, show social links, hide menu header section
+        clearObjectClasses(navList);
         linkSection.style.display = 'flex';
         displayEl(navHead, 'none')
 
@@ -252,7 +252,7 @@ function navCreation(){
     //check screen size
     window.addEventListener('resize', () => {
         displayNav()
-        //update SVG's
+        //update SVG's when desktop nav is loaded
         feather.replace();
     });
 
@@ -454,7 +454,7 @@ let displayPage = {
             projectTextContainer.append(projectDescription);
             projectTextContainer.classList.add('expanded');
             projectDescription.style.color = 'rgb(204, 204, 204)';
-            desktopPageLayout();
+            desktopProjectPageLayout();
         }else{
             //check if project object has a .description, if not, apply different styling.
             if (projectList[projectIndex].description !== null) { //if project contains a description
@@ -472,6 +472,14 @@ let displayPage = {
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
+
+        function desktopProjectPageLayout(){
+            pageContents.className = 'row-flex-container'
+            pageContents.className = 'grid-container two-cols-25-75 top-padding'
+        
+            pageSectionOne.className = 'b-right proj-text-container'
+            pageHeaderSection.className = 'page-header-section'
+        }
 
     },
     
@@ -614,13 +622,4 @@ let displayPage = {
     }
 };
 
-function desktopPageLayout(){
-    pageContents.className = 'row-flex-container'
-
-    pageContents.className = 'grid-container two-cols-25-75 top-padding'
-    pageSectionOne.className = 'b-right proj-text-container'
-
-    pageHeaderSection.className = 'page-header-section'
-}
-
-displayPage.project(0);
+// displayPage.project(0);
