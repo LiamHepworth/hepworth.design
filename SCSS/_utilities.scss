@@ -54,6 +54,8 @@
 
 //grid utils
 
+
+//NEEDS FIX, DOESN'T FIT PROPERLY ACROSS ALL HEIGHT/WIDTH COMBOS
 .two-cols-25-75{
     grid-template-columns: 27.6vw auto;  //.1 added to the left column to account for border thickness
 }

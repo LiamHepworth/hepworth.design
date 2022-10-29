@@ -339,6 +339,16 @@ body {
     grid-template-columns: repeat(2, 37vw);
     gap: 3rem;
   }
+  .project-image-container {
+    display: flex;
+    padding: 0;
+  }
+  .project-image-container img {
+    height: 80vh;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
   .work-header-container {
     height: 18rem;
   }

@@ -365,6 +365,20 @@
         gap: 3rem;
     }
 
+    .project-image-container{
+        // height: $viewportHeight;
+        // overflow-y: hidden;
+        display: flex;
+        padding: 0;
+
+        img{
+            height: 80vh;
+            width: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+
     .work-header-container{
         height: 18rem;
     }
