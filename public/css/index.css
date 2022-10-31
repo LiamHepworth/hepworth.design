@@ -343,12 +343,22 @@ body {
     overflow-y: hidden;
     display: flex;
     padding: 0;
+    scroll-snap-type: x mandatory;
+  }
+  .project-image-container :first-child {
+    padding-left: 60px;
+    scroll-snap-align: start;
+  }
+  .project-image-container :last-child {
+    padding-right: 60px;
+    scroll-snap-align: end;
   }
   .project-image-container img {
     height: 80vh;
     width: auto;
     margin-top: auto;
     margin-bottom: auto;
+    scroll-snap-align: center;
   }
   .project-image-container .videos {
     height: 80vh;

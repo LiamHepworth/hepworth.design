@@ -370,12 +370,24 @@
         overflow-y: hidden;
         display: flex;
         padding: 0;
+        scroll-snap-type: x mandatory;
+
+        :first-child{
+            padding-left: 60px;
+            scroll-snap-align: start;
+        }
+
+        :last-child{
+            padding-right: 60px;
+            scroll-snap-align: end;
+        }
 
         img{
             height: 80vh;
             width: auto;
             margin-top: auto;
             margin-bottom: auto;
+            scroll-snap-align: center;
         }
 
         .videos{
