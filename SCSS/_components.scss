@@ -202,10 +202,10 @@
 
 //assets:
 
-.dropdown-arrow{
+.arrows{
     filter: $convertSVGColour;
     font-size: 30pt !important;
-    background-image: $bgColourDark; 
+    // background-image: $bgColourDark; 
     border-radius: 50%;
     user-select: none;
     cursor: pointer;
@@ -404,6 +404,17 @@
         padding-right: 2vw;
     }
 
+    #page-section-two{
+
+        span:nth-child(2){
+            left: 0%;
+        }
+
+        span:nth-child(3){
+            right: 0%;
+        }
+    }
+
     .work-header-container{
         height: 18rem;
     }
@@ -411,6 +422,11 @@
     //assets
     #burger-menu{
         display: none;
+    }
+
+    .carousel-arrows{
+        position: absolute;
+        top: 50%;
     }
 
     #print-markers{

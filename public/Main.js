@@ -444,7 +444,7 @@ let displayPage = {
         //drop-down button
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more';
-        dropDownArrow.classList.add('material-symbols-outlined', 'dropdown-arrow');
+        dropDownArrow.classList.add('material-symbols-outlined', 'arrows');
 
         pageSectionOne.appendChild(projectTextOuterContainer);
         projectTextOuterContainer.appendChild(projectTextContainer);
@@ -456,6 +456,23 @@ let displayPage = {
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
+
+        //create side arrows to scroll carousel for desktop layout
+        const leftArrow = document.createElement('span');
+        leftArrow.innerText = 'expand_more';
+        leftArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
+        leftArrow.style.transform = 'rotate(90deg)'; 
+        // leftArrow.style.display = 'none';
+        
+        const rightArrow = document.createElement('span');
+        rightArrow.innerText = 'expand_more';
+        rightArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
+        rightArrow.style.transform = 'rotate(-90deg)'; 
+        // rightArrow.style.display = 'none';
+
+        pageSectionTwo.append(leftArrow, rightArrow);
+            
+
 
         //check width to determine correct styling
         if(window.innerWidth > 1080){
@@ -475,15 +492,10 @@ let displayPage = {
         };
 
         function desktopProjectPageLayout(){
-            pageContents.className = 'row-flex-container'
             pageContents.className = 'grid-container two-cols-25-75'
-        
             pageSectionOne.className = 'b-right proj-text-container'
             pageSectionTwo.className = 'grid-container'
-
             pageHeaderSection.className = 'page-header-section'
-
-            // projectImageContainer.className = 'grid-background';
         }
     },
     
