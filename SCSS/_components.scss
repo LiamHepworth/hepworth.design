@@ -367,7 +367,7 @@
 
     .project-image-container{
         // height: $viewportHeight;
-        // overflow-y: hidden;
+        overflow-y: hidden;
         display: flex;
         padding: 0;
 
@@ -377,6 +377,19 @@
             margin-top: auto;
             margin-bottom: auto;
         }
+
+        .videos{
+            height: 80vh;
+            width: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+
+    .proj-text-container{
+        padding-top: 15vh;
+        padding-left: 8vw;
+        padding-right: 2vw;
     }
 
     .work-header-container{

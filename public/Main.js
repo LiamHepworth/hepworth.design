@@ -626,4 +626,4 @@ let displayPage = {
     }
 };
 
-// displayPage.project(0);
+displayPage.project(0);
