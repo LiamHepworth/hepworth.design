@@ -239,10 +239,10 @@ function navCreation(){
     //display the nav style which corresponds to the screen size
     function displayNav(){
         if(window.innerWidth < 1080){
-            console.log('mobile')
+            // console.log('mobile')
             mobileNav();
         } else if(window.innerWidth >= 1080){
-            console.log('desktop')
+            // console.log('desktop')
             desktopNav();
         }; 
     };
@@ -566,33 +566,36 @@ let displayPage = {
 
         function appendLinks() {
             linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
-            pageSectionOne.insertBefore(linkSection, gridFiller);
+            pageSectionOne.append(linkSection)
+            // pageSectionOne.insertBefore(linkSection, aboutText);
             feather.replace(); //updates icons as SVG's
         };
 
-        //define a variable to hold timeout function
-        let time;
+        // //define a variable to hold timeout function
+        // let time;
 
-        //call once resize is complete
-        function checkWinSize() {
-            if (window.innerWidth < 1080) {
-                appendLinks();
-            } else {
-                return;
-            };
-        }
+        // //call once resize is complete
+        // function checkWinSize() {
+        //     if (window.innerWidth < 1080) {
+        //         appendLinks();
+        //     } else {
+        //         return;
+        //     };
+        // }
 
-        checkWinSize();
+        // checkWinSize();
 
-        //on resize, clear existing timeout function
-        window.onresize = function () {
-            clearTimeout(time);
-            //then, call the function again with a 1ms buffer to prevent it running until resize end. 
-            time = setTimeout(function () {
-                checkWinSize();
-            }, 100);
-        };
+        // //on resize, clear existing timeout function
+        // window.onresize = function () {
+        //     clearTimeout(time);
+        //     //then, call the function again with a 1ms buffer to prevent it running until resize end. 
+        //     time = setTimeout(function () {
+        //         checkWinSize();
+        //         console.log('sizing');
+        //     }, 100);
+        // };
 
+        resizeDisplay(appendLinks);
     }, 
     
     contact: () => {
@@ -673,4 +676,30 @@ let displayPage = {
     }
 };
 
-// displayPage.project(0);
+// displayPage.about();
+
+function resizeDisplay(func){
+    //define a variable to hold timeout function
+    let time;
+
+    //call once resize is complete
+    function checkWinSize() {
+        if (window.innerWidth < 1080) {
+            func();
+        } else {
+            return;
+        };
+    }
+
+    checkWinSize();
+
+    //on resize, clear existing timeout function
+    window.onresize = function () {
+        clearTimeout(time);
+        //then, call the function again with a 1ms buffer to prevent it running until resize end. 
+        time = setTimeout(function () {
+            checkWinSize();
+            console.log('sizing');
+        }, 100);
+    };
+}
