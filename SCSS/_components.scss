@@ -406,12 +406,18 @@
 
     #page-section-two{
 
+        .carousel-arrows{
+            position: absolute;
+            bottom: 5.5%;
+            font-size: 36pt !important;
+        }
+
         span:nth-child(2){
-            left: 0%;
+            left: 53%;
         }
 
         span:nth-child(3){
-            right: 0%;
+            right: 25%;
         }
     }
 
@@ -422,11 +428,6 @@
     //assets
     #burger-menu{
         display: none;
-    }
-
-    .carousel-arrows{
-        position: absolute;
-        top: 50%;
     }
 
     #print-markers{

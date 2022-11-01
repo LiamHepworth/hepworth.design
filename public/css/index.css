@@ -370,21 +370,22 @@ body {
     padding-left: 8vw;
     padding-right: 2vw;
   }
+  #page-section-two .carousel-arrows {
+    position: absolute;
+    bottom: 5.5%;
+    font-size: 36pt !important;
+  }
   #page-section-two span:nth-child(2) {
-    left: 0%;
+    left: 53%;
   }
   #page-section-two span:nth-child(3) {
-    right: 0%;
+    right: 25%;
   }
   .work-header-container {
     height: 18rem;
   }
   #burger-menu {
     display: none;
-  }
-  .carousel-arrows {
-    position: absolute;
-    top: 50%;
   }
   #print-markers {
     width: 92vw;

@@ -462,17 +462,61 @@ let displayPage = {
         leftArrow.innerText = 'expand_more';
         leftArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
         leftArrow.style.transform = 'rotate(90deg)'; 
-        // leftArrow.style.display = 'none';
         
         const rightArrow = document.createElement('span');
         rightArrow.innerText = 'expand_more';
         rightArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
         rightArrow.style.transform = 'rotate(-90deg)'; 
-        // rightArrow.style.display = 'none';
 
         pageSectionTwo.append(leftArrow, rightArrow);
-            
+        leftArrow.style.display = 'none';
+        rightArrow.style.display = 'none';
 
+        // console.log(projectImageContainer.children);
+
+        function carouselImageFocus(){
+            let images = [];
+            images = projectImageContainer.children
+
+            let currentIndex = 0
+
+            let currentImage = images[currentIndex];
+
+            rightArrow.addEventListener('click', function(){
+                if(currentIndex < images.length - 1){
+                    currentIndex ++
+                    currentImage = images[currentIndex]
+                    console.log(currentImage);
+
+                    currentImage.scrollIntoView({
+                        behavior: 'smooth',
+                        inline: 'start'
+                    });
+                } else {
+                    return
+                }
+            })
+            
+            leftArrow.addEventListener('click', function(){
+                if(currentIndex > 0){
+                    currentIndex --
+                    currentImage = images[currentIndex]
+                    console.log(currentImage);
+                    
+                    currentImage.scrollIntoView({
+                        behavior: 'smooth',
+                        inline: 'start'
+                    });
+                } else {
+                    return
+                }
+            })
+
+
+        }
+
+        carouselImageFocus();
+            
 
         //check width to determine correct styling
         if(window.innerWidth > 1080){
@@ -496,6 +540,10 @@ let displayPage = {
             pageSectionOne.className = 'b-right proj-text-container'
             pageSectionTwo.className = 'grid-container'
             pageHeaderSection.className = 'page-header-section'
+
+            leftArrow.style.display = 'block';
+            rightArrow.style.display = 'block';
+
         }
     },
     
