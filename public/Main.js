@@ -472,25 +472,20 @@ let displayPage = {
         leftArrow.style.display = 'none';
         rightArrow.style.display = 'none';
 
-        // console.log(projectImageContainer.children);
-
-        function carouselImageFocus(){
+        (function carouselImageFocus(){
             let images = [];
             images = projectImageContainer.children
 
             let currentIndex = 0
-
             let currentImage = images[currentIndex];
 
             rightArrow.addEventListener('click', function(){
                 if(currentIndex < images.length - 1){
                     currentIndex ++
                     currentImage = images[currentIndex]
-                    console.log(currentImage);
 
                     currentImage.scrollIntoView({
                         behavior: 'smooth',
-                        inline: 'start'
                     });
                 } else {
                     return
@@ -501,23 +496,16 @@ let displayPage = {
                 if(currentIndex > 0){
                     currentIndex --
                     currentImage = images[currentIndex]
-                    console.log(currentImage);
                     
                     currentImage.scrollIntoView({
                         behavior: 'smooth',
-                        inline: 'start'
                     });
                 } else {
                     return
                 }
             })
-
-
-        }
-
-        carouselImageFocus();
+        })();
             
-
         //check width to determine correct styling
         if(window.innerWidth > 1080){
             projectTextContainer.append(projectDescription);
@@ -605,7 +593,6 @@ let displayPage = {
             }, 100);
         };
 
-
     }, 
     
     contact: () => {
@@ -686,4 +673,4 @@ let displayPage = {
     }
 };
 
-displayPage.project(0);
+// displayPage.project(0);

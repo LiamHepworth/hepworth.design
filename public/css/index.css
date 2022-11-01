@@ -349,7 +349,7 @@ body {
     scroll-snap-align: start;
   }
   .project-image-container :last-child {
-    padding-right: 60px;
+    padding-right: 20rem;
     scroll-snap-align: end;
   }
   .project-image-container img {
