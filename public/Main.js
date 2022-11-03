@@ -102,6 +102,32 @@ let util = {
                 }
             }
         }
+    },
+
+    resizeDisplayToMobile: (func) => {
+        //define a variable to hold timeout function
+        let time;
+    
+        //call once resize is complete
+        function checkWinSize() {
+            if (window.innerWidth < 1080) {
+                func();
+            } else {
+                return;
+            };
+        }
+    
+        checkWinSize();
+    
+        //on resize, clear existing timeout function
+        window.onresize = function () {
+            clearTimeout(time);
+            //then, call the function again with a 1ms buffer to prevent it running until resize end. 
+            time = setTimeout(function () {
+                checkWinSize();
+                console.log('sizing');
+            }, 100);
+        };
     }
 };
 
@@ -504,6 +530,19 @@ let displayPage = {
                     return
                 }
             })
+
+            //so that you can click on an image, and have it come into view
+            for (const child of projectImageContainer.children) {
+                child.addEventListener('click', function(){
+                    currentIndex = Array.from(projectImageContainer.children).indexOf(this);
+                    currentImage = images[currentIndex];
+
+                    currentImage.scrollIntoView({
+                        behavior: 'smooth',
+                    });
+                })
+            }
+
         })();
             
         //check width to determine correct styling
@@ -571,31 +610,7 @@ let displayPage = {
             feather.replace(); //updates icons as SVG's
         };
 
-        // //define a variable to hold timeout function
-        // let time;
-
-        // //call once resize is complete
-        // function checkWinSize() {
-        //     if (window.innerWidth < 1080) {
-        //         appendLinks();
-        //     } else {
-        //         return;
-        //     };
-        // }
-
-        // checkWinSize();
-
-        // //on resize, clear existing timeout function
-        // window.onresize = function () {
-        //     clearTimeout(time);
-        //     //then, call the function again with a 1ms buffer to prevent it running until resize end. 
-        //     time = setTimeout(function () {
-        //         checkWinSize();
-        //         console.log('sizing');
-        //     }, 100);
-        // };
-
-        resizeDisplay(appendLinks);
+        util.resizeDisplayToMobile(appendLinks);
     }, 
     
     contact: () => {
@@ -676,30 +691,4 @@ let displayPage = {
     }
 };
 
-// displayPage.about();
-
-function resizeDisplay(func){
-    //define a variable to hold timeout function
-    let time;
-
-    //call once resize is complete
-    function checkWinSize() {
-        if (window.innerWidth < 1080) {
-            func();
-        } else {
-            return;
-        };
-    }
-
-    checkWinSize();
-
-    //on resize, clear existing timeout function
-    window.onresize = function () {
-        clearTimeout(time);
-        //then, call the function again with a 1ms buffer to prevent it running until resize end. 
-        time = setTimeout(function () {
-            checkWinSize();
-            console.log('sizing');
-        }, 100);
-    };
-}
+displayPage.project(0);
