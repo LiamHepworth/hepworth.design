@@ -166,6 +166,8 @@ body {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  pointer-events: none;
+  user-select: none;
 }
 
 #contact-form {
@@ -320,19 +322,10 @@ body {
     margin: 0 auto;
   }
   .header-section {
-    margin: 0 auto;
-    position: relative;
-    top: 11rem;
-    text-align: center;
-    pointer-events: none;
-    user-select: none;
-    width: fit-content;
+    margin: 0 auto 1.8rem auto;
   }
   .expanding-text-container {
     margin: 0;
-  }
-  .page-header-section {
-    margin-bottom: 1.8rem;
   }
   .gallery {
     grid-template-columns: repeat(2, 37vw);
@@ -366,7 +359,7 @@ body {
     margin-bottom: auto;
   }
   .proj-text-container {
-    padding-top: 15vh;
+    padding-top: 23vh;
     padding-left: 8vw;
     padding-right: 2vw;
   }

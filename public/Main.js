@@ -442,8 +442,6 @@ let displayPage = {
 
         util.blueMenuBar(1);
 
-        pageSectionTwo.classList.add('grid-container', 'grow');
-
         //hide the grid background
         pageBody.classList.remove('grid-background');
 
@@ -498,6 +496,15 @@ let displayPage = {
         leftArrow.style.display = 'none';
         rightArrow.style.display = 'none';
 
+        //check if project object has a .description, if not, apply different styling.
+        if(projectList[projectIndex].description !== null){ //if project contains a description
+            projectTextContainer.append(projectDescription);
+            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
+        }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
+            projectTextContainer.style.marginBottom = '3rem';
+            projectTextContainer.classList.add('expanded');
+        };
+
         (function carouselImageFocus(){
             let images = [];
             images = projectImageContainer.children
@@ -544,34 +551,39 @@ let displayPage = {
             }
 
         })();
-            
-        //check width to determine correct styling
-        if(window.innerWidth > 1080){
+
+        function mobileProjectPageLayout(){
+            projectTextContainer.classList.remove('expanded');
+            pageContents.className = 'grid-container'
+            pageSectionTwo.classList.add('grid-container');
+            dropDownArrow.style.display = 'block'
+        }
+
+        function desktopProjectPageLayout(){
             projectTextContainer.append(projectDescription);
             projectTextContainer.classList.add('expanded');
             projectDescription.style.color = 'rgb(204, 204, 204)';
-            desktopProjectPageLayout();
-        }
-
-        //check if project object has a .description, if not, apply different styling.
-        if(projectList[projectIndex].description !== null){ //if project contains a description
-            projectTextContainer.append(projectDescription);
-            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
-        }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
-            projectTextContainer.style.marginBottom = '3rem';
-            projectTextContainer.classList.add('expanded');
-        };
-
-        function desktopProjectPageLayout(){
             pageContents.className = 'grid-container two-cols-25-75'
             pageSectionOne.className = 'b-right proj-text-container'
             pageSectionTwo.className = 'grid-container'
-            pageHeaderSection.className = 'page-header-section'
+            // pageHeaderSection.className = 'page-header-section'
 
             leftArrow.style.display = 'block';
             rightArrow.style.display = 'block';
-
+            dropDownArrow.style.display = 'none'
         }
+
+        //check width to determine correct styling
+        function windowSize(){
+            if(window.innerWidth > 1080){
+                desktopProjectPageLayout();
+            } else {
+                mobileProjectPageLayout();
+            }
+        };
+
+        windowSize()
+        window.addEventListener('resize', windowSize);
     },
     
     about: () => {

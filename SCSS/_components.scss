@@ -161,6 +161,8 @@
     display: flex;
     flex-flow: row;
     justify-content: space-between;
+    pointer-events: none;
+    user-select: none;
 }
 
 #contact-form{
@@ -340,24 +342,15 @@
 
     // containers
     .header-section{
-        margin: 0 auto;
-        position: relative;
-        top: calc(13.4rem - $headerFooterHeight);
-        text-align: center;
-        pointer-events: none;
-        user-select: none;
-        width: fit-content;
+        margin: 0 auto $conatinerBottomMargin auto;
     }
 
     .expanding-text-container{
         margin: 0;
     }
 
-    .page-header-section{
-        margin-bottom: $conatinerBottomMargin;
-
+    .grid-container{
     }
-
 
     .gallery{
         // margin-top: calc($headerFooterHeight + 5rem);
@@ -399,7 +392,7 @@
     }
 
     .proj-text-container{
-        padding-top: 15vh;
+        padding-top: 23vh;
         padding-left: 8vw;
         padding-right: 2vw;
     }
