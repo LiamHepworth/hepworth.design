@@ -118,14 +118,14 @@ body {
   min-height: 35rem;
 }
 
-.expanding-text-container.expanded {
+.expanding-text-container.expanded-dropdown {
   max-height: fit-content;
   margin-bottom: 1rem;
   overflow: auto;
-  color: #cccccc;
 }
-.expanding-text-container.expanded :nth-child(2) {
+.expanding-text-container.expanded-dropdown :nth-child(2) {
   min-height: auto;
+  color: #cccccc;
 }
 
 .project-image-container {
@@ -326,6 +326,14 @@ body {
   }
   .expanding-text-container {
     margin: 0;
+    margin-bottom: 1rem;
+    max-height: fit-content;
+    overflow: auto;
+    color: #cccccc;
+  }
+  .expanding-text-container :nth-child(2) {
+    min-height: auto;
+    color: #cccccc;
   }
   .gallery {
     grid-template-columns: repeat(2, 37vw);

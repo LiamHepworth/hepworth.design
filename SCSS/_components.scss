@@ -109,14 +109,14 @@
     }
 }
 
-.expanding-text-container.expanded{
+.expanding-text-container.expanded-dropdown{
     max-height: fit-content;
     margin-bottom: 1rem;
     overflow: auto;
-    color: $lineColourLight;
     
     :nth-child(2){
         min-height: auto;
+        color: $lineColourLight;
     }
 }
 
@@ -347,9 +347,15 @@
 
     .expanding-text-container{
         margin: 0;
-    }
+        margin-bottom: 1rem;
+        max-height: fit-content;
+        overflow: auto;
+        color: $lineColourLight;
 
-    .grid-container{
+            :nth-child(2){
+                min-height: auto;
+                color: #cccccc;
+            }
     }
 
     .gallery{

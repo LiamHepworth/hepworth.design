@@ -39,13 +39,13 @@ let util = {
     
         trigger.addEventListener('click', function(){
                 if(arrowIsClicked == false || arrowIsClicked == undefined){
-                    outerContainer.classList.add('expanded');                        //fit content, auto overflow
-                    outerContainer.children[innerContainerIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
+                    outerContainer.classList.add('expanded-dropdown');                        //fit content, auto overflow
+                    // outerContainer.children[innerContainerIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
                     trigger.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
                     arrowIsClicked = true;                                            //switches to true so that when arrow is clicked, the following code runs:
                 } else if (arrowIsClicked == true){
-                    outerContainer.classList.remove('expanded');
-                    outerContainer.children[innerContainerIndex].style.color = '#ffffff00';
+                    outerContainer.classList.remove('expanded-dropdown');
+                    // outerContainer.children[innerContainerIndex].style.color = '#ffffff00';
                     trigger.style.transform = 'rotate(0deg)';
                     arrowIsClicked = false;
                 };
@@ -463,7 +463,7 @@ let displayPage = {
         projectDescription.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
-        projectDescription.classList.add('body-text', 'project-text');
+        projectDescription.classList.add('body-text');
 
         //drop-down button
         let dropDownArrow = document.createElement('span');
@@ -502,7 +502,7 @@ let displayPage = {
             projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
         }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
             projectTextContainer.style.marginBottom = '3rem';
-            projectTextContainer.classList.add('expanded');
+            projectTextContainer.classList.add('expanded-dropdown');
         };
 
         (function carouselImageFocus(){
@@ -553,7 +553,6 @@ let displayPage = {
         })();
 
         function mobileProjectPageLayout(){
-            projectTextContainer.classList.remove('expanded');
             pageContents.className = 'grid-container'
             pageSectionTwo.classList.add('grid-container');
             dropDownArrow.style.display = 'block'
@@ -561,12 +560,9 @@ let displayPage = {
 
         function desktopProjectPageLayout(){
             projectTextContainer.append(projectDescription);
-            projectTextContainer.classList.add('expanded');
-            projectDescription.style.color = 'rgb(204, 204, 204)';
             pageContents.className = 'grid-container two-cols-25-75'
             pageSectionOne.className = 'b-right proj-text-container'
             pageSectionTwo.className = 'grid-container'
-            // pageHeaderSection.className = 'page-header-section'
 
             leftArrow.style.display = 'block';
             rightArrow.style.display = 'block';
