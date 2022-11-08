@@ -558,10 +558,8 @@ let displayPage = {
         function windowSize(){
             if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
-                // projectDescription.style.color = '';
             } else {
                 pageContents.className = 'grid-container'
-                // projectDescription.style.color = '#cccccc'
             }
         };
 

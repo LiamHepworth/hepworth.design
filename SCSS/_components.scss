@@ -358,15 +358,19 @@
         overflow: auto;
         color: $lineColourLight;
 
-            :nth-child(2){
-                min-height: auto;
-                // color: #cccccc;
-            }
+        :nth-child(2){
+            min-height: auto;
+            background-image: none;
+            background-clip: unset;
+        }
     }
 
     .expanding-text-container.expanded-dropdown{
         :nth-child(2){
             color: #ffffff00;
+            min-height: auto;
+            background-image: none;
+            background-clip: unset;
         }
     }
 
@@ -421,11 +425,12 @@
         width: 100%;
         max-height: 42vh;
         padding-right: 2rem;
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: hidden;
 
         background-image: linear-gradient(0deg, rgba(23,23,23,1) 0%, rgba(204,204,204,1) 10%, rgba(204,204,204,1) 90%, rgba(23,23,23,1) 100%);
         background-clip: text;
-        color: rgba(255, 255, 255, 0);
+        // color: rgba(255, 255, 255, 0);
     }
 
     #page-section-two{

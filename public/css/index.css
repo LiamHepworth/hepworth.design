@@ -340,9 +340,14 @@ body {
   }
   .expanding-text-container :nth-child(2) {
     min-height: auto;
+    background-image: none;
+    background-clip: unset;
   }
   .expanding-text-container.expanded-dropdown :nth-child(2) {
     color: rgba(255, 255, 255, 0);
+    min-height: auto;
+    background-image: none;
+    background-clip: unset;
   }
   .gallery {
     grid-template-columns: repeat(2, 37vw);
@@ -386,10 +391,10 @@ body {
     width: 100%;
     max-height: 42vh;
     padding-right: 2rem;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     background-image: linear-gradient(0deg, rgb(23, 23, 23) 0%, rgb(204, 204, 204) 10%, rgb(204, 204, 204) 90%, rgb(23, 23, 23) 100%);
     background-clip: text;
-    color: rgba(255, 255, 255, 0);
   }
   #page-section-two .carousel-arrows {
     position: absolute;
