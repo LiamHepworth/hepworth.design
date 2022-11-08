@@ -166,7 +166,6 @@ body {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  pointer-events: none;
   user-select: none;
 }
 
@@ -211,6 +210,14 @@ body {
   border-radius: 50%;
   user-select: none;
   cursor: pointer;
+}
+
+.dropdown-arrow {
+  display: block;
+}
+
+.carousel-arrows {
+  display: none;
 }
 
 #print-markers {
@@ -370,6 +377,7 @@ body {
     padding-top: 23vh;
     padding-left: 8vw;
     padding-right: 2vw;
+    border-right: 3px solid #cccccc;
   }
   #page-section-two .carousel-arrows {
     position: absolute;
@@ -381,6 +389,9 @@ body {
   }
   #page-section-two span:nth-child(3) {
     right: 25%;
+  }
+  .dropdown-arrow {
+    display: none !important;
   }
   .work-header-container {
     height: 18rem;
@@ -491,10 +502,6 @@ body {
 
 .vh-height {
   min-height: calc(100vh - (2.4rem + 40px) * 2);
-}
-
-.b-right {
-  border-right: 3px solid #cccccc;
 }
 
 .grow {

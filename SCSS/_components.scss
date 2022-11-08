@@ -161,7 +161,6 @@
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    pointer-events: none;
     user-select: none;
 }
 
@@ -207,10 +206,17 @@
 .arrows{
     filter: $convertSVGColour;
     font-size: 30pt !important;
-    // background-image: $bgColourDark; 
     border-radius: 50%;
     user-select: none;
     cursor: pointer;
+}
+
+.dropdown-arrow{
+    display: block;
+}
+
+.carousel-arrows{
+    display: none;
 }
 
 #print-markers{
@@ -401,6 +407,7 @@
         padding-top: 23vh;
         padding-left: 8vw;
         padding-right: 2vw;
+        border-right: $borderStrokeWidth solid $lineColourLight;
     }
 
     #page-section-two{
@@ -418,6 +425,10 @@
         span:nth-child(3){
             right: 25%;
         }
+    }
+
+    .dropdown-arrow{
+        display: none !important;
     }
 
     .work-header-container{

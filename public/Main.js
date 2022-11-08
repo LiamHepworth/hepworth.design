@@ -40,12 +40,10 @@ let util = {
         trigger.addEventListener('click', function(){
                 if(arrowIsClicked == false || arrowIsClicked == undefined){
                     outerContainer.classList.add('expanded-dropdown');                        //fit content, auto overflow
-                    // outerContainer.children[innerContainerIndex].style.color = '#cccccc';     //removes the text gradient effect from the text
                     trigger.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
                     arrowIsClicked = true;                                            //switches to true so that when arrow is clicked, the following code runs:
                 } else if (arrowIsClicked == true){
                     outerContainer.classList.remove('expanded-dropdown');
-                    // outerContainer.children[innerContainerIndex].style.color = '#ffffff00';
                     trigger.style.transform = 'rotate(0deg)';
                     arrowIsClicked = false;
                 };
@@ -468,9 +466,11 @@ let displayPage = {
         //drop-down button
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more';
-        dropDownArrow.classList.add('material-symbols-outlined', 'arrows');
+        dropDownArrow.classList.add('material-symbols-outlined', 'arrows', 'dropdown-arrow');
 
         pageSectionOne.appendChild(projectTextOuterContainer);
+        pageSectionOne.className = 'proj-text-container'
+
         projectTextOuterContainer.appendChild(projectTextContainer);
         projectTextContainer.append(projectType);
 
@@ -480,6 +480,10 @@ let displayPage = {
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
+
+        //FIX! creates issues on mobile with a large margin space at the bottom
+        pageSectionTwo.className = 'grid-container'
+
 
         //create side arrows to scroll carousel for desktop layout
         const leftArrow = document.createElement('span');
@@ -493,8 +497,6 @@ let displayPage = {
         rightArrow.style.transform = 'rotate(-90deg)'; 
 
         pageSectionTwo.append(leftArrow, rightArrow);
-        leftArrow.style.display = 'none';
-        rightArrow.style.display = 'none';
 
         //check if project object has a .description, if not, apply different styling.
         if(projectList[projectIndex].description !== null){ //if project contains a description
@@ -552,29 +554,12 @@ let displayPage = {
 
         })();
 
-        function mobileProjectPageLayout(){
-            pageContents.className = 'grid-container'
-            pageSectionTwo.classList.add('grid-container');
-            dropDownArrow.style.display = 'block'
-        }
-
-        function desktopProjectPageLayout(){
-            projectTextContainer.append(projectDescription);
-            pageContents.className = 'grid-container two-cols-25-75'
-            pageSectionOne.className = 'b-right proj-text-container'
-            pageSectionTwo.className = 'grid-container'
-
-            leftArrow.style.display = 'block';
-            rightArrow.style.display = 'block';
-            dropDownArrow.style.display = 'none'
-        }
-
         //check width to determine correct styling
         function windowSize(){
             if(window.innerWidth > 1080){
-                desktopProjectPageLayout();
+                pageContents.className = 'grid-container two-cols-25-75'
             } else {
-                mobileProjectPageLayout();
+                pageContents.className = 'grid-container'
             }
         };
 
@@ -619,6 +604,7 @@ let displayPage = {
         };
 
         util.resizeDisplayToMobile(appendLinks);
+        // FIX! once this has been called, it calls on every page
     }, 
     
     contact: () => {
