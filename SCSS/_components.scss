@@ -357,17 +357,18 @@
         max-height: fit-content;
         overflow: auto;
         color: $lineColourLight;
-
+        
         :nth-child(2){
             min-height: auto;
             background-image: none;
             background-clip: unset;
+            color: $lineColourLight;
         }
     }
 
     .expanding-text-container.expanded-dropdown{
         :nth-child(2){
-            color: #ffffff00;
+            color: $lineColourLight;
             min-height: auto;
             background-image: none;
             background-clip: unset;
@@ -428,8 +429,11 @@
         overflow-y: scroll;
         overflow-x: hidden;
 
-        background-image: linear-gradient(0deg, rgba(23,23,23,1) 0%, rgba(204,204,204,1) 10%, rgba(204,204,204,1) 90%, rgba(23,23,23,1) 100%);
-        background-clip: text;
+        fill: red;
+        //find a way to make this outer container have a gradient which can sit on top of the child text
+
+        // background-image: linear-gradient(0deg, rgba(23,23,23,1) 0%, rgba(204,204,204,1) 10%, rgba(204,204,204,1) 90%, rgba(23,23,23,1) 100%);
+        // background-clip: text;
         // color: rgba(255, 255, 255, 0);
     }
 

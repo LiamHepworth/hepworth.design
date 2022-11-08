@@ -342,9 +342,10 @@ body {
     min-height: auto;
     background-image: none;
     background-clip: unset;
+    color: #cccccc;
   }
   .expanding-text-container.expanded-dropdown :nth-child(2) {
-    color: rgba(255, 255, 255, 0);
+    color: #cccccc;
     min-height: auto;
     background-image: none;
     background-clip: unset;
@@ -393,8 +394,7 @@ body {
     padding-right: 2rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    background-image: linear-gradient(0deg, rgb(23, 23, 23) 0%, rgb(204, 204, 204) 10%, rgb(204, 204, 204) 90%, rgb(23, 23, 23) 100%);
-    background-clip: text;
+    fill: red;
   }
   #page-section-two .carousel-arrows {
     position: absolute;
