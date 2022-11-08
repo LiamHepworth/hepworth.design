@@ -341,6 +341,9 @@ body {
   .expanding-text-container :nth-child(2) {
     min-height: auto;
   }
+  .expanding-text-container.expanded-dropdown :nth-child(2) {
+    color: rgba(255, 255, 255, 0);
+  }
   .gallery {
     grid-template-columns: repeat(2, 37vw);
     gap: 3rem;

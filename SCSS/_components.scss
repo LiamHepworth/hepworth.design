@@ -364,7 +364,11 @@
             }
     }
 
-
+    .expanding-text-container.expanded-dropdown{
+        :nth-child(2){
+            color: #ffffff00;
+        }
+    }
 
     .gallery{
         // margin-top: calc($headerFooterHeight + 5rem);
