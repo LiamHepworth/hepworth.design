@@ -101,6 +101,8 @@ body {
   text-align: center;
   width: 100%;
   height: fit-content;
+  background-clip: text;
+  background-image: linear-gradient(180deg, #ccc 40%, rgba(204, 204, 204, 0) 80%);
 }
 
 .expanding-text-container {
@@ -111,11 +113,11 @@ body {
   margin: 0 2.1rem 0 2.1rem;
   transition: height 0.5s linear;
 }
-.expanding-text-container :nth-child(2) {
-  background-image: linear-gradient(180deg, #cccccc 10%, rgba(204, 204, 204, 0) 18%);
-  background-clip: text;
+.expanding-text-container :nth-child(1) {
   color: rgba(255, 255, 255, 0);
-  min-height: 35rem;
+}
+.expanding-text-container :nth-child(2) {
+  color: rgba(255, 255, 255, 0);
 }
 
 .expanding-text-container.expanded-dropdown {
@@ -214,6 +216,7 @@ body {
 
 .dropdown-arrow {
   display: block;
+  color: rgb(0, 0, 0);
 }
 
 .carousel-arrows {
@@ -331,24 +334,36 @@ body {
   .header-section {
     margin: 0 auto 1.8rem auto;
   }
+  .outer-content-container {
+    text-align: center;
+    width: 100%;
+    max-height: 42vh;
+    padding-right: 2rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-clip: text;
+    background-image: linear-gradient(0deg, #171717 0%, #cccccc 10%, #cccccc 90%);
+    background-attachment: local;
+  }
   .expanding-text-container {
+    position: relative;
     margin: 0;
-    margin-bottom: 1rem;
     max-height: fit-content;
-    overflow: auto;
-    color: #cccccc;
+    overflow: scroll;
+    color: rgba(255, 255, 255, 0);
+  }
+  .expanding-text-container :nth-child(1) {
+    color: rgba(255, 255, 255, 0);
   }
   .expanding-text-container :nth-child(2) {
-    min-height: auto;
-    background-image: none;
-    background-clip: unset;
-    color: #cccccc;
+    color: rgba(255, 255, 255, 0);
+    padding: 0 0 2rem 0;
+  }
+  .expanding-text-container.expanded-dropdown :nth-child(1) {
+    color: rgba(255, 255, 255, 0);
   }
   .expanding-text-container.expanded-dropdown :nth-child(2) {
-    color: #cccccc;
-    min-height: auto;
-    background-image: none;
-    background-clip: unset;
+    color: rgba(255, 255, 255, 0);
   }
   .gallery {
     grid-template-columns: repeat(2, 37vw);
@@ -386,15 +401,6 @@ body {
     padding-left: 8vw;
     padding-right: 2vw;
     border-right: 3px solid #cccccc;
-  }
-  .outer-content-container {
-    text-align: center;
-    width: 100%;
-    max-height: 42vh;
-    padding-right: 2rem;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    fill: red;
   }
   #page-section-two .carousel-arrows {
     position: absolute;
