@@ -28,5 +28,5 @@ $bodyTextSize: 1rem;
 $bodyLineHeight: $headerLineHeight 1.5rem;
 
 //other styling:
-$mobileLinearGradient: linear-gradient(180deg, #ccc 40%, rgba(204, 204, 204, 0) 80%);
+$mobileLinearGradient: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, $bgColourDark 80%);
 $borderStrokeWidth: 3px;

@@ -101,8 +101,7 @@ body {
   text-align: center;
   width: 100%;
   height: fit-content;
-  background-clip: text;
-  background-image: linear-gradient(180deg, #ccc 40%, rgba(204, 204, 204, 0) 80%);
+  position: relative;
 }
 
 .expanding-text-container {
@@ -113,12 +112,6 @@ body {
   margin: 0 2.1rem 0 2.1rem;
   transition: height 0.5s linear;
 }
-.expanding-text-container :nth-child(1) {
-  color: rgba(255, 255, 255, 0);
-}
-.expanding-text-container :nth-child(2) {
-  color: rgba(255, 255, 255, 0);
-}
 
 .expanding-text-container.expanded-dropdown {
   max-height: fit-content;
@@ -127,7 +120,6 @@ body {
 }
 .expanding-text-container.expanded-dropdown :nth-child(2) {
   min-height: auto;
-  color: #cccccc;
 }
 
 .project-image-container {
@@ -273,6 +265,14 @@ body {
   padding: 0;
 }
 
+.gradient-overlay {
+  height: 10rem;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  background-image: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, #171717 80%);
+}
+
 .bar {
   height: 2.4rem;
   width: 100%;
@@ -341,28 +341,11 @@ body {
     padding-right: 2rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    background-clip: text;
-    background-image: linear-gradient(0deg, #171717 0%, #cccccc 10%, #cccccc 90%);
-    background-attachment: local;
   }
   .expanding-text-container {
     position: relative;
     margin: 0;
     max-height: fit-content;
-    overflow: scroll;
-    color: rgba(255, 255, 255, 0);
-  }
-  .expanding-text-container :nth-child(1) {
-    color: rgba(255, 255, 255, 0);
-  }
-  .expanding-text-container :nth-child(2) {
-    color: rgba(255, 255, 255, 0);
-    padding: 0 0 2rem 0;
-  }
-  .expanding-text-container.expanded-dropdown :nth-child(1) {
-    color: rgba(255, 255, 255, 0);
-  }
-  .expanding-text-container.expanded-dropdown :nth-child(2) {
     color: rgba(255, 255, 255, 0);
   }
   .gallery {

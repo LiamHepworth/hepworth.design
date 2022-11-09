@@ -34,16 +34,18 @@ let util = {
         return gridFiller;    
     }, 
 
-    expandingSection: (trigger, outerContainer, innerContainerIndex) => {  //innerContainerIndex lets you determine which child container you actually want to expand
+    expandingSection: (trigger, outerContainer, gradient, innerContainerIndex) => {  //innerContainerIndex lets you determine which child container you actually want to expand
         let arrowIsClicked = undefined;
     
         trigger.addEventListener('click', function(){
                 if(arrowIsClicked == false || arrowIsClicked == undefined){
                     outerContainer.classList.add('expanded-dropdown');                        //fit content, auto overflow
+                    gradient.style.display = 'none'
                     trigger.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
                     arrowIsClicked = true;                                            //switches to true so that when arrow is clicked, the following code runs:
                 } else if (arrowIsClicked == true){
                     outerContainer.classList.remove('expanded-dropdown');
+                    gradient.style.display = 'block'
                     trigger.style.transform = 'rotate(0deg)';
                     arrowIsClicked = false;
                 };
@@ -463,6 +465,10 @@ let displayPage = {
         ${projectList[projectIndex].description}`;
         projectDescription.classList.add('body-text');
 
+        //gradient overlay
+        let gradientOverlay = document.createElement('div');
+        gradientOverlay.className = 'gradient-overlay';
+
         //drop-down button
         let dropDownArrow = document.createElement('span');
         dropDownArrow.innerText = 'expand_more';
@@ -471,8 +477,10 @@ let displayPage = {
         pageSectionOne.appendChild(projectTextOuterContainer);
         pageSectionOne.className = 'proj-text-container'
 
-        projectTextOuterContainer.appendChild(projectTextContainer);
+        // projectTextOuterContainer.appendChild(projectTextContainer);
         projectTextContainer.append(projectType);
+        projectTextOuterContainer.appendChild(projectTextContainer);
+        projectTextOuterContainer.appendChild(gradientOverlay);
 
         //create container for carousel of images, create carousel, append
         let projectImageContainer = document.createElement('section');
@@ -501,10 +509,12 @@ let displayPage = {
         //check if project object has a .description, if not, apply different styling.
         if(projectList[projectIndex].description !== null){ //if project contains a description
             projectTextContainer.append(projectDescription);
-            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, 1));
+            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, gradientOverlay, 1));
         }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
             projectTextContainer.style.marginBottom = '3rem';
             projectTextContainer.classList.add('expanded-dropdown');
+            gradientOverlay.style.display = 'none'
+
         };
 
         (function carouselImageFocus(){

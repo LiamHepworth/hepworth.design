@@ -91,8 +91,9 @@
     text-align: center;
     width: 100%;
     height: fit-content;
-    background-clip: text;
-    background-image: $mobileLinearGradient;
+    position: relative;
+    // background-clip: text;
+    // background-image: $mobileLinearGradient;
     // color: #ffffff00;
 }
 
@@ -104,13 +105,13 @@
     margin: $containerSideMargins;
     transition: height .5s linear;
     
-    :nth-child(1){
-        color: #ffffff00;
-    }
+    // :nth-child(1){
+    //     color: #ffffff00;
+    // }
 
-    :nth-child(2){
-        color: #ffffff00;
-    }
+    // :nth-child(2){
+    //     color: #ffffff00;
+    // }
 }
 
 .expanding-text-container.expanded-dropdown{
@@ -120,7 +121,7 @@
     
     :nth-child(2){
         min-height: auto;
-        color: $lineColourLight;
+        // color: $lineColourLight;
     }
 }
 
@@ -281,6 +282,14 @@
 
 //misc/decoration:
 
+.gradient-overlay{
+    height: 10rem;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    background-image: $mobileLinearGradient;
+}
+
 .bar{
     height: $headerFooterHeight;
     width: 100%;
@@ -363,9 +372,9 @@
         padding-right: 2rem;
         overflow-y: scroll;
         overflow-x: hidden;
-        background-clip: text;
-        background-image: linear-gradient(0deg, $bgColourDark 0%, $lineColourLight 10%, $lineColourLight 90%);
-        background-attachment: local;
+        // background-clip: text;
+        // background-image: linear-gradient(0deg, $bgColourDark 0%, $lineColourLight 10%, $lineColourLight 90%);
+        // background-attachment: local;
         
         // background-image: linear-gradient(0deg, rgba(23,23,23,1) 0%, rgba(204,204,204,1) 10%, rgba(204,204,204,1) 90%, rgba(23,23,23,1) 100%);
         // background-clip: text;
@@ -377,28 +386,28 @@
         margin: 0;
         // margin-bottom: 20rem;
         max-height: fit-content;
-        overflow: scroll;
+        // overflow: scroll;
         color: #ffffff00;
         
         :nth-child(1){
-            color: #ffffff00;
+            // color: #ffffff00;
         }
     
         :nth-child(2){
-            color: #ffffff00;
-            padding: 0 0 2rem 0;
+            // color: #ffffff00;
+            // padding: 0 0 2rem 0;
         }
     }
 
-    .expanding-text-container.expanded-dropdown{
-        :nth-child(1){
-            color: #ffffff00;
-        }
+    // .expanding-text-container.expanded-dropdown{
+    //     :nth-child(1){
+    //         color: #ffffff00;
+    //     }
 
-        :nth-child(2){
-            color: #ffffff00;
-        }
-    }
+    //     :nth-child(2){
+    //         color: #ffffff00;
+    //     }
+    // }
 
     .gallery{
         // margin-top: calc($headerFooterHeight + 5rem);
