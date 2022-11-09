@@ -475,12 +475,12 @@ let displayPage = {
         dropDownArrow.classList.add('material-symbols-outlined', 'arrows', 'dropdown-arrow');
 
         pageSectionOne.appendChild(projectTextOuterContainer);
+        pageSectionOne.appendChild(gradientOverlay);
         pageSectionOne.className = 'proj-text-container'
 
         // projectTextOuterContainer.appendChild(projectTextContainer);
         projectTextContainer.append(projectType);
         projectTextOuterContainer.appendChild(projectTextContainer);
-        projectTextOuterContainer.appendChild(gradientOverlay);
 
         //create container for carousel of images, create carousel, append
         let projectImageContainer = document.createElement('section');
@@ -490,7 +490,7 @@ let displayPage = {
         pageSectionTwo.appendChild(projectImageContainer);
 
         //FIX! creates issues on mobile with a large margin space at the bottom
-        pageSectionTwo.className = 'grid-container'
+        pageSectionTwo.className = 'grid-container left-border'
 
 
         //create side arrows to scroll carousel for desktop layout
@@ -568,8 +568,11 @@ let displayPage = {
         function windowSize(){
             if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
+                pageSectionTwo.className = 'grid-container left-border'
+                
             } else {
                 pageContents.className = 'grid-container'
+                pageSectionTwo.className = 'grid-container'
             }
         };
 

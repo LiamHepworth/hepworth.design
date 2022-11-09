@@ -101,7 +101,6 @@ body {
   text-align: center;
   width: 100%;
   height: fit-content;
-  position: relative;
 }
 
 .expanding-text-container {
@@ -120,6 +119,10 @@ body {
 }
 .expanding-text-container.expanded-dropdown :nth-child(2) {
   min-height: auto;
+}
+
+.proj-text-container {
+  position: relative;
 }
 
 .project-image-container {
@@ -209,6 +212,8 @@ body {
 .dropdown-arrow {
   display: block;
   color: rgb(0, 0, 0);
+  position: relative;
+  z-index: 2;
 }
 
 .carousel-arrows {
@@ -267,10 +272,11 @@ body {
 
 .gradient-overlay {
   height: 10rem;
-  width: 100vw;
+  width: 100%;
   position: absolute;
-  top: 0;
+  bottom: 0;
   background-image: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, #171717 80%);
+  z-index: 1;
 }
 
 .bar {
@@ -337,7 +343,7 @@ body {
   .outer-content-container {
     text-align: center;
     width: 100%;
-    max-height: 42vh;
+    max-height: 37vh;
     padding-right: 2rem;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -347,6 +353,9 @@ body {
     margin: 0;
     max-height: fit-content;
     color: rgba(255, 255, 255, 0);
+  }
+  .expanding-text-container :nth-child(2) {
+    padding-bottom: 2rem;
   }
   .gallery {
     grid-template-columns: repeat(2, 37vw);
@@ -380,10 +389,10 @@ body {
     margin-bottom: auto;
   }
   .proj-text-container {
+    position: relative;
     padding-top: 25vh;
     padding-left: 8vw;
     padding-right: 2vw;
-    border-right: 3px solid #cccccc;
   }
   #page-section-two .carousel-arrows {
     position: absolute;
@@ -476,6 +485,15 @@ body {
   .bottom-bar div {
     display: none;
   }
+  .gradient-overlay {
+    bottom: auto;
+    top: 59vh;
+    height: 10rem;
+    width: 70%;
+    position: absolute;
+    background-image: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, #171717 80%);
+    pointer-events: none;
+  }
 }
 @media (min-width: 2500px) {
   .grid-container.gallery {
@@ -527,5 +545,9 @@ body {
 }
 
 .two-cols-25-75 {
-  grid-template-columns: 27.6vw auto;
+  grid-template-columns: 27.4vw auto;
+}
+
+.left-border {
+  border-left: 3px solid #cccccc;
 }/*# sourceMappingURL=index.css.map */

@@ -45,5 +45,9 @@
 //grid utils
 
 .two-cols-25-75{
-    grid-template-columns: 27.6vw auto;  //.1 added to the left column to account for border thickness
+    grid-template-columns: 27.4vw auto;  //.1 added to the left column to account for border thickness
+}
+
+.left-border{
+    border-left: $borderStrokeWidth solid $lineColourLight;
 }

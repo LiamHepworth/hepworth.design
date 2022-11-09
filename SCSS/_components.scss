@@ -91,7 +91,7 @@
     text-align: center;
     width: 100%;
     height: fit-content;
-    position: relative;
+    // position: relative;
     // background-clip: text;
     // background-image: $mobileLinearGradient;
     // color: #ffffff00;
@@ -123,6 +123,10 @@
         min-height: auto;
         // color: $lineColourLight;
     }
+}
+
+.proj-text-container{
+    position: relative;
 }
 
 .project-image-container{
@@ -219,6 +223,8 @@
 .dropdown-arrow{
     display: block;
     color: rgb(0, 0, 0);
+    position: relative;
+    z-index: 2;
 }
 
 .carousel-arrows{
@@ -284,10 +290,11 @@
 
 .gradient-overlay{
     height: 10rem;
-    width: 100vw;
+    width: 100%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     background-image: $mobileLinearGradient;
+    z-index: 1;
 }
 
 .bar{
@@ -368,7 +375,7 @@
     .outer-content-container{
         text-align: center;
         width: 100%;
-        max-height: 42vh;
+        max-height: 37vh;
         padding-right: 2rem;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -384,30 +391,14 @@
     .expanding-text-container{
         position: relative;
         margin: 0;
-        // margin-bottom: 20rem;
         max-height: fit-content;
-        // overflow: scroll;
         color: #ffffff00;
-        
-        :nth-child(1){
-            // color: #ffffff00;
-        }
-    
+
         :nth-child(2){
-            // color: #ffffff00;
-            // padding: 0 0 2rem 0;
+            padding-bottom: 2rem;
         }
     }
 
-    // .expanding-text-container.expanded-dropdown{
-    //     :nth-child(1){
-    //         color: #ffffff00;
-    //     }
-
-    //     :nth-child(2){
-    //         color: #ffffff00;
-    //     }
-    // }
 
     .gallery{
         // margin-top: calc($headerFooterHeight + 5rem);
@@ -449,10 +440,13 @@
     }
 
     .proj-text-container{
+        position: relative;
+        // top: 25;
         padding-top: 25vh;
+        // padding-bottom: 25vh;
         padding-left: 8vw;
         padding-right: 2vw;
-        border-right: $borderStrokeWidth solid $lineColourLight;
+        // border-right: $borderStrokeWidth solid $lineColourLight;
     }
 
     #page-section-two{
@@ -576,6 +570,18 @@
         div{
             display: none;
         }
+    }
+
+    //decoration etc
+
+    .gradient-overlay{
+        bottom: auto;
+        top: 59vh;
+        height: 10rem;
+        width: 70%;
+        position: absolute;
+        background-image: $mobileLinearGradient;
+        pointer-events: none;
     }
 }
 
