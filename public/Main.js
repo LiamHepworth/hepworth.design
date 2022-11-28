@@ -103,32 +103,6 @@ let util = {
             }
         }
     },
-
-    resizeDisplayToMobile: (func) => {
-        //define a variable to hold timeout function
-        let time;
-    
-        //call once resize is complete
-        function checkWinSize() {
-            if (window.innerWidth < 1080) {
-                func();
-            } else {
-                return;
-            };
-        }
-    
-        checkWinSize();
-    
-        //on resize, clear existing timeout function
-        window.onresize = function () {
-            clearTimeout(time);
-            //then, call the function again with a 1ms buffer to prevent it running until resize end. 
-            time = setTimeout(function () {
-                checkWinSize();
-                console.log('sizing');
-            }, 100);
-        };
-    }
 };
 
 const socialLinks = {
@@ -410,12 +384,15 @@ let displayPage = {
     work: () => {
         util.resetPage(pageSectionOne);
         util.resetPage(pageSectionTwo);
+        pageContents.className = 'grid-container';
 
-        util.elementHasId(pageHeader, true, 'primary-header');
+        util.elementHasId(pageHeader, true, 'primary-header');  //gives full size header, when removed, small header
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         util.blueMenuBar(1);
         
         pageSectionOne.classList.add('work-header-container');
+
+        //FIX!! Causing issues with carousel
         pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
 
         for (let i = 0; i < projectList.length; i++) {
@@ -491,7 +468,6 @@ let displayPage = {
 
         //FIX! creates issues on mobile with a large margin space at the bottom
         pageSectionTwo.className = 'grid-container left-border'
-
 
         //create side arrows to scroll carousel for desktop layout
         const leftArrow = document.createElement('span');
@@ -575,8 +551,8 @@ let displayPage = {
                 pageSectionTwo.className = 'grid-container'
             }
         };
-
         windowSize()
+
         window.addEventListener('resize', windowSize);
     },
     
@@ -609,14 +585,40 @@ let displayPage = {
         let gridFiller = util.createBlueGridFiller();
         pageSectionTwo.appendChild(gridFiller);
 
-        function appendLinks() {
-            linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
-            pageSectionOne.append(linkSection)
-            // pageSectionOne.insertBefore(linkSection, aboutText);
-            feather.replace(); //updates icons as SVG's
+        function displayLinks(){
+            function appendLinks(){
+                if (window.innerWidth < 1080) {
+                    linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
+                    pageSectionOne.append(linkSection)
+                    feather.replace(); //updates icons as SVG's
+                } else {
+                    return;
+                };
+            };
+            appendLinks();
+
+            function checkWindowSize(){
+                let time;
+                clearTimeout(time);
+                
+                time = setTimeout(function () {
+                    if(history.state === 'about'){
+                        appendLinks()
+                    }
+                    console.log('sizing' + history.state);
+                }, 100);
+            }
+
+            window.onresize = checkWindowSize
+
+            // window.addEventListener('resize', function(){
+            //     if(history.state === 'about'){
+            //         checkWindowSize;
+            //     };
+            // });
         };
 
-        util.resizeDisplayToMobile(appendLinks);
+        displayLinks();
         // FIX! once this has been called, it calls on every page
     }, 
     
