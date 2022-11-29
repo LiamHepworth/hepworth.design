@@ -467,7 +467,7 @@ let displayPage = {
         pageSectionTwo.appendChild(projectImageContainer);
 
         //FIX! creates issues on mobile with a large margin space at the bottom
-        pageSectionTwo.className = 'grid-container left-border'
+        // pageSectionTwo.className = 'grid-container left-border'
 
         //create side arrows to scroll carousel for desktop layout
         const leftArrow = document.createElement('span');
@@ -548,7 +548,7 @@ let displayPage = {
                 
             } else {
                 pageContents.className = 'grid-container'
-                pageSectionTwo.className = 'grid-container'
+                pageSectionTwo.className = ''
             }
         };
         windowSize()
@@ -587,39 +587,26 @@ let displayPage = {
 
         function displayLinks(){
             function appendLinks(){
-                if (window.innerWidth < 1080) {
-                    linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
-                    pageSectionOne.append(linkSection)
-                    feather.replace(); //updates icons as SVG's
-                } else {
-                    return;
-                };
+                linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
+                pageSectionOne.append(linkSection)
+                feather.replace(); //updates icons as SVG's
             };
-            appendLinks();
 
             function checkWindowSize(){
                 let time;
                 clearTimeout(time);
                 
                 time = setTimeout(function () {
-                    if(history.state === 'about'){
+                    if(history.state === 'about' && window.innerWidth < 1080){
                         appendLinks()
                     }
-                    console.log('sizing' + history.state);
                 }, 100);
             }
 
+            checkWindowSize();
             window.onresize = checkWindowSize
-
-            // window.addEventListener('resize', function(){
-            //     if(history.state === 'about'){
-            //         checkWindowSize;
-            //     };
-            // });
         };
-
         displayLinks();
-        // FIX! once this has been called, it calls on every page
     }, 
     
     contact: () => {
