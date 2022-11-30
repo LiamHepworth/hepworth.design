@@ -544,16 +544,22 @@ let displayPage = {
 
         //check width to determine correct styling
         function checkProjectWindowSize(){
-            if(history.state === projectList[projectIndex].name && window.innerWidth > 1080){
+            if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.className = 'grid-container left-border'
-            } else if(history.state === projectList[projectIndex].name && window.innerWidth <= 1080) {
+            }else{
                 pageContents.className = 'grid-container'
                 pageSectionTwo.className = ''
-            }
+            };
         };
-        checkProjectWindowSize()
-        window.onresize = checkProjectWindowSize;
+
+        checkProjectWindowSize();
+
+        window.addEventListener('resize', function(){
+            if(projectList[projectIndex].name === history.state){
+                checkProjectWindowSize();
+            };
+        });
     },
     
     about: () => {
