@@ -319,8 +319,7 @@ body {
     align-items: center;
     grid-template-columns: repeat(2, 40vw);
     gap: 2rem;
-    margin-top: 0;
-    margin-bottom: 8rem;
+    margin: 0 auto 8rem auto;
     padding: 0 1rem;
   }
   .gallery img {
@@ -363,6 +362,7 @@ body {
   .gallery {
     grid-template-columns: repeat(2, 37vw);
     gap: 3rem;
+    margin: auto;
   }
   .project-image-container {
     overflow-y: hidden;

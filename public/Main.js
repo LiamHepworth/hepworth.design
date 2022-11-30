@@ -381,6 +381,22 @@ let displayPage = {
 
         //FIX - doesn't update correctly if window is resized. 
         util.blueMenuBar(0);
+
+        function checkHomeWindowSize(){
+            if(window.innerWidth > 1080){
+                pageHeaderSection.className = 'large-header-section'
+            }else{
+                pageHeaderSection.className = 'header-section'
+            };
+        };
+
+        checkHomeWindowSize();
+
+        window.addEventListener('resize', function(){
+            if(history.state === 'home'){
+                checkHomeWindowSize();
+            };
+        });
     }, 
     
     work: () => {
@@ -410,6 +426,22 @@ let displayPage = {
                 displayPage.project(currentPage);                                  //display the selected page
                 projectList[currentPage].pushProjectPageHistory();
             });
+        });
+
+        function checkWorkWindowSize(){
+            if(window.innerWidth > 1080){
+                pageHeaderSection.className = 'large-header-section'
+            }else{
+                pageHeaderSection.className = 'header-section'
+            };
+        };
+
+        checkWorkWindowSize();
+
+        window.addEventListener('resize', function(){
+            if(history.state === 'work'){
+                checkWorkWindowSize();
+            };
         });
     },
 
@@ -603,14 +635,17 @@ let displayPage = {
                 clearTimeout(time);
                 
                 time = setTimeout(function () {
-                    if(history.state === 'about' && window.innerWidth < 1080){
-                        appendLinks()
-                    }
+                    appendLinks()
                 }, 100);
             }
 
             checkAboutWindowSize();
-            window.onresize = checkAboutWindowSize
+
+            window.addEventListener('resize', function(){
+                if(history.state === 'about' && window.innerWidth < 1080){
+                    checkAboutWindowSize();
+                };
+            });
         };
         displayLinks();
     }, 
