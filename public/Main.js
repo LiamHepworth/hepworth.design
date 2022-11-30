@@ -10,14 +10,17 @@ const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 
 let util = {
-    resetPage: (containerName) => {
-        containerName.innerHTML = '';
+    resetPage: (containers) => {
+
+        for(cont of containers){
+            cont.innerHTML = '';
+            cont.className = '';
+        };
+
         fullPage.style.overflow = 'visible'                 
         pageHeader.innerText = 'HEPWORTH.DESIGN';
         pageBody.style.overflow = 'visible'
         pageBody.classList.add('grid-background');
-        pageSectionOne.className = '';
-        pageSectionTwo.className = '';
     },
 
     appendHeader: (headerText, menuStatus, container) => {
@@ -374,8 +377,9 @@ let projectList = [
 
 let displayPage = {
     home: () => {
-        util.resetPage(pageSectionOne);
-        util.resetPage(pageSectionTwo);
+        util.resetPage([pageSectionOne, pageSectionTwo]);
+        pageContents.className = 'grid-container';
+
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
 
@@ -400,8 +404,7 @@ let displayPage = {
     }, 
     
     work: () => {
-        util.resetPage(pageSectionOne);
-        util.resetPage(pageSectionTwo);
+        util.resetPage([pageSectionOne, pageSectionTwo]);
         pageContents.className = 'grid-container';
 
         util.elementHasId(pageHeader, true, 'primary-header');  //gives full size header, when removed, small header
@@ -446,8 +449,7 @@ let displayPage = {
     },
 
     project: (projectIndex) => {
-        util.resetPage(pageSectionOne);
-        util.resetPage(pageSectionTwo);
+        util.resetPage([pageSectionOne, pageSectionTwo]);
 
         util.elementHasId(pageHeader, false);
         util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
@@ -595,8 +597,7 @@ let displayPage = {
     },
     
     about: () => {
-        util.resetPage(pageSectionOne);
-        util.resetPage(pageSectionTwo);
+        util.resetPage([pageSectionOne, pageSectionTwo]);
 
         util.elementHasId(pageHeader, false);
         util.appendHeader('ABOUT', 'menu', pageSectionOne);
@@ -643,6 +644,7 @@ let displayPage = {
 
             window.addEventListener('resize', function(){
                 if(history.state === 'about' && window.innerWidth < 1080){
+                    console.log('mobile')
                     checkAboutWindowSize();
                 };
             });
@@ -651,7 +653,8 @@ let displayPage = {
     }, 
     
     contact: () => {
-        util.resetPage(pageSectionOne);
+        util.resetPage([pageSectionOne, pageSectionTwo]);
+        
         util.elementHasId(pageHeader, false);
         util.appendHeader('CONTACT', 'menu', pageSectionOne);
 
