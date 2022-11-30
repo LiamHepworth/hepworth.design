@@ -17,8 +17,8 @@ let util = {
             cont.className = '';
         };
 
+        pageHeader.innerText = 'HEPWORTH.DESIGN'
         fullPage.style.overflow = 'visible'                 
-        pageHeader.innerText = 'HEPWORTH.DESIGN';
         pageBody.style.overflow = 'visible'
         pageBody.classList.add('grid-background');
     },
@@ -382,13 +382,12 @@ let displayPage = {
 
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
-
-        //FIX - doesn't update correctly if window is resized. 
-        util.blueMenuBar(0);
-
+        
         function checkHomeWindowSize(){
             if(window.innerWidth > 1080){
+                pageSectionOne.classList.add('work-header-container');
                 pageHeaderSection.className = 'large-header-section'
+                util.blueMenuBar(0);
             }else{
                 pageHeaderSection.className = 'header-section'
             };
@@ -409,12 +408,10 @@ let displayPage = {
 
         util.elementHasId(pageHeader, true, 'primary-header');  //gives full size header, when removed, small header
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
-        util.blueMenuBar(1);
         
         pageSectionOne.classList.add('work-header-container');
         pageHeaderSection.className = 'large-header-section'
 
-        //FIX!! Causing issues with carousel
         pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
 
         for (let i = 0; i < projectList.length; i++) {
@@ -434,6 +431,7 @@ let displayPage = {
         function checkWorkWindowSize(){
             if(window.innerWidth > 1080){
                 pageHeaderSection.className = 'large-header-section'
+                util.blueMenuBar(1);
             }else{
                 pageHeaderSection.className = 'header-section'
             };
@@ -453,8 +451,6 @@ let displayPage = {
 
         util.elementHasId(pageHeader, false);
         util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
-
-        util.blueMenuBar(1);
 
         //hide the grid background
         pageBody.classList.remove('grid-background');
@@ -581,6 +577,7 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.className = 'grid-container left-border'
+                util.blueMenuBar(1);
             }else{
                 pageContents.className = 'grid-container'
                 pageSectionTwo.className = ''
@@ -601,8 +598,6 @@ let displayPage = {
 
         util.elementHasId(pageHeader, false);
         util.appendHeader('ABOUT', 'menu', pageSectionOne);
-
-        util.blueMenuBar(2);
 
         pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
@@ -632,29 +627,31 @@ let displayPage = {
             };
 
             function checkAboutWindowSize(){
+                
                 let time;
                 clearTimeout(time);
-                
+
                 time = setTimeout(function () {
-                    appendLinks()
+                    if(history.state === 'about' && window.innerWidth < 1080){
+                        appendLinks();
+                    }
                 }, 100);
             }
 
             checkAboutWindowSize();
 
             window.addEventListener('resize', function(){
-                if(history.state === 'about' && window.innerWidth < 1080){
-                    console.log('mobile')
-                    checkAboutWindowSize();
-                };
+                checkAboutWindowSize();
+                util.blueMenuBar(2);
             });
         };
+        util.blueMenuBar(2);
         displayLinks();
     }, 
     
     contact: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-        
+
         util.elementHasId(pageHeader, false);
         util.appendHeader('CONTACT', 'menu', pageSectionOne);
 
@@ -731,4 +728,5 @@ let displayPage = {
     }
 };
 
-displayPage.work();
+//To ensure that the homepage loads when the page is first opened.
+window.onload = displayPage.home();
