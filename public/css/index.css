@@ -340,6 +340,9 @@ body {
   .header-section {
     margin: 0 auto 1.8rem auto;
   }
+  .large-header-section {
+    margin-top: 11rem;
+  }
   .outer-content-container {
     text-align: center;
     width: 100%;
@@ -410,6 +413,7 @@ body {
   }
   .work-header-container {
     height: 18rem;
+    margin-bottom: 5rem;
   }
   #burger-menu {
     display: none;

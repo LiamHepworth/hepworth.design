@@ -321,7 +321,7 @@ class Project {
     carouselCreation(container){
         function createVideos(index, item){
             let video = document.createElement('video');
-            util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
+            util.setAttributes(video, {autoplay: 'autoplay', loop: true});
 
             video.classList.add('videos');
 
@@ -378,6 +378,8 @@ let displayPage = {
         util.resetPage(pageSectionTwo);
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
+
+        //FIX - doesn't update correctly if window is resized. 
         util.blueMenuBar(0);
     }, 
     
@@ -391,6 +393,7 @@ let displayPage = {
         util.blueMenuBar(1);
         
         pageSectionOne.classList.add('work-header-container');
+        pageHeaderSection.className = 'large-header-section'
 
         //FIX!! Causing issues with carousel
         pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
@@ -455,6 +458,8 @@ let displayPage = {
         pageSectionOne.appendChild(gradientOverlay);
         pageSectionOne.className = 'proj-text-container'
 
+        pageHeaderSection.className = 'header-section'
+
         // projectTextOuterContainer.appendChild(projectTextContainer);
         projectTextContainer.append(projectType);
         projectTextOuterContainer.appendChild(projectTextContainer);
@@ -465,9 +470,6 @@ let displayPage = {
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
-
-        //FIX! creates issues on mobile with a large margin space at the bottom
-        // pageSectionTwo.className = 'grid-container left-border'
 
         //create side arrows to scroll carousel for desktop layout
         const leftArrow = document.createElement('span');
@@ -481,17 +483,6 @@ let displayPage = {
         rightArrow.style.transform = 'rotate(-90deg)'; 
 
         pageSectionTwo.append(leftArrow, rightArrow);
-
-        //check if project object has a .description, if not, apply different styling.
-        if(projectList[projectIndex].description !== null){ //if project contains a description
-            projectTextContainer.append(projectDescription);
-            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, gradientOverlay, 1));
-        }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
-            projectTextContainer.style.marginBottom = '3rem';
-            projectTextContainer.classList.add('expanded-dropdown');
-            gradientOverlay.style.display = 'none'
-
-        };
 
         (function carouselImageFocus(){
             let images = [];
@@ -540,20 +531,29 @@ let displayPage = {
 
         })();
 
+        //check if project object has a .description, if not, apply different styling.
+        if(projectList[projectIndex].description !== null){ //if project contains a description
+            projectTextContainer.append(projectDescription);
+            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, gradientOverlay, 1));
+        }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
+            projectTextContainer.style.marginBottom = '3rem';
+            projectTextContainer.classList.add('expanded-dropdown');
+            gradientOverlay.style.display = 'none'
+
+        };
+
         //check width to determine correct styling
-        function windowSize(){
-            if(window.innerWidth > 1080){
+        function checkProjectWindowSize(){
+            if(history.state === projectList[projectIndex].name && window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.className = 'grid-container left-border'
-                
-            } else {
+            } else if(history.state === projectList[projectIndex].name && window.innerWidth <= 1080) {
                 pageContents.className = 'grid-container'
                 pageSectionTwo.className = ''
             }
         };
-        windowSize()
-
-        window.addEventListener('resize', windowSize);
+        checkProjectWindowSize()
+        window.onresize = checkProjectWindowSize;
     },
     
     about: () => {
@@ -592,7 +592,7 @@ let displayPage = {
                 feather.replace(); //updates icons as SVG's
             };
 
-            function checkWindowSize(){
+            function checkAboutWindowSize(){
                 let time;
                 clearTimeout(time);
                 
@@ -603,8 +603,8 @@ let displayPage = {
                 }, 100);
             }
 
-            checkWindowSize();
-            window.onresize = checkWindowSize
+            checkAboutWindowSize();
+            window.onresize = checkAboutWindowSize
         };
         displayLinks();
     }, 
@@ -687,4 +687,4 @@ let displayPage = {
     }
 };
 
-displayPage.project(0);
+displayPage.work();
