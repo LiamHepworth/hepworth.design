@@ -182,6 +182,18 @@ body {
   height: 2rem;
   border: none;
 }
+#contact-form #submit-button {
+  background-color: #171717;
+  border: 2px solid #cccccc;
+  color: #cccccc;
+  height: 2.5rem;
+}
+#contact-form #submit-button:hover {
+  background-color: #cccccc;
+  color: #171717;
+  border: none;
+  height: 2.5rem;
+}
 #contact-form textarea {
   font-family: "Space Grotesk", sans-serif;
   font-size: 12pt;
@@ -357,6 +369,30 @@ body {
     padding: 2rem;
     border: 2px solid #cccccc;
     align-items: center;
+  }
+  .contact-form-container {
+    min-height: fit-content;
+    width: 52vw;
+    left: 36% !important;
+    padding: 2rem;
+    border: 2px solid #cccccc;
+    align-items: center;
+  }
+  #contact-form {
+    margin: 1rem 0 0 0;
+  }
+  #contact-form input {
+    margin: 1rem 0;
+    padding: 0.3rem;
+  }
+  #contact-form #submit-button {
+    width: 12rem;
+    margin-right: 0;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+  #contact-form textarea {
+    margin: 1rem 0;
   }
   .expanding-text-container {
     position: relative;
@@ -562,6 +598,10 @@ body {
 
 .two-cols-50-50 {
   grid-template-columns: 49.9vw auto;
+}
+
+.two-cols-75-25 {
+  grid-template-columns: 72.39vw auto;
 }
 
 .left-border {

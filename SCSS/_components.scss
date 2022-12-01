@@ -176,6 +176,20 @@
         height: 2rem;
         border: none;
     };
+
+    #submit-button{
+        background-color: $bgColourDark;
+        border: 2px solid $lineColourLight;
+        color: $lineColourLight;
+        height: 2.5rem;
+    }
+
+    #submit-button:hover{
+        background-color: $lineColourLight;
+        color: $bgColourDark;
+        border: none;
+        height: 2.5rem;
+    }
     
     textarea{
         font-family: 'Space Grotesk', sans-serif;
@@ -378,6 +392,36 @@
         padding: 2rem;
         border: 2px solid $lineColourLight;
         align-items: center;
+    }
+
+    .contact-form-container{
+        min-height: fit-content;
+        width: 52vw;
+        left: 36% !important;
+        padding: 2rem;
+        border: 2px solid $lineColourLight;
+        align-items: center;
+    }
+
+    #contact-form{
+
+        margin: 1rem 0 0 0;
+
+        input{
+            margin: 1rem 0;
+            padding: .3rem;
+        };
+
+        #submit-button{
+            width: 12rem;
+            margin-right: 0;
+            margin-left: auto;
+            margin-bottom: 0;
+        }
+
+        textarea{
+            margin: 1rem 0;
+        }
     }
 
     .expanding-text-container{

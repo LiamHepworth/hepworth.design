@@ -84,6 +84,7 @@ let util = {
     },
 
     elementHasId: (element, hasId, idName) => {
+        //used primarily to toggle full-size header
         if(hasId === false){
             element.removeAttribute('id');
         } else if(hasId === true){
@@ -408,11 +409,11 @@ let displayPage = {
         util.resetPage([pageSectionOne, pageSectionTwo]);
         pageContents.className = 'grid-container';
 
-        util.elementHasId(pageHeader, true, 'primary-header');  //gives full size header, when removed, small header
+        util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         
         pageSectionOne.classList.add('work-header-container');
-        pageHeaderSection.className = 'large-header-section'
+        // pageHeaderSection.className = 'large-header-section'
 
         pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
 
@@ -634,7 +635,7 @@ let displayPage = {
                 clearTimeout(time);
 
                 time = setTimeout(function () {
-                    if(history.state === 'about' && window.innerWidth < 1080){
+                    if(window.innerWidth < 1080){
                         appendLinks();
                     }
                 }, 100);
@@ -661,8 +662,10 @@ let displayPage = {
 
 
             window.addEventListener('resize', function(){
-                checkAboutWindowSize();
-                determineLinkPlacement();
+                if(history.state === 'about'){
+                    checkAboutWindowSize();
+                    determineLinkPlacement();
+                }
             });
         };
 
@@ -676,14 +679,11 @@ let displayPage = {
         util.elementHasId(pageHeader, false);
         util.appendHeader('CONTACT', 'menu', pageSectionOne);
 
-        util.blueMenuBar(3);
-
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
-        pageSectionOne.className = 'column-flex-container grow';
+        // pageSectionOne.className = 'column-flex-container grow';
 
         let contactFormContainer = document.createElement('div');
-        contactFormContainer.classList.add('content-container');
         pageSectionOne.appendChild(contactFormContainer);
 
         let contactDescription = document.createElement('p');
@@ -712,7 +712,7 @@ let displayPage = {
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         contactFormContainer.appendChild(contactForm);
-        pageSectionOne.appendChild(util.createBlueGridFiller());
+        pageSectionTwo.appendChild(util.createBlueGridFiller());
 
         contactForm.addEventListener('submit', (e) => {
 
@@ -746,8 +746,34 @@ let displayPage = {
                 .then(displayPage.contact())
                 .catch(error => console.log(error));
         });
+
+        function checkContactWindowSize(){
+            if(window.innerWidth > 1080){
+                pageHeaderSection.style.display = 'none';
+                contactFormContainer.className = 'content-container contact-form-container vertical-center';
+                pageContents.className = 'grid-container two-cols-75-25'
+                pageSectionTwo.className = 'grid-container left-border'
+                util.blueMenuBar(3);
+            }else{
+                pageHeaderSection.style.display = 'flex';
+                contactFormContainer.className = 'content-container contact-form-container';
+                pageContents.className = 'grid-container'
+                pageSectionTwo.className = ''
+            };
+        };
+
+        checkContactWindowSize();
+
+
+        window.addEventListener('resize', function(){
+            if(history.state === 'contact'){
+                checkContactWindowSize();
+            }
+        });
     }
 };
 
 //To ensure that the homepage loads when the page is first opened.
 window.onload = displayPage.home();
+
+displayPage.contact();
