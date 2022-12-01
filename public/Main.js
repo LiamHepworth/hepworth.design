@@ -17,6 +17,8 @@ let util = {
             cont.className = '';
         };
 
+        pageHeaderSection.className = 'header-section'
+        pageHeaderSection.style.display = 'flex';
         pageHeader.innerText = 'HEPWORTH.DESIGN'
         fullPage.style.overflow = 'visible'                 
         pageBody.style.overflow = 'visible'
@@ -561,7 +563,7 @@ let displayPage = {
 
         })();
 
-        //check if project object has a .description, if not, apply different styling.
+        //check if project object has a description to determine styling
         if(projectList[projectIndex].description !== null){ //if project contains a description
             projectTextContainer.append(projectDescription);
             projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, gradientOverlay, 1));
@@ -599,13 +601,12 @@ let displayPage = {
         util.elementHasId(pageHeader, false);
         util.appendHeader('ABOUT', 'menu', pageSectionOne);
 
-        pageHeader.innerText = 'ABOUT';
         pageBody.classList.remove('grid-background');
 
         pageSectionTwo.className = 'column-flex-container grow';
 
         let aboutTextSection = document.createElement('div');
-        aboutTextSection.classList.add('content-container');
+        aboutTextSection.className = 'content-container about-text-container';
         pageSectionOne.appendChild(aboutTextSection);
 
         let aboutText = document.createElement('p');
@@ -619,14 +620,15 @@ let displayPage = {
         let gridFiller = util.createBlueGridFiller();
         pageSectionTwo.appendChild(gridFiller);
 
-        function displayLinks(){
+        function isMobileOrDesktop(){
             function appendLinks(){
+                //FIX! - links get appended every time page is resized, needs to only trigger once
                 linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
                 pageSectionOne.append(linkSection)
                 feather.replace(); //updates icons as SVG's
             };
 
-            function checkAboutWindowSize(){
+            function determineLinkPlacement(){
                 
                 let time;
                 clearTimeout(time);
@@ -638,15 +640,34 @@ let displayPage = {
                 }, 100);
             }
 
+            determineLinkPlacement();
+
+            function checkAboutWindowSize(){
+                if(window.innerWidth > 1080){
+                    pageHeaderSection.style.display = 'none';
+                    aboutTextSection.className = 'content-container vertical-center about-text-container';
+                    pageContents.className = 'grid-container two-cols-50-50'
+                    pageSectionTwo.className = 'grid-container left-border'
+                    util.blueMenuBar(2);
+                }else{
+                    pageHeaderSection.style.display = 'flex';
+                    aboutTextSection.className = 'content-container about-text-container';
+                    pageContents.className = 'grid-container'
+                    pageSectionTwo.className = ''
+                };
+            };
+    
             checkAboutWindowSize();
+
 
             window.addEventListener('resize', function(){
                 checkAboutWindowSize();
-                util.blueMenuBar(2);
+                determineLinkPlacement();
             });
         };
+
         util.blueMenuBar(2);
-        displayLinks();
+        isMobileOrDesktop();
     }, 
     
     contact: () => {
