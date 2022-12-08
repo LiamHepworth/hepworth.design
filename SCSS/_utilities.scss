@@ -44,6 +44,10 @@
 
 //grid utils
 
+.content-split{
+    grid-template-rows: minmax(50vh, auto) 1fr;
+}
+
 .two-cols-25-75{
     grid-template-columns: 27.4vw auto;  //.1 added to the right column to account for border thickness
 }

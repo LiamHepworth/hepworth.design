@@ -653,8 +653,8 @@ let displayPage = {
                 }else{
                     pageHeaderSection.style.display = 'flex';
                     aboutTextSection.className = 'content-container about-text-container';
-                    pageContents.className = 'grid-container'
-                    pageSectionTwo.className = 'grid-grow'
+                    pageContents.className = 'grid-container content-split'
+                    pageSectionTwo.className = ''
                 };
             };
     
@@ -757,7 +757,7 @@ let displayPage = {
             }else{
                 pageHeaderSection.style.display = 'flex';
                 contactFormContainer.className = 'content-container contact-form-container';
-                pageContents.className = 'grid-container'
+                pageContents.className = 'grid-container content-split'
                 pageSectionTwo.className = ''
             };
         };
