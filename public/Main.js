@@ -35,7 +35,7 @@ let util = {
 
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grow');
+        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
         return gridFiller;    
     }, 
 
@@ -399,7 +399,7 @@ let displayPage = {
         checkHomeWindowSize();
 
         window.addEventListener('resize', function(){
-            if(history.state === 'home'){
+            if(history.state === 'home' || history.state === null){
                 checkHomeWindowSize();
             };
         });
@@ -604,7 +604,7 @@ let displayPage = {
 
         pageBody.classList.remove('grid-background');
 
-        pageSectionTwo.className = 'column-flex-container grow';
+        pageSectionTwo.className = 'column-flex-container';
 
         let aboutTextSection = document.createElement('div');
         aboutTextSection.className = 'content-container about-text-container';
@@ -654,7 +654,7 @@ let displayPage = {
                     pageHeaderSection.style.display = 'flex';
                     aboutTextSection.className = 'content-container about-text-container';
                     pageContents.className = 'grid-container'
-                    pageSectionTwo.className = ''
+                    pageSectionTwo.className = 'grid-grow'
                 };
             };
     
@@ -775,5 +775,3 @@ let displayPage = {
 
 //To ensure that the homepage loads when the page is first opened.
 window.onload = displayPage.home();
-
-displayPage.contact();

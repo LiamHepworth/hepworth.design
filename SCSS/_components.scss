@@ -211,6 +211,11 @@
     margin-right: 10%;
 }
 
+.grid-grow{
+    width: 100%;
+    height: 100%;
+}
+
 //assets:
 
 .arrows{
@@ -510,6 +515,10 @@
         margin-bottom: 5rem;
     }
 
+    .work-page-container{
+        padding-bottom: 7rem;
+    }
+
     //assets
     #burger-menu{
         display: none;
@@ -633,7 +642,7 @@
     // }
 
     .grid-container.gallery{
-        margin-top: 17.5rem;
+        // margin-top: 17.5rem;
         grid-template-columns: repeat(3, 25vw);
         gap: 5rem;
     }
