@@ -136,7 +136,7 @@ body {
   cursor: pointer;
   height: 100vh;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 0;
   left: 100%;
@@ -600,7 +600,7 @@ body {
 }
 
 .content-split {
-  grid-template-rows: minmax(50vh, auto) 1fr;
+  grid-template-rows: minmax(40vh, auto) 1fr;
 }
 
 .two-cols-25-75 {

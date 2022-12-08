@@ -17,6 +17,7 @@ let util = {
             cont.className = '';
         };
 
+        pageContents.className = 'grid-container';
         pageHeaderSection.className = 'header-section'
         pageHeaderSection.style.display = 'flex';
         pageHeader.innerText = 'HEPWORTH.DESIGN'
@@ -37,26 +38,6 @@ let util = {
         let gridFiller = document.createElement('div');
         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
         return gridFiller;    
-    }, 
-
-    expandingSection: (trigger, outerContainer, gradient, innerContainerIndex) => {  //innerContainerIndex lets you determine which child container you actually want to expand
-        let arrowIsClicked = undefined;
-    
-        trigger.addEventListener('click', function(){
-                if(arrowIsClicked == false || arrowIsClicked == undefined){
-                    outerContainer.classList.add('expanded-dropdown');                        //fit content, auto overflow
-                    gradient.style.display = 'none'
-                    trigger.style.transform = 'rotate(180deg)';                     //rotates arrow in preparation to collapse container
-                    arrowIsClicked = true;                                            //switches to true so that when arrow is clicked, the following code runs:
-                } else if (arrowIsClicked == true){
-                    outerContainer.classList.remove('expanded-dropdown');
-                    gradient.style.display = 'block'
-                    trigger.style.transform = 'rotate(0deg)';
-                    arrowIsClicked = false;
-                };
-            });
-    
-        return trigger;                                                            
     }, 
 
     resetScrollPosition: () => {
@@ -381,8 +362,6 @@ let projectList = [
 let displayPage = {
     home: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-        pageContents.className = 'grid-container';
-
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         
@@ -407,26 +386,21 @@ let displayPage = {
     
     work: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-        pageContents.className = 'grid-container';
-
         util.elementHasId(pageHeader, true, 'primary-header');
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
         
         pageSectionOne.classList.add('work-header-container');
-        // pageHeaderSection.className = 'large-header-section'
-
         pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
 
         for (let i = 0; i < projectList.length; i++) {
-            projectList[i].thumbnailCreation(pageSectionTwo); //create thumbnails to display
+            projectList[i].thumbnailCreation(pageSectionTwo); //create project thumbnails
         };
-
         let thumbNails = document.querySelectorAll('.thumbnail');
 
-        thumbNails.forEach((thumbnail) => {                   //add a listener to each thumbNail
+        thumbNails.forEach((thumbnail) => {
             thumbnail.addEventListener('click', function () {
-                let currentPage = Array.from(thumbNails).indexOf(thumbnail);       //get the index of the current project from its' nodeList
-                displayPage.project(currentPage);                                  //display the selected page
+                let currentPage = Array.from(thumbNails).indexOf(thumbnail);       //get the index of the current project from nodeList
+                displayPage.project(currentPage);                                  //display the selected page when corresponding thumbnail is clicked
                 projectList[currentPage].pushProjectPageHistory();
             });
         });
@@ -451,7 +425,6 @@ let displayPage = {
 
     project: (projectIndex) => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-
         util.elementHasId(pageHeader, false);
         util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
 
@@ -470,6 +443,9 @@ let displayPage = {
         let projectType = document.createElement('p');
         projectType.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
         projectType.classList.add('body-text', 'project-text');
+
+        projectTextContainer.append(projectType);
+        projectTextOuterContainer.appendChild(projectTextContainer);
 
         //project description text
         let projectDescription = document.createElement('p');
@@ -493,10 +469,6 @@ let displayPage = {
 
         pageHeaderSection.className = 'header-section'
 
-        // projectTextOuterContainer.appendChild(projectTextContainer);
-        projectTextContainer.append(projectType);
-        projectTextOuterContainer.appendChild(projectTextContainer);
-
         //create container for carousel of images, create carousel, append
         let projectImageContainer = document.createElement('section');
         projectImageContainer.classList.add('grid-background', 'project-image-container');
@@ -505,6 +477,7 @@ let displayPage = {
         pageSectionTwo.appendChild(projectImageContainer);
 
         //create side arrows to scroll carousel for desktop layout
+        //FIX!! wrap in a function and only apply if window is desktop size?
         const leftArrow = document.createElement('span');
         leftArrow.innerText = 'expand_more';
         leftArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
@@ -565,9 +538,29 @@ let displayPage = {
         })();
 
         //check if project object has a description to determine styling
-        if(projectList[projectIndex].description !== null){ //if project contains a description
+        if(projectList[projectIndex].description !== null){
             projectTextContainer.append(projectDescription);
-            projectTextOuterContainer.appendChild(util.expandingSection(dropDownArrow, projectTextContainer, gradientOverlay, 1));
+
+            //creates dropdown arrow functionality
+            function expandingSection(){
+                let arrowIsClicked = undefined;
+                dropDownArrow.addEventListener('click', function(){
+                        if(arrowIsClicked == false || arrowIsClicked == undefined){
+                            projectTextContainer.classList.add('expanded-dropdown');
+                            gradientOverlay.style.display = 'none'
+                            dropDownArrow.style.transform = 'rotate(180deg)'; 
+                            arrowIsClicked = true;                                  //switches to true so that when arrow is clicked again, the following code runs:
+                        } else if (arrowIsClicked == true){
+                            projectTextContainer.classList.remove('expanded-dropdown');
+                            gradientOverlay.style.display = 'block'
+                            dropDownArrow.style.transform = 'rotate(0deg)';
+                            arrowIsClicked = false;
+                        };
+                    });
+                return dropDownArrow;
+            }  
+            projectTextOuterContainer.appendChild(expandingSection());
+
         }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
             projectTextContainer.style.marginBottom = '3rem';
             projectTextContainer.classList.add('expanded-dropdown');
@@ -774,4 +767,4 @@ let displayPage = {
 };
 
 //To ensure that the homepage loads when the page is first opened.
-window.onload = displayPage.home();
+window.onload = displayPage.project(0);
