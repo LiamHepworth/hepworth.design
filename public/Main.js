@@ -321,26 +321,23 @@ class Project {
             }
             
             video.appendChild(source);
-            container.appendChild(video)
+            container.appendChild(video);
         };
 
         if(this.videos !== null){
-            if(this.videos.length > 1){
-                for(let i = 0; i <this.videos.length; i++){
-                    createVideos(i, this)
-                } 
-            } else if (this.videos.length = 1) {
-                createVideos(0, this)
-            };
-        } else if(this.images !== null){
+            for(let i = 0; i <this.videos.length; i++){
+                createVideos(i, this);
+            } 
+        } 
+        
+        if(this.images !== null){
             let imageStore = [];
             for(let i = 0; i < this.images.length; i++){
                 imageStore[i] = new Image();
                 imageStore[i].src = this.images[i];
                 container.appendChild(imageStore[i]);
             }; 
-        }
-          
+        };
     };
 
     pushProjectPageHistory(){
@@ -352,8 +349,8 @@ class Project {
 let projectList = [
     new Project('UNREAL TEST', 'poster', ['/projects/unreal/image01.png', '/projects/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg', '/projects/severe/image01.jpg', '/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
-    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
-    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', ['/projects/severe/image01.jpg'], ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
+    new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4', '/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
     new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/projects/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/projects/unreal/image01.png'),
     new Project('severe', 'poster', ['/projects/severe/image01.jpg'], null, null, null,'/projects/severe/image01.jpg'),
@@ -428,6 +425,8 @@ let displayPage = {
         util.elementHasId(pageHeader, false);
         util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
 
+        let currentProject = projectList[projectIndex];
+
         //hide the grid background
         pageBody.classList.remove('grid-background');
 
@@ -477,7 +476,6 @@ let displayPage = {
         pageSectionTwo.appendChild(projectImageContainer);
 
         //create side arrows to scroll carousel for desktop layout
-        //FIX!! wrap in a function and only apply if window is desktop size?
         const leftArrow = document.createElement('span');
         leftArrow.innerText = 'expand_more';
         leftArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
@@ -523,8 +521,7 @@ let displayPage = {
                 }
             })
 
-            //so that you can click on an image, and have it come into view
-            for (const child of projectImageContainer.children) {
+            for(const child of projectImageContainer.children){
                 child.addEventListener('click', function(){
                     currentIndex = Array.from(projectImageContainer.children).indexOf(this);
                     currentImage = images[currentIndex];
@@ -534,11 +531,10 @@ let displayPage = {
                     });
                 })
             }
-
         })();
 
         //check if project object has a description to determine styling
-        if(projectList[projectIndex].description !== null){
+        if(currentProject.description !== null){
             projectTextContainer.append(projectDescription);
 
             //creates dropdown arrow functionality
@@ -561,12 +557,13 @@ let displayPage = {
             }  
             projectTextOuterContainer.appendChild(expandingSection());
 
-        }else if(projectList[projectIndex].description === null) {  //if project doesn't contain a description
+        }else if(currentProject.description === null) {  //if project doesn't contain a description
             projectTextContainer.style.marginBottom = '3rem';
             projectTextContainer.classList.add('expanded-dropdown');
             gradientOverlay.style.display = 'none'
-
         };
+
+        //check project has more than one image or video before applying carousel arrows.
 
         //check width to determine correct styling
         function checkProjectWindowSize(){
@@ -616,7 +613,6 @@ let displayPage = {
 
         function isMobileOrDesktop(){
             function appendLinks(){
-                //FIX! - links get appended every time page is resized, needs to only trigger once
                 linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
                 pageSectionOne.append(linkSection)
                 feather.replace(); //updates icons as SVG's
@@ -767,4 +763,4 @@ let displayPage = {
 };
 
 //To ensure that the homepage loads when the page is first opened.
-window.onload = displayPage.project(0);
+window.onload = displayPage.home();
