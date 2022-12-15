@@ -52,6 +52,10 @@ body {
   overflow-wrap: break-word;
 }
 
+.small-header {
+  max-width: 100% !important;
+}
+
 .sub-header {
   font-size: 1.8rem;
 }
@@ -353,6 +357,10 @@ body {
     line-height: 3rem;
     margin: 0 auto;
   }
+  .small-header {
+    font-size: 2.3rem !important;
+    margin: 0 !important;
+  }
   .header-section {
     margin: 0 auto 1.8rem auto;
   }
@@ -582,6 +590,10 @@ body {
 
 .vh-height {
   min-height: calc(100vh - (2.4rem + 40px) * 2);
+}
+
+.hidden {
+  display: none;
 }
 
 .grow {

@@ -64,17 +64,6 @@ let util = {
         return link
     },
 
-    elementHasId: (element, hasId, idName) => {
-        //used primarily to toggle full-size header
-        if(hasId === false){
-            element.removeAttribute('id');
-        } else if(hasId === true){
-            element.setAttribute('id', idName)
-        } else {
-            element.id = idName;
-        }
-    },
-
     blueMenuBar: (pageIndex) => {
         if(window.innerWidth > 1080){
             let container = menuContainer.children;
@@ -308,7 +297,7 @@ class Project {
     carouselCreation(container){
         function createVideos(index, item){
             let video = document.createElement('video');
-            util.setAttributes(video, {autoplay: 'autoplay', loop: true});
+            util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
 
             video.classList.add('videos');
 
@@ -359,8 +348,9 @@ let projectList = [
 let displayPage = {
     home: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-        util.elementHasId(pageHeader, true, 'primary-header');
+
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
+        pageHeader.classList = 'header'
         
         function checkHomeWindowSize(){
             if(window.innerWidth > 1080){
@@ -383,8 +373,9 @@ let displayPage = {
     
     work: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-        util.elementHasId(pageHeader, true, 'primary-header');
+        
         util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
+        pageHeader.classList = 'header'
         
         pageSectionOne.classList.add('work-header-container');
         pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
@@ -422,8 +413,9 @@ let displayPage = {
 
     project: (projectIndex) => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-        util.elementHasId(pageHeader, false);
+        
         util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
+        pageHeader.classList = 'header small-header';
 
         let currentProject = projectList[projectIndex];
 
@@ -563,8 +555,6 @@ let displayPage = {
             gradientOverlay.style.display = 'none'
         };
 
-        //check project has more than one image or video before applying carousel arrows.
-
         //check width to determine correct styling
         function checkProjectWindowSize(){
             if(window.innerWidth > 1080){
@@ -588,9 +578,9 @@ let displayPage = {
     
     about: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
-
-        util.elementHasId(pageHeader, false);
+        
         util.appendHeader('ABOUT', 'menu', pageSectionOne);
+        pageHeader.classList = 'hidden'
 
         pageBody.classList.remove('grid-background');
 
@@ -665,8 +655,8 @@ let displayPage = {
     contact: () => {
         util.resetPage([pageSectionOne, pageSectionTwo]);
 
-        util.elementHasId(pageHeader, false);
         util.appendHeader('CONTACT', 'menu', pageSectionOne);
+        pageHeader.classList = 'hidden'
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');

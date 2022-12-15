@@ -24,6 +24,10 @@
     min-height: $viewportHeight;
 }
 
+.hidden{
+    display: none;
+}
+
 //flexbox utils:
 
 .grow{
