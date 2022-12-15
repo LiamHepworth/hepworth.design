@@ -67,6 +67,10 @@ body {
   font-size: 1rem;
 }
 
+.project-text {
+  margin-bottom: 1rem;
+}
+
 .grid-container {
   min-height: fit-content;
   display: grid;

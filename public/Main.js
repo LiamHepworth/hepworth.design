@@ -560,10 +560,14 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.className = 'grid-container left-border'
+                leftArrow.style.display = 'block'
+                rightArrow.style.display = 'block'
                 util.blueMenuBar(1);
             }else{
                 pageContents.className = 'grid-container'
                 pageSectionTwo.className = ''
+                leftArrow.style.display = 'none'
+                rightArrow.style.display = 'none'
             };
         };
 
