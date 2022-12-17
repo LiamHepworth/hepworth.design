@@ -22,11 +22,11 @@ body {
 }
 
 .cursor {
-  z-index: 100;
+  z-index: 10;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #cccccc;
+  background: #cccccc;
   mix-blend-mode: difference;
   position: absolute;
 }
@@ -190,6 +190,7 @@ body {
   justify-content: flex-start;
   align-items: stretch;
   margin: 2rem 0;
+  cursor: none !important;
 }
 #contact-form input {
   font-family: "Space Grotesk", sans-serif;
@@ -199,18 +200,21 @@ body {
   padding: 0.3rem;
   height: 2rem;
   border: none;
+  cursor: none !important;
 }
 #contact-form #submit-button {
   background-color: #171717;
   border: 2px solid #cccccc;
   color: #cccccc;
   height: 2.5rem;
+  cursor: none !important;
 }
 #contact-form #submit-button:hover {
   background-color: #cccccc;
   color: #171717;
   border: none;
   height: 2.5rem;
+  cursor: none !important;
 }
 #contact-form textarea {
   font-family: "Space Grotesk", sans-serif;
@@ -220,6 +224,7 @@ body {
   padding: 0.3rem;
   height: 7rem;
   border: none;
+  cursor: none !important;
 }
 
 .work-page-container {
@@ -253,6 +258,7 @@ body {
 
 .carousel-arrows {
   display: none;
+  cursor: none;
 }
 
 #print-markers {
