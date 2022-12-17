@@ -1,3 +1,14 @@
+//cursor
+.cursor{
+    z-index: 100;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $lineColourLight;
+    mix-blend-mode: difference;
+    position: absolute;
+}
+
 //bg colours
 
 .blue{
@@ -132,7 +143,7 @@
 }
 
 .menu-container{
-    cursor: pointer;
+    // cursor: pointer;
     height: 100vh;
     width: 100%;
     z-index: 2;
@@ -354,7 +365,7 @@
 
     .gallery{
         align-self: center;
-        align-items: center;
+        align-items: start;
         grid-template-columns: repeat(2, 40vw);
         gap: 2rem;
 
@@ -596,7 +607,7 @@
                 background-size: 350%;
                 transition: background-position .5s ease-out;
 
-                cursor: pointer;
+                // cursor: pointer;
             }
 
             li:nth-child(4){

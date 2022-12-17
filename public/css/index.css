@@ -1,4 +1,5 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  cursor: none;
   margin: 0;
   padding: 0;
   border: 0;
@@ -18,6 +19,16 @@ body {
 #page-contents {
   min-height: 100vh;
   height: fit-content;
+}
+
+.cursor {
+  z-index: 100;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  mix-blend-mode: difference;
+  position: absolute;
 }
 
 .blue {
@@ -141,7 +152,6 @@ body {
 }
 
 .menu-container {
-  cursor: pointer;
   height: 100vh;
   width: 100%;
   z-index: 2;
@@ -341,7 +351,7 @@ body {
 @media (min-width: 720px) {
   .gallery {
     align-self: center;
-    align-items: center;
+    align-items: start;
     grid-template-columns: repeat(2, 40vw);
     gap: 2rem;
     margin: 0 auto 8rem auto;
@@ -530,7 +540,6 @@ body {
     background-repeat: no-repeat;
     background-size: 350%;
     transition: background-position 0.5s ease-out;
-    cursor: pointer;
   }
   .bar ul li:nth-child(4) {
     border-right: solid #cccccc;
