@@ -10,14 +10,14 @@ const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
 
+
+//FIX - only apply if page is viewed in desktop mode, otherwise cursor appears every time user taps on screen
 document.addEventListener('mousemove', (e) => {
-    let x = e.pageX;
-    let y = e.pageY;
-    // curs.style.left = (x - 15) + "px";    //FIX - if cursor is centered, it doesn't work?
-    // curs.style.top = (y - 15) + "px";
+    let x = e.pageX - 15;
+    let y = e.pageY - 15;
+    
     curs.style.left = x + "px";
     curs.style.top = y + "px";
-    // curs.style.filter = "grayscale()"
 });
 
 let util = {

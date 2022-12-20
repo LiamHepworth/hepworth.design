@@ -1,17 +1,15 @@
 //cursor
 .cursor{
     z-index: 10;
+    pointer-events: none;
+
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: $lineColourLight;
-    mix-blend-mode: difference;
     position: absolute;
 
-    // filter: grayscale(100%);
-    // -webkit-backdrop-filter: blur(100px);
-    // backdrop-filter: blur(100px);
-    // clip-path: circle(50%);
+    backdrop-filter: invert(100%) grayscale(100%);
+    filter: brightness(150%) contrast(150%);
 }
 
 //bg colours
