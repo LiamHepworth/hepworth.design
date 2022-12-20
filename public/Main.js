@@ -478,6 +478,9 @@ let displayPage = {
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
 
+        //FIX - Is this responsive? 
+        (function carouselImageFocus(){
+
         //create side arrows to scroll carousel for desktop layout
         const leftArrow = document.createElement('span');
         leftArrow.innerText = 'expand_more';
@@ -489,9 +492,6 @@ let displayPage = {
         rightArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
         rightArrow.style.transform = 'rotate(-90deg)'; 
 
-        pageSectionTwo.append(leftArrow, rightArrow);
-
-        (function carouselImageFocus(){
             let images = [];
             images = projectImageContainer.children
 
@@ -534,6 +534,12 @@ let displayPage = {
                     });
                 })
             }
+
+            if(images.length > 1){
+                pageSectionTwo.append(leftArrow, rightArrow);
+            } else {
+                return;
+            }
         })();
 
         //check if project object has a description to determine styling
@@ -571,14 +577,14 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.className = 'grid-container left-border'
-                leftArrow.style.display = 'block'
-                rightArrow.style.display = 'block'
+                // leftArrow.style.display = 'block'
+                // rightArrow.style.display = 'block'
                 util.blueMenuBar(1);
             }else{
                 pageContents.className = 'grid-container'
                 pageSectionTwo.className = ''
-                leftArrow.style.display = 'none'
-                rightArrow.style.display = 'none'
+                // leftArrow.style.display = 'none'
+                // rightArrow.style.display = 'none'
             };
         };
 
