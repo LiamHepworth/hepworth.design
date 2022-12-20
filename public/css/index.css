@@ -26,8 +26,8 @@ body {
   pointer-events: none;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   position: absolute;
+  border-radius: 50%;
   backdrop-filter: invert(100%) grayscale(100%);
   filter: brightness(150%) contrast(150%);
 }

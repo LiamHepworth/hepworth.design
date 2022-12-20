@@ -595,7 +595,7 @@ let displayPage = {
         util.resetPage([pageSectionOne, pageSectionTwo]);
         
         util.appendHeader('ABOUT', 'menu', pageSectionOne);
-        pageHeader.classList = 'hidden'
+        pageHeader.classList = 'header small-header';
 
         pageBody.classList.remove('grid-background');
 
@@ -671,11 +671,10 @@ let displayPage = {
         util.resetPage([pageSectionOne, pageSectionTwo]);
 
         util.appendHeader('CONTACT', 'menu', pageSectionOne);
-        pageHeader.classList = 'hidden'
+        pageHeader.classList = 'header small-header';
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
-        // pageSectionOne.className = 'column-flex-container grow';
 
         let contactFormContainer = document.createElement('div');
         pageSectionOne.appendChild(contactFormContainer);
