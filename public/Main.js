@@ -13,8 +13,8 @@ const curs = document.querySelector('.cursor');
 
 //FIX - only apply if page is viewed in desktop mode, otherwise cursor appears every time user taps on screen
 document.addEventListener('mousemove', (e) => {
-    let x = e.pageX - 15;
-    let y = e.pageY - 15;
+    let x = e.clientX - 15;
+    let y = e.clientY - 15;
     
     curs.style.left = x + "px";
     curs.style.top = y + "px";
@@ -478,7 +478,7 @@ let displayPage = {
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
 
-        //FIX - Is this responsive? 
+        //FIX - Arrows just become hidden under bottom bar when in mobile view, not actually removed.
         (function carouselImageFocus(){
 
         //create side arrows to scroll carousel for desktop layout

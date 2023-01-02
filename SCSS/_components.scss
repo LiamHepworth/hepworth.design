@@ -5,11 +5,13 @@
 
     width: 30px;
     height: 30px;
-    position: absolute;
+    position: fixed;
     border-radius: 50%;
 
     backdrop-filter: invert(100%) grayscale(100%);
     filter: brightness(150%) contrast(150%);
+
+    overflow: hidden;
 }
 
 //bg colours
