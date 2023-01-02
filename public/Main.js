@@ -12,13 +12,14 @@ const curs = document.querySelector('.cursor');
 
 
 //FIX - only apply if page is viewed in desktop mode, otherwise cursor appears every time user taps on screen
+
 document.addEventListener('mousemove', (e) => {
     let x = e.clientX - 15;
     let y = e.clientY - 15;
     
     curs.style.left = x + "px";
     curs.style.top = y + "px";
-});
+}); 
 
 let util = {
     resetPage: (containers) => {

@@ -3,6 +3,8 @@
     z-index: 10;
     pointer-events: none;
 
+    display: none;
+
     width: 30px;
     height: 30px;
     position: fixed;
@@ -392,6 +394,10 @@
 }
 
 @media (min-width: 1080px){
+
+    .cursor{
+        display: block;
+    }
 
     // text elements:
     #primary-header{
