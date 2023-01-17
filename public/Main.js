@@ -431,21 +431,21 @@ let displayPage = {
         //hide the grid background
         pageBody.classList.remove('grid-background');
 
-        //create outer container for expandable section, which includes text + dropdown button
-        let projectTextOuterContainer = document.createElement('section');
-        projectTextOuterContainer.classList.add('outer-content-container');
+        //create outer container for expandable section, which includes all text + dropdown button
+        let projectInfoContainer = document.createElement('section');
+        projectInfoContainer.classList.add('outer-content-container');
 
-        //create container for just the text
+        //create container for just the text (project "type" + description)
         let projectTextContainer = document.createElement('div');
         projectTextContainer.classList.add('expanding-text-container');
 
-        //project type text, '\u00A0' adds a space when adding innerText
+        //project "type" text, '\u00A0' adds a space when adding innerText
         let projectType = document.createElement('p');
         projectType.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
         projectType.classList.add('body-text', 'project-text');
 
         projectTextContainer.append(projectType);
-        projectTextOuterContainer.appendChild(projectTextContainer);
+        projectInfoContainer.appendChild(projectTextContainer);
 
         //project description text
         let projectDescription = document.createElement('p');
@@ -463,7 +463,7 @@ let displayPage = {
         dropDownArrow.innerText = 'expand_more';
         dropDownArrow.classList.add('material-symbols-outlined', 'arrows', 'dropdown-arrow');
 
-        pageSectionOne.appendChild(projectTextOuterContainer);
+        pageSectionOne.appendChild(projectInfoContainer);
         pageSectionOne.appendChild(gradientOverlay);
         pageSectionOne.className = 'proj-text-container'
 
@@ -476,7 +476,7 @@ let displayPage = {
         projectList[projectIndex].carouselCreation(projectImageContainer);
         pageSectionTwo.appendChild(projectImageContainer);
 
-        //FIX - Arrows just become hidden under bottom bar when in mobile view, not actually removed.
+        //Arrows just become hidden under bottom bar when in mobile view, not actually removed.
         (function carouselImageFocus(){
 
         //create side arrows to scroll carousel for desktop layout
@@ -562,7 +562,7 @@ let displayPage = {
                     });
                 return dropDownArrow;
             }  
-            projectTextOuterContainer.appendChild(expandingSection());
+            projectInfoContainer.appendChild(expandingSection());
 
         }else if(currentProject.description === null) {  //if project doesn't contain a description
             projectTextContainer.style.marginBottom = '3rem';
@@ -575,14 +575,10 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageContents.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.className = 'grid-container left-border'
-                // leftArrow.style.display = 'block'
-                // rightArrow.style.display = 'block'
                 util.blueMenuBar(1);
             }else{
                 pageContents.className = 'grid-container'
                 pageSectionTwo.className = ''
-                // leftArrow.style.display = 'none'
-                // rightArrow.style.display = 'none'
             };
         };
 
@@ -602,8 +598,6 @@ let displayPage = {
         pageHeader.classList = 'header small-header';
 
         pageBody.classList.remove('grid-background');
-
-        // pageSectionTwo.className = 'column-flex-container';
 
         let aboutTextSection = document.createElement('div');
         aboutTextSection.className = 'content-container about-text-container';
