@@ -76,6 +76,16 @@
 
 //containers:
 
+.header-section{
+    margin: $containerSideMargins;
+    margin-top: 3.2rem;
+    margin-bottom: $conatinerBottomMargin;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    user-select: none;
+}
+
 .grid-container{
     min-height: fit-content;
     display: grid;
@@ -95,17 +105,6 @@
     }
 }
 
-.column-flex-container{
-    display: flex;
-    flex-flow: column;
-    // min-height: $viewportHeight;
-}
-
-.row-flex-container{
-    display: flex;
-    flex-flow: row;
-}
-
 .content-container{  //standard content container
     height: fit-content;
     margin: $containerSideMargins;
@@ -117,6 +116,53 @@
     text-align: center;
     width: 100%;
     height: fit-content;
+}
+
+#contact-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 2rem 0;
+    cursor: none !important;
+    
+    input{
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 12pt;
+        background-color: $lineColourLight;
+        margin: .5rem 0;
+        padding: .3rem;
+        height: 2rem;
+        border: none;
+        cursor: none !important;
+    };
+    
+    #submit-button{
+        background-color: $bgColourDark;
+        border: 2px solid $lineColourLight;
+        color: $lineColourLight;
+        height: 2.5rem;
+        cursor: none !important;
+    }
+    
+    #submit-button:hover{
+        background-color: $lineColourLight;
+        color: $bgColourDark;
+        border: none;
+        height: 2.5rem;
+        cursor: none !important;
+    }
+    
+    textarea{
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 12pt;
+        background-color: $lineColourLight;
+        margin: .5rem 0;
+        padding: .3rem;
+        height: 7rem;
+        border: none; 
+        cursor: none !important;
+    }
 }
 
 .expanding-text-container{
@@ -174,63 +220,6 @@
     left: 0%;
     transition: left .2s ease-in-out;
 
-}
-
-.header-section{
-    margin: $containerSideMargins;
-    margin-top: 3.2rem;
-    margin-bottom: $conatinerBottomMargin;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    user-select: none;
-}
-
-#contact-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    margin: 2rem 0;
-    cursor: none !important;
-    
-    input{
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 12pt;
-        background-color: $lineColourLight;
-        margin: .5rem 0;
-        padding: .3rem;
-        height: 2rem;
-        border: none;
-        cursor: none !important;
-    };
-    
-    #submit-button{
-        background-color: $bgColourDark;
-        border: 2px solid $lineColourLight;
-        color: $lineColourLight;
-        height: 2.5rem;
-        cursor: none !important;
-    }
-    
-    #submit-button:hover{
-        background-color: $lineColourLight;
-        color: $bgColourDark;
-        border: none;
-        height: 2.5rem;
-        cursor: none !important;
-    }
-    
-    textarea{
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 12pt;
-        background-color: $lineColourLight;
-        margin: .5rem 0;
-        padding: .3rem;
-        height: 7rem;
-        border: none; 
-        cursor: none !important;
-    }
 }
 
 .work-page-container{
@@ -403,7 +392,7 @@
     #primary-header{
         max-width: fit-content;
         overflow-wrap: normal;
-        font-size: calc($headerTextSize * 2.3);
+        font-size: calc($headerTextSize * 3);
         line-height: $headerLineHeight; 
         margin: 0 auto;
     }
@@ -672,19 +661,9 @@
     }
 }
 
-// @media (min-width: 1600px){
-//     .header{
-//         font-size: calc($headerTextSize * 2.8);
-//     }
-// }
-
 @media (min-width: 2500px){
-    // .header{
-    //     font-size: calc($headerTextSize * 2.4);
-    // }
 
     .grid-container.gallery{
-        // margin-top: 17.5rem;
         grid-template-columns: repeat(3, 25vw);
         gap: 5rem;
     }

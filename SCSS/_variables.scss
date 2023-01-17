@@ -1,20 +1,25 @@
-//colours:
+//colours and gradients:
 $bgColourDark: #171717;
 $bgColourBlue: #0092bd;
 $lineColourLight: #cccccc;
 $textOuterGlow: #cccccc5b;
-$convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);  
-$menuItemsGradient: linear-gradient(90deg, rgba(0,146,189,1) 0%, rgba(0,146,189,1) 42%, rgba(23,23,23,1) 70%, rgba(23,23,23,1) 100%);
 
-//spacing:
+$convertSVGColour: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);  
+
+$menuItemsGradient: linear-gradient(90deg, rgba(0,146,189,1) 0%, rgba(0,146,189,1) 42%, rgba(23,23,23,1) 70%, rgba(23,23,23,1) 100%);
+$mobileLinearGradient: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, $bgColourDark 80%);
+
+//spacing and borders:
 $containerSideMargins: 0 2.1rem 0 2.1rem;
 $conatinerBottomMargin: 1.8rem;
 $containerPadding: 0.5rem;
-$headerFooterHeight: 2.4rem;
-$viewportHeight: calc(100vh - (($headerFooterHeight + 40px) * 2));
 
+$headerFooterHeight: 2.4rem;
 $headerFooterHeightDesktop: calc($headerFooterHeight + 1rem);
 
+$viewportHeight: calc(100vh - (($headerFooterHeight + 40px) * 2));
+
+$borderStrokeWidth: 3px;
 
 //text styles:
 
@@ -26,7 +31,3 @@ $headerLineHeight: 3rem;
 
 $bodyTextSize: 1rem;
 $bodyLineHeight: $headerLineHeight 1.5rem;
-
-//other styling:
-$mobileLinearGradient: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, $bgColourDark 80%);
-$borderStrokeWidth: 3px;

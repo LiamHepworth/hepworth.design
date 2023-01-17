@@ -10,9 +10,6 @@ const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
 
-
-//FIX - only apply if page is viewed in desktop mode, otherwise cursor appears every time user taps on screen
-
 document.addEventListener('mousemove', (e) => {
     let x = e.clientX - 15;
     let y = e.clientY - 15;
@@ -606,7 +603,7 @@ let displayPage = {
 
         pageBody.classList.remove('grid-background');
 
-        pageSectionTwo.className = 'column-flex-container';
+        // pageSectionTwo.className = 'column-flex-container';
 
         let aboutTextSection = document.createElement('div');
         aboutTextSection.className = 'content-container about-text-container';

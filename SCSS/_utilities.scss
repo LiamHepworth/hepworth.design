@@ -20,32 +20,6 @@
     background: $bgColourBlue !important;
 }
 
-.vh-height{
-    min-height: $viewportHeight;
-}
-
-.hidden{
-    display: none;
-}
-
-//flexbox utils:
-
-.grow{
-    flex-grow: 2;
-}
-
-.space-between{
-    justify-content: space-between;
-}
-
-.space-evenly{
-    justify-content: space-evenly;
-}
-
-.top-padding{
-    margin-top: 3.2rem;
-}
-
 //grid utils
 
 .content-split{

@@ -90,6 +90,16 @@ body {
   margin-bottom: 1rem;
 }
 
+.header-section {
+  margin: 0 2.1rem 0 2.1rem;
+  margin-top: 3.2rem;
+  margin-bottom: 1.8rem;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  user-select: none;
+}
+
 .grid-container {
   min-height: fit-content;
   display: grid;
@@ -107,16 +117,6 @@ body {
   padding: 0 2.1rem 0 2.1rem;
 }
 
-.column-flex-container {
-  display: flex;
-  flex-flow: column;
-}
-
-.row-flex-container {
-  display: flex;
-  flex-flow: row;
-}
-
 .content-container {
   height: fit-content;
   margin: 0 2.1rem 0 2.1rem;
@@ -128,6 +128,49 @@ body {
   text-align: center;
   width: 100%;
   height: fit-content;
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 2rem 0;
+  cursor: none !important;
+}
+#contact-form input {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12pt;
+  background-color: #cccccc;
+  margin: 0.5rem 0;
+  padding: 0.3rem;
+  height: 2rem;
+  border: none;
+  cursor: none !important;
+}
+#contact-form #submit-button {
+  background-color: #171717;
+  border: 2px solid #cccccc;
+  color: #cccccc;
+  height: 2.5rem;
+  cursor: none !important;
+}
+#contact-form #submit-button:hover {
+  background-color: #cccccc;
+  color: #171717;
+  border: none;
+  height: 2.5rem;
+  cursor: none !important;
+}
+#contact-form textarea {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12pt;
+  background-color: #cccccc;
+  margin: 0.5rem 0;
+  padding: 0.3rem;
+  height: 7rem;
+  border: none;
+  cursor: none !important;
 }
 
 .expanding-text-container {
@@ -180,59 +223,6 @@ body {
 .menu-appear {
   left: 0%;
   transition: left 0.2s ease-in-out;
-}
-
-.header-section {
-  margin: 0 2.1rem 0 2.1rem;
-  margin-top: 3.2rem;
-  margin-bottom: 1.8rem;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  user-select: none;
-}
-
-#contact-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  margin: 2rem 0;
-  cursor: none !important;
-}
-#contact-form input {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 12pt;
-  background-color: #cccccc;
-  margin: 0.5rem 0;
-  padding: 0.3rem;
-  height: 2rem;
-  border: none;
-  cursor: none !important;
-}
-#contact-form #submit-button {
-  background-color: #171717;
-  border: 2px solid #cccccc;
-  color: #cccccc;
-  height: 2.5rem;
-  cursor: none !important;
-}
-#contact-form #submit-button:hover {
-  background-color: #cccccc;
-  color: #171717;
-  border: none;
-  height: 2.5rem;
-  cursor: none !important;
-}
-#contact-form textarea {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 12pt;
-  background-color: #cccccc;
-  margin: 0.5rem 0;
-  padding: 0.3rem;
-  height: 7rem;
-  border: none;
-  cursor: none !important;
 }
 
 .work-page-container {
@@ -384,7 +374,7 @@ body {
   #primary-header {
     max-width: fit-content;
     overflow-wrap: normal;
-    font-size: 5.29rem;
+    font-size: 6.9rem;
     line-height: 3rem;
     margin: 0 auto;
   }
@@ -616,30 +606,6 @@ body {
 
 .solid-blue {
   background: #0092bd !important;
-}
-
-.vh-height {
-  min-height: calc(100vh - (2.4rem + 40px) * 2);
-}
-
-.hidden {
-  display: none;
-}
-
-.grow {
-  flex-grow: 2;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
-.space-evenly {
-  justify-content: space-evenly;
-}
-
-.top-padding {
-  margin-top: 3.2rem;
 }
 
 .content-split {
