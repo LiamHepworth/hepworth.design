@@ -22,6 +22,10 @@
     background-color: $bgColourBlue;
 }
 
+.grey{
+    background-color: $lineColourLight;
+}
+
 .black{
     background-color: $bgColourDark;
 }
@@ -44,6 +48,7 @@
 #primary-header{
     //limits width of header for homepage
     max-width: 15rem;
+    user-select: none;
 }
 
 .header{

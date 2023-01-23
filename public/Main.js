@@ -46,6 +46,7 @@ let util = {
     createBlueGridFiller: () => {
         let gridFiller = document.createElement('div');
         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
+        // gridFiller.classList.add('grey', 'grid-background', 'grid-grow');
         return gridFiller;    
     }, 
 
