@@ -4,7 +4,8 @@
   "description": "Personal design portfolio for Liam Hepworth",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "homepage": "https://github.com/LiamHepworth/Hepworth.design-portfolio#readme",
   "dependencies": {
     "feather-icons": "^4.29.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
