@@ -1,8 +1,5 @@
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
-// const pageContents = document.querySelector('#page-contents');
-// const pageSectionOne = document.querySelector('#page-section-one');
-// const pageSectionTwo = document.querySelector('#page-section-two');
 const pageHeaderSection = document.querySelector('#header-section');
 const pageHeader = document.querySelector('.header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
@@ -42,12 +39,13 @@ class Section extends Page {
         this.header = header;
     }
 
-    appendHeader(headerText, menuStatus){
+    appendHeader(headerText, menuStatus, headerClass){
         this.headerSection.className = 'header-section'
         this.headerSection.style.display = 'flex';
 
         this.header.innerText = headerText;
         this.menu.innerText = menuStatus;
+        this.header.classList = headerClass;
 
         this.headerSection.append(this.header, this.menu);
         this.el.appendChild(this.headerSection);
@@ -73,36 +71,6 @@ document.addEventListener('mousemove', (e) => {
 }); 
 
 let util = {
-    // resetPage: (containers) => {
-
-    //     for(cont of containers){
-    //         cont.innerHTML = '';
-    //         cont.className = '';
-    //     };
-
-    //     pageContents.className = 'grid-container';
-    //     pageHeaderSection.className = 'header-section'
-    //     pageHeaderSection.style.display = 'flex';
-    //     pageHeader.innerText = 'HEPWORTH.DESIGN'
-    //     fullPage.style.overflow = 'visible'                 
-    //     pageBody.style.overflow = 'visible'
-    //     pageBody.classList.add('grid-background');
-    // },
-
-    // appendHeader: (headerText, menuStatus, container) => {
-    //     pageHeader.innerText = headerText;
-    //     burgerMenuMobile.innerText = menuStatus;
-
-    //     pageHeaderSection.append(pageHeader, burgerMenuMobile)
-    //     container.appendChild(pageHeaderSection)
-    // },
-
-    // createBlueGridFiller: () => {
-    //     let gridFiller = document.createElement('div');
-    //     gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
-    //     return gridFiller;    
-    // }, 
-
     resetScrollPosition: () => {
         window.scrollTo(0, 0);
     }, 
@@ -125,6 +93,17 @@ let util = {
 
         link.appendChild(icon)
         return link
+    },
+
+    createEl: (type, className, parent) => {
+        const el = document.createElement(type);
+        el.className = className
+
+        if(parent !== undefined){
+            parent.appendChild(el);
+        }
+
+        return el;
     },
 
     blueMenuBar: (pageIndex) => {
@@ -156,9 +135,9 @@ function navCreation(){
 
     //mobile nav header elements
     const navHead = {
-        headerSection: document.createElement('div'),
-        menuHeader: document.createElement('h1'),
-        closeMenu: document.createElement('span'),
+        navHeaderSection: document.createElement('div'),
+        navMenuHeader: document.createElement('h1'),
+        navCloseMenu: document.createElement('span'),
     }
     
     //main list and list items for nav
@@ -207,6 +186,7 @@ function navCreation(){
                 fullPage.style.overflow = 'visible'                 
                 pageBody.style.overflow = 'visible'
             };
+
             setTimeout(menuContainer.classList.remove('menu-appear'), 300);
             setTimeout(hideMenu, 300);
 
@@ -231,21 +211,21 @@ function navCreation(){
         // creating and styling DOM elements
         menuContainer.className = 'blue grid-background grid-light menu-container';
 
-        navHead.headerSection.className = 'header-section';
+        navHead.navHeaderSection.className = 'header-section';
         
-        navHead.menuHeader.className = 'header';
-        navHead.menuHeader.innerText = 'MENU';
+        navHead.navMenuHeader.className = 'header';
+        navHead.navMenuHeader.innerText = 'MENU';
         
-        navHead.closeMenu.className = 'material-symbols-outlined basic-icon';
-        navHead.closeMenu.innerText = 'close';
+        navHead.navCloseMenu.className = 'material-symbols-outlined basic-icon';
+        navHead.navCloseMenu.innerText = 'close';
     
         navList.menuList.className = 'vertical-center menu-list' 
 
         navList.menuListItems.forEach(el => el.setAttribute('class', 'header sub-header menu-list-items')) 
 
         //appending DOM elements to the menu container
-        navHead.headerSection.append(navHead.menuHeader, navHead.closeMenu);
-        menuContainer.append(navHead.headerSection, navList.menuList);
+        navHead.navHeaderSection.append(navHead.navMenuHeader, navHead.navCloseMenu);
+        menuContainer.append(navHead.navHeaderSection, navList.menuList);
     };
 
     //show mobile menu on burgermenu click
@@ -254,7 +234,7 @@ function navCreation(){
     });
     
     //hide menu on close button click
-    navHead.closeMenu.addEventListener('click', function(){
+    navHead.navCloseMenu.addEventListener('click', function(){
         menuAnimation('clear');
     }); 
 
@@ -278,10 +258,8 @@ function navCreation(){
     //display the nav style which corresponds to the screen size
     function displayNav(){
         if(window.innerWidth < 1080){
-            // console.log('mobile')
             mobileNav();
         } else if(window.innerWidth >= 1080){
-            // console.log('desktop')
             desktopNav();
         }; 
     };
@@ -404,8 +382,6 @@ const projectList = [
     new Project('Exile Corp HoloDisk Reader', 'Animated Poster (2022)', null, ['/src/assets/project-images/video-test/Comp 2.mp4'], null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', '/src/assets/project-images/unreal/image01.png'),
 ]; 
 
-
-
 let displayPage = {
     home: () => {
         pageContents.reset()
@@ -448,6 +424,7 @@ let displayPage = {
         for (let i = 0; i < projectList.length; i++) {
             projectList[i].thumbnailCreation(pageSectionTwo.el); //create project thumbnails
         };
+
         let thumbNails = document.querySelectorAll('.thumbnail');
 
         thumbNails.forEach((thumbnail) => {
@@ -479,10 +456,11 @@ let displayPage = {
     project: (projectIndex) => {
         pageContents.reset()
         pageSectionOne.clear()
+        pageSectionOne.el.className = 'proj-text-container'
         pageSectionTwo.clear()
         
-        pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu');
-        pageHeader.classList = 'header small-header';
+        pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', 'header small-header');
+        pageHeaderSection.className = 'header-section'
 
         let currentProject = projectList[projectIndex];
 
@@ -490,62 +468,43 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         //create outer container for expandable section, which includes all text + dropdown button
-        let projectInfoContainer = document.createElement('section');
-        projectInfoContainer.classList.add('outer-content-container');
-
+        const projectInfoContainer = util.createEl('section', 'outer-content-container', pageSectionOne.el);
+        
         //create container for just the text (project "type" + description)
-        let projectTextContainer = document.createElement('div');
-        projectTextContainer.classList.add('expanding-text-container');
-
+        const projectTextContainer = util.createEl('div', 'expanding-text-container', projectInfoContainer);
+        
         //project "type" text, '\u00A0' adds a space when adding innerText
-        let projectType = document.createElement('p');
+        const projectType = util.createEl('p', 'body-text project-text', projectTextContainer);
         projectType.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
-        projectType.classList.add('body-text', 'project-text');
-
-        projectTextContainer.append(projectType);
-        projectInfoContainer.appendChild(projectTextContainer);
-
+        
         //project description text
-        let projectDescription = document.createElement('p');
+        const projectDescription = util.createEl('p', 'body-text');
+        projectType.innerText = `Project Type: \u00A0 ${projectList[projectIndex].type}`;
         projectDescription.innerText = `Description: 
         
         ${projectList[projectIndex].description}`;
-        projectDescription.classList.add('body-text');
-
-        //gradient overlay
-        let gradientOverlay = document.createElement('div');
-        gradientOverlay.className = 'gradient-overlay';
-
+        
+        //text gradient overlay
+        const gradientOverlay = util.createEl('div', 'gradient-overlay', pageSectionOne.el);
+        
         //drop-down button
-        let dropDownArrow = document.createElement('span');
+        const dropDownArrow = util.createEl('span', 'material-symbols-outlined arrows dropdown-arrow');
         dropDownArrow.innerText = 'expand_more';
-        dropDownArrow.classList.add('material-symbols-outlined', 'arrows', 'dropdown-arrow');
-
-        pageSectionOne.el.appendChild(projectInfoContainer);
-        pageSectionOne.el.appendChild(gradientOverlay);
-        pageSectionOne.el.className = 'proj-text-container'
-
-        pageHeaderSection.className = 'header-section'
-
+        
         //create container for carousel of images, create carousel, append
-        let projectImageContainer = document.createElement('section');
-        projectImageContainer.classList.add('grid-background', 'project-image-container');
-
+        const projectImageContainer = util.createEl('section', 'grid-background project-image-container', pageSectionTwo.el);
         projectList[projectIndex].carouselCreation(projectImageContainer);
-        pageSectionTwo.el.appendChild(projectImageContainer);
 
         //Arrows just become hidden under bottom bar when in mobile view, not actually removed.
         (function carouselImageFocus(){
 
         //create side arrows to scroll carousel for desktop layout
-        const leftArrow = document.createElement('span');
+        const leftArrow = util.createEl('span', 'material-symbols-outlined arrows carousel-arrows');
         leftArrow.innerText = 'expand_more';
-        leftArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
         leftArrow.style.transform = 'rotate(90deg)'; 
         
-        const rightArrow = document.createElement('span');
+        const rightArrow = util.createEl('span', 'material-symbols-outlined arrows carousel-arrows');
         rightArrow.innerText = 'expand_more';
-        rightArrow.classList.add('material-symbols-outlined', 'arrows', 'carousel-arrows');
         rightArrow.style.transform = 'rotate(-90deg)'; 
 
             let images = [];
@@ -654,24 +613,17 @@ let displayPage = {
         pageSectionOne.clear()
         pageSectionTwo.clear()
         
-        pageSectionOne.appendHeader('ABOUT', 'menu');
-        pageHeader.classList = 'header small-header';
+        pageSectionOne.appendHeader('ABOUT', 'menu', 'header small-header');
 
         pageBody.classList.remove('grid-background');
 
-        let aboutTextSection = document.createElement('div');
-        aboutTextSection.className = 'content-container about-text-container';
-        pageSectionOne.el.appendChild(aboutTextSection);
+        const aboutTextSection = util.createEl('div', 'content-container about-text-container', pageSectionOne.el)
 
-        let aboutText = document.createElement('p');
+        const aboutText = util.createEl('p', 'body-text', aboutTextSection)
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ');
-        aboutText.classList.add('body-text');
-        aboutTextSection.appendChild(aboutText);
 
-        let linkSection = document.createElement('div');
-        linkSection.classList.add('content-container');
+        const linkSection = util.createEl('div', 'content-container')
 
-        // pageSectionTwo.el.appendChild(util.createBlueGridFiller());
         pageSectionTwo.createGridFiller();
 
         function isMobileOrDesktop(){
@@ -765,7 +717,6 @@ let displayPage = {
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         contactFormContainer.appendChild(contactForm);
-        // pageSectionTwo.appendChild(util.createBlueGridFiller());
         pageSectionTwo.createGridFiller();
 
         contactForm.addEventListener('submit', (e) => {
@@ -817,7 +768,6 @@ let displayPage = {
         };
 
         checkContactWindowSize();
-
 
         window.addEventListener('resize', function(){
             if(history.state === 'contact'){
