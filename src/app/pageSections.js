@@ -30,10 +30,11 @@ class Section extends Page {
         this.header = header;
     }
 
-    appendHeader(headerText, menuStatus){
+    appendHeader(headerText, menuStatus, headerClass){
         this.headerSection.className = 'header-section'
         this.headerSection.style.display = 'flex';
 
+        this.header.className = headerClass;
         this.header.innerText = headerText;
         this.menu.innerText = menuStatus;
 
@@ -48,17 +49,4 @@ class Section extends Page {
     }
 }
 
-// class SectTwo extends Page {
-//     constructor(el){
-//         super(el);
-//     }
-
-//     createGridFiller(){
-//         let gridFiller = document.createElement('div');
-//         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
-//         this.el.appendChild(gridFiller);
-//     }
-
-// }
-
-// export { Page as Section, SectOne, SectTwo };
+export { Page, Section}

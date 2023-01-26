@@ -39,12 +39,6 @@ body {
   overflow: hidden;
 }
 
-.red {
-  height: 100px;
-  width: 100px;
-  background-color: red;
-}
-
 .blue {
   background-color: #0092bd;
 }

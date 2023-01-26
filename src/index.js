@@ -1,3 +1,7 @@
+import { util } from "./app/utilities";
+import { Page, Section } from "./app/pageSections";
+import { Project } from "./app/projectSetup";
+
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
 const pageHeaderSection = document.querySelector('#header-section');
@@ -6,57 +10,6 @@ const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
-
-class Page {
-    constructor(el, parent, body, doc){
-        this.el = el;
-        this.parent = parent;
-        this.body = body;
-        this.doc = doc;
-    }
-
-    clear(){
-        this.el.innerHTML = '';
-        this.el.className = '';
-    }
-
-    reset(){
-        this.el.className = 'grid-container'
-
-        this.body.style.overflow = 'visible'
-        this.body.classList.add('grid-background');
-        
-        this.doc.style.overflow = 'visible'
-    }
-}
-
-class Section extends Page {
-    constructor(el, headerSection, menu, header){
-        super(el);
-
-        this.headerSection = headerSection;
-        this.menu = menu;
-        this.header = header;
-    }
-
-    appendHeader(headerText, menuStatus, headerClass){
-        this.headerSection.className = 'header-section'
-        this.headerSection.style.display = 'flex';
-
-        this.header.innerText = headerText;
-        this.menu.innerText = menuStatus;
-        this.header.classList = headerClass;
-
-        this.headerSection.append(this.header, this.menu);
-        this.el.appendChild(this.headerSection);
-    }
-
-    createGridFiller(){
-        let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
-        this.el.appendChild(gridFiller);
-    }
-}
 
 let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody, fullPage);
 let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, burgerMenuMobile, pageHeader)
@@ -69,59 +22,6 @@ document.addEventListener('mousemove', (e) => {
     curs.style.left = x + "px";
     curs.style.top = y + "px";
 }); 
-
-let util = {
-    resetScrollPosition: () => {
-        window.scrollTo(0, 0);
-    }, 
-
-    setAttributes: (el, attrs) => {
-        for(let key in attrs) {
-            el.setAttribute(key, attrs[key]);
-          };
-      
-    },
-
-    createLinkedIcon: (iconName, URL) => {
-        //create link
-        let link = document.createElement('a')
-        util.setAttributes(link, {'href': URL, 'class': 'link-container'})
-
-        //create SVG 
-        let icon = document.createElement('svg')
-        util.setAttributes(icon, {'data-feather': iconName, 'class': 'basic-icon larger-icon'})
-
-        link.appendChild(icon)
-        return link
-    },
-
-    createEl: (type, className, parent) => {
-        const el = document.createElement(type);
-        el.className = className
-
-        if(parent !== undefined){
-            parent.appendChild(el);
-        }
-
-        return el;
-    },
-
-    blueMenuBar: (pageIndex) => {
-        if(window.innerWidth > 1080){
-            let container = menuContainer.children;
-            let nav = container[container.length -1]
-            let listItem = nav.children[pageIndex]
-    
-            for(let i = 0; i < 4; i++){
-                if(i == pageIndex){
-                    listItem.classList.add('solid-blue')
-                } else {
-                    nav.children[i].classList.remove('solid-blue')
-                }
-            }
-        }
-    },
-};
 
 const socialLinks = {
     instagram: util.createLinkedIcon('instagram', 'https://www.instagram.com/hepworth.design/?hl=en'),
@@ -317,65 +217,6 @@ navCreation();
     });
 })();
 
-class Project {
-    constructor(name, type, images, videos, embeddedContent, description, thumbnail) {
-        this.name = name;
-        this.type = type;
-        this.images = images;
-        this.videos = videos;
-        this.embeddedContent = embeddedContent;
-        this.description = description;
-        this.thumbnail = thumbnail;
-    };
-    
-    thumbnailCreation(container){
-        let thumbnail = new Image();
-        thumbnail.src = this.thumbnail;
-        thumbnail.classList.add('thumbnail');
-        container.appendChild(thumbnail);
-    };
-
-    carouselCreation(container){
-        function createVideos(index, item){
-            let video = document.createElement('video');
-            util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
-
-            video.classList.add('videos');
-
-            let source = document.createElement('source');
-            util.setAttributes(source, {src: item.videos[index], type:'video/mp4'});
-            
-            video.oncanplay = () => {  //ensures video autoplays when page is fully loaded
-                video.muted = true;
-                video.play();
-            }
-            
-            video.appendChild(source);
-            container.appendChild(video);
-        };
-
-        if(this.videos !== null){
-            for(let i = 0; i <this.videos.length; i++){
-                createVideos(i, this);
-            } 
-        } 
-        
-        if(this.images !== null){
-            let imageStore = [];
-            for(let i = 0; i < this.images.length; i++){
-                imageStore[i] = new Image();
-                imageStore[i].src = this.images[i];
-                container.appendChild(imageStore[i]);
-            }; 
-        };
-    };
-
-    pushProjectPageHistory(){
-        history.pushState(this.name, null, null);
-        util.resetScrollPosition();
-    };
-};
-
 const projectList = [
     new Project('UNREAL TEST', 'poster', ['/src/assets/project-images/unreal/image01.png', '/src/assets/project-images/unreal/image02.png'], null, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.', '/src/assets/project-images/unreal/image01.png'),
     new Project('SEVERE', 'poster', ['/src/assets/project-images/severe/image01.jpg', '/src/assets/project-images/severe/image01.jpg'], null, null, 'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', '/src/assets/project-images/severe/image01.jpg'),
@@ -395,7 +236,7 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageSectionOne.el.classList.add('work-header-container');
                 pageHeaderSection.className = 'large-header-section'
-                util.blueMenuBar(0);
+                util.blueMenuBar(0, menuContainer);
             }else{
                 pageHeaderSection.className = 'header-section'
             };
@@ -438,7 +279,7 @@ let displayPage = {
         function checkWorkWindowSize(){
             if(window.innerWidth > 1080){
                 pageHeaderSection.className = 'large-header-section'
-                util.blueMenuBar(1);
+                util.blueMenuBar(1, menuContainer);
             }else{
                 pageHeaderSection.className = 'header-section'
             };
@@ -460,7 +301,7 @@ let displayPage = {
         pageSectionTwo.clear()
         
         pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', 'header small-header');
-        pageHeaderSection.className = 'header-section'
+        // pageHeaderSection.className = 'header-section'
 
         let currentProject = projectList[projectIndex];
 
@@ -592,7 +433,7 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageContents.el.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.el.className = 'grid-container left-border'
-                util.blueMenuBar(1);
+                util.blueMenuBar(1, menuContainer);
             }else{
                 pageContents.el.className = 'grid-container'
                 pageSectionTwo.el.className = ''
@@ -653,7 +494,7 @@ let displayPage = {
                     aboutTextSection.className = 'content-container vertical-center about-text-container';
                     pageContents.el.className = 'grid-container two-cols-50-50'
                     pageSectionTwo.el.className = 'grid-container left-border'
-                    util.blueMenuBar(2);
+                    util.blueMenuBar(2, menuContainer);
                 }else{
                     pageHeaderSection.style.display = 'flex';
                     aboutTextSection.className = 'content-container about-text-container';
@@ -673,7 +514,7 @@ let displayPage = {
             });
         };
 
-        util.blueMenuBar(2);
+        util.blueMenuBar(2, menuContainer);
         isMobileOrDesktop();
     }, 
     
@@ -758,7 +599,7 @@ let displayPage = {
                 contactFormContainer.className = 'content-container contact-form-container vertical-center';
                 pageContents.el.className = 'grid-container two-cols-75-25'
                 pageSectionTwo.el.className = 'grid-container left-border'
-                util.blueMenuBar(3);
+                util.blueMenuBar(3, menuContainer);
             }else{
                 pageHeaderSection.style.display = 'flex';
                 contactFormContainer.className = 'content-container contact-form-container';
