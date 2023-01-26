@@ -1,14 +1,68 @@
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
-const pageContents = document.querySelector('#page-contents');
-const pageSectionOne = document.querySelector('#page-section-one');
-const pageSectionTwo = document.querySelector('#page-section-two');
+// const pageContents = document.querySelector('#page-contents');
+// const pageSectionOne = document.querySelector('#page-section-one');
+// const pageSectionTwo = document.querySelector('#page-section-two');
 const pageHeaderSection = document.querySelector('#header-section');
 const pageHeader = document.querySelector('.header');
 const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
+
+class Page {
+    constructor(el, parent, body, doc){
+        this.el = el;
+        this.parent = parent;
+        this.body = body;
+        this.doc = doc;
+    }
+
+    clear(){
+        this.el.innerHTML = '';
+        this.el.className = '';
+    }
+
+    reset(){
+        this.el.className = 'grid-container'
+
+        this.body.style.overflow = 'visible'
+        this.body.classList.add('grid-background');
+        
+        this.doc.style.overflow = 'visible'
+    }
+}
+
+class Section extends Page {
+    constructor(el, headerSection, menu, header){
+        super(el);
+
+        this.headerSection = headerSection;
+        this.menu = menu;
+        this.header = header;
+    }
+
+    appendHeader(headerText, menuStatus){
+        this.headerSection.className = 'header-section'
+        this.headerSection.style.display = 'flex';
+
+        this.header.innerText = headerText;
+        this.menu.innerText = menuStatus;
+
+        this.headerSection.append(this.header, this.menu);
+        this.el.appendChild(this.headerSection);
+    }
+
+    createGridFiller(){
+        let gridFiller = document.createElement('div');
+        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
+        this.el.appendChild(gridFiller);
+    }
+}
+
+let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody, fullPage);
+let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, burgerMenuMobile, pageHeader)
+let pageSectionTwo = new Section(document.querySelector('#page-section-two'))
 
 document.addEventListener('mousemove', (e) => {
     let x = e.clientX - 15;
@@ -19,35 +73,35 @@ document.addEventListener('mousemove', (e) => {
 }); 
 
 let util = {
-    resetPage: (containers) => {
+    // resetPage: (containers) => {
 
-        for(cont of containers){
-            cont.innerHTML = '';
-            cont.className = '';
-        };
+    //     for(cont of containers){
+    //         cont.innerHTML = '';
+    //         cont.className = '';
+    //     };
 
-        pageContents.className = 'grid-container';
-        pageHeaderSection.className = 'header-section'
-        pageHeaderSection.style.display = 'flex';
-        pageHeader.innerText = 'HEPWORTH.DESIGN'
-        fullPage.style.overflow = 'visible'                 
-        pageBody.style.overflow = 'visible'
-        pageBody.classList.add('grid-background');
-    },
+    //     pageContents.className = 'grid-container';
+    //     pageHeaderSection.className = 'header-section'
+    //     pageHeaderSection.style.display = 'flex';
+    //     pageHeader.innerText = 'HEPWORTH.DESIGN'
+    //     fullPage.style.overflow = 'visible'                 
+    //     pageBody.style.overflow = 'visible'
+    //     pageBody.classList.add('grid-background');
+    // },
 
-    appendHeader: (headerText, menuStatus, container) => {
-        pageHeader.innerText = headerText;
-        burgerMenuMobile.innerText = menuStatus;
+    // appendHeader: (headerText, menuStatus, container) => {
+    //     pageHeader.innerText = headerText;
+    //     burgerMenuMobile.innerText = menuStatus;
 
-        pageHeaderSection.append(pageHeader, burgerMenuMobile)
-        container.appendChild(pageHeaderSection)
-    },
+    //     pageHeaderSection.append(pageHeader, burgerMenuMobile)
+    //     container.appendChild(pageHeaderSection)
+    // },
 
-    createBlueGridFiller: () => {
-        let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
-        return gridFiller;    
-    }, 
+    // createBlueGridFiller: () => {
+    //     let gridFiller = document.createElement('div');
+    //     gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
+    //     return gridFiller;    
+    // }, 
 
     resetScrollPosition: () => {
         window.scrollTo(0, 0);
@@ -148,7 +202,7 @@ function navCreation(){
     function menuAnimation(input){
         if(input === 'clear'){
             function hideMenu(){
-                pageContents.removeChild(menuContainer);
+                pageContents.el.removeChild(menuContainer);
                 pageBody.classList.remove('noScroll');
                 fullPage.style.overflow = 'visible'                 
                 pageBody.style.overflow = 'visible'
@@ -158,7 +212,7 @@ function navCreation(){
 
         } else if(input === 'play'){
             //hiding overflow to ensure scroll bars don't appear, removed on resetPage() and hideMenu()
-            pageContents.appendChild(menuContainer);
+            pageContents.el.appendChild(menuContainer);
             fullPage.style.overflow = 'hidden'                 
             pageBody.style.overflow = 'hidden'
             pageBody.classList.add('noScroll');
@@ -354,14 +408,16 @@ const projectList = [
 
 let displayPage = {
     home: () => {
-        util.resetPage([pageSectionOne, pageSectionTwo]);
+        pageContents.reset()
+        pageSectionOne.clear()
+        pageSectionTwo.clear()
 
-        util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
+        pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
         
         function checkHomeWindowSize(){
             if(window.innerWidth > 1080){
-                pageSectionOne.classList.add('work-header-container');
+                pageSectionOne.el.classList.add('work-header-container');
                 pageHeaderSection.className = 'large-header-section'
                 util.blueMenuBar(0);
             }else{
@@ -379,16 +435,18 @@ let displayPage = {
     }, 
     
     work: () => {
-        util.resetPage([pageSectionOne, pageSectionTwo]);
+        pageContents.reset()
+        pageSectionOne.clear()
+        pageSectionTwo.clear()
         
-        util.appendHeader('HEPWORTH.DESIGN', 'menu', pageSectionOne);
+        pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
         
-        pageSectionOne.classList.add('work-header-container');
-        pageSectionTwo.classList.add('grid-container', 'gallery', 'work-page-container');
+        pageSectionOne.el.classList.add('work-header-container');
+        pageSectionTwo.el.classList.add('grid-container', 'gallery', 'work-page-container');
 
         for (let i = 0; i < projectList.length; i++) {
-            projectList[i].thumbnailCreation(pageSectionTwo); //create project thumbnails
+            projectList[i].thumbnailCreation(pageSectionTwo.el); //create project thumbnails
         };
         let thumbNails = document.querySelectorAll('.thumbnail');
 
@@ -419,9 +477,11 @@ let displayPage = {
     },
 
     project: (projectIndex) => {
-        util.resetPage([pageSectionOne, pageSectionTwo]);
+        pageContents.reset()
+        pageSectionOne.clear()
+        pageSectionTwo.clear()
         
-        util.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', pageSectionOne);
+        pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu');
         pageHeader.classList = 'header small-header';
 
         let currentProject = projectList[projectIndex];
@@ -461,9 +521,9 @@ let displayPage = {
         dropDownArrow.innerText = 'expand_more';
         dropDownArrow.classList.add('material-symbols-outlined', 'arrows', 'dropdown-arrow');
 
-        pageSectionOne.appendChild(projectInfoContainer);
-        pageSectionOne.appendChild(gradientOverlay);
-        pageSectionOne.className = 'proj-text-container'
+        pageSectionOne.el.appendChild(projectInfoContainer);
+        pageSectionOne.el.appendChild(gradientOverlay);
+        pageSectionOne.el.className = 'proj-text-container'
 
         pageHeaderSection.className = 'header-section'
 
@@ -472,7 +532,7 @@ let displayPage = {
         projectImageContainer.classList.add('grid-background', 'project-image-container');
 
         projectList[projectIndex].carouselCreation(projectImageContainer);
-        pageSectionTwo.appendChild(projectImageContainer);
+        pageSectionTwo.el.appendChild(projectImageContainer);
 
         //Arrows just become hidden under bottom bar when in mobile view, not actually removed.
         (function carouselImageFocus(){
@@ -532,7 +592,7 @@ let displayPage = {
             }
 
             if(images.length > 1){
-                pageSectionTwo.append(leftArrow, rightArrow);
+                pageSectionTwo.el.append(leftArrow, rightArrow);
             } else {
                 return;
             }
@@ -571,12 +631,12 @@ let displayPage = {
         //check width to determine correct styling
         function checkProjectWindowSize(){
             if(window.innerWidth > 1080){
-                pageContents.className = 'grid-container two-cols-25-75'
-                pageSectionTwo.className = 'grid-container left-border'
+                pageContents.el.className = 'grid-container two-cols-25-75'
+                pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(1);
             }else{
-                pageContents.className = 'grid-container'
-                pageSectionTwo.className = ''
+                pageContents.el.className = 'grid-container'
+                pageSectionTwo.el.className = ''
             };
         };
 
@@ -590,16 +650,18 @@ let displayPage = {
     },
     
     about: () => {
-        util.resetPage([pageSectionOne, pageSectionTwo]);
+        pageContents.reset()
+        pageSectionOne.clear()
+        pageSectionTwo.clear()
         
-        util.appendHeader('ABOUT', 'menu', pageSectionOne);
+        pageSectionOne.appendHeader('ABOUT', 'menu');
         pageHeader.classList = 'header small-header';
 
         pageBody.classList.remove('grid-background');
 
         let aboutTextSection = document.createElement('div');
         aboutTextSection.className = 'content-container about-text-container';
-        pageSectionOne.appendChild(aboutTextSection);
+        pageSectionOne.el.appendChild(aboutTextSection);
 
         let aboutText = document.createElement('p');
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ');
@@ -609,12 +671,13 @@ let displayPage = {
         let linkSection = document.createElement('div');
         linkSection.classList.add('content-container');
 
-        pageSectionTwo.appendChild(util.createBlueGridFiller());
+        // pageSectionTwo.el.appendChild(util.createBlueGridFiller());
+        pageSectionTwo.createGridFiller();
 
         function isMobileOrDesktop(){
             function appendLinks(){
                 linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
-                pageSectionOne.append(linkSection)
+                pageSectionOne.el.append(linkSection)
                 feather.replace(); //updates icons as SVG's
             };
 
@@ -636,14 +699,14 @@ let displayPage = {
                 if(window.innerWidth > 1080){
                     pageHeaderSection.style.display = 'none';
                     aboutTextSection.className = 'content-container vertical-center about-text-container';
-                    pageContents.className = 'grid-container two-cols-50-50'
-                    pageSectionTwo.className = 'grid-container left-border'
+                    pageContents.el.className = 'grid-container two-cols-50-50'
+                    pageSectionTwo.el.className = 'grid-container left-border'
                     util.blueMenuBar(2);
                 }else{
                     pageHeaderSection.style.display = 'flex';
                     aboutTextSection.className = 'content-container about-text-container';
-                    pageContents.className = 'grid-container content-split'
-                    pageSectionTwo.className = ''
+                    pageContents.el.className = 'grid-container content-split'
+                    pageSectionTwo.el.className = ''
                 };
             };
     
@@ -663,16 +726,18 @@ let displayPage = {
     }, 
     
     contact: () => {
-        util.resetPage([pageSectionOne, pageSectionTwo]);
-
-        util.appendHeader('CONTACT', 'menu', pageSectionOne);
+        pageContents.reset()
+        pageSectionOne.clear()
+        pageSectionTwo.clear()
+        
+        pageSectionOne.appendHeader('CONTACT', 'menu');
         pageHeader.classList = 'header small-header';
 
         pageHeader.innerText = 'CONTACT';
         pageBody.classList.remove('grid-background');
 
         let contactFormContainer = document.createElement('div');
-        pageSectionOne.appendChild(contactFormContainer);
+        pageSectionOne.el.appendChild(contactFormContainer);
 
         let contactDescription = document.createElement('p');
         contactDescription.classList.add('body-text');
@@ -700,7 +765,8 @@ let displayPage = {
 
         contactForm.append(emailInput, subjectInput, messageInput, honeyPot, submitButton);
         contactFormContainer.appendChild(contactForm);
-        pageSectionTwo.appendChild(util.createBlueGridFiller());
+        // pageSectionTwo.appendChild(util.createBlueGridFiller());
+        pageSectionTwo.createGridFiller();
 
         contactForm.addEventListener('submit', (e) => {
 
@@ -739,14 +805,14 @@ let displayPage = {
             if(window.innerWidth > 1080){
                 pageHeaderSection.style.display = 'none';
                 contactFormContainer.className = 'content-container contact-form-container vertical-center';
-                pageContents.className = 'grid-container two-cols-75-25'
-                pageSectionTwo.className = 'grid-container left-border'
+                pageContents.el.className = 'grid-container two-cols-75-25'
+                pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(3);
             }else{
                 pageHeaderSection.style.display = 'flex';
                 contactFormContainer.className = 'content-container contact-form-container';
-                pageContents.className = 'grid-container content-split'
-                pageSectionTwo.className = ''
+                pageContents.el.className = 'grid-container content-split'
+                pageSectionTwo.el.className = ''
             };
         };
 

@@ -1,4 +1,4 @@
-class Section {
+class Page {
     constructor(el, parent, body, doc){
         this.el = el;
         this.parent = parent;
@@ -6,22 +6,24 @@ class Section {
         this.doc = doc;
     }
 
-    reset(){
+    clear(){
         this.el.innerHTML = '';
         this.el.className = '';
+    }
 
-        this.doc.style.overflow = 'visible'
+    reset(){
+        this.el.className = 'grid-container'
 
         this.body.style.overflow = 'visible'
         this.body.classList.add('grid-background');
-
-        this.parent.className = 'grid-container'
+        
+        this.doc.style.overflow = 'visible'
     }
 }
 
-class SectOne extends Section {
+class Section extends Page {
     constructor(el, headerSection, menu, header){
-        super(el, parent);
+        super(el);
 
         this.headerSection = headerSection;
         this.menu = menu;
@@ -38,18 +40,25 @@ class SectOne extends Section {
         this.headerSection.append(this.header, this.menu);
         this.el.appendChild(this.headerSection);
     }
-}
-
-class SectTwo extends Section {
-    constructor(){
-        super(el, parent);
-    }
 
     createGridFiller(){
         let gridFiller = document.createElement('div');
         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
         this.el.appendChild(gridFiller);
     }
-
 }
 
+// class SectTwo extends Page {
+//     constructor(el){
+//         super(el);
+//     }
+
+//     createGridFiller(){
+//         let gridFiller = document.createElement('div');
+//         gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
+//         this.el.appendChild(gridFiller);
+//     }
+
+// }
+
+// export { Page as Section, SectOne, SectTwo };
