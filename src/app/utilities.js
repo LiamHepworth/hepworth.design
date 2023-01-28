@@ -25,11 +25,11 @@ export let util = {
 
     createEl: (type, className, parent) => {
         const el = document.createElement(type);
-        el.className = className
+        el.className = className;
 
         if(parent !== undefined){
             parent.appendChild(el);
-        }
+        };
 
         return el; 
     },

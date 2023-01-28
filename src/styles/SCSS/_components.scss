@@ -241,6 +241,19 @@
     height: 100%;
 }
 
+//canvas styles
+
+canvas{
+    position: fixed;
+    top: 0;
+}
+
+.main-canvas{
+    height: 100%;
+    width: 100%;
+    // background-color: red;
+}
+
 //assets:
 
 .arrows{

@@ -224,10 +224,7 @@ let displayPage = {
         pageSectionOne.clear()
         pageSectionTwo.clear()
 
-        // let mainCanvas = util.createEl("canvas", "main-canvas");
         pageSectionTwo.el.appendChild( renderer.domElement );
-
-        // pageSectionTwo.appendChild(renderer.domElement);
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
