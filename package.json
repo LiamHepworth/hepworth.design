@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/LiamHepworth/Hepworth.design-portfolio#readme",
   "dependencies": {
-    "feather-icons": "^4.29.0"
+    "feather-icons": "^4.29.0",
+    "three": "^0.149.0"
   },
   "devDependencies": {
     "webpack": "^5.75.0",

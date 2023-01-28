@@ -1,3 +1,4 @@
+import { renderer } from "./app/mainScene"
 import { util } from "./app/utilities";
 import { projectList } from "./app/projectList";
 import { Page, Section } from "./app/pageSections";
@@ -222,6 +223,11 @@ let displayPage = {
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
+
+        // let mainCanvas = util.createEl("canvas", "main-canvas");
+        pageSectionTwo.el.appendChild( renderer.domElement );
+
+        // pageSectionTwo.appendChild(renderer.domElement);
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
