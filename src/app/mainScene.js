@@ -44,15 +44,28 @@ document.addEventListener("mousemove", function modelLookAt(e){
 const loader = new GLTFLoader();
 
 let monitorModel;
+let monitorModel2;
+let monitorModel3;
 
 loader.load(
     'assets/monitorModel.glb', 
     (gltfScene) => {
-        monitorModel = gltfScene;
-        monitorModel.scene.scale.set(4, 4, 4);
-        
-        scene.add(monitorModel.scene);
+        monitorModel = gltfScene.scene;
+        monitorModel2 = monitorModel.clone();
+        monitorModel3 = monitorModel.clone();
 
+        monitorModel.scale.set(4, 4, 4);
+        monitorModel.position.y = 6;
+
+        monitorModel2.scale.set(4, 4, 4);
+        monitorModel2.position.set(12, -2, 0);
+
+        monitorModel3.scale.set(4, 4, 4);
+        monitorModel3.position.set(-12, -2, 0);  
+
+        scene.add(monitorModel);
+        scene.add(monitorModel2);
+        scene.add(monitorModel3);
     }, 	
     (xhr) => {
 		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
@@ -60,10 +73,6 @@ loader.load(
 );
 
 //lighting
-
-// const ambLight = new THREE.AmbientLight(0xccdbd7, 0.3)
-// scene.add(ambLight);
-
 const pointLightRight = new THREE.PointLight(0xccdbd7, 2, 100)
 pointLightRight.position.set(10, 15, -10);
 pointLightRight.castShadow = true;
@@ -79,11 +88,6 @@ pointLightTop.position.set(0, 30, 20);
 pointLightTop.castShadow = true;
 scene.add(pointLightTop);
 
-// const sunLight = new THREE.DirectionalLight(0x64bad5, 0.5)
-// sunLight.position.set(0, 0, 10);
-// sunLight.rotation.set(0, 30, 0)
-// scene.add(sunLight);
-
 //clock and timer
 // var clock = new THREE.Clock();
 // var time = 0;
@@ -95,8 +99,9 @@ function animate() {
 
     //if statement to check whether model has loaded before applying rotation
     if(monitorModel){
-        // monitorModel.scene.rotation.y += 0.01;
-        monitorModel.scene.lookAt(pointOfIntersection);
+        monitorModel.lookAt(pointOfIntersection);
+        monitorModel2.lookAt(pointOfIntersection);
+        monitorModel3.lookAt(pointOfIntersection);
     }
 
     renderer.render( scene, camera );
