@@ -30,16 +30,33 @@ function onWindowResize(){
 //loading model
 const loader = new GLTFLoader();
 
+//mouseLook event - makes cubes look at cursor
+let plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -5); //use last control to define intersection distance from object
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
+let pointOfIntersection = new THREE.Vector3();
+
+document.addEventListener("mousemove", function modelLookAt(e){
+    mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    raycaster.ray.intersectPlane(plane, pointOfIntersection);
+});
+
 let monitorModel;
 
 loader.load(
-    'assets/Monitor.glb', (gltfScene) => {
+    'assets/monitorModel.glb', 
+    (gltfScene) => {
         monitorModel = gltfScene;
-        monitorModel.scene.rotation.y = 10;
         monitorModel.scene.scale.set(4, 4, 4);
         
         scene.add(monitorModel.scene);
-    }
+
+    }, 	
+    (xhr) => {
+		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
+	}
 );
 
 
@@ -86,7 +103,7 @@ loader.load(
 const ambLight = new THREE.AmbientLight(0xffffff, 0.1)
 scene.add(ambLight);
 
-const pointLight = new THREE.PointLight(0xffffff, 1, 50)
+const pointLight = new THREE.PointLight(0xffffff, 2, 50)
 pointLight.position.set(0, 10, 10);
 pointLight.castShadow = true;
 scene.add(pointLight);
@@ -102,7 +119,8 @@ function animate() {
 
     //if statement to check whether model has loaded before applying rotation
     if(monitorModel){
-        monitorModel.scene.rotation.y += 0.01;
+        // monitorModel.scene.rotation.y += 0.01;
+        monitorModel.scene.lookAt(pointOfIntersection);
     }
 
     renderer.render( scene, camera );
