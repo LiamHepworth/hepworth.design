@@ -1,23 +1,48 @@
 import { util } from './utilities';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader'
+import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass'
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader'
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
+import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass'
+import { LuminosityShader } from 'three/examples/jsm/shaders/LuminosityShader'
+import { ColorifyShader } from 'three/examples/jsm/shaders/ColorifyShader'
 
 //scene
 const scene = new THREE.Scene();
-// scene.fog = new THREE.Fog( 0x000000, 0.005, 100 );
 
 //renderer
 let mainCanvas = util.createEl("canvas", "main-canvas"); //define custom canvas
 export const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: mainCanvas});
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
-renderer.outputEncoding = THREE.sRGBEncoding;
-// document.body.appendChild( renderer.domElement );  //append scene to DOM, included in main file;
+// renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.5;
 
 //camera
 const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.set(0, 3, 50);
 camera.rotation.set(0, 0, 0);
+
+//post processing
+const renderScene = new RenderPass(scene, camera);
+const composer = new EffectComposer(renderer);
+composer.antialias = true;
+composer.addPass(renderScene);
+
+let LUTLoader = new LUTCubeLoader();
+LUTLoader.load('./assets/Lenox.CUBE', function(result){
+
+    let lutPass = new LUTPass();
+    lutPass.lut = result.texture;
+    lutPass.intensity = 0.2;
+
+    composer.addPass(lutPass);
+})
 
 //resize controls
 window.addEventListener( 'resize', onWindowResize, false );
@@ -74,19 +99,17 @@ loader.load(
 
 //lighting
 const pointLightRight = new THREE.PointLight(0xccdbd7, 2, 100)
-pointLightRight.position.set(10, 15, -10);
+pointLightRight.position.set(10, 15, -7);
 pointLightRight.castShadow = true;
 scene.add(pointLightRight);
 
 const pointLightLeft = new THREE.PointLight(0xccdbd7, 2, 100)
-pointLightLeft.position.set(-10, 15, -10);
+pointLightLeft.position.set(-10, 15, -7);
 pointLightLeft.castShadow = true;
 scene.add(pointLightLeft);
 
-const pointLightTop = new THREE.PointLight(0xccdbd7, 1, 100)
-pointLightTop.position.set(0, 30, 20);
-pointLightTop.castShadow = true;
-scene.add(pointLightTop);
+const light = new THREE.HemisphereLight( 0xc593c3, 0x728f99, 1.2 );
+scene.add( light );
 
 //clock and timer
 // var clock = new THREE.Clock();
@@ -95,7 +118,7 @@ scene.add(pointLightTop);
 
 //animate loop
 function animate() {
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
 
     //if statement to check whether model has loaded before applying rotation
     if(monitorModel){
@@ -104,7 +127,8 @@ function animate() {
         monitorModel3.lookAt(pointOfIntersection);
     }
 
-    renderer.render( scene, camera );
+    // renderer.render( scene, camera );
+    composer.render();
 };
 
 animate();
