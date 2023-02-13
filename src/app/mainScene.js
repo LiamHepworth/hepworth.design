@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 //scene
 const scene = new THREE.Scene();
+// scene.fog = new THREE.Fog( 0x000000, 0.005, 100 );
 
 //renderer
 let mainCanvas = util.createEl("canvas", "main-canvas"); //define custom canvas
@@ -23,14 +24,10 @@ window.addEventListener( 'resize', onWindowResize, false );
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
-//loading model
-const loader = new GLTFLoader();
-
-//mouseLook event - makes cubes look at cursor
+//mouseLook event - makes model look at cursor
 let plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -5); //use last control to define intersection distance from object
 let raycaster = new THREE.Raycaster();
 let mouse = new THREE.Vector2();
@@ -42,6 +39,9 @@ document.addEventListener("mousemove", function modelLookAt(e){
     raycaster.setFromCamera(mouse, camera);
     raycaster.ray.intersectPlane(plane, pointOfIntersection);
 });
+
+//loading model and adding to scene
+const loader = new GLTFLoader();
 
 let monitorModel;
 
@@ -59,54 +59,30 @@ loader.load(
 	}
 );
 
-
-//geometry and materials
-// const cubeGeom = new THREE.BoxGeometry( 6, 6, 6 );
-// const cubeMat = new THREE.MeshStandardMaterial( {color: 0x0092bd, side: THREE.DoubleSide} );
-
-// (function createModels(){
-
-//     let models = []
-    
-//     for(let i = 0; i < 3; i++){
-//         models[i] = new THREE.Mesh( cubeGeom, cubeMat );
-//         models[i].castShadow = true;
-//         scene.add(models[i]);
-//     }
-
-//     //FIX - doesn't resize on window.
-//     models[0].position.set(window.innerWidth/150, 0, 0)
-//     models[1].position.set(0, 5, 0)
-//     models[2].position.set(-Math.abs(window.innerWidth/150), 0, 0)
-
-
-//     //mouseLook event - makes cubes look at cursor
-//     let plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -5); //use last control to define intersection distance from object
-//     let raycaster = new THREE.Raycaster();
-//     let mouse = new THREE.Vector2();
-//     let pointOfIntersection = new THREE.Vector3();
-    
-//     document.addEventListener("mousemove", function cubeLookAt(e){
-//         mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-//         mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
-//         raycaster.setFromCamera(mouse, camera);
-//         raycaster.ray.intersectPlane(plane, pointOfIntersection);
-    
-//         for(let i = 0; i < 3; i++){
-//             models[i].lookAt(pointOfIntersection);
-//         }
-//     });
-// })();
-
 //lighting
 
-const ambLight = new THREE.AmbientLight(0xffffff, 0.1)
-scene.add(ambLight);
+// const ambLight = new THREE.AmbientLight(0xccdbd7, 0.3)
+// scene.add(ambLight);
 
-const pointLight = new THREE.PointLight(0xffffff, 2, 50)
-pointLight.position.set(0, 10, 10);
-pointLight.castShadow = true;
-scene.add(pointLight);
+const pointLightRight = new THREE.PointLight(0xccdbd7, 2, 100)
+pointLightRight.position.set(10, 15, -10);
+pointLightRight.castShadow = true;
+scene.add(pointLightRight);
+
+const pointLightLeft = new THREE.PointLight(0xccdbd7, 2, 100)
+pointLightLeft.position.set(-10, 15, -10);
+pointLightLeft.castShadow = true;
+scene.add(pointLightLeft);
+
+const pointLightTop = new THREE.PointLight(0xccdbd7, 1, 100)
+pointLightTop.position.set(0, 30, 20);
+pointLightTop.castShadow = true;
+scene.add(pointLightTop);
+
+// const sunLight = new THREE.DirectionalLight(0x64bad5, 0.5)
+// sunLight.position.set(0, 0, 10);
+// sunLight.rotation.set(0, 30, 0)
+// scene.add(sunLight);
 
 //clock and timer
 // var clock = new THREE.Clock();
