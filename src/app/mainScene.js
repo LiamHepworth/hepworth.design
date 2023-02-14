@@ -6,7 +6,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader'
 import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
-import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 
 //scene
 const scene = new THREE.Scene();
@@ -84,19 +84,29 @@ let monitorModel;
 let monitorModel2;
 let monitorModel3;
 
-// let mapTest = new THREE.Texture('./assets/mapTest.png')
-const mapTest = new THREE.TextureLoader().load( './assets/mapTest.png' );
+let designVideo = document.createElement('video')
+designVideo.loop = true;
+designVideo.muted = 'muted';
+designVideo.controls = false;
+designVideo.src = './assets/THREE-Videos/design.mp4'
+designVideo.load();
+designVideo.play();
+
+let designVideoTexture = new THREE.VideoTexture(designVideo);
+designVideoTexture.flipY = false;
+
+// const mapTest = new THREE.TextureLoader().load( './assets/mapTest.png' );
 
 let screenMat = new THREE.MeshStandardMaterial({
     color : new THREE.Color(0x000000),
     roughness : 0.7,
     emissive :  new THREE.Color(0x0092bd),
     emissiveIntensity : 1,
-    emissiveMap : mapTest,
+    emissiveMap : designVideoTexture,
 });
 
 loader.load(
-    'assets/monitorModel.glb', 
+    'assets/monitor.glb', 
     (gltfScene) => {
         monitorModel = gltfScene.scene;
         monitorModel2 = monitorModel.clone();
