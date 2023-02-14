@@ -5,7 +5,6 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader'
 import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass'
 
@@ -19,7 +18,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.5;
+renderer.toneMappingExposure = 1.7;
 
 //camera
 const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -32,12 +31,8 @@ const composer = new EffectComposer(renderer);
 composer.antialias = true;
 composer.addPass(renderScene);
 
-// let resolution = new THREE.Vector2(window.innerWidth, window.innerHeight)
-// let bloom = new UnrealBloomPass(resolution, 0.15, 0.1, 0.05);
-// composer.addPass(bloom);
-
 let LUTLoader = new LUTCubeLoader();
-LUTLoader.load('./assets/3D-LUT/Cobi 3.CUBE', function(result){
+LUTLoader.load('./assets/3D-LUT/Neon 770.CUBE', function(result){
 
     let lutPass = new LUTPass();
     lutPass.lut = result.texture;
@@ -89,11 +84,15 @@ let monitorModel;
 let monitorModel2;
 let monitorModel3;
 
+// let mapTest = new THREE.Texture('./assets/mapTest.png')
+const mapTest = new THREE.TextureLoader().load( './assets/mapTest.png' );
+
 let screenMat = new THREE.MeshStandardMaterial({
     color : new THREE.Color(0x000000),
     roughness : 0.7,
     emissive :  new THREE.Color(0x0092bd),
     emissiveIntensity : 1,
+    emissiveMap : mapTest,
 });
 
 loader.load(
