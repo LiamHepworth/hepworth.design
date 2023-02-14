@@ -35,14 +35,24 @@ composer.antialias = true;
 composer.addPass(renderScene);
 
 let LUTLoader = new LUTCubeLoader();
-LUTLoader.load('./assets/Lenox.CUBE', function(result){
+LUTLoader.load('./assets/3D-LUT/Cobi 3.CUBE', function(result){
 
     let lutPass = new LUTPass();
     lutPass.lut = result.texture;
-    lutPass.intensity = 0.2;
+    lutPass.intensity = 0.5;
 
     composer.addPass(lutPass);
 })
+
+let fxaaPass = new ShaderPass( FXAAShader );
+
+let pixelRatio = renderer.getPixelRatio();
+let fxaaUniforms = fxaaPass.material.uniforms;
+
+fxaaUniforms[ 'resolution' ].value.x = 1 / ( window.innerWidth * pixelRatio );
+fxaaUniforms[ 'resolution' ].value.y = 1 / ( window.innerHeight * pixelRatio );
+
+composer.addPass(fxaaPass);
 
 //resize controls
 window.addEventListener( 'resize', onWindowResize, false );
@@ -50,6 +60,11 @@ function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize( window.innerWidth, window.innerHeight );
+
+    pixelRatio = renderer.getPixelRatio();
+
+    fxaaUniforms[ 'resolution' ].value.x = 1 / ( window.innerWidth * pixelRatio );
+    fxaaUniforms[ 'resolution' ].value.y = 1 / ( window.innerHeight * pixelRatio );
 }
 
 //mouseLook event - makes model look at cursor
@@ -91,6 +106,9 @@ loader.load(
         scene.add(monitorModel);
         scene.add(monitorModel2);
         scene.add(monitorModel3);
+
+        // let screen = monitor.traverse()
+        console.log(monitorModel)
     }, 	
     (xhr) => {
 		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
@@ -108,7 +126,7 @@ pointLightLeft.position.set(-10, 15, -7);
 pointLightLeft.castShadow = true;
 scene.add(pointLightLeft);
 
-const light = new THREE.HemisphereLight( 0xc593c3, 0x728f99, 1.2 );
+const light = new THREE.HemisphereLight( 0xe8bee6, 0x8facda, 1.2 );
 scene.add( light );
 
 //clock and timer
