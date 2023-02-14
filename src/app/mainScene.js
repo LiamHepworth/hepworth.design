@@ -5,11 +5,9 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader'
 import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass'
-import { CopyShader } from 'three/examples/jsm/shaders/CopyShader'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass'
-import { LuminosityShader } from 'three/examples/jsm/shaders/LuminosityShader'
-import { ColorifyShader } from 'three/examples/jsm/shaders/ColorifyShader'
 
 //scene
 const scene = new THREE.Scene();
@@ -19,7 +17,7 @@ let mainCanvas = util.createEl("canvas", "main-canvas"); //define custom canvas
 export const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: mainCanvas});
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
-// renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.5;
 
@@ -34,12 +32,16 @@ const composer = new EffectComposer(renderer);
 composer.antialias = true;
 composer.addPass(renderScene);
 
+// let resolution = new THREE.Vector2(window.innerWidth, window.innerHeight)
+// let bloom = new UnrealBloomPass(resolution, 0.15, 0.1, 0.05);
+// composer.addPass(bloom);
+
 let LUTLoader = new LUTCubeLoader();
 LUTLoader.load('./assets/3D-LUT/Cobi 3.CUBE', function(result){
 
     let lutPass = new LUTPass();
     lutPass.lut = result.texture;
-    lutPass.intensity = 0.5;
+    lutPass.intensity = 0.2;
 
     composer.addPass(lutPass);
 })
@@ -87,6 +89,13 @@ let monitorModel;
 let monitorModel2;
 let monitorModel3;
 
+let screenMat = new THREE.MeshStandardMaterial({
+    color : new THREE.Color(0x000000),
+    roughness : 0.7,
+    emissive :  new THREE.Color(0x0092bd),
+    emissiveIntensity : 1,
+});
+
 loader.load(
     'assets/monitorModel.glb', 
     (gltfScene) => {
@@ -107,8 +116,26 @@ loader.load(
         scene.add(monitorModel2);
         scene.add(monitorModel3);
 
-        // let screen = monitor.traverse()
+        console.log(gltfScene)
         console.log(monitorModel)
+
+        monitorModel.traverse(child => {
+            if(child.name == 'Screen_01'){
+                child.material = screenMat;
+            }
+        })
+
+        monitorModel2.traverse(child => {
+            if(child.name == 'Screen_01'){
+                child.material = screenMat;
+            }
+        })
+
+        monitorModel3.traverse(child => {
+            if(child.name == 'Screen_01'){
+                child.material = screenMat;
+            }
+        })
     }, 	
     (xhr) => {
 		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
