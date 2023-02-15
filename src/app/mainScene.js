@@ -1,12 +1,6 @@
 import { util } from './utilities';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { LUTCubeLoader } from 'three/examples/jsm/loaders/LUTCubeLoader'
-import { LUTPass } from 'three/examples/jsm/postprocessing/LUTPass'
-import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader'
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 
 //scene
 const scene = new THREE.Scene();
@@ -25,43 +19,12 @@ const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.inner
 camera.position.set(0, 3, 50);
 camera.rotation.set(0, 0, 0);
 
-//post processing
-const renderScene = new RenderPass(scene, camera);
-const composer = new EffectComposer(renderer);
-composer.antialias = true;
-composer.addPass(renderScene);
-
-// let LUTLoader = new LUTCubeLoader();
-// LUTLoader.load('./assets/3D-LUT/Neon 770.CUBE', function(result){
-
-//     let lutPass = new LUTPass();
-//     lutPass.lut = result.texture;
-//     lutPass.intensity = 0.2;
-
-//     composer.addPass(lutPass);
-// })
-
-let fxaaPass = new ShaderPass( FXAAShader );
-
-let pixelRatio = renderer.getPixelRatio();
-let fxaaUniforms = fxaaPass.material.uniforms;
-
-fxaaUniforms[ 'resolution' ].value.x = 1 / ( window.innerWidth * pixelRatio );
-fxaaUniforms[ 'resolution' ].value.y = 1 / ( window.innerHeight * pixelRatio );
-
-composer.addPass(fxaaPass);
-
 //resize controls
 window.addEventListener( 'resize', onWindowResize, false );
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize( window.innerWidth, window.innerHeight );
-
-    pixelRatio = renderer.getPixelRatio();
-
-    fxaaUniforms[ 'resolution' ].value.x = 1 / ( window.innerWidth * pixelRatio );
-    fxaaUniforms[ 'resolution' ].value.y = 1 / ( window.innerHeight * pixelRatio );
 }
 
 //mouseLook event - makes model look at cursor
@@ -90,7 +53,6 @@ function createVidTexture(src, n){
     vid.muted = 'muted';
     vid.controls = false;
     vid.src = src;
-
     vid.load();
     vid.play();
 
@@ -100,16 +62,21 @@ function createVidTexture(src, n){
     return final;
 }
 
+function createMat(){
+    let mat = new THREE.MeshStandardMaterial({
+        color : new THREE.Color(0x000000),
+        roughness : 0.7,
+        emissive :  new THREE.Color(0x0092bd),
+        emissiveIntensity : 0.7,
+    });
+
+    return mat;
+}
+
 let designVideoTexture = createVidTexture('./assets/THREE-Videos/design.mp4');
 let threeDVideoTexture = createVidTexture('./assets/THREE-Videos/3D.mp4');
+let codeVideoTexture = createVidTexture('./assets/THREE-Videos/Code.mp4');
 
-let screenMat = new THREE.MeshStandardMaterial({
-    color : new THREE.Color(0x000000),
-    roughness : 0.7,
-    emissive :  new THREE.Color(0x0092bd),
-    emissiveIntensity : 1,
-    emissiveMap : designVideoTexture,
-});
 
 loader.load(
     'assets/monitor.glb', 
@@ -127,30 +94,28 @@ loader.load(
         monitorModel3.scale.set(4, 4, 4);
         monitorModel3.position.set(-12, -2, 0);  
 
-        scene.add(monitorModel);
-        scene.add(monitorModel2);
-        scene.add(monitorModel3);
-
-        console.log(gltfScene)
-        console.log(monitorModel)
-
         monitorModel.traverse(child => {
             if(child.name == 'Screen_01'){
-                child.material = screenMat;
+                child.material = createMat();
+                child.material.emissiveMap = threeDVideoTexture;
             }
         })
-
+        
         monitorModel2.traverse(child => {
             if(child.name == 'Screen_01'){
-                child.material = screenMat;
+                child.material = createMat();
+                child.material.emissiveMap = codeVideoTexture;
+            }
+        })
+        
+        monitorModel3.traverse(child => {
+            if(child.name == 'Screen_01'){
+                child.material = createMat();
+                child.material.emissiveMap = designVideoTexture;
             }
         })
 
-        monitorModel3.traverse(child => {
-            if(child.name == 'Screen_01'){
-                child.material = screenMat;
-            }
-        })
+        scene.add(monitorModel, monitorModel2, monitorModel3);
     }, 	
     (xhr) => {
 		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
@@ -158,17 +123,17 @@ loader.load(
 );
 
 //lighting
-const pointLightRight = new THREE.PointLight(0x0092bd, 2, 100)
+const pointLightRight = new THREE.PointLight(0x0092bd, 1, 100)
 pointLightRight.position.set(10, 15, -7);
 pointLightRight.castShadow = true;
 scene.add(pointLightRight);
 
-const pointLightLeft = new THREE.PointLight(0xf71bbd, 2, 100)
+const pointLightLeft = new THREE.PointLight(0xf71bbd, 1, 100)
 pointLightLeft.position.set(-10, 15, -7);
 pointLightLeft.castShadow = true;
 scene.add(pointLightLeft);
 
-const light = new THREE.HemisphereLight( 0xa4e0d1, 0x8facda, 1.2 );
+const light = new THREE.HemisphereLight( 0xa4e0d1, 0x8facda, 0.2 );
 scene.add( light );
 
 //clock and timer
@@ -187,8 +152,8 @@ function animate() {
         monitorModel3.lookAt(pointOfIntersection);
     }
 
-    // renderer.render( scene, camera );
-    composer.render();
+    renderer.render( scene, camera );
+    // composer.render();
 };
 
 animate();
