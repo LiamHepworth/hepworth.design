@@ -31,15 +31,15 @@ const composer = new EffectComposer(renderer);
 composer.antialias = true;
 composer.addPass(renderScene);
 
-let LUTLoader = new LUTCubeLoader();
-LUTLoader.load('./assets/3D-LUT/Neon 770.CUBE', function(result){
+// let LUTLoader = new LUTCubeLoader();
+// LUTLoader.load('./assets/3D-LUT/Neon 770.CUBE', function(result){
 
-    let lutPass = new LUTPass();
-    lutPass.lut = result.texture;
-    lutPass.intensity = 0.2;
+//     let lutPass = new LUTPass();
+//     lutPass.lut = result.texture;
+//     lutPass.intensity = 0.2;
 
-    composer.addPass(lutPass);
-})
+//     composer.addPass(lutPass);
+// })
 
 let fxaaPass = new ShaderPass( FXAAShader );
 
@@ -84,18 +84,24 @@ let monitorModel;
 let monitorModel2;
 let monitorModel3;
 
-let designVideo = document.createElement('video')
-designVideo.loop = true;
-designVideo.muted = 'muted';
-designVideo.controls = false;
-designVideo.src = './assets/THREE-Videos/design.mp4'
-designVideo.load();
-designVideo.play();
+function createVidTexture(src, n){
+    let vid = document.createElement('video');
+    vid.loop = true;
+    vid.muted = 'muted';
+    vid.controls = false;
+    vid.src = src;
 
-let designVideoTexture = new THREE.VideoTexture(designVideo);
-designVideoTexture.flipY = false;
+    vid.load();
+    vid.play();
 
-// const mapTest = new THREE.TextureLoader().load( './assets/mapTest.png' );
+    let final = new THREE.VideoTexture(vid);
+    final.flipY = false;
+
+    return final;
+}
+
+let designVideoTexture = createVidTexture('./assets/THREE-Videos/design.mp4');
+let threeDVideoTexture = createVidTexture('./assets/THREE-Videos/3D.mp4');
 
 let screenMat = new THREE.MeshStandardMaterial({
     color : new THREE.Color(0x000000),
@@ -152,17 +158,17 @@ loader.load(
 );
 
 //lighting
-const pointLightRight = new THREE.PointLight(0xccdbd7, 2, 100)
+const pointLightRight = new THREE.PointLight(0x0092bd, 2, 100)
 pointLightRight.position.set(10, 15, -7);
 pointLightRight.castShadow = true;
 scene.add(pointLightRight);
 
-const pointLightLeft = new THREE.PointLight(0xccdbd7, 2, 100)
+const pointLightLeft = new THREE.PointLight(0xf71bbd, 2, 100)
 pointLightLeft.position.set(-10, 15, -7);
 pointLightLeft.castShadow = true;
 scene.add(pointLightLeft);
 
-const light = new THREE.HemisphereLight( 0xe8bee6, 0x8facda, 1.2 );
+const light = new THREE.HemisphereLight( 0xa4e0d1, 0x8facda, 1.2 );
 scene.add( light );
 
 //clock and timer
