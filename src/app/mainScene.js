@@ -33,7 +33,7 @@ const loader = new GLTFLoader();
 let monitorModel;
 let models = [];
 
-function createVidTexture(src, n){
+function createVidTexture(src, _n){
     let vid = document.createElement('video');
     vid.loop = true;
     vid.muted = 'muted';
@@ -82,9 +82,9 @@ loader.load(
         models.push(monitorModel.clone());
         models.push(monitorModel.clone());
 
-        models[0].position.y = 6;
-        models[1].position.y = -2;
-        models[2].position.y = -2;
+        // models[0].position.y = 6;
+        // models[1].position.y = -2;
+        // models[2].position.y = -2;
         modelBreakPoints();
 
         applyMat(0, threeDVideoTexture);
@@ -99,53 +99,74 @@ loader.load(
 	}
 );
 
+function desktopSceneSetup(spacing){
+    scene.rotation.y = 0;
+    camera.position.set(0, 3, 50);
+    camera.rotation.set(0, 0, 0);
+    controls.enabled = false;
+
+    models[0].position.x = 0;
+    models[1].position.x = window.innerWidth/spacing;
+    models[2].position.x = - window.innerWidth/spacing;
+
+    models[0].position.y = 6;
+    models[1].position.y = -2;
+    models[2].position.y = -2;
+}
+
+function MobileSceneSetup(axis, mNaught, mOne, mTwo){
+    controls.enabled = true;
+    controls.enablePan = false;
+
+    models[0].rotation.set(0.05, 0.32, 0.02);
+    models[1].rotation.set(-0.05, 0.32, -0.17);
+    models[2].rotation.set(0.23, -0.32, 0.02);
+
+    models[0].position[axis] = mNaught;
+    models[1].position[axis] = mOne;
+    models[2].position[axis]= mTwo;
+}
+
+function mobileModelRotation(){
+    //offset all rotation coords to give more of a random look.
+    models[0].rotation.set(0.05, 0.32, 0.02);
+    models[1].rotation.set(-0.05, 0.32, -0.17);
+    models[2].rotation.set(0.23, -0.32, 0.02);
+}
+
 //responsive models
 window.addEventListener('resize', modelBreakPoints);
 function modelBreakPoints(){
-        if(window.innerWidth > 2000){
-            models.forEach(model => model.scale.set(1.1, 1.1, 1.1))
-            models[1].position.x = window.innerWidth/167;
-            models[2].position.x = - window.innerWidth/167;
-        }
-        else if(window.innerWidth > 1600){
-            models.forEach(model => model.scale.set(1, 1, 1))
-            models[1].position.x = window.innerWidth/160;
-            models[2].position.x = - window.innerWidth/160; 
-        }
-        else if(window.innerWidth > 1080){
-         models.forEach(model => model.scale.set(0.9, 0.9, 0.9))
-            models[1].position.x = window.innerWidth/150;
-            models[2].position.x = - window.innerWidth/150; 
-        }
-        else if(window.innerWidth > 800 && window.innerHeight > 700){
-         models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
-            models[1].position.x = window.innerWidth/150;
-            models[2].position.x = - window.innerWidth/150; 
-        }
-        else if(window.innerWidth > 600){
-            models[1].position.x = window.innerWidth/120;
-            models[2].position.x = - window.innerWidth/120; 
-            models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
-
-            models[0].rotation.set(0.05, 0.32, 0.02);
-            models[0].position.y = 5;
-            models[1].rotation.set(-0.05, 0.32, -0.17);
-            models[1].position.y = -4;
-            models[2].rotation.set(0.23, -0.32, 0.02);
-            models[2].position.y = -3;
-        }
-        else{
-            models.forEach(model => model.scale.set(0.7, 0.7, 0.7))
-            models[1].position.x = window.innerWidth/100;
-            models[2].position.x = - window.innerWidth/100; 
-
-            models[0].rotation.set(0.05, 0.32, 0.02);
-            models[0].position.y = 4;
-            models[1].rotation.set(-0.05, 0.32, -0.17);
-            models[1].position.y = -3;
-            models[2].rotation.set(0.23, -0.32, 0.02);
-            models[2].position.y = -2;
-        }
+    if(window.innerWidth > 2000){
+        models.forEach(model => model.scale.set(1.1, 1.1, 1.1))
+        desktopSceneSetup(167)
+    }
+    else if(window.innerWidth > 1600){
+        models.forEach(model => model.scale.set(1, 1, 1))
+        desktopSceneSetup(160)
+    }
+    else if(window.innerWidth > 1080){
+        models.forEach(model => model.scale.set(0.9, 0.9, 0.9))
+        desktopSceneSetup(150)
+    }
+    else if(window.innerWidth > 800){
+        models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
+        mobileModelRotation()
+        MobileSceneSetup('y', 5, -4, -3)
+        MobileSceneSetup('x', 0, 5, -5)
+    }
+    else if(window.innerWidth > 600){
+        models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
+        mobileModelRotation()
+        MobileSceneSetup('y', 6.5, 0, -6.5)
+        MobileSceneSetup('x', 2, -3.5, 3.5)
+    }
+    else{
+        models.forEach(model => model.scale.set(0.7, 0.7, 0.7))
+        mobileModelRotation()
+        MobileSceneSetup('y', 4.5, -1.5, -7)
+        MobileSceneSetup('x', 1.5, -1.7, 1.3)
+    }
 }
 
 //mouseLook event + Raycaster - makes model look at cursor
@@ -184,35 +205,28 @@ const light = new THREE.HemisphereLight( 0xa4e0d1, 0x8facda, 0.2 );
 scene.add( light );
 
 //clock and timer
-// var clock = new THREE.Clock();
-// var time = 0;
-// var delta = 0;
+let clock = new THREE.Clock();
+let time = 0;
+let delta = 0;
 
 //animate loop
 function animate() {
     requestAnimationFrame(animate);
 
+    delta = clock.getDelta();
+    time += delta;
+
     //if statement to check whether model has loaded before applying rotation
     if(monitorModel){
         if(window.innerWidth < 1080){
-            // models[0].lookAt(0, 3, 50);
-            // models[0].rotation.x += 0.0001
-            // models[0].rotation.y += 0.001
-            scene.rotation.y += 0.001
-            controls.enabled = true;
-            controls.enablePan = false;
+            scene.rotation.y = -0.5 + Math.abs(Math.sin(time/3) * 0.5);
             controls.update()
         } else {
-            scene.rotation.y = 0;
             models[0].lookAt(pointOfIntersection);
             models[1].lookAt(pointOfIntersection);
             models[2].lookAt(pointOfIntersection);
-            camera.position.set(0, 3, 50);
-            camera.rotation.set(0, 0, 0);
-            controls.enabled = false;
         }
     }
-
     renderer.render( scene, camera );
 };
 
