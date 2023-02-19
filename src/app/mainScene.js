@@ -19,33 +19,11 @@ const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.inner
 camera.position.set(0, 3, 50);
 camera.rotation.set(0, 0, 0);
 
-//resize controls
-window.addEventListener( 'resize', onWindowResize, false );
-function onWindowResize(){
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-}
-
-//mouseLook event - makes model look at cursor
-let plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -5); //use last control to define intersection distance from object
-let raycaster = new THREE.Raycaster();
-let mouse = new THREE.Vector2();
-let pointOfIntersection = new THREE.Vector3();
-
-document.addEventListener("mousemove", function modelLookAt(e){
-    mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-    mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
-    raycaster.ray.intersectPlane(plane, pointOfIntersection);
-});
-
 //loading model and adding to scene
 const loader = new GLTFLoader();
 
 let monitorModel;
-let monitorModel2;
-let monitorModel3;
+let models = [];
 
 function createVidTexture(src, n){
     let vid = document.createElement('video');
@@ -75,52 +53,115 @@ function createMat(){
 
 let designVideoTexture = createVidTexture('./assets/THREE-Videos/design.mp4');
 let threeDVideoTexture = createVidTexture('./assets/THREE-Videos/3D.mp4');
-let codeVideoTexture = createVidTexture('./assets/THREE-Videos/Code.mp4');
-
+let codeVideoTexture = createVidTexture('./assets/THREE-Videos/Code.mp4'); 
 
 loader.load(
     'assets/monitor.glb', 
     (gltfScene) => {
+
         monitorModel = gltfScene.scene;
-        monitorModel2 = monitorModel.clone();
-        monitorModel3 = monitorModel.clone();
 
-        monitorModel.scale.set(4, 4, 4);
-        monitorModel.position.y = 6;
+        models.push(monitorModel)
+        models.push(monitorModel.clone())
+        models.push(monitorModel.clone())
 
-        monitorModel2.scale.set(4, 4, 4);
-        monitorModel2.position.set(12, -2, 0);
+        models[0].position.y = 6;
+        models[1].position.y = -2;
+        models[2].position.y = -2;
+        modelBreakPoints();
 
-        monitorModel3.scale.set(4, 4, 4);
-        monitorModel3.position.set(-12, -2, 0);  
-
-        monitorModel.traverse(child => {
+        models[0].traverse(child => {
             if(child.name == 'Screen_01'){
                 child.material = createMat();
                 child.material.emissiveMap = threeDVideoTexture;
             }
         })
-        
-        monitorModel2.traverse(child => {
+
+        models[1].traverse(child => {
             if(child.name == 'Screen_01'){
                 child.material = createMat();
                 child.material.emissiveMap = codeVideoTexture;
             }
         })
-        
-        monitorModel3.traverse(child => {
+
+        models[2].traverse(child => {
             if(child.name == 'Screen_01'){
                 child.material = createMat();
                 child.material.emissiveMap = designVideoTexture;
             }
         })
 
-        scene.add(monitorModel, monitorModel2, monitorModel3);
+        scene.add(models[0], models[1], models[2]);
+        return models;
     }, 	
     (xhr) => {
 		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
 	}
 );
+
+//responsive models
+window.addEventListener('resize', modelBreakPoints);
+function modelBreakPoints(){
+        if(window.innerWidth > 2000){
+            models.forEach(model => model.scale.set(1.1, 1.1, 1.1))
+            models[1].position.x = window.innerWidth/167;
+            models[2].position.x = - window.innerWidth/167;
+        }
+        else if(window.innerWidth > 1600){
+            models.forEach(model => model.scale.set(1, 1, 1))
+            models[1].position.x = window.innerWidth/160;
+            models[2].position.x = - window.innerWidth/160; 
+        }
+        else if(window.innerWidth > 1080){
+            models[1].visible = true;
+            models[2].visible = true;
+            models[0].position.y = 6;
+    
+            models.forEach(model => model.scale.set(0.9, 0.9, 0.9))
+            models[1].position.x = window.innerWidth/150;
+            models[2].position.x = - window.innerWidth/150; 
+        }
+        else if(window.innerWidth > 800 && window.innerHeight > 700){
+            models[1].visible = true;
+            models[2].visible = true;
+            models[0].position.y = 6;
+    
+            models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
+            models[1].position.x = window.innerWidth/150;
+            models[2].position.x = - window.innerWidth/150; 
+        }
+        else if(window.innerWidth > 600){
+            models[1].visible = false;
+            models[2].visible = false;
+            models[0].position.y = 3;
+    
+            models[0].scale.set(1, 1, 1);
+        }
+        else if(window.innerWidth < 600){
+            models[0].scale.set(.8, .8, .8);
+        }
+}
+
+//mouseLook event + Raycaster - makes model look at cursor
+let plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -5); //use last control to define intersection distance from object
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
+let pointOfIntersection = new THREE.Vector3();
+
+document.addEventListener("mousemove", function modelLookAt(e){
+    mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+    raycaster.ray.intersectPlane(plane, pointOfIntersection);
+});
+
+//responsive scene
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    console.log('resized')
+});
 
 //lighting
 const pointLightRight = new THREE.PointLight(0x0092bd, 1, 100)
@@ -147,13 +188,12 @@ function animate() {
 
     //if statement to check whether model has loaded before applying rotation
     if(monitorModel){
-        monitorModel.lookAt(pointOfIntersection);
-        monitorModel2.lookAt(pointOfIntersection);
-        monitorModel3.lookAt(pointOfIntersection);
+        models[0].lookAt(pointOfIntersection);
+        models[1].lookAt(pointOfIntersection);
+        models[2].lookAt(pointOfIntersection);
     }
 
     renderer.render( scene, camera );
-    // composer.render();
 };
 
 animate();
