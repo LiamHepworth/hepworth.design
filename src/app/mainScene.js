@@ -18,16 +18,15 @@ renderer.toneMappingExposure = 1.7;
 //camera
 const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.set(0, 3, 50);
-// camera.rotation.set(0, 0, 0);
 
 //controls
 let controls = new OrbitControls( camera, renderer.domElement );
 controls.enabled = false;
+//Sets min/max anglies for vertical orbiting
 controls.minPolarAngle = 0.8;
 controls.maxPolarAngle = Math.PI/1.5;
-// controls.update();
 
-//loading model and adding to scene
+//loading model, adding to scene, setting positions and rotations etc
 const loader = new GLTFLoader();
 
 let monitorModel;
@@ -75,17 +74,13 @@ let codeVideoTexture = createVidTexture('./assets/THREE-Videos/Code.mp4');
 loader.load(
     'assets/monitor.glb', 
     (gltfScene) => {
-
         monitorModel = gltfScene.scene;
 
         models.push(monitorModel);
         models.push(monitorModel.clone());
         models.push(monitorModel.clone());
 
-        // models[0].position.y = 6;
-        // models[1].position.y = -2;
-        // models[2].position.y = -2;
-        modelBreakPoints();
+        responsiveScene();
 
         applyMat(0, threeDVideoTexture);
         applyMat(1, codeVideoTexture);
@@ -134,38 +129,43 @@ function mobileModelRotation(){
     models[2].rotation.set(0.23, -0.32, 0.02);
 }
 
-//responsive models
-window.addEventListener('resize', modelBreakPoints);
-function modelBreakPoints(){
+//responsive models + scene
+window.addEventListener('resize', responsiveScene);
+function responsiveScene(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
     if(window.innerWidth > 2000){
-        models.forEach(model => model.scale.set(1.1, 1.1, 1.1))
-        desktopSceneSetup(167)
+        models.forEach(model => model.scale.set(1.1, 1.1, 1.1));
+        desktopSceneSetup(167);
     }
     else if(window.innerWidth > 1600){
-        models.forEach(model => model.scale.set(1, 1, 1))
-        desktopSceneSetup(160)
+        models.forEach(model => model.scale.set(1, 1, 1));
+        desktopSceneSetup(160);
     }
     else if(window.innerWidth > 1080){
-        models.forEach(model => model.scale.set(0.9, 0.9, 0.9))
-        desktopSceneSetup(150)
+        models.forEach(model => model.scale.set(0.9, 0.9, 0.9));
+        desktopSceneSetup(150);
     }
     else if(window.innerWidth > 800){
-        models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
-        mobileModelRotation()
-        MobileSceneSetup('y', 5, -4, -3)
-        MobileSceneSetup('x', 0, 5, -5)
+        models.forEach(model => model.scale.set(0.8, 0.8, 0.8));
+        mobileModelRotation();
+        MobileSceneSetup('y', 5, -4, -3);
+        MobileSceneSetup('x', 0, 5, -5);
     }
     else if(window.innerWidth > 600){
-        models.forEach(model => model.scale.set(0.8, 0.8, 0.8))
-        mobileModelRotation()
-        MobileSceneSetup('y', 6.5, 0, -6.5)
-        MobileSceneSetup('x', 2, -3.5, 3.5)
+        models.forEach(model => model.scale.set(0.8, 0.8, 0.8));
+        mobileModelRotation();
+        MobileSceneSetup('y', 6.5, 0, -6.5);
+        MobileSceneSetup('x', 2, -3.5, 3.5);
     }
     else{
-        models.forEach(model => model.scale.set(0.7, 0.7, 0.7))
-        mobileModelRotation()
-        MobileSceneSetup('y', 4.5, -1.5, -7)
-        MobileSceneSetup('x', 1.5, -1.7, 1.3)
+        models.forEach(model => model.scale.set(0.7, 0.7, 0.7));
+        mobileModelRotation();
+        MobileSceneSetup('y', 4.5, -1.5, -7);
+        MobileSceneSetup('x', 1.5, -1.7, 1.3);
     }
 }
 
@@ -182,21 +182,13 @@ document.addEventListener("mousemove", function modelLookAt(e){
     raycaster.ray.intersectPlane(plane, pointOfIntersection);
 });
 
-//responsive scene
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    console.log('resized')
-});
-
 //lighting
-const pointLightRight = new THREE.PointLight(0x0092bd, 1, 100)
+const pointLightRight = new THREE.PointLight(0x0092bd, 1, 100);
 pointLightRight.position.set(10, 15, -7);
 pointLightRight.castShadow = true;
 scene.add(pointLightRight);
 
-const pointLightLeft = new THREE.PointLight(0xf71bbd, 1, 100)
+const pointLightLeft = new THREE.PointLight(0xf71bbd, 1, 100);
 pointLightLeft.position.set(-10, 15, -7);
 pointLightLeft.castShadow = true;
 scene.add(pointLightLeft);
