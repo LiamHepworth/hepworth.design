@@ -230,7 +230,8 @@ let displayPage = {
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
-        util.colouredBackdrop(pageHeader);
+        util.colouredBackdrop(pageHeader, 5, 2.5);
+        // util.colouredBackdrop(pageHeader, 5, 2.5, 1.05, 1.3);
         
         function checkHomeWindowSize(){
             if(window.innerWidth > 1080){
@@ -452,6 +453,8 @@ let displayPage = {
     about: () => {
         pageContents.reset()
         pageSectionOne.clear()
+        pageSectionOne.el.className = 'center-children'
+
         pageSectionTwo.clear()
         
         pageSectionOne.appendHeader('ABOUT', 'menu', 'header small-header');
@@ -459,6 +462,7 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         const aboutTextSection = util.createEl('div', 'content-container about-text-container', pageSectionOne.el)
+        util.colouredBackdrop(aboutTextSection, 5, 2.5);
 
         const aboutText = util.createEl('p', 'body-text', aboutTextSection)
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ');
@@ -491,7 +495,7 @@ let displayPage = {
             function checkAboutWindowSize(){
                 if(window.innerWidth > 1080){
                     pageHeaderSection.style.display = 'none';
-                    aboutTextSection.className = 'content-container vertical-center about-text-container';
+                    aboutTextSection.className = 'content-container about-text-container';
                     pageContents.el.className = 'grid-container two-cols-50-50'
                     pageSectionTwo.el.className = 'grid-container left-border'
                     util.blueMenuBar(2, menuContainer);

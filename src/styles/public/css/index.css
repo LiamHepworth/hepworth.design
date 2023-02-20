@@ -421,9 +421,9 @@ canvas {
     overflow-x: hidden;
   }
   .about-text-container {
+    margin: auto;
     min-height: fit-content;
     width: 35vw;
-    left: 25% !important;
     padding: 2rem;
     border: 2px solid #cccccc;
     align-items: center;
@@ -630,6 +630,10 @@ canvas {
 
 .solid-blue {
   background: #0092bd !important;
+}
+
+.center-children {
+  align-self: center;
 }
 
 .content-split {

@@ -449,9 +449,10 @@ canvas{
     }
 
     .about-text-container{
+        margin: auto;
         min-height: fit-content;
         width: 35vw;
-        left: 25% !important;
+        // left: 25% !important;
         padding: 2rem;
         border: 2px solid $lineColourLight;
         align-items: center;

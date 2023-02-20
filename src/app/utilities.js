@@ -49,33 +49,33 @@ export let util = {
         }
     },
 
-    colouredBackdrop: (el) => {
+    colouredBackdrop: (el, offsetX, offsetY, pWidth, pHeight) => {
         let backdrop = document.createElement('div');
         backdrop.className = 'backdrop';
 
-        let elWidth, elHeight, elPos, elMarginTop;
+        let elWidth, elHeight, elPos;
 
-        function setConstants(){
+        function updateConstants(){
             elWidth = el.offsetWidth;
             elHeight = el.offsetHeight;
             elPos = el.getBoundingClientRect();
-            elMarginTop = getComputedStyle(el).marginTop
         };
-        setConstants();
+        updateConstants();
         
         function setStyles(){
-            backdrop.style.height = elHeight/1.3 + 'px';
             backdrop.style.width = elWidth/1.05 + 'px';
-            backdrop.style.left = elPos.left/16 + 1.5 + 'rem'
-            // backdrop.style.marginTop = elMarginTop + 10
+            backdrop.style.height = elHeight/1.3 + 'px';
+            backdrop.style.left = elPos.left/16 + offsetX + 'rem'
+            backdrop.style.marginTop = offsetY + 'rem'; 
         };
         setStyles();
     
         window.onresize = () => {
-            setConstants()
+            updateConstants()
             setStyles();
         }
 
+        //needs to check whether one has already been inserted, otherwise it just inserts infinite ones
         el.parentNode.insertBefore(backdrop, el.nextElementSibling);
     }
 };
