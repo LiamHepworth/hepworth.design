@@ -51,6 +51,10 @@ body {
   background-color: #171717;
 }
 
+.gradient {
+  background-color: linear-gradient(0deg, #0092bd 0%, #171717 44%, #171717 68%, #171717 100%);
+}
+
 .grid-background {
   background-image: url("/src/assets/bg_grid.svg");
   background-size: 135rem;
@@ -71,7 +75,6 @@ body {
   color: #cccccc;
   font-family: "input-sans", Helvetica, sans-serif;
   font-size: 2.3rem;
-  line-height: 3rem;
   text-shadow: 0 0 10px rgba(204, 204, 204, 0.3568627451);
   overflow-wrap: break-word;
 }
@@ -390,7 +393,6 @@ canvas {
     max-width: fit-content;
     overflow-wrap: normal;
     font-size: 6.9rem;
-    line-height: 3rem;
     margin: 0 auto;
   }
   .small-header {
@@ -401,7 +403,7 @@ canvas {
     margin: 0 auto 1.8rem auto;
   }
   .large-header-section {
-    margin-top: 11rem;
+    margin-top: 8.3rem;
   }
   .outer-content-container {
     text-align: center;

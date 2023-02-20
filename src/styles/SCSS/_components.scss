@@ -30,6 +30,10 @@
     background-color: $bgColourDark;
 }
 
+.gradient{
+    background-color: linear-gradient(0deg, #0092bd 0%, #171717 44%, #171717 68%, #171717 100%); 
+}
+
 //bg grids 
 
 .grid-background{
@@ -55,7 +59,7 @@
     color: $lineColourLight;
     font-family: $inputSans;
     font-size: $headerTextSize;
-    line-height: $headerLineHeight; 
+    // line-height: $headerLineHeight; 
     text-shadow: 0 0 10px $textOuterGlow;
     overflow-wrap: break-word;
 }
@@ -414,7 +418,7 @@ canvas{
         max-width: fit-content;
         overflow-wrap: normal;
         font-size: calc($headerTextSize * 3);
-        line-height: $headerLineHeight; 
+        // line-height: $headerLineHeight; 
         margin: 0 auto;
     }
 
@@ -429,7 +433,7 @@ canvas{
     }
 
     .large-header-section{
-        margin-top: 11rem;
+        margin-top: 8.3rem;
     }
 
     .outer-content-container{

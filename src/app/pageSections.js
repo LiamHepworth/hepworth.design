@@ -1,9 +1,7 @@
 class Page {
-    constructor(el, parent, body, doc){
+    constructor(el, parent){
         this.el = el;
         this.parent = parent;
-        this.body = body;
-        this.doc = doc;
     }
 
     clear(){
@@ -14,20 +12,19 @@ class Page {
     reset(){
         this.el.className = 'grid-container'
 
-        this.body.style.overflow = 'visible'
-        this.body.classList.add('grid-background');
-        
-        this.doc.style.overflow = 'visible'
+        document.querySelector('body').style.overflow = 'visible'
+        document.querySelector('body').classList.add('grid-background');
+        document.querySelector('html').style.overflow = 'visible'
     }
 }
 
 class Section extends Page {
-    constructor(el, headerSection, menu, header){
+    constructor(el, headerSection, header, menu){
         super(el);
 
         this.headerSection = headerSection;
-        this.menu = menu;
         this.header = header;
+        this.menu = menu;
     }
 
     appendHeader(headerText, menuStatus, headerClass){
@@ -44,7 +41,8 @@ class Section extends Page {
 
     createGridFiller(){
         let gridFiller = document.createElement('div');
-        gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
+        gridFiller.classList.add('grid-background', 'grid-grow');
+        // gridFiller.classList.add('blue', 'grid-background', 'grid-light', 'grid-grow');
         this.el.appendChild(gridFiller);
     }
 }

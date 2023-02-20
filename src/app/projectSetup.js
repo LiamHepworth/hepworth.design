@@ -1,7 +1,7 @@
 import { util } from "./utilities";
 
 export class Project {
-    constructor(name, type, images, videos, embeddedContent, description, thumbnail) {
+    constructor(name, type, images, videos, embeddedContent, description, thumbnail){
         this.name = name;
         this.type = type;
         this.images = images;

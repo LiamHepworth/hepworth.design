@@ -12,10 +12,11 @@ const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
 
-let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody, fullPage);
-let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, burgerMenuMobile, pageHeader)
+let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody);
+let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, pageHeader, burgerMenuMobile)
 let pageSectionTwo = new Section(document.querySelector('#page-section-two'))
 
+//cursor styling
 document.addEventListener('mousemove', (e) => {
     let x = e.clientX - 15;
     let y = e.clientY - 15;
@@ -31,7 +32,7 @@ const socialLinks = {
 
 function navCreation(){
 
-    //name+text for each menu item
+    //name + text for each menu item
     const menuListNames = ['home', 'work', 'about', 'contact']
 
     //mobile nav header elements
@@ -54,7 +55,7 @@ function navCreation(){
         for(let i = 0; i < menuListNames.length; i++){
             navList.menuListItems[i] = document.createElement('li');
             navList.menuListItems[i].innerText = menuListNames[i].toUpperCase();
-            navList.menuListItems[i].setAttribute('id', 'menu-item')
+            // navList.menuListItems[i].setAttribute('id', 'menu-item') //FIX - ID applied to multiple items - may not be needed.
             navList.menuList.appendChild(navList.menuListItems[i]);
         };
     })();
@@ -220,14 +221,16 @@ navCreation();
 
 let displayPage = {
     home: () => {
-        pageContents.reset()
-        pageSectionOne.clear()
-        pageSectionTwo.clear()
+        pageContents.reset();
+        pageSectionOne.clear();
+        pageSectionTwo.clear();
 
-        pageSectionTwo.el.appendChild( renderer.domElement );
+        //append THREE scene
+        pageSectionTwo.el.appendChild(renderer.domElement);
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
+        util.colouredBackdrop(pageHeader);
         
         function checkHomeWindowSize(){
             if(window.innerWidth > 1080){
