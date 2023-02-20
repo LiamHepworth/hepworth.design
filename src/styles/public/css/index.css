@@ -370,6 +370,13 @@ canvas {
   display: none;
 }
 
+.backdrop {
+  background-color: #0092bd;
+  box-shadow: 0 0 5px 0 #0092bd;
+  position: absolute;
+  z-index: -1;
+}
+
 @media (min-width: 720px) {
   .gallery {
     align-self: center;

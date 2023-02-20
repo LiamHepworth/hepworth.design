@@ -50,34 +50,32 @@ export let util = {
     },
 
     colouredBackdrop: (el) => {
-        let elWidth = el.offsetWidth;
-        let elHeight = el.offsetHeight;
-        let elPos = el.getBoundingClientRect();
-        let elMarginTop = getComputedStyle(el).marginTop
-        let elMarginBottom = getComputedStyle(el).marginBottom
-        let elMarginLeft = getComputedStyle(el).marginLeft
-        let elMarginRight = getComputedStyle(el).marginRight
-        // let elLeft = el.offsetLeft
-        // let elTop = el.offsetTop;
-
         let backdrop = document.createElement('div');
-        backdrop.style.height = elHeight + 'px';
-        backdrop.style.width = elWidth + 'px';
-        // backdrop.style.height = '100px';
-        // backdrop.style.width = '100px';
-        backdrop.style.backgroundColor = '#0092bd';
-        backdrop.style.boxShadow = '0 0 50px 15px #0092bd;'
-        backdrop.style.position = 'absolute'
-        backdrop.style.left = elPos.left/16 + 'rem'
-        backdrop.style.marginTop = elMarginTop
+        backdrop.className = 'backdrop';
+
+        let elWidth, elHeight, elPos, elMarginTop;
+
+        function setConstants(){
+            elWidth = el.offsetWidth;
+            elHeight = el.offsetHeight;
+            elPos = el.getBoundingClientRect();
+            elMarginTop = getComputedStyle(el).marginTop
+        };
+        setConstants();
         
-        // backdrop.style.top = elPos.top/16 + 'rem'
+        function setStyles(){
+            backdrop.style.height = elHeight/1.3 + 'px';
+            backdrop.style.width = elWidth/1.05 + 'px';
+            backdrop.style.left = elPos.left/16 + 1.5 + 'rem'
+            // backdrop.style.marginTop = elMarginTop + 10
+        };
+        setStyles();
+    
+        window.onresize = () => {
+            setConstants()
+            setStyles();
+        }
 
-        // backdrop.style.marginBottom = elMarginBottom
-        // backdrop.style.marginLeft = elMarginLeft
-        // backdrop.style.marginRight = elMarginRight
-
-        // el.appendChild(backdrop);
         el.parentNode.insertBefore(backdrop, el.nextElementSibling);
     }
 };

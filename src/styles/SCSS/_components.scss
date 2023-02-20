@@ -255,10 +255,6 @@ canvas{
 .main-canvas{
     height: 100%;
     width: 100%;
-    // filter: contrast(80%);
-    // shape-image-threshold: 100;
-    // mix-blend-mode: lighten;
-    // background-color: red;
 }
 
 //assets:
@@ -385,6 +381,13 @@ canvas{
     nav{
         display: none;
     }
+}
+
+.backdrop{
+    background-color: $bgColourBlue;
+    box-shadow: 0 0 5px 0 $bgColourBlue;
+    position: absolute;
+    z-index: -1;
 }
 
 
