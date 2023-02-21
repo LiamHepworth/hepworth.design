@@ -53,19 +53,21 @@ export let util = {
         let backdrop = document.createElement('div');
         backdrop.className = 'backdrop';
 
-        let elWidth, elHeight, elPos;
+        let elWidth, elHeight, elPos, elTop;
 
         function updateConstants(){
             elWidth = el.offsetWidth/16 * pWidth;
             elHeight = el.offsetHeight/16 * pHeight;
             elPos = el.getBoundingClientRect();
+
+            elTop = - Math.abs(elHeight) + offsetY
         };
         
         function setStyles(){
             backdrop.style.width = elWidth + 'rem';
             backdrop.style.height = elHeight + 'rem';
             backdrop.style.left = elPos.left/16 + offsetX + 'rem';
-            backdrop.style.marginTop = offsetY + 'rem';
+            backdrop.style.marginTop = elTop + 'rem';
         };
 
         function applyBackdrop(){

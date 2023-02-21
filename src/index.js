@@ -231,7 +231,7 @@ let displayPage = {
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
 
-        const homeHeaderColour = util.createBackdrop(pageHeader, -3.7, 4, 1.1, 0.5);
+        const homeHeaderColour = util.createBackdrop(pageHeader, -3.7, 8.3, 1.1, 0.5);
         pageHeaderSection.appendChild(homeHeaderColour);
         
         function checkHomeWindowSize(){
@@ -264,7 +264,7 @@ let displayPage = {
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
 
-        const workHeaderColour = util.createBackdrop(pageHeader, -3.7, 4, 1.1, 0.5);
+        const workHeaderColour = util.createBackdrop(pageHeader, -3.7, 8.3, 1.1, 0.5);
         pageHeaderSection.appendChild(workHeaderColour);
         
         pageSectionOne.el.classList.add('work-header-container');
@@ -463,7 +463,6 @@ let displayPage = {
     about: () => {
         pageContents.reset()
         pageSectionOne.clear()
-        pageSectionOne.el.className = 'center-children'
         pageSectionTwo.clear()
         
         pageSectionOne.appendHeader('ABOUT', 'menu', 'header small-header');
@@ -471,7 +470,7 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         const aboutTextSection = util.createEl('div', 'content-container about-text-container', pageSectionOne.el)
-        const aboutTextColour = util.createBackdrop(aboutTextSection,  1, -16.3, 1, 1);
+        const aboutTextColour = util.createBackdrop(aboutTextSection,  1, 1, 1, 1);
         aboutTextSection.parentNode.insertBefore(aboutTextColour, aboutTextSection.nextSibling);
 
         
@@ -510,6 +509,7 @@ let displayPage = {
                     aboutTextSection.className = 'content-container about-text-container';
                     aboutTextColour.style.display = 'block'
                     pageContents.el.className = 'grid-container two-cols-50-50'
+                    pageSectionOne.el.className = 'center-children'
                     pageSectionTwo.el.className = 'grid-container left-border'
                     util.blueMenuBar(2, menuContainer);
                 }else{
@@ -517,6 +517,7 @@ let displayPage = {
                     aboutTextSection.className = 'content-container about-text-container';
                     aboutTextColour.style.display = 'none'
                     pageContents.el.className = 'grid-container content-split'
+                    pageSectionOne.el.className = ''
                     pageSectionTwo.el.className = ''
                 };
             };
@@ -550,7 +551,7 @@ let displayPage = {
         let contactFormContainer = document.createElement('div');
         pageSectionOne.el.appendChild(contactFormContainer);
 
-        const contactFormColour = util.createBackdrop(contactFormContainer,  1.2, -27.8, 1, 1);
+        const contactFormColour = util.createBackdrop(contactFormContainer,  1.2, 1, 1, 1);
         contactFormContainer.parentNode.insertBefore(contactFormColour, contactFormContainer.nextSibling);
 
         let contactDescription = document.createElement('p');
@@ -619,12 +620,14 @@ let displayPage = {
                 pageHeaderSection.style.display = 'none';
                 pageSectionOne.el.className = 'center-children'
                 contactFormContainer.className = 'content-container contact-form-container';
+                contactFormColour.style.display = 'block'
                 pageContents.el.className = 'grid-container two-cols-75-25'
                 pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(3, menuContainer);
             }else{
                 pageHeaderSection.style.display = 'flex';
                 contactFormContainer.className = 'content-container contact-form-container';
+                contactFormColour.style.display = 'none'
                 pageContents.el.className = 'grid-container content-split'
                 pageSectionTwo.el.className = ''
                 pageSectionOne.el.className = ''
