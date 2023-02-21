@@ -423,7 +423,8 @@ canvas {
   .about-text-container {
     margin: auto;
     min-height: fit-content;
-    width: 35vw;
+    min-width: 25rem;
+    max-width: 40rem;
     padding: 2rem;
     border: 2px solid #cccccc;
     align-items: center;
@@ -634,6 +635,7 @@ canvas {
 
 .center-children {
   align-self: center;
+  padding: 0 1rem;
 }
 
 .content-split {

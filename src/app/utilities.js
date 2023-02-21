@@ -56,26 +56,33 @@ export let util = {
         let elWidth, elHeight, elPos;
 
         function updateConstants(){
-            elWidth = el.offsetWidth;
-            elHeight = el.offsetHeight;
+            elWidth = el.offsetWidth/16 * pWidth;
+            elHeight = el.offsetHeight/16 * pHeight;
             elPos = el.getBoundingClientRect();
         };
-        updateConstants();
         
         function setStyles(){
-            backdrop.style.width = elWidth/1.05 + 'px';
-            backdrop.style.height = elHeight/1.3 + 'px';
-            backdrop.style.left = elPos.left/16 + offsetX + 'rem'
-            backdrop.style.marginTop = offsetY + 'rem'; 
+            backdrop.style.width = elWidth + 'rem';
+            backdrop.style.height = elHeight + 'rem';
+            backdrop.style.left = elPos.left/16 + offsetX + 'rem';
+            backdrop.style.marginTop = offsetY + 'rem';
         };
-        setStyles();
-    
+
+        function applyBackdrop(){
+            updateConstants()
+            setStyles();
+            el.parentNode.insertBefore(backdrop, el.nextElementSibling);
+        }
+
+        //to ensure width/height/left are accurate for elements which use responsive units
+        window.setTimeout(applyBackdrop, 1);
+
         window.onresize = () => {
             updateConstants()
             setStyles();
         }
 
         //needs to check whether one has already been inserted, otherwise it just inserts infinite ones
-        el.parentNode.insertBefore(backdrop, el.nextElementSibling);
+        return backdrop;
     }
 };
