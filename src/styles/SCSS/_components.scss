@@ -397,7 +397,6 @@ canvas{
     .gallery{
         align-self: center;
         align-items: start;
-        // grid-template-columns: repeat(2, 40vw);
         gap: 2rem;
 
         margin: 0 auto 8rem auto;
@@ -413,7 +412,6 @@ canvas{
 
 @media (min-width: 780px){
     .gallery{
-        // grid-template-columns: repeat(2, 42vw);
         gap: 3rem;
         margin: auto;
 
@@ -425,9 +423,21 @@ canvas{
         margin: 3.2rem 5rem 2rem 5rem;
     }
 
-    // #primary-header{
-    //     max-width: fit-content;
-    // }
+    .about-text-container{
+        padding: 0 3rem;
+    }
+
+    .content-container{
+        padding: 0 3rem;
+    }
+
+    .expanding-text-container{
+        padding: 0 3rem;
+    }
+
+    .project-image-container{
+        padding: 1.5rem 3rem;
+    }
 }
 
 @media (min-width: 1080px){
@@ -441,13 +451,16 @@ canvas{
         max-width: fit-content;
         overflow-wrap: normal;
         font-size: calc($headerTextSize * 2);
-        line-height: $headerLineHeight * 2.8; 
         margin: 0 auto;
     }
 
     .small-header{
         font-size: 2.3rem !important;
         margin: 0 !important;
+    }
+
+    .large-header-alignment{
+        line-height: calc($headerLineHeight * 2.8); 
     }
 
     // containers
@@ -513,6 +526,7 @@ canvas{
         margin: 0;
         max-height: fit-content;
         color: #ffffff00;
+        padding: 0;
 
         :nth-child(2){
             padding-bottom: 2rem;
@@ -704,11 +718,11 @@ canvas{
 
 @media (min-width: 1425px){
     #primary-header{
-        // max-width: fit-content;
-        // overflow-wrap: normal;
         font-size: calc($headerTextSize * 3);
-        line-height: $headerLineHeight * 2.85; 
-        // margin: 0 auto;
+    }
+
+    .large-header-alignment{
+        line-height: calc($headerLineHeight * 2.8); 
     }
 }
 

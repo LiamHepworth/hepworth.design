@@ -402,6 +402,18 @@ canvas {
   .header-section {
     margin: 3.2rem 5rem 2rem 5rem;
   }
+  .about-text-container {
+    padding: 0 3rem;
+  }
+  .content-container {
+    padding: 0 3rem;
+  }
+  .expanding-text-container {
+    padding: 0 3rem;
+  }
+  .project-image-container {
+    padding: 1.5rem 3rem;
+  }
 }
 @media (min-width: 1080px) {
   .cursor {
@@ -411,12 +423,14 @@ canvas {
     max-width: fit-content;
     overflow-wrap: normal;
     font-size: 4.6rem;
-    line-height: 8.4rem;
     margin: 0 auto;
   }
   .small-header {
     font-size: 2.3rem !important;
     margin: 0 !important;
+  }
+  .large-header-alignment {
+    line-height: 8.4rem;
   }
   .header-section {
     margin: 0 auto 1.8rem auto;
@@ -470,6 +484,7 @@ canvas {
     margin: 0;
     max-height: fit-content;
     color: rgba(255, 255, 255, 0);
+    padding: 0;
   }
   .expanding-text-container :nth-child(2) {
     padding-bottom: 2rem;
@@ -620,7 +635,9 @@ canvas {
 @media (min-width: 1425px) {
   #primary-header {
     font-size: 6.9rem;
-    line-height: 8.55rem;
+  }
+  .large-header-alignment {
+    line-height: 8.4rem;
   }
 }
 @media (min-width: 2500px) {

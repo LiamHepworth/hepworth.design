@@ -229,9 +229,9 @@ let displayPage = {
         pageSectionTwo.el.appendChild(renderer.domElement);
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
-        pageHeader.classList = 'header'
+        pageHeader.classList = 'header large-header-alignment'
 
-        const homeHeaderColour = util.createBackdrop(pageHeader, -3.7, 8.3, 1.1, 0.5);
+        const homeHeaderColour = util.createBackdrop(pageHeader, 0, 7.3, 1, 0.4);
         pageHeaderSection.appendChild(homeHeaderColour);
         
         function checkHomeWindowSize(){
@@ -262,9 +262,9 @@ let displayPage = {
         pageSectionTwo.clear()
         
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
-        pageHeader.classList = 'header'
+        pageHeader.classList = 'header large-header-alignment'
 
-        const workHeaderColour = util.createBackdrop(pageHeader, -3.7, 8.3, 1.1, 0.5);
+        const workHeaderColour = util.createBackdrop(pageHeader, 0, 7.3, 1, 0.4);
         pageHeaderSection.appendChild(workHeaderColour);
         
         pageSectionOne.el.classList.add('work-header-container');
