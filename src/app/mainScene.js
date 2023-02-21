@@ -90,7 +90,7 @@ loader.load(
         return models;
     }, 	
     (xhr) => {
-		console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
+		// console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
 	}
 );
 

@@ -28,6 +28,8 @@ class Section extends Page {
     }
 
     appendHeader(headerText, menuStatus, headerClass){
+        this.headerSection.innerHTML = '';
+
         this.headerSection.className = 'header-section'
         this.headerSection.style.display = 'flex';
 

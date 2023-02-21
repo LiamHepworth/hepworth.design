@@ -230,16 +230,20 @@ let displayPage = {
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
-        // util.colouredBackdrop(pageHeader, 5, 2.5,);
-        util.colouredBackdrop(pageHeader, 5, 2.5, 1, 1);
+
+        const homeHeaderColour = util.createBackdrop(pageHeader, -3.7, 4, 1.1, 0.5);
+        pageHeaderSection.appendChild(homeHeaderColour);
         
         function checkHomeWindowSize(){
             if(window.innerWidth > 1080){
                 pageSectionOne.el.classList.add('work-header-container');
                 pageHeaderSection.className = 'large-header-section'
+                homeHeaderColour.style.display = 'block'
                 util.blueMenuBar(0, menuContainer);
+                
             }else{
                 pageHeaderSection.className = 'header-section'
+                homeHeaderColour.style.display = 'none'
             };
         };
 
@@ -259,6 +263,9 @@ let displayPage = {
         
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header'
+
+        const workHeaderColour = util.createBackdrop(pageHeader, -3.7, 4, 1.1, 0.5);
+        pageHeaderSection.appendChild(workHeaderColour);
         
         pageSectionOne.el.classList.add('work-header-container');
         pageSectionTwo.el.classList.add('grid-container', 'gallery', 'work-page-container');
@@ -280,9 +287,12 @@ let displayPage = {
         function checkWorkWindowSize(){
             if(window.innerWidth > 1080){
                 pageHeaderSection.className = 'large-header-section'
+                workHeaderColour.style.display = 'block'
+                
                 util.blueMenuBar(1, menuContainer);
             }else{
                 pageHeaderSection.className = 'header-section'
+                workHeaderColour.style.display = 'none'
             };
         };
 
@@ -454,7 +464,6 @@ let displayPage = {
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionOne.el.className = 'center-children'
-
         pageSectionTwo.clear()
         
         pageSectionOne.appendHeader('ABOUT', 'menu', 'header small-header');
@@ -462,11 +471,13 @@ let displayPage = {
         pageBody.classList.remove('grid-background');
 
         const aboutTextSection = util.createEl('div', 'content-container about-text-container', pageSectionOne.el)
+        const aboutTextColour = util.createBackdrop(aboutTextSection,  1, -16.3, 1, 1);
+        aboutTextSection.parentNode.insertBefore(aboutTextColour, aboutTextSection.nextSibling);
+
         
         const aboutText = util.createEl('p', 'body-text', aboutTextSection)
         aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ');
 
-        util.colouredBackdrop(aboutTextSection, 1, -16.3, 1, 1);
 
         const linkSection = util.createEl('div', 'content-container')
 
@@ -497,12 +508,14 @@ let displayPage = {
                 if(window.innerWidth > 1080){
                     pageHeaderSection.style.display = 'none';
                     aboutTextSection.className = 'content-container about-text-container';
+                    aboutTextColour.style.display = 'block'
                     pageContents.el.className = 'grid-container two-cols-50-50'
                     pageSectionTwo.el.className = 'grid-container left-border'
                     util.blueMenuBar(2, menuContainer);
                 }else{
                     pageHeaderSection.style.display = 'flex';
                     aboutTextSection.className = 'content-container about-text-container';
+                    aboutTextColour.style.display = 'none'
                     pageContents.el.className = 'grid-container content-split'
                     pageSectionTwo.el.className = ''
                 };
@@ -536,6 +549,9 @@ let displayPage = {
 
         let contactFormContainer = document.createElement('div');
         pageSectionOne.el.appendChild(contactFormContainer);
+
+        const contactFormColour = util.createBackdrop(contactFormContainer,  1.2, -27.8, 1, 1);
+        contactFormContainer.parentNode.insertBefore(contactFormColour, contactFormContainer.nextSibling);
 
         let contactDescription = document.createElement('p');
         contactDescription.classList.add('body-text');
@@ -601,7 +617,8 @@ let displayPage = {
         function checkContactWindowSize(){
             if(window.innerWidth > 1080){
                 pageHeaderSection.style.display = 'none';
-                contactFormContainer.className = 'content-container contact-form-container vertical-center';
+                pageSectionOne.el.className = 'center-children'
+                contactFormContainer.className = 'content-container contact-form-container';
                 pageContents.el.className = 'grid-container two-cols-75-25'
                 pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(3, menuContainer);
@@ -610,6 +627,7 @@ let displayPage = {
                 contactFormContainer.className = 'content-container contact-form-container';
                 pageContents.el.className = 'grid-container content-split'
                 pageSectionTwo.el.className = ''
+                pageSectionOne.el.className = ''
             };
         };
 

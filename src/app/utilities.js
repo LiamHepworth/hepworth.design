@@ -49,7 +49,7 @@ export let util = {
         }
     },
 
-    colouredBackdrop: (el, offsetX, offsetY, pWidth, pHeight) => {
+    createBackdrop: (el, offsetX, offsetY, pWidth, pHeight) => {
         let backdrop = document.createElement('div');
         backdrop.className = 'backdrop';
 
@@ -69,20 +69,17 @@ export let util = {
         };
 
         function applyBackdrop(){
-            updateConstants()
+            updateConstants();
             setStyles();
-            el.parentNode.insertBefore(backdrop, el.nextElementSibling);
         }
-
+        
         //to ensure width/height/left are accurate for elements which use responsive units
-        window.setTimeout(applyBackdrop, 1);
-
+        window.setTimeout(applyBackdrop, 2);
+        
         window.onresize = () => {
-            updateConstants()
-            setStyles();
+            applyBackdrop();
         }
-
-        //needs to check whether one has already been inserted, otherwise it just inserts infinite ones
+        
         return backdrop;
-    }
+    }, 
 };

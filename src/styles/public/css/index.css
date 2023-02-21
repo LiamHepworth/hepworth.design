@@ -372,9 +372,10 @@ canvas {
 
 .backdrop {
   background-color: #0092bd;
-  box-shadow: 0 0 5px 0 #0092bd;
+  box-shadow: 0 0 3px 5px #0092bd;
   position: absolute;
   z-index: -1;
+  mix-blend-mode: screen;
 }
 
 @media (min-width: 720px) {
@@ -430,9 +431,9 @@ canvas {
     align-items: center;
   }
   .contact-form-container {
-    min-height: fit-content;
-    width: 52vw;
-    left: 36% !important;
+    min-width: 25rem;
+    max-width: 60rem;
+    margin: auto;
     padding: 2rem;
     border: 2px solid #cccccc;
     align-items: center;
