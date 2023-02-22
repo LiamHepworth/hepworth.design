@@ -497,38 +497,37 @@ canvas {
   .project-image-container {
     overflow-y: hidden;
     display: flex;
+    flex-direction: column;
     padding: 0;
-    scroll-snap-type: x mandatory;
   }
   .project-image-container :first-child {
-    padding-left: 60px;
-    scroll-snap-align: start;
+    margin-top: 6rem;
   }
   .project-image-container :last-child {
-    padding-right: 10vw;
-    scroll-snap-align: end;
+    margin-bottom: 6rem;
   }
   .project-image-container img {
-    height: 80vh;
-    width: auto;
-    margin-top: auto;
+    height: auto;
+    width: 70vw;
+    margin-top: 2rem;
     margin-bottom: auto;
-    scroll-snap-align: center;
   }
-  .project-image-container .videos {
-    height: 80vh;
-    width: auto;
-    margin-top: auto;
+  .project-image-container video {
+    height: auto;
+    width: 70vw;
+    margin-top: 2rem;
     margin-bottom: auto;
   }
   .proj-text-container {
-    position: relative;
+    position: sticky;
+    top: 0;
+    height: 100vh;
     padding-top: 25vh;
-    padding-left: 8vw;
-    padding-right: 2vw;
+    padding-left: 7vw;
+    padding-right: 1vw;
   }
   #page-section-two .carousel-arrows {
-    display: block;
+    display: none;
     position: absolute;
     bottom: 5.5%;
     font-size: 36pt !important;
@@ -638,6 +637,48 @@ canvas {
   }
   .large-header-alignment {
     line-height: 8.4rem;
+  }
+  .proj-text-container {
+    position: relative;
+    padding-top: 25vh;
+    padding-left: 7vw;
+    padding-right: 2vw;
+  }
+  .project-image-container {
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    scroll-snap-type: x mandatory;
+  }
+  .project-image-container :first-child {
+    padding-left: 60px;
+    scroll-snap-align: start;
+    margin: auto;
+  }
+  .project-image-container :last-child {
+    padding-right: 10vw;
+    scroll-snap-align: end;
+    margin: auto;
+  }
+  .project-image-container img {
+    height: 80vh;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    scroll-snap-align: center;
+  }
+  .project-image-container .videos {
+    height: 80vh;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  #page-section-two .carousel-arrows {
+    display: block;
+    position: absolute;
+    bottom: 5.5%;
+    font-size: 36pt !important;
   }
 }
 @media (min-width: 2500px) {

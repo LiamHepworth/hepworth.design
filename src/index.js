@@ -351,11 +351,11 @@ let displayPage = {
         (function carouselImageFocus(){
 
         //create side arrows to scroll carousel for desktop layout
-        const leftArrow = util.createEl('span', 'material-symbols-outlined arrows carousel-arrows');
+        const leftArrow = util.createEl('span', 'arrows carousel-arrows material-symbols-outlined');
         leftArrow.innerText = 'expand_more';
         leftArrow.style.transform = 'rotate(90deg)'; 
         
-        const rightArrow = util.createEl('span', 'material-symbols-outlined arrows carousel-arrows');
+        const rightArrow = util.createEl('span', 'arrows carousel-arrows material-symbols-outlined');
         rightArrow.innerText = 'expand_more';
         rightArrow.style.transform = 'rotate(-90deg)'; 
 

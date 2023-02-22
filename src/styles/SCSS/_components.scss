@@ -544,46 +544,46 @@ canvas{
     .project-image-container{
         overflow-y: hidden;
         display: flex;
+        flex-direction: column;
         padding: 0;
-        scroll-snap-type: x mandatory;
 
         :first-child{
-            padding-left: 60px;
-            scroll-snap-align: start;
+            margin-top: 6rem;
         }
 
         :last-child{
-            padding-right: 10vw;
-            scroll-snap-align: end;
+            margin-bottom: 6rem;
         }
 
         img{
-            height: 80vh;
-            width: auto;
-            margin-top: auto;
+            height: auto;
+            width: 70vw;
+            margin-top: 2rem;
             margin-bottom: auto;
-            scroll-snap-align: center;
         }
 
-        .videos{
-            height: 80vh;
-            width: auto;
-            margin-top: auto;
+        video{
+            height: auto;
+            width: 70vw;
+            margin-top: 2rem;
             margin-bottom: auto;
         }
     }
 
     .proj-text-container{
-        position: relative;
-        padding-top: 25vh;
-        padding-left: 8vw;
-        padding-right: 2vw;
-    }
+        position: sticky;
+        top: 0;
+        height: 100vh;
 
+        padding-top: 25vh;
+        padding-left: 7vw;
+        padding-right: 1vw;
+    }
+    
     #page-section-two{
 
         .carousel-arrows{
-            display: block;
+            display: none;
             position: absolute;
             bottom: 5.5%;
             font-size: 36pt !important;
@@ -723,6 +723,58 @@ canvas{
 
     .large-header-alignment{
         line-height: calc($headerLineHeight * 2.8); 
+    }
+
+    .proj-text-container{
+        position: relative;
+        padding-top: 25vh;
+        padding-left: 7vw;
+        padding-right: 2vw;
+    }
+
+    .project-image-container{
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        scroll-snap-type: x mandatory;
+
+        :first-child{
+            padding-left: 60px;
+            scroll-snap-align: start;
+            margin: auto;
+        }
+        
+        :last-child{
+            padding-right: 10vw;
+            scroll-snap-align: end;
+            margin: auto;
+        }
+
+        img{
+            height: 80vh;
+            width: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+            scroll-snap-align: center;
+        }
+
+        .videos{
+            height: 80vh;
+            width: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+
+    #page-section-two{
+
+        .carousel-arrows{
+            display: block;
+            position: absolute;
+            bottom: 5.5%;
+            font-size: 36pt !important;
+        }
     }
 }
 
