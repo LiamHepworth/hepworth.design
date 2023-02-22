@@ -106,7 +106,7 @@
         padding: $containerSideMargins;
     }
     
-    .videos{
+    video{
         width: 100%;
         margin: 1rem auto;
         height: auto;
@@ -291,6 +291,7 @@ canvas{
     align-content: space-between;
     column-gap: 50%;
     z-index: 3;
+    opacity: 60%;
 
     img{
         height: 3rem;
@@ -493,7 +494,7 @@ canvas{
 
     .contact-form-container{
         min-width: 25rem;
-        max-width: 60rem;
+        max-width: 40rem;
         margin: auto;
         padding: 2rem;
         border: 2px solid $lineColourLight;
@@ -557,14 +558,14 @@ canvas{
 
         img{
             height: auto;
-            width: 70vw;
+            width: 55vw;
             margin-top: 2rem;
             margin-bottom: auto;
         }
 
         video{
             height: auto;
-            width: 70vw;
+            width: 55vw;
             margin-top: 2rem;
             margin-bottom: auto;
         }
@@ -730,6 +731,10 @@ canvas{
         padding-top: 25vh;
         padding-left: 7vw;
         padding-right: 2vw;
+    }
+
+    .contact-form-container{
+        max-width: 50rem;
     }
 
     .project-image-container{

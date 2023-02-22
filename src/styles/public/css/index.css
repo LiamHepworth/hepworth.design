@@ -118,7 +118,7 @@ body {
   height: auto;
   padding: 0 2.1rem 0 2.1rem;
 }
-.grid-container .videos {
+.grid-container video {
   width: 100%;
   margin: 1rem auto;
   height: auto;
@@ -289,6 +289,7 @@ canvas {
   align-content: space-between;
   column-gap: 50%;
   z-index: 3;
+  opacity: 60%;
 }
 #print-markers img {
   height: 3rem;
@@ -457,7 +458,7 @@ canvas {
   }
   .contact-form-container {
     min-width: 25rem;
-    max-width: 60rem;
+    max-width: 40rem;
     margin: auto;
     padding: 2rem;
     border: 2px solid #cccccc;
@@ -508,13 +509,13 @@ canvas {
   }
   .project-image-container img {
     height: auto;
-    width: 70vw;
+    width: 55vw;
     margin-top: 2rem;
     margin-bottom: auto;
   }
   .project-image-container video {
     height: auto;
-    width: 70vw;
+    width: 55vw;
     margin-top: 2rem;
     margin-bottom: auto;
   }
@@ -643,6 +644,9 @@ canvas {
     padding-top: 25vh;
     padding-left: 7vw;
     padding-right: 2vw;
+  }
+  .contact-form-container {
+    max-width: 50rem;
   }
   .project-image-container {
     overflow-y: hidden;
