@@ -2,6 +2,7 @@ import { util } from './utilities';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import {manager} from './loadTracker.js'
 
 //scene
 const scene = new THREE.Scene();
@@ -27,7 +28,7 @@ controls.minPolarAngle = 0.8;
 controls.maxPolarAngle = Math.PI/1.5;
 
 //loading model, adding to scene, setting positions and rotations etc
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(manager);
 
 let monitorModel;
 let models = [];
@@ -89,9 +90,9 @@ loader.load(
         scene.add(models[0], models[1], models[2]);
         return models;
     }, 	
-    (xhr) => {
-		// console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
-	}
+    // (xhr) => {
+	// 	console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
+	// }
 );
 
 function desktopSceneSetup(spacing){
