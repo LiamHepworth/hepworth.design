@@ -2,7 +2,7 @@ import { monitorModels, renderer } from "./app/mainScene"
 import { util } from "./app/utilities";
 import { projectList } from "./app/projectList";
 import { Page, Section } from "./app/pageSections";
-import {checkThreeIsLoaded} from "./app/loadTracker"
+import {checkThreeIsLoaded, checkContentIsLoaded} from "./app/loadTracker"
 
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
@@ -12,14 +12,12 @@ const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
+const preloader = document.querySelector('#preload-container')
+
 
 let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody);
 let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, pageHeader, burgerMenuMobile)
 let pageSectionTwo = new Section(document.querySelector('#page-section-two'))
-
-// window.addEventListener('load', function(){
-//     document.querySelector('#preload-container').style.display = 'none';
-// })
 
 //cursor styling
 document.addEventListener('mousemove', (e) => {
@@ -264,6 +262,7 @@ let displayPage = {
     }, 
     
     work: () => {
+        checkContentIsLoaded();
 
         pageContents.reset()
         pageSectionOne.clear()

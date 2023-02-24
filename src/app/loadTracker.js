@@ -9,13 +9,21 @@ export function checkThreeIsLoaded(objCheck){
 
     if(objCheck === undefined){ //once models are loaded, remove pre-loader
         manager.onLoad = () => {
-            console.log(objCheck);
-            console.log('models undefined')
             preloader.style.display = 'none';
             return;
         };
     } else if (objCheck){ //if models are already loaded, remove preloader
-        console.log(objCheck);
         preloader.style.display = 'none';
     }
 };
+
+
+export function checkContentIsLoaded(){
+    preloader.style.display = 'block'; //reset pre-loader
+    window.onload = loaded()
+
+    function loaded(){
+        console.log('loaded');
+        preloader.style.display = 'none';
+    }
+}
