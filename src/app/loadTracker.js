@@ -1,20 +1,21 @@
 import * as THREE from 'three';
 
+const preloader = document.querySelector('#preload-container')
 export const manager = new THREE.LoadingManager();
-// // function loadStatus(){
-//     let isLoaded
-    
-//     manager.onProgress = (url, itemsLoaded, itemsTotal) => {
-        
-//         isLoaded = (Math.ceil(itemsLoaded / itemsTotal * 100))
-        
-//         // console.log(url + 'Loaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
-//         // console.log(isLoaded + '%')
-        
-//         console.log(isLoaded)
-//         return isLoaded;
-//     }
-//     // }
 
+export function checkThreeIsLoaded(objCheck){
 
-// export default isLoaded;
+    preloader.style.display = 'block'; //reset pre-loader
+
+    if(objCheck === undefined){ //once models are loaded, remove pre-loader
+        manager.onLoad = () => {
+            console.log(objCheck);
+            console.log('models undefined')
+            preloader.style.display = 'none';
+            return;
+        };
+    } else if (objCheck){ //if models are already loaded, remove preloader
+        console.log(objCheck);
+        preloader.style.display = 'none';
+    }
+};

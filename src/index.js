@@ -1,7 +1,8 @@
-import { renderer } from "./app/mainScene"
+import { monitorModels, renderer } from "./app/mainScene"
 import { util } from "./app/utilities";
 import { projectList } from "./app/projectList";
 import { Page, Section } from "./app/pageSections";
+import {checkThreeIsLoaded} from "./app/loadTracker"
 
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
@@ -15,6 +16,10 @@ const curs = document.querySelector('.cursor');
 let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody);
 let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, pageHeader, burgerMenuMobile)
 let pageSectionTwo = new Section(document.querySelector('#page-section-two'))
+
+// window.addEventListener('load', function(){
+//     document.querySelector('#preload-container').style.display = 'none';
+// })
 
 //cursor styling
 document.addEventListener('mousemove', (e) => {
@@ -221,6 +226,8 @@ navCreation();
 
 let displayPage = {
     home: () => {
+        checkThreeIsLoaded(monitorModels);
+
         pageContents.reset();
         pageSectionOne.clear();
         pageSectionTwo.clear();
@@ -257,6 +264,7 @@ let displayPage = {
     }, 
     
     work: () => {
+
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
@@ -306,6 +314,7 @@ let displayPage = {
     },
 
     project: (projectIndex) => {
+
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionOne.el.className = 'proj-text-container'
@@ -461,6 +470,7 @@ let displayPage = {
     },
     
     about: () => {
+
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
@@ -538,6 +548,7 @@ let displayPage = {
     }, 
     
     contact: () => {
+
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
