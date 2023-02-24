@@ -33,7 +33,7 @@ const loader = new GLTFLoader(manager);
 let monitorModel;
 let models = [];
 
-function createVidTexture(src, _n){
+function createVidTexture(src){
     let vid = document.createElement('video');
     vid.loop = true;
     vid.muted = 'muted';
@@ -91,8 +91,8 @@ loader.load(
         return models;
     }, 	
     // (xhr) => {
-	// 	console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
-	// }
+	// 	// console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
+    // }
 );
 
 function desktopSceneSetup(spacing){

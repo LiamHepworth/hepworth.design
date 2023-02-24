@@ -39,6 +39,87 @@ body {
   overflow: hidden;
 }
 
+#preload-container {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #171717;
+  background-image: url("/src/assets/bg_grid.svg");
+  background-size: 135rem;
+  background-repeat: repeat;
+  background-position: center top;
+}
+
+#preload-info {
+  width: 80%;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#loader-icon {
+  transform-style: preserve-3d;
+  animation: spin 6s infinite linear;
+  height: 5rem;
+  width: 5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  align-self: center;
+}
+#loader-icon div {
+  height: 5rem;
+  width: 5rem;
+  position: absolute;
+  display: block;
+  border: 3px solid #cccccc;
+  box-shadow: 0 0 15px 0px #cccccc;
+}
+#loader-icon .top {
+  transform: rotateX(90deg);
+  margin-top: -40px;
+}
+#loader-icon .right {
+  transform: rotateY(90deg);
+  margin-left: 40px;
+}
+#loader-icon .bottom {
+  transform: rotateX(-90deg);
+  margin-top: 40px;
+}
+#loader-icon .left {
+  transform: rotateY(-90deg);
+  margin-left: -40px;
+}
+#loader-icon .front {
+  transform: translateZ(40px);
+}
+#loader-icon .back {
+  transform: translateZ(-40px) rotateX(180deg);
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotateX(-50deg) rotateY(20deg);
+  }
+  100% {
+    -webkit-transform: rotateX(-50deg) rotateY(740deg);
+  }
+}
+
+#loading-text {
+  font-size: 1.5rem;
+  font-family: "input-sans", Helvetica, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+#loading-info {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
 .blue {
   background-color: #0092bd;
 }
@@ -288,8 +369,8 @@ canvas {
   justify-content: space-between;
   align-content: space-between;
   column-gap: 50%;
-  z-index: 3;
-  opacity: 60%;
+  z-index: 11;
+  opacity: 100%;
 }
 #print-markers img {
   height: 3rem;
