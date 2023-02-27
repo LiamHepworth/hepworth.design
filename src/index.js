@@ -1,8 +1,8 @@
-import { monitorModels, renderer } from "./app/mainScene"
+import { monitorModels, renderer } from "./app/three-scenes/mainScene"
 import { util } from "./app/utilities";
-import { projectList } from "./app/projectList";
+import { projectList } from "./app/projects";
 import { Page, Section } from "./app/pageSections";
-import {checkThreeIsLoaded, checkContentIsLoaded} from "./app/loadTracker"
+import {threeIsLoaded, contentIsLoaded} from "./app/loadTracker"
 
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
@@ -13,7 +13,6 @@ const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
 const preloader = document.querySelector('#preload-container')
-
 
 let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody);
 let pageSectionOne = new Section(document.querySelector('#page-section-one'), pageHeaderSection, pageHeader, burgerMenuMobile)
@@ -224,7 +223,8 @@ navCreation();
 
 let displayPage = {
     home: () => {
-        checkThreeIsLoaded(monitorModels);
+        
+        threeIsLoaded(monitorModels);
 
         pageContents.reset();
         pageSectionOne.clear();
@@ -262,7 +262,8 @@ let displayPage = {
     }, 
     
     work: () => {
-        checkContentIsLoaded();
+
+        contentIsLoaded();
 
         pageContents.reset()
         pageSectionOne.clear()
@@ -313,6 +314,8 @@ let displayPage = {
     },
 
     project: (projectIndex) => {
+
+        contentIsLoaded();
 
         pageContents.reset()
         pageSectionOne.clear()
@@ -470,6 +473,8 @@ let displayPage = {
     
     about: () => {
 
+        contentIsLoaded()
+
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
@@ -547,6 +552,8 @@ let displayPage = {
     }, 
     
     contact: () => {
+
+        contentIsLoaded();
 
         pageContents.reset()
         pageSectionOne.clear()

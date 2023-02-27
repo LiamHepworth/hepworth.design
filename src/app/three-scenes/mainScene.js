@@ -1,8 +1,8 @@
-import { util } from './utilities';
+import { util } from '../utilities';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import {manager} from './loadTracker.js'
+import {manager} from '../loadTracker.js'
 
 //scene
 const scene = new THREE.Scene();
