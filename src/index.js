@@ -163,7 +163,7 @@ function navCreation(){
     function displayNav(){
         if(window.innerWidth < 1080){
             mobileNav();
-        } else if(window.innerWidth >= 1080){
+        } else {
             desktopNav();
         }; 
     };
@@ -240,13 +240,13 @@ let displayPage = {
         pageHeaderSection.appendChild(homeHeaderColour);
         
         function checkHomeWindowSize(){
-            if(window.innerWidth > 1080){
+            if(window.innerWidth >= 1080){
                 pageSectionOne.el.classList.add('work-header-container');
                 pageHeaderSection.className = 'large-header-section'
                 homeHeaderColour.style.display = 'block'
                 util.blueMenuBar(0, menuContainer);
                 
-            }else{
+            }else if(window.innerWidth < 1080){
                 pageHeaderSection.className = 'header-section'
                 homeHeaderColour.style.display = 'none'
             };
@@ -293,12 +293,12 @@ let displayPage = {
         });
 
         function checkWorkWindowSize(){
-            if(window.innerWidth > 1080){
+            if(window.innerWidth >= 1080){
                 pageHeaderSection.className = 'large-header-section'
                 workHeaderColour.style.display = 'block'
                 
                 util.blueMenuBar(1, menuContainer);
-            }else{
+            }else if(window.innerWidth < 1080){
                 pageHeaderSection.className = 'header-section'
                 workHeaderColour.style.display = 'none'
             };
@@ -452,11 +452,11 @@ let displayPage = {
 
         //check width to determine correct styling
         function checkProjectWindowSize(){
-            if(window.innerWidth > 1080){
+            if(window.innerWidth >= 1080){
                 pageContents.el.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(1, menuContainer);
-            }else{
+            }else if(window.innerWidth < 1080){
                 pageContents.el.className = 'grid-container'
                 pageSectionTwo.el.className = ''
             };
@@ -489,10 +489,10 @@ let displayPage = {
 
         
         const aboutText = util.createEl('p', 'body-text', aboutTextSection)
-        aboutText.innerText = ('Liam Hepworth is a graphic designer, 3D Artist and JavaScript  developer working in the North-West of England.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero sed diam tempus, sit amet tempus justo pellentesque. Fusce porta dapibus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi non ante id est porttitor feugiat. Morbi eu augue nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Nulla non sem at augue fermentum malesuada. Phasellus vitae porttitor nunc. Fusce commodo lacinia metus, quis congue ligula finibus nec. ');
+        aboutText.innerText = ('I’m Liam - a multidisciplinary graphic designer and web developer.\r\n \r\n To put it simply, I love to build things. I’ve always carried an attitude of “finding a way”, and I let my curiosity and passion for technology guide me as I discover new techniques and ways of creating things. I’m comfortable exploring the unfamiliar, and figuring things out as I go along, often finding that the best ideas emerge as a part of the process. \r\n \r\n Since graduating from my Graphic Design degree at Sheffield Hallam University, I’ve spent my time learning different tools and techniques, in an effort to find new ways to tell stories and create experiences. This has ranged from teaching myself how to build intricate 3D scenes in Blender, to learning how to develop websites like this one using Javascript. I love working on technical problems and delivering inventive solutions, and find that my most enjoyable projects are always those which push me to step just beyond what I already know. \r\n \r\n If you would like to work with someone who is prepared to take an idea, explore the unexpected and deliver engaging and considered solutions, I’d love to hear from you.');
 
 
-        const linkSection = util.createEl('div', 'content-container')
+        const linkSection = util.createEl('div', 'content-container link-section-container')
 
         pageSectionTwo.createGridFiller();
 
@@ -518,7 +518,7 @@ let displayPage = {
             determineLinkPlacement();
 
             function checkAboutWindowSize(){
-                if(window.innerWidth > 1080){
+                if(window.innerWidth >= 1080){
                     pageHeaderSection.style.display = 'none';
                     aboutTextSection.className = 'content-container about-text-container';
                     aboutTextColour.style.display = 'block'
@@ -526,7 +526,7 @@ let displayPage = {
                     pageSectionOne.el.className = 'center-children'
                     pageSectionTwo.el.className = 'grid-container left-border'
                     util.blueMenuBar(2, menuContainer);
-                }else{
+                }else if(window.innerWidth < 1080){
                     pageHeaderSection.style.display = 'flex';
                     aboutTextSection.className = 'content-container about-text-container';
                     aboutTextColour.style.display = 'none'
@@ -633,7 +633,7 @@ let displayPage = {
         });
 
         function checkContactWindowSize(){
-            if(window.innerWidth > 1080){
+            if(window.innerWidth >= 1080){
                 pageHeaderSection.style.display = 'none';
                 pageSectionOne.el.className = 'center-children'
                 contactFormContainer.className = 'content-container contact-form-container';
@@ -641,7 +641,7 @@ let displayPage = {
                 pageContents.el.className = 'grid-container two-cols-75-25'
                 pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(3, menuContainer);
-            }else{
+            }else if(window.innerWidth < 1080){
                 pageHeaderSection.style.display = 'flex';
                 contactFormContainer.className = 'content-container contact-form-container';
                 contactFormColour.style.display = 'none'

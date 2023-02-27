@@ -34,7 +34,7 @@ export let util = {
     },
 
     blueMenuBar: (pageIndex, cont) => {
-        if(window.innerWidth > 1080){
+        if(window.innerWidth >= 1080){
             let container = cont.children;
             let nav = container[container.length -1]
             let listItem = nav.children[pageIndex]

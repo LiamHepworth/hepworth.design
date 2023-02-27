@@ -162,6 +162,7 @@ body {
 
 .small-header {
   max-width: 100% !important;
+  font-size: 1.8rem !important;
 }
 
 .sub-header {
@@ -172,7 +173,7 @@ body {
   font-family: "Space Grotesk", Helvetica, sans-serif;
   color: #cccccc;
   line-height: 3rem 1.5rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .project-text {
@@ -187,6 +188,7 @@ body {
   flex-flow: row;
   justify-content: space-between;
   user-select: none;
+  align-items: center;
 }
 
 .grid-container {
@@ -211,6 +213,10 @@ body {
   margin: 0 2.1rem 0 2.1rem;
   margin-bottom: 1.8rem;
   text-align: left;
+}
+
+.link-section-container {
+  margin-bottom: 4rem;
 }
 
 .outer-content-container {
@@ -397,7 +403,6 @@ canvas {
   color: #cccccc;
   font-weight: 700;
   font-size: 2.3rem !important;
-  padding-top: 0.2rem;
   cursor: pointer;
   z-index: 1;
 }
@@ -508,7 +513,6 @@ canvas {
     margin: 0 auto;
   }
   .small-header {
-    font-size: 2.3rem !important;
     margin: 0 !important;
   }
   .large-header-alignment {
@@ -544,6 +548,9 @@ canvas {
     padding: 2rem;
     border: 2px solid #cccccc;
     align-items: center;
+  }
+  .link-section-container {
+    margin-bottom: 0;
   }
   #contact-form {
     margin: 1rem 0 0 0;
@@ -717,6 +724,13 @@ canvas {
   #primary-header {
     font-size: 6.9rem;
   }
+  .small-header {
+    font-size: 2.3rem !important;
+    margin: 0 !important;
+  }
+  .body-text {
+    font-size: 1rem;
+  }
   .large-header-alignment {
     line-height: 8.4rem;
   }
@@ -796,7 +810,7 @@ canvas {
 
 .center-children {
   align-self: center;
-  padding: 0 5rem;
+  padding: 4rem 4rem 4rem 7rem;
 }
 
 .content-split {

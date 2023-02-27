@@ -149,7 +149,7 @@ function responsiveScene(){
         monitorModels.forEach(model => model.scale.set(1, 1, 1));
         desktopSceneSetup(160);
     }
-    else if(window.innerWidth > 1080){
+    else if(window.innerWidth >= 1080){
         monitorModels.forEach(model => model.scale.set(0.9, 0.9, 0.9));
         desktopSceneSetup(150);
     }
