@@ -2,7 +2,7 @@ import { util } from '../utilities';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import {manager} from '../loadTracker.js'
+import { manager } from '../loadTracker.js'
 
 //scene
 const scene = new THREE.Scene();
@@ -124,7 +124,7 @@ function MobileSceneSetup(axis, mNaught, mOne, mTwo){
     monitorModels[2].position[axis]= mTwo;
 }
 
-function mobileModelRotation(){
+function defaultModelRotation(){
     //offset all rotation coords to give more of a random look.
     monitorModels[0].rotation.set(0.05, 0.32, 0.02);
     monitorModels[1].rotation.set(-0.05, 0.32, -0.17);
@@ -134,6 +134,8 @@ function mobileModelRotation(){
 //responsive models + scene
 window.addEventListener('resize', responsiveScene);
 function responsiveScene(){
+
+    defaultModelRotation()
 
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -153,19 +155,19 @@ function responsiveScene(){
     }
     else if(window.innerWidth > 800){
         monitorModels.forEach(model => model.scale.set(0.8, 0.8, 0.8));
-        mobileModelRotation();
+        defaultModelRotation();
         MobileSceneSetup('y', 5, -4, -3);
         MobileSceneSetup('x', 0, 5, -5);
     }
     else if(window.innerWidth > 600){
         monitorModels.forEach(model => model.scale.set(0.8, 0.8, 0.8));
-        mobileModelRotation();
+        defaultModelRotation();
         MobileSceneSetup('y', 6.5, 0, -6.5);
         MobileSceneSetup('x', 2, -3.5, 3.5);
     }
     else{
         monitorModels.forEach(model => model.scale.set(0.7, 0.7, 0.7));
-        mobileModelRotation();
+        defaultModelRotation();
         MobileSceneSetup('y', 4.5, -1.5, -7);
         MobileSceneSetup('x', 1.5, -1.7, 1.3);
     }
@@ -203,6 +205,8 @@ let clock = new THREE.Clock();
 let time = 0;
 let delta = 0;
 
+let mouseLookFlag = false;
+
 //animate loop
 function animate() {
     requestAnimationFrame(animate);
@@ -213,14 +217,22 @@ function animate() {
     //if statement to check whether model has loaded before applying rotation
     if(monitorModel){
         if(window.innerWidth < 1080){
+            mouseLookFlag = false;
             scene.rotation.y = -0.5 + Math.abs(Math.sin(time/3) * 0.5);
             controls.update()
         } else {
-            monitorModels[0].lookAt(pointOfIntersection);
-            monitorModels[1].lookAt(pointOfIntersection);
-            monitorModels[2].lookAt(pointOfIntersection);
+            mouseLookFlag = true;
+            onmousemove = () => {
+                if(mouseLookFlag){
+                    console.log('looking')
+                    monitorModels[0].lookAt(pointOfIntersection);
+                    monitorModels[1].lookAt(pointOfIntersection);
+                    monitorModels[2].lookAt(pointOfIntersection);
+                }
+            }
         }
     }
+
     renderer.render( scene, camera );
 };
 
