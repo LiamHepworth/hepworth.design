@@ -5,23 +5,23 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { manager } from '../loadTracker.js'
 
 //scene
-const scene = new THREE.Scene();
+const mainScene = new THREE.Scene();
 
 //renderer
 let mainCanvas = util.createEl("canvas", "main-canvas"); //define custom canvas
-export const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: mainCanvas});
-renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.shadowMap.enabled = true;
-renderer.outputEncoding = THREE.sRGBEncoding;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.7;
+export const mainRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: mainCanvas});
+mainRenderer.setSize( window.innerWidth, window.innerHeight );
+mainRenderer.shadowMap.enabled = true;
+mainRenderer.outputEncoding = THREE.sRGBEncoding;
+mainRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+mainRenderer.toneMappingExposure = 1.7;
 
 //camera
-const camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.set(0, 3, 50);
+const mainCamera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 0.1, 1000 );
+mainCamera.position.set(0, 3, 50);
 
 //controls
-let controls = new OrbitControls( camera, renderer.domElement );
+let controls = new OrbitControls( mainCamera, mainRenderer.domElement );
 controls.enabled = false;
 //Sets min/max anglies for vertical orbiting
 controls.minPolarAngle = 0.8;
@@ -88,7 +88,7 @@ loader.load(
         applyMat(1, codeVideoTexture);
         applyMat(2, designVideoTexture);
 
-        scene.add(monitorModels[0], monitorModels[1], monitorModels[2]);
+        mainScene.add(monitorModels[0], monitorModels[1], monitorModels[2]);
         return monitorModels;
     }, 	
     // (xhr) => {
@@ -97,9 +97,9 @@ loader.load(
 );
 
 function desktopSceneSetup(spacing){
-    scene.rotation.y = 0;
-    camera.position.set(0, 3, 50);
-    camera.rotation.set(0, 0, 0);
+    mainScene.rotation.y = 0;
+    mainCamera.position.set(0, 3, 50);
+    mainCamera.rotation.set(0, 0, 0);
     controls.enabled = false;
 
     monitorModels[0].position.x = 0;
@@ -137,9 +137,9 @@ function responsiveScene(){
 
     defaultModelRotation()
 
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    mainCamera.aspect = window.innerWidth / window.innerHeight;
+    mainCamera.updateProjectionMatrix();
+    mainRenderer.setSize(window.innerWidth, window.innerHeight);
 
     if(window.innerWidth > 2000){
         monitorModels.forEach(model => model.scale.set(1.1, 1.1, 1.1));
@@ -182,7 +182,7 @@ let pointOfIntersection = new THREE.Vector3();
 document.addEventListener("mousemove", function modelLookAt(e){
     mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, mainCamera);
     raycaster.ray.intersectPlane(plane, pointOfIntersection);
 });
 
@@ -190,15 +190,15 @@ document.addEventListener("mousemove", function modelLookAt(e){
 const pointLightRight = new THREE.PointLight(0x0092bd, 1, 100);
 pointLightRight.position.set(10, 15, -7);
 pointLightRight.castShadow = true;
-scene.add(pointLightRight);
+mainScene.add(pointLightRight);
 
 const pointLightLeft = new THREE.PointLight(0xf71bbd, 1, 100);
 pointLightLeft.position.set(-10, 15, -7);
 pointLightLeft.castShadow = true;
-scene.add(pointLightLeft);
+mainScene.add(pointLightLeft);
 
 const light = new THREE.HemisphereLight( 0xa4e0d1, 0x8facda, 0.2 );
-scene.add( light );
+mainScene.add( light );
 
 //clock and timer
 let clock = new THREE.Clock();
@@ -218,7 +218,7 @@ function animate() {
     if(monitorModel){
         if(window.innerWidth < 1080){
             mouseLookFlag = false;
-            scene.rotation.y = -0.5 + Math.abs(Math.sin(time/3) * 0.5);
+            mainScene.rotation.y = -0.5 + Math.abs(Math.sin(time/3) * 0.5);
             controls.update()
         } else {
             mouseLookFlag = true;
@@ -233,7 +233,7 @@ function animate() {
         }
     }
 
-    renderer.render( scene, camera );
+    mainRenderer.render( mainScene, mainCamera );
 };
 
 animate();

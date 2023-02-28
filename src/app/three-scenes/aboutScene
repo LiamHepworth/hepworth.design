@@ -1,0 +1,84 @@
+import { util } from '../utilities';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { manager } from '../loadTracker.js'
+
+//scene
+const aboutScene = new THREE.Scene();
+
+//create renderer
+let aboutCanvas = util.createEl("canvas", "about-canvas"); //define custom canvas
+export const aboutRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas: aboutCanvas});
+aboutRenderer.shadowMap.enabled = true;
+aboutRenderer.outputEncoding = THREE.sRGBEncoding;
+aboutRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+aboutRenderer.toneMappingExposure = 1.7;
+
+//camera
+const aboutCamera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.1, 1000 );
+aboutCamera.position.z = 20;
+aboutCamera.rotation.set(0, 0, 0)
+
+//set renderer size to be equal to the container element
+function renderSize(){
+    let container = document.querySelector('#page-section-two')
+    let contSize = container.getBoundingClientRect();
+
+    aboutRenderer.setSize(contSize.width, contSize.height);
+    aboutCamera.aspect = contSize.width / contSize.height;
+    aboutCamera.updateProjectionMatrix();
+}
+
+// let helper = new THREE.AxesHelper(10);
+// aboutScene.add(helper);
+
+//controls
+let controls = new OrbitControls( aboutCamera, aboutRenderer.domElement );
+controls.enabled = true;
+
+controls.minPolarAngle = 0.8;
+controls.maxPolarAngle = Math.PI/1.5;
+
+controls.minAzimuthAngle = Math.PI/-4.5;
+controls.maxAzimuthAngle = Math.PI/4;
+
+//loading model, adding to scene, setting positions and rotations etc
+const loader = new GLTFLoader(manager);
+
+let aboutModels;
+
+loader.load(
+    'assets/about.glb',
+    (gltfScene) => {
+        aboutModels = gltfScene.scene;
+
+        //only to be viewed in dekstop in it's curent state;
+        aboutModels.position.set(-0.5, -2, 0);
+        aboutScene.add(aboutModels);
+    }
+)
+
+//lighting
+const pointLightRight = new THREE.PointLight(0x0092bd, 0.3, 100);
+pointLightRight.position.set(5, 0, 5);
+pointLightRight.castShadow = true;
+aboutScene.add(pointLightRight);
+
+const pointLightLeft = new THREE.PointLight(0xf71bbd, 0.3, 100);
+pointLightLeft.position.set(-5, 0, 5);
+pointLightLeft.castShadow = true;
+aboutScene.add(pointLightLeft);
+
+const light = new THREE.HemisphereLight( 0xa4e0d1, 0x8facda, 0.2 );
+aboutScene.add( light );
+
+//animate loop
+function animate() {
+    requestAnimationFrame(animate);
+    renderSize();
+
+    aboutRenderer.render( aboutScene, aboutCamera );
+};
+
+animate();

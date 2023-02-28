@@ -1,4 +1,5 @@
-import { monitorModels, renderer } from "./app/three-scenes/mainScene"
+import { monitorModels, mainRenderer } from "./app/three-scenes/mainScene"
+import { aboutRenderer } from "./app/three-scenes/aboutScene";
 import { util } from "./app/utilities";
 import { projectList } from "./app/projects";
 import { Page, Section } from "./app/pageSections";
@@ -231,7 +232,7 @@ let displayPage = {
         pageSectionTwo.clear();
 
         //append THREE scene
-        pageSectionTwo.el.appendChild(renderer.domElement);
+        pageSectionTwo.el.appendChild(mainRenderer.domElement);
 
         pageSectionOne.appendHeader('HEPWORTH.DESIGN', 'menu');
         pageHeader.classList = 'header large-header-alignment'
@@ -478,6 +479,9 @@ let displayPage = {
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
+
+        //append THREE scene
+        pageSectionTwo.el.appendChild(aboutRenderer.domElement);
         
         pageSectionOne.appendHeader('ABOUT', 'menu', 'header small-header');
 
@@ -662,4 +666,4 @@ let displayPage = {
 };
 
 //To ensure that the homepage loads when the page is first opened.
-window.onload = displayPage.home();
+window.onload = displayPage.about();

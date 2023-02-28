@@ -181,7 +181,7 @@
     flex-flow: row;
     justify-content: space-between;
     user-select: none;
-    align-items: center;
+    // align-items: center;
 }
 
 .grid-container{
@@ -348,6 +348,10 @@ canvas{
 .main-canvas{
     height: 100%;
     width: 100%;
+}
+
+.about-canvas{
+    mix-blend-mode: screen;
 }
 
 //assets:
