@@ -340,19 +340,29 @@
 
 //canvas styles
 
-canvas{
-    position: fixed;
-    top: 0;
-}
+// canvas{
+
+// }
 
 .main-canvas{
     height: 100%;
     width: 100%;
+    position: fixed;
+    top: 0;
 }
 
 .about-canvas{
-    mix-blend-mode: screen;
-    filter: invert(1) brightness(70%) contrast(1.6);
+    position: fixed;
+    mix-blend-mode: hard-light;
+    filter: invert(0) brightness(90%) contrast(1.2);
+
+    // mix-blend-mode: soft-light;
+    // filter: invert(1) brightness(150%);
+    
+    // mix-blend-mode: overlay;
+
+    // mix-blend-mode: difference;
+    // filter: invert(1) brightness(70%) contrast(1.5);
 }
 
 //assets:

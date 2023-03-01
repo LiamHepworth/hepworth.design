@@ -7,8 +7,11 @@ import { manager } from '../loadTracker.js'
 const container = document.querySelector('#page-section-two')
 
 //scene
+// const aboutScene = new THREE.Scene();
+// aboutScene.fog = new THREE.Fog(0xffffff, 13, 40);
+
 const aboutScene = new THREE.Scene();
-aboutScene.fog = new THREE.Fog(0xffffff, 13, 40);
+aboutScene.fog = new THREE.Fog(0x000000, 13, 40);
 
 //create renderer
 let aboutCanvas = util.createEl("canvas", "about-canvas"); //define custom canvas
@@ -35,6 +38,7 @@ function renderSize(){
 let controls = new OrbitControls( aboutCamera, aboutRenderer.domElement );
 controls.enabled = true;
 controls.enablePan = false;
+controls.enableZoom = false;
 
 controls.minPolarAngle = 1.2;
 controls.maxPolarAngle = Math.PI/1.8;
@@ -64,14 +68,13 @@ loader.load(
 )
 
 //lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.3)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.7)
 aboutScene.add( ambientLight );
 
 //clock and timer
 let clock = new THREE.Clock();
 let time = 0;
 let delta = 0;
-// let timeDivision = Math.random()*3;
 
 //animate loop
 function animate() {
@@ -83,7 +86,7 @@ function animate() {
 
     if(aboutModels){
         aboutScene.rotation.y = -Math.abs(Math.sin(time/3) * 0.3);
-        aboutScene.rotation.x = -Math.abs(Math.cos(time/3  ) * 0.15);
+        aboutScene.rotation.x = -Math.abs(Math.sin(time/3) * 0.15);
     }
 
     aboutRenderer.render( aboutScene, aboutCamera );

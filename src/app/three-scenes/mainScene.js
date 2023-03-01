@@ -52,7 +52,7 @@ function createMat(){
     let mat = new THREE.MeshStandardMaterial({
         color : new THREE.Color(0x000000),
         roughness : 0.7,
-        emissive :  new THREE.Color(0x0092bd),
+        emissive : new THREE.Color(0x0092bd),
         emissiveIntensity : 0.7,
     });
 
