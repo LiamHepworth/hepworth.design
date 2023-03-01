@@ -352,6 +352,7 @@ canvas{
 
 .about-canvas{
     mix-blend-mode: screen;
+    filter: invert(1) brightness(70%) contrast(1.6);
 }
 
 //assets:
