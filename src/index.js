@@ -1,5 +1,6 @@
 import { monitorModels, mainRenderer } from "./app/three-scenes/mainScene"
 import { aboutRenderer } from "./app/three-scenes/aboutScene";
+import { contactRenderer } from "./app/three-scenes/contactScene";
 import { util } from "./app/utilities";
 import { projectList } from "./app/projects";
 import { Page, Section } from "./app/pageSections";
@@ -495,7 +496,7 @@ let displayPage = {
         const aboutText = util.createEl('p', 'body-text', aboutTextSection)
         aboutText.innerText = ('I’m Liam - a multidisciplinary graphic designer and web developer.\r\n \r\n To put it simply, I love to build things. I’ve always carried an attitude of “finding a way”, and I let my curiosity and passion for technology guide me as I discover new techniques and ways of creating things. I’m comfortable exploring the unfamiliar, and figuring things out as I go along, often finding that the best ideas emerge as a part of the process. \r\n \r\n Since graduating from my Graphic Design degree at Sheffield Hallam University, I’ve spent my time learning different tools and techniques, in an effort to find new ways to tell stories and create experiences. This has ranged from teaching myself how to build intricate 3D scenes in Blender, to learning how to develop websites like this one using Javascript. I love working on technical problems and delivering inventive solutions, and find that my most enjoyable projects are always those which push me to step just beyond what I already know. \r\n \r\n If you would like to work with someone who is prepared to take an idea, explore the unexpected and deliver engaging and considered solutions, I’d love to hear from you.');
 
-
+        //FIX - Appends a bunch of times for some reason, requires investigation. 
         const linkSection = util.createEl('div', 'content-container link-section-container')
 
         pageSectionTwo.createGridFiller();
@@ -562,6 +563,8 @@ let displayPage = {
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
+
+        pageSectionTwo.el.appendChild(contactRenderer.domElement);
         
         pageSectionOne.appendHeader('CONTACT', 'menu');
         pageHeader.classList = 'header small-header';

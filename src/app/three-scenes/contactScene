@@ -1,0 +1,64 @@
+import { util } from '../utilities';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { manager } from '../loadTracker.js'
+import { Mesh, MeshBasicMaterial } from 'three';
+
+const container = document.querySelector('#page-section-two')
+
+//scene
+const contactScene = new THREE.Scene();
+
+//create renderer
+let contactCanvas = util.createEl("canvas", "contact-canvas"); //define custom canvas
+export const contactRenderer = new THREE.WebGLRenderer({antialias: true, alpha: true, canvas: contactCanvas});
+contactRenderer.shadowMap.enabled = true;
+contactRenderer.outputEncoding = THREE.sRGBEncoding;
+contactRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+contactRenderer.toneMappingExposure = 1.7;
+
+//camera
+const contactCamera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.1, 1000 );
+contactCamera.position.z = 18;
+contactCamera.rotation.set(0, 0, 0)
+
+//set renderer size to be equal to the container element
+function renderSize(){
+    let contSize = container.getBoundingClientRect();
+    contactRenderer.setSize(contSize.width, contSize.height);
+    contactCamera.aspect = contSize.width / contSize.height;
+    contactCamera.updateProjectionMatrix();
+}
+
+//objects
+const ballGeometry = new THREE.SphereGeometry(1, 16, 32);
+const ballMaterial = new MeshBasicMaterial();
+const ball = new Mesh(ballGeometry, ballMaterial)
+contactScene.add(ball);
+
+//controls
+let controls = new OrbitControls( contactCamera, contactRenderer.domElement );
+controls.enabled = true;
+
+//lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.7)
+contactScene.add( ambientLight );
+
+//clock and timer
+let clock = new THREE.Clock();
+let time = 0;
+let delta = 0;
+
+//animate loop
+function animate() {
+    requestAnimationFrame(animate);
+    renderSize();
+
+    delta = clock.getDelta();
+    time += delta;
+
+    contactRenderer.render( contactScene, contactCamera );
+};
+
+animate();

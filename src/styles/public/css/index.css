@@ -346,6 +346,10 @@ body {
   filter: invert(0) brightness(90%) contrast(1.2);
 }
 
+.contact-canvas {
+  position: fixed;
+}
+
 .arrows {
   filter: invert(96%) sepia(0%) saturate(0%) hue-rotate(243deg) brightness(86%) contrast(95%);
   font-size: 30pt !important;

@@ -86,7 +86,7 @@ function animate() {
 
     if(aboutModels){
         aboutScene.rotation.y = -Math.abs(Math.sin(time/3) * 0.3);
-        aboutScene.rotation.x = -Math.abs(Math.sin(time/3) * 0.15);
+        aboutScene.rotation.x = -Math.abs(Math.cos(time/3) * 0.15);
     }
 
     aboutRenderer.render( aboutScene, aboutCamera );
