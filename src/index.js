@@ -669,4 +669,4 @@ let displayPage = {
 };
 
 //To ensure that the homepage loads when the page is first opened.
-window.onload = displayPage.contact();
+window.onload = displayPage.home();

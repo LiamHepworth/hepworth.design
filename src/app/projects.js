@@ -62,30 +62,52 @@ export class Project {
 export const projectList = [
 
     new Project(
-        'UNREAL TEST', 
-        'poster', 
-        ['/src/assets/project-images/unreal/image01.png', '/src/assets/project-images/unreal/image02.png'], 
-        null, 
-        null, 
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis auctor sem, ac elementum quam. Fusce vitae ante dapibus, tempus erat in, hendrerit nibh. Suspendisse fringilla pellentesque elit, a tempus augue fringilla non. Aliquam sodales, nisl sed malesuada laoreet, libero ligula scelerisque nibh, in efficitur orci ex sed lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Vestibulum aliquet vestibulum metus eget blandit. Curabitur sodales sit amet nisl ut fermentum. Cras tristique justo diam, nec eleifend ex cursus feugiat. Nam egestas velit lectus, ac ullamcorper tortor lobortis non.', 
-        '/src/assets/project-images/unreal/image01.png'),
-
-    new Project(
-        'SEVERE', 
-        'poster', 
-        ['/src/assets/project-images/severe/image01.jpg', '/src/assets/project-images/severe/image01.jpg'], 
-        null, 
-        null, 
+        'Exile Corp: Holo-Disk Reader',
+        'Animation/3D Model',
+        ['/src/assets/project-images/1-HoloDisk-Reader/image-01.png', '/src/assets/project-images/1-HoloDisk-Reader/image-02.png'],
+        ['/src/assets/project-images/1-HoloDisk-Reader/vid-02.mp4', '/src/assets/project-images/1-HoloDisk-Reader/vid-01.mp4'],
+        null,
         'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
-        '/src/assets/project-images/severe/image01.jpg'),
-    
-    new Project(
-        'Exile Corp HoloDisk Reader', 
-        'Animated Poster (2022)', 
-        ['/src/assets/project-images/severe/image01.jpg'], 
-        ['/src/assets/project-images/video-test/Comp 2.mp4'], 
-        null, 
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', 
-        '/src/assets/project-images/unreal/image01.png'),
+        '/src/assets/project-images/1-HoloDisk-Reader/image-01.png',
+    ),
 
-]; 
+    new Project(
+        '3D Poster Series',
+        '3D Model/Graphic Poster',
+        ['/src/assets/project-images/3-Misc-Posters/image-01.png', '/src/assets/project-images/3-Misc-Posters/image-02.png', '/src/assets/project-images/3-Misc-Posters/image-03.png', '/src/assets/project-images/3-Misc-Posters/image-04.png', '/src/assets/project-images/3-Misc-Posters/image-05.png', '/src/assets/project-images/3-Misc-Posters/image-06.png'],
+        null,
+        null,
+        'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
+        '/src/assets/project-images/3-Misc-Posters/image-01.png',
+    ),
+
+    new Project(
+        'Procedural Animation',
+        'Animation',
+        ['/src/assets/project-images/5-Looping-Geometry/image-01.png', '/src/assets/project-images/5-Looping-Geometry/image-02.png'],
+        ['/src/assets/project-images/5-Looping-Geometry/vid-01.mp4', '/src/assets/project-images/5-Looping-Geometry/vid-02.mp4'],
+        null,
+        'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
+        '/src/assets/project-images/5-Looping-Geometry/image-01.png',
+    ),
+
+    new Project(
+        'Animated Sketches',
+        'Animation',
+        null,
+        ['/src/assets/project-images/4-Animation-Sketches/vid-03.mp4', '/src/assets/project-images/4-Animation-Sketches/vid-02.mp4', '/src/assets/project-images/4-Animation-Sketches/vid-01.mp4'],
+        null,
+        'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
+        '/src/assets/project-images/4-Animation-Sketches/image-01.png',
+    ),
+
+    new Project(
+        'Nucleus',
+        'Animation/3D Model',
+        ['/src/assets/project-images/2-Nucleus/image-02.png', '/src/assets/project-images/2-Nucleus/image-01.png'],
+        ['/src/assets/project-images/2-Nucleus/vid-01.mp4'],
+        null,
+        'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
+        '/src/assets/project-images/2-Nucleus/image-01.png',
+    ),
+    ]; 
