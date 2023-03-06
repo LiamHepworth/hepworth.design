@@ -58,12 +58,6 @@ loader.load(
         //only to be viewed in dekstop in it's curent state;
         aboutModels.position.set(-0.5, -2, 0);
         aboutScene.add(aboutModels);
-
-        aboutModels.traverse(child => {
-            if(child.name == 'Large-BD'){
-                console.log(child);
-            }
-        })
     }
 )
 
@@ -86,7 +80,7 @@ function animate() {
 
     if(aboutModels){
         aboutScene.rotation.y = -Math.abs(Math.sin(time/3) * 0.3);
-        aboutScene.rotation.x = -Math.abs(Math.cos(time/3) * 0.15);
+        aboutScene.rotation.x = -Math.abs(Math.sin(time/3) * 0.15);
     }
 
     aboutRenderer.render( aboutScene, aboutCamera );

@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { manager } from '../loadTracker.js'
-import { Mesh, MeshBasicMaterial } from 'three';
 
 const container = document.querySelector('#page-section-two')
 
@@ -20,7 +19,7 @@ contactRenderer.toneMappingExposure = 1.7;
 
 //camera
 const contactCamera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.1, 1000 );
-contactCamera.position.z = 18;
+contactCamera.position.z = 30;
 contactCamera.rotation.set(0, 0, 0)
 
 //set renderer size to be equal to the container element
@@ -32,14 +31,46 @@ function renderSize(){
 }
 
 //objects
-const ballGeometry = new THREE.SphereGeometry(1, 16, 32);
-const ballMaterial = new MeshBasicMaterial();
-const ball = new Mesh(ballGeometry, ballMaterial)
-contactScene.add(ball);
+const loader = new GLTFLoader(manager);
+
+let contactModels;
+let cubeOne, cubeTwo, cubeThree;
+
+loader.load(
+    'assets/contactModels.glb',
+    (gltfScene) => {
+        contactModels = gltfScene.scene;
+
+        //only to be viewed in dekstop in it's curent state;
+        contactModels.position.set(0, 0, 0);
+        contactScene.add(contactModels);
+
+        contactModels.traverse(child => {
+            if(child.name === 'cubeOne'){
+                console.log(child)
+                cubeOne = child;
+            }
+            if(child.name === 'cubeTwo'){
+                console.log(child)
+                cubeTwo = child;
+            }
+            if(child.name === 'cubeThree'){
+                console.log(child)
+                cubeThree = child;
+            }
+        })
+    }
+)
 
 //controls
 let controls = new OrbitControls( contactCamera, contactRenderer.domElement );
 controls.enabled = true;
+
+controls.minPolarAngle = 1.2;
+controls.maxPolarAngle = Math.PI/1.8;
+
+controls.minAzimuthAngle = Math.PI/-4;
+controls.maxAzimuthAngle = Math.PI/6;
 
 //lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.7)
@@ -57,6 +88,16 @@ function animate() {
 
     delta = clock.getDelta();
     time += delta;
+
+    if(cubeOne && cubeTwo && cubeThree){
+        cubeOne.rotation.y += 0.01
+        cubeTwo.rotation.y += 0.01
+        cubeThree.rotation.y += 0.01
+    }
+
+    if(contactModels){
+        contactModels.rotation.y = -Math.abs(Math.sin(time/1) * 0.4) + Math.PI / 2;
+    }
 
     contactRenderer.render( contactScene, contactCamera );
 };

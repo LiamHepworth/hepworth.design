@@ -82,7 +82,7 @@ export const projectList = [
     new Project(
         'Exile Corp HoloDisk Reader', 
         'Animated Poster (2022)', 
-        null, 
+        ['/src/assets/project-images/severe/image01.jpg'], 
         ['/src/assets/project-images/video-test/Comp 2.mp4'], 
         null, 
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis elit ex vitae', 

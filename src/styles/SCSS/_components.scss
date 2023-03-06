@@ -367,6 +367,10 @@
 
 .contact-canvas{
     position: fixed;
+
+    mix-blend-mode: hard-light;
+    filter: invert(0) brightness(80%) contrast(1.2);
+
 }
 
 //assets:
