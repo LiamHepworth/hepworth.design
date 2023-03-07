@@ -392,35 +392,40 @@ let displayPage = {
             }
 
             //scroll with mousewheel
-            let s = 0;
 
-            document.addEventListener('wheel', (e) => {
-                const delta = Math.sign(e.deltaY) * 0.49;
-
-                if(s >= 0 && s <= projectImageContainer.children.length - 1){
-                    s += delta;
-                    currentIndex = Math.round(s);
-                    currentImage = images[currentIndex];
-
-                } else if (s < 0) {
-                    s = 0;
-                    currentIndex = s 
-                    currentImage = images[currentIndex]; 
-
-                } else if (s > projectImageContainer.children.length - 1){
-                    s = projectImageContainer.children.length - 1;
-                    currentIndex = s 
-                    currentImage = images[currentIndex]; 
-
+            (function horizontalScroll(){
+                let s = 0;
+                currentImage = images[0];
+                
+                document.onwheel = function(e){
+                    if(window.innerWidth > 1425){
+    
+                        const delta = Math.sign(e.deltaY) * 0.49;
+                        
+                        if(s >= 0 && s <= projectImageContainer.children.length - 1){
+                            s += delta;
+                            currentIndex = Math.round(s);
+                            currentImage = images[currentIndex];
+                            
+                        } else if (s < 0) {
+                            s = 0;
+                            currentIndex = s 
+                            currentImage = images[currentIndex]; 
+                            
+                        } else if (s > projectImageContainer.children.length - 1){
+                            s = projectImageContainer.children.length - 1;
+                            currentIndex = s 
+                            currentImage = images[currentIndex]; 
+                            
+                        };
+                        
+                        currentImage.scrollIntoView({
+                            behavior: 'smooth',
+                            inline: 'center',
+                        });
+                    }   
                 };
-
-                currentImage.scrollIntoView({
-                    behavior: 'smooth',
-                    inline: 'center',
-                });
-
-            });
-            
+            })();
 
             //scrolling based on arrow click
             if(images.length > 1){
@@ -715,4 +720,4 @@ let displayPage = {
 };
 
 //To ensure that the homepage loads when the page is first opened.
-window.onload = displayPage.project(0);
+window.onload = displayPage.home();
