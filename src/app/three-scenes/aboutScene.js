@@ -6,10 +6,6 @@ import { manager } from '../loadTracker.js'
 
 const container = document.querySelector('#page-section-two')
 
-//scene
-// const aboutScene = new THREE.Scene();
-// aboutScene.fog = new THREE.Fog(0xffffff, 13, 40);
-
 const aboutScene = new THREE.Scene();
 aboutScene.fog = new THREE.Fog(0x000000, 13, 40);
 
@@ -51,7 +47,7 @@ const loader = new GLTFLoader(manager);
 let aboutModels;
 
 loader.load(
-    'assets/aboutModels.glb',
+    'assets/THREE-Models/aboutModels.glb',
     (gltfScene) => {
         aboutModels = gltfScene.scene;
 

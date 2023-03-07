@@ -37,7 +37,7 @@ let contactModels;
 let cubeOne, cubeTwo, cubeThree;
 
 loader.load(
-    'assets/contactModels.glb',
+    'assets/THREE-Models/contactModels.glb',
     (gltfScene) => {
         contactModels = gltfScene.scene;
 
@@ -47,15 +47,12 @@ loader.load(
 
         contactModels.traverse(child => {
             if(child.name === 'cubeOne'){
-                console.log(child)
                 cubeOne = child;
             }
             if(child.name === 'cubeTwo'){
-                console.log(child)
                 cubeTwo = child;
             }
             if(child.name === 'cubeThree'){
-                console.log(child)
                 cubeThree = child;
             }
         })

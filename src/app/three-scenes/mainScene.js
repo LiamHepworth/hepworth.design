@@ -68,19 +68,16 @@ function applyMat(modelNum, textureName){
     })
 }
 
-let designVideoTexture = createVidTexture('./assets/THREE-Videos/design.mp4');
+let designVideoTexture = createVidTexture('./assets/THREE-Videos/Design.mp4');
 let threeDVideoTexture = createVidTexture('./assets/THREE-Videos/3D.mp4');
 let codeVideoTexture = createVidTexture('./assets/THREE-Videos/Code.mp4'); 
 
 loader.load(
-    'assets/monitor.glb', 
+    'assets/THREE-Models/homeMonitor.glb', 
     (gltfScene) => {
         monitorModel = gltfScene.scene;
-
         monitorModels = [];
-        monitorModels.push(monitorModel);
-        monitorModels.push(monitorModel.clone());
-        monitorModels.push(monitorModel.clone());
+        monitorModels.push(monitorModel, monitorModel.clone(), monitorModel.clone());
 
         responsiveScene();
 
@@ -90,10 +87,7 @@ loader.load(
 
         mainScene.add(monitorModels[0], monitorModels[1], monitorModels[2]);
         return monitorModels;
-    }, 	
-    // (xhr) => {
-	// 	// console.log((Math.ceil(xhr.loaded / xhr.total * 100) ) + '% loaded');
-    // }
+    }
 );
 
 function desktopSceneSetup(spacing){
@@ -224,7 +218,6 @@ function animate() {
             mouseLookFlag = true;
             onmousemove = () => {
                 if(mouseLookFlag){
-                    console.log('looking')
                     monitorModels[0].lookAt(pointOfIntersection);
                     monitorModels[1].lookAt(pointOfIntersection);
                     monitorModels[2].lookAt(pointOfIntersection);
