@@ -378,6 +378,57 @@ let displayPage = {
             let currentIndex = 0
             let currentImage = images[currentIndex];
 
+            //allows for scrolling based on clicking each image
+            for(const child of projectImageContainer.children){
+                child.addEventListener('click', function(){
+                    currentIndex = Array.from(projectImageContainer.children).indexOf(this);
+                    currentImage = images[currentIndex];
+
+                    currentImage.scrollIntoView({
+                        behavior: 'smooth',
+                        inline: 'center',
+                    });
+                })
+            }
+
+            //scroll with mousewheel
+            let s = 0;
+
+            document.addEventListener('wheel', (e) => {
+                const delta = Math.sign(e.deltaY) * 0.49;
+
+                if(s >= 0 && s <= projectImageContainer.children.length - 1){
+                    s += delta;
+                    currentIndex = Math.round(s);
+                    currentImage = images[currentIndex];
+
+                } else if (s < 0) {
+                    s = 0;
+                    currentIndex = s 
+                    currentImage = images[currentIndex]; 
+
+                } else if (s > projectImageContainer.children.length - 1){
+                    s = projectImageContainer.children.length - 1;
+                    currentIndex = s 
+                    currentImage = images[currentIndex]; 
+
+                };
+
+                currentImage.scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'center',
+                });
+
+            });
+            
+
+            //scrolling based on arrow click
+            if(images.length > 1){
+                pageSectionTwo.el.append(leftArrow, rightArrow);
+            } else {
+                return;
+            }
+
             rightArrow.addEventListener('click', function(){
                 if(currentIndex < images.length - 1){
                     currentIndex ++
@@ -385,6 +436,7 @@ let displayPage = {
 
                     currentImage.scrollIntoView({
                         behavior: 'smooth',
+                        inline: 'center',
                     });
                 } else {
                     return
@@ -395,31 +447,16 @@ let displayPage = {
                 if(currentIndex > 0){
                     currentIndex --
                     currentImage = images[currentIndex]
-                    
+
                     currentImage.scrollIntoView({
                         behavior: 'smooth',
+                        inline: 'center',
                     });
                 } else {
                     return
                 }
             })
 
-            for(const child of projectImageContainer.children){
-                child.addEventListener('click', function(){
-                    currentIndex = Array.from(projectImageContainer.children).indexOf(this);
-                    currentImage = images[currentIndex];
-
-                    currentImage.scrollIntoView({
-                        behavior: 'smooth',
-                    });
-                })
-            }
-
-            if(images.length > 1){
-                pageSectionTwo.el.append(leftArrow, rightArrow);
-            } else {
-                return;
-            }
         })();
 
         //check if project object has a description to determine styling
@@ -454,13 +491,22 @@ let displayPage = {
 
         //check width to determine correct styling
         function checkProjectWindowSize(){
-            if(window.innerWidth >= 1080){
+            function desktop(){
                 pageContents.el.className = 'grid-container two-cols-25-75'
                 pageSectionTwo.el.className = 'grid-container left-border'
                 util.blueMenuBar(1, menuContainer);
+            };
+
+            if(window.innerWidth > 1425){
+                desktop();
+                document.querySelector('body').style.overflow = 'hidden'
+            }else if(window.innerWidth >= 1080){
+                desktop();
+                document.querySelector('body').style.overflow = 'visible'
             }else if(window.innerWidth < 1080){
                 pageContents.el.className = 'grid-container'
                 pageSectionTwo.el.className = ''
+                document.querySelector('body').style.overflow = 'visible'
             };
         };
 
@@ -669,4 +715,4 @@ let displayPage = {
 };
 
 //To ensure that the homepage loads when the page is first opened.
-window.onload = displayPage.home();
+window.onload = displayPage.project(0);

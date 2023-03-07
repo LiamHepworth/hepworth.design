@@ -780,6 +780,7 @@ body {
     width: auto;
     margin-top: auto;
     margin-bottom: auto;
+    scroll-snap-align: center;
   }
   #page-section-two .carousel-arrows {
     display: block;
