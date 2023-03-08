@@ -395,9 +395,17 @@ let displayPage = {
             (function horizontalScroll(){
                 let s = 0;
                 currentImage = images[0];
+
+                let mouseHover = false;
+                pageSectionTwo.el.addEventListener('mouseleave', function(){
+                    mouseHover = false;
+                })
+                pageSectionTwo.el.addEventListener('mouseover', function(){
+                    mouseHover = true;
+                })
                 
                 document.onwheel = function(e){
-                    if(window.innerWidth > 1425){
+                    if(mouseHover && window.innerWidth > 1425){
     
                         const delta = Math.sign(e.deltaY) * 0.49;
                         
