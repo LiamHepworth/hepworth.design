@@ -638,7 +638,7 @@ let displayPage = {
 
         let contactDescription = document.createElement('p');
         contactDescription.classList.add('body-text');
-        contactDescription.innerText = ("If you've made it this far, I'd love to hear from you. Drop me a line below.");
+        contactDescription.innerText = ("If you'd like to get in touch, use the form below or email me directly at hepworth.design@gmail.com");
         contactFormContainer.appendChild(contactDescription);
 
         //create form and set attributes
