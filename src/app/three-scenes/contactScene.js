@@ -62,6 +62,8 @@ loader.load(
 //controls
 let controls = new OrbitControls( contactCamera, contactRenderer.domElement );
 controls.enabled = true;
+controls.enablePan = false;
+controls.enableZoom = false;
 
 controls.minPolarAngle = 1.2;
 controls.maxPolarAngle = Math.PI/1.8;
@@ -77,6 +79,18 @@ contactScene.add( ambientLight );
 let clock = new THREE.Clock();
 let time = 0;
 let delta = 0;
+
+function contactCamDistance(){
+    if(container.offsetHeight < 300){
+        contactCamera.position.z = 12;
+        contactCamera.position.y = -0.5;        
+    } else {
+        contactCamera.position.z = 30;
+        contactCamera.position.y = -0;        
+    }
+}
+window.onload = contactCamDistance();
+window.addEventListener('resize', contactCamDistance);
 
 //animate loop
 function animate() {

@@ -208,7 +208,7 @@ function animate() {
     delta = clock.getDelta();
     time += delta;
 
-    //if statement to check whether model has loaded before applying rotation
+    // if statement to check whether model has loaded before applying rotation
     if(monitorModel){
         if(window.innerWidth < 1080){
             mouseLookFlag = false;

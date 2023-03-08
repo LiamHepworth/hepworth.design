@@ -59,7 +59,6 @@ function navCreation(){
         for(let i = 0; i < menuListNames.length; i++){
             navList.menuListItems[i] = document.createElement('li');
             navList.menuListItems[i].innerText = menuListNames[i].toUpperCase();
-            // navList.menuListItems[i].setAttribute('id', 'menu-item') //FIX - ID applied to multiple items - may not be needed.
             navList.menuList.appendChild(navList.menuListItems[i]);
         };
     })();
@@ -570,8 +569,16 @@ let displayPage = {
                     }
                 }, 100);
             }
-
             determineLinkPlacement();
+
+            function showHideThreeScene(){
+                if(pageSectionTwo.el.offsetHeight > 200){
+                    document.querySelector('.about-canvas').style.display = 'block'
+                } else {
+                    document.querySelector('.about-canvas').style.display = 'none'
+                }
+            }
+            showHideThreeScene()
 
             function checkAboutWindowSize(){
                 if(window.innerWidth >= 1080){
@@ -591,7 +598,6 @@ let displayPage = {
                     pageSectionTwo.el.className = ''
                 };
             };
-    
             checkAboutWindowSize();
 
 
@@ -599,6 +605,7 @@ let displayPage = {
                 if(history.state === 'about'){
                     checkAboutWindowSize();
                     determineLinkPlacement();
+                    showHideThreeScene();
                 }
             });
         };

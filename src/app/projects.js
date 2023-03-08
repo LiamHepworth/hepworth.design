@@ -62,6 +62,16 @@ export class Project {
 export const projectList = [
 
     new Project(
+        '3D Poster Series',
+        '3D Model/Graphic Poster',
+        ['/src/assets/project-images/3-Misc-Posters/image-01.png', '/src/assets/project-images/3-Misc-Posters/image-02.png', '/src/assets/project-images/3-Misc-Posters/image-03.png', '/src/assets/project-images/3-Misc-Posters/image-04.png', '/src/assets/project-images/3-Misc-Posters/image-07.png', '/src/assets/project-images/3-Misc-Posters/image-05.png', '/src/assets/project-images/3-Misc-Posters/image-06.png',],
+        null,
+        null,
+        'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
+        '/src/assets/project-images/3-Misc-Posters/thumbnail.png',
+    ),
+
+    new Project(
         'Exile Corp: Holo-Disk Reader',
         'Animation/3D Model',
         ['/src/assets/project-images/1-HoloDisk-Reader/image-01.png', '/src/assets/project-images/1-HoloDisk-Reader/image-02.png'],
@@ -72,23 +82,13 @@ export const projectList = [
     ),
 
     new Project(
-        '3D Poster Series',
-        '3D Model/Graphic Poster',
-        ['/src/assets/project-images/3-Misc-Posters/image-01.png', '/src/assets/project-images/3-Misc-Posters/image-02.png', '/src/assets/project-images/3-Misc-Posters/image-03.png', '/src/assets/project-images/3-Misc-Posters/image-04.png', '/src/assets/project-images/3-Misc-Posters/image-05.png', '/src/assets/project-images/3-Misc-Posters/image-06.png'],
-        null,
-        null,
-        'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
-        '/src/assets/project-images/3-Misc-Posters/image-01.png',
-    ),
-
-    new Project(
         'Procedural Animation',
         'Animation',
-        ['/src/assets/project-images/5-Looping-Geometry/image-01.png', '/src/assets/project-images/5-Looping-Geometry/image-02.png'],
-        ['/src/assets/project-images/5-Looping-Geometry/vid-01.mp4', '/src/assets/project-images/5-Looping-Geometry/vid-02.mp4'],
+        null,
+        ['/src/assets/project-images/5-Looping-Geometry/vid-01.mp4', '/src/assets/project-images/5-Looping-Geometry/vid-02.mp4', '/src/assets/project-images/5-Looping-Geometry/vid-03.mp4'],
         null,
         'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
-        '/src/assets/project-images/5-Looping-Geometry/image-01.png',
+        '/src/assets/project-images/5-Looping-Geometry/image-03.png',
     ),
 
     new Project(
@@ -108,6 +108,6 @@ export const projectList = [
         ['/src/assets/project-images/2-Nucleus/vid-01.mp4'],
         null,
         'Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras imperdiet, ex in scelerisque placerat, velit dui ultricies ipsum, viverra facilisis ', 
-        '/src/assets/project-images/2-Nucleus/image-01.png',
+        '/src/assets/project-images/2-Nucleus/image-02.png',
     ),
     ]; 
