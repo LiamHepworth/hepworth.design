@@ -37,7 +37,7 @@ let contactModels;
 let cubeOne, cubeTwo, cubeThree;
 
 loader.load(
-    'assets/THREE-Models/contactModels.glb',
+    './assets/THREE-Models/contactModels.glb',
     (gltfScene) => {
         contactModels = gltfScene.scene;
 
