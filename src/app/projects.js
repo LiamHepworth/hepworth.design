@@ -110,4 +110,4 @@ export const projectList = [
         'A speculative concept for an atomic microscope to be used during field expeditions. This device would allow users to collect biological material and interact with it at the cellular level. Taking aesthetic cues from sterile lab environments, the device features a pristine ceramic housing, accompanied by various displays and controls to interact with the subject. \n \n The custom animated typeface was developed by using a series of circles across a grid, connected by lines that scale in width relative to the distance of any point from one of the circles. This effect mimics the animation of the 3D cells in the centre of the device, which form a mesh around themselves as the animation plays. \n \n ', 
         '/src/assets/project-images/2-Nucleus/image-02.png',
     ),
-    ]; 
+]; 
