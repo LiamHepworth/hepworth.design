@@ -3,7 +3,7 @@ const path = require("path")
 module.exports = {
     mode: "development",
 
-    entry: ["./src/index.js", "./src/styles/css/styles.css"],
+    entry: ["./src/index.js"],
 
     devServer: {
         static: {
@@ -25,31 +25,15 @@ module.exports = {
                 use: ["style-loader", "css-loader"],
             },
             // {
-            //     test: /\.svg$/,
-            //     use: {
-            //         loader: "svg-inline-loader",
-            //         options: {
-            //             name: "[name].[ext]",
-            //             outputPath: "assets"
-            //         }
-            //     }
-            //  },
-            // {
-            //     test: /\.(png|svg|jpg|gif)$/,
-            //     use: {
-            //         loader: "file-loader",
-            //         options: {
-            //             name: "[name].[hash].[ext]",
-            //             outputPath: "assets"
-            //         }
-            //     }
-            // }
+            //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            //     use: "file-loader"
+            // },
         ],
     },
 
-
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, "docs")
+        path: path.resolve(__dirname, "docs"),
+        publicPath: '/'
     },
 };
