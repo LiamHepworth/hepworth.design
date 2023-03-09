@@ -5,18 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --config webpack.config.js"
+    "start": "webpack --config webpack.config.js",
+    "serve": "webpack-dev-server --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LiamHepworth/Hepworth.design-portfolio.git"
+    "url": "git+https://github.com/LiamHepworth/hepworth.design.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LiamHepworth/Hepworth.design-portfolio/issues"
+    "url": "https://github.com/LiamHepworth/hepworth.design/issues"
   },
-  "homepage": "https://github.com/LiamHepworth/Hepworth.design-portfolio#readme",
+  "homepage": "https://github.com/LiamHepworth/hepworth.design#readme",
   "dependencies": {
     "feather-icons": "^4.29.0",
     "three": "^0.149.0"
@@ -24,8 +25,12 @@
   "devDependencies": {
     "css-loader": "^6.7.3",
     "file-loader": "^6.2.0",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
+    "svg-inline-loader": "^0.8.2",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   }
 }
