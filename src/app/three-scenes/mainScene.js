@@ -73,7 +73,7 @@ let threeDVideoTexture = createVidTexture('/src/assets/THREE-Videos/3D.mp4');
 let codeVideoTexture = createVidTexture('/src/assets/THREE-Videos/Code.mp4'); 
 
 loader.load(
-    '/src/assets/THREE-Models/homeMonitor.glb', 
+    'src/assets/THREE-Models/homeMonitor.glb', 
     (gltfScene) => {
         monitorModel = gltfScene.scene;
         monitorModels = [];

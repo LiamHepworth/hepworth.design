@@ -47,7 +47,7 @@ const loader = new GLTFLoader(manager);
 let aboutModels;
 
 loader.load(
-    '/src/assets/THREE-Models/aboutModels.glb',
+    'src/assets/THREE-Models/aboutModels.glb',
     (gltfScene) => {
         aboutModels = gltfScene.scene;
 
