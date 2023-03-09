@@ -1,3 +1,4 @@
+import './styles/css/styles.css'
 import { monitorModels, mainRenderer } from "/src/app/THREE-Scenes/mainScene"
 import { aboutRenderer } from "/src/app/THREE-Scenes/aboutScene";
 import { contactRenderer } from "/src/app/THREE-Scenes/contactScene";
@@ -5,7 +6,6 @@ import { util } from "./app/utilities";
 import { projectList } from "./app/projects";
 import { Page, Section } from "./app/pageSections";
 import {threeIsLoaded, contentIsLoaded} from "./app/loadTracker"
-import './styles/css/styles.css'
 // import './assets/print_marks.svg'
 
 const fullPage = document.querySelector('html')
