@@ -8,7 +8,9 @@ module.exports = {
         filename: "bundle[contenthash].js",
         path: path.resolve(__dirname, "docs"),
         clean: true,
+        assetModuleFilename: "[name][ext]"
     },
+
     devtool: "source-map",
     devServer: {
         static: {
@@ -27,6 +29,10 @@ module.exports = {
                 use: [
                     "style-loader", "css-loader", "sass-loader"
                 ]
+            },
+            {
+                test: /\.(png|svg|jpg)$/i,
+                type: "asset/resource"
             }
         ]
     },

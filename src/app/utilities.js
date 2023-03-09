@@ -84,4 +84,8 @@ export let util = {
         
         return backdrop;
     }, 
+
+    importAll: (r) => {
+        r.keys().forEach(r)
+    }
 };
