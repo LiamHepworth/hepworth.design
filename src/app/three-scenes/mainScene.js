@@ -68,12 +68,12 @@ function applyMat(modelNum, textureName){
     })
 }
 
-let designVideoTexture = createVidTexture('./assets/THREE-Videos/Design.mp4');
-let threeDVideoTexture = createVidTexture('./assets/THREE-Videos/3D.mp4');
-let codeVideoTexture = createVidTexture('./assets/THREE-Videos/Code.mp4'); 
+let designVideoTexture = createVidTexture('/src/assets/THREE-Videos/Design.mp4');
+let threeDVideoTexture = createVidTexture('/src/assets/THREE-Videos/3D.mp4');
+let codeVideoTexture = createVidTexture('/src/assets/THREE-Videos/Code.mp4'); 
 
 loader.load(
-    'assets/THREE-Models/homeMonitor.glb', 
+    '/src/assets/THREE-Models/homeMonitor.glb', 
     (gltfScene) => {
         monitorModel = gltfScene.scene;
         monitorModels = [];
