@@ -19,7 +19,7 @@ contactRenderer.toneMappingExposure = 1.7;
 
 //camera
 const contactCamera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.1, 1000 );
-contactCamera.position.z = 30;
+// contactCamera.position.z = 30;
 contactCamera.rotation.set(0, 0, 0)
 
 //set renderer size to be equal to the container element

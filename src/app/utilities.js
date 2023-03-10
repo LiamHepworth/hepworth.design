@@ -86,6 +86,8 @@ export let util = {
     }, 
 
     importAll: (r) => {
-        r.keys().forEach(r)
+        let images = {};
+        r.keys().map(item => { images[item.replace('./', '')] = r(item) });
+        return images;
     }
-};
+}

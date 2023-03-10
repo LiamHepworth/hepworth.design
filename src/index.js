@@ -7,10 +7,6 @@ import { Page, Section } from "./app/pageSections";
 import {threeIsLoaded, contentIsLoaded} from "./app/loadTracker"
 import "./styles/SCSS/index.scss"
 
-// import image from '/src/assets/project-images/1-HoloDisk-Reader/image-01.png'
-// util.importAll(require.context('/src/assets/project-images/1-HoloDisk-Reader', false, /\.jpg\.svg\.png$/))
-
-
 const fullPage = document.querySelector('html')
 const pageBody = document.querySelector('body');
 const pageHeaderSection = document.querySelector('#header-section');

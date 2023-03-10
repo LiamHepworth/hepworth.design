@@ -1,5 +1,9 @@
 import { util } from "./utilities";
 
+// const images = util.importAll(require.context('../src/assets/project-images/1-HoloDisk-Reader/', false, '/\.png/'))
+// const image = require('../assets/project-images/1-HoloDisk-Reader/image-01.png')
+
+
 export class Project {
     constructor(name, type, images, videos, embeddedContent, description, thumbnail){
         this.name = name;
@@ -64,11 +68,11 @@ export const projectList = [
     new Project(
         '3D POSTER SERIES',
         '3D Model / Graphic Posters',
-        ['/src/assets/project-images/3-Misc-Posters/image-01.png', '/src/assets/project-images/3-Misc-Posters/image-02.png', '/src/assets/project-images/3-Misc-Posters/image-03.png', '/src/assets/project-images/3-Misc-Posters/image-04.png', '/src/assets/project-images/3-Misc-Posters/image-07.png', '/src/assets/project-images/3-Misc-Posters/image-05.png', '/src/assets/project-images/3-Misc-Posters/image-06.png',],
+        ['assets/project-images/3-Misc-Posters/image-01.png', 'assets/project-images/3-Misc-Posters/image-02.png', 'assets/project-images/3-Misc-Posters/image-03.png', 'assets/project-images/3-Misc-Posters/image-04.png', 'assets/project-images/3-Misc-Posters/image-07.png', 'assets/project-images/3-Misc-Posters/image-05.png', 'assets/project-images/3-Misc-Posters/image-06.png',],
         null,
         null,
         "A series of mixed-media, graphic posters created throughout 2021 and 2022. Whilst building this series, I primarily focussed on expanding my technical abilities with 3D tools and experimenting with creating custom typography, textures, and unique compositions. \n \n 1. Vengeance - Inspired by modern true crime documentary visuals, this poster features an original model of a Colt M1911 pistol. After seeing this gun used by Jules in Pulp Fiction, I chose it specifically because of its classic film noir style. This is one of the most complex models I have worked on, requiring precision to ensure its proportions correctly matched the real-world counterpart. \n \n 2. Post-human - An ethereal scene of a sole island in a sea of fog, that examines the blurred lines between physical and digital space. Working on this piece developed my understanding of instancing objects, such as the leaves and the grass, to efficiently build realistic scenes. \n \n 3. Core 3 - A sci-fi inspired scene of a remote power station, blending brutalist architectural concepts with futuristic ambiance and featuring custom hand drawn lettering. \n \n 4. Extinction - A speculative museum display of the fossilised teeth of a humanoid creature. The procedural texture for this model was based on amber, a gemstone which forms from fossilised tree resin. \n \n 5. Unreal - This was imagined as a terraforming device produced for space travellers in the distant future, enabling them to set up new civilisations on other worlds. The concept is inspired by the G.E.C.K from the Fallout video game series. \n \n 6. Bones - Depicting a giant ribcage emerging from a watery grave, this poster was an opportunity to explore lighting and vector displacement, as well as heavy texturing and custom typography. \n \n 7. Home Defence - Envisioned as the front page of a satirical survival manual, I experimented with ways to create procedural barbed wire which followed a 3D vector curve. \n \n", 
-        '/src/assets/project-images/3-Misc-Posters/thumbnail.png',
+        'assets/project-images/3-Misc-Posters/thumbnail.png',
     ),
 
     new Project(
