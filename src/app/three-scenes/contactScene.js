@@ -19,7 +19,7 @@ contactRenderer.toneMappingExposure = 1.7;
 
 //camera
 const contactCamera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.1, 1000 );
-// contactCamera.position.z = 30;
+contactCamera.position.z = 30;
 contactCamera.rotation.set(0, 0, 0)
 
 //set renderer size to be equal to the container element
@@ -89,7 +89,9 @@ function contactCamDistance(){
         contactCamera.position.y = -0;        
     }
 }
-window.onload = contactCamDistance();
+window.onload = () => {
+    setTimeout(contactCamDistance(), 3000)
+}
 window.addEventListener('resize', contactCamDistance);
 
 //animate loop

@@ -175,7 +175,7 @@
 
 .header-section{
     margin: $containerSideMargins;
-    margin-top: 3.2rem;
+    margin-top: 1.8rem;
     margin-bottom: $conatinerBottomMargin;
     display: flex;
     flex-flow: row;
@@ -301,7 +301,7 @@
     // cursor: pointer;
     height: 100vh;
     width: 100%;
-    z-index: 2;
+    z-index: 1000;
     position: absolute;
     top: 0;
     left: 100%;
@@ -466,7 +466,7 @@
     height: $headerFooterHeight;
     width: 100%;
     background-color: $bgColourDark;
-    display: flex;
+    display: none;
     position: fixed;
     z-index: 5;
     
@@ -528,6 +528,11 @@
 }
 
 @media (min-width: 780px){
+
+    .bar{
+        display: flex;
+    }
+
     .gallery{
         gap: 3rem;
         margin: auto;
@@ -696,8 +701,8 @@
         height: 100vh;
 
         padding-top: 25vh;
-        padding-left: 7vw;
-        padding-right: 1vw;
+        padding-left: 4vw;
+        padding-right: 3vw;
     }
     
     #page-section-two{
@@ -751,6 +756,8 @@
 
     //nav
     .bar{
+
+        display: flex;
 
         height: $headerFooterHeightDesktop;
         
@@ -857,8 +864,8 @@
     .proj-text-container{
         position: relative;
         padding-top: 25vh;
-        padding-left: 7vw;
-        padding-right: 2vw;
+        // padding-left: 7vw;
+        // padding-right: 2vw;
     }
 
     .contact-form-container{

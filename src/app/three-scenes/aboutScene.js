@@ -19,7 +19,7 @@ aboutRenderer.toneMappingExposure = 1.7;
 
 //camera
 const aboutCamera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 0.1, 1000 );
-// aboutCamera.position.z = 18;
+aboutCamera.position.z = 18;
 aboutCamera.rotation.set(0, 0, 0)
 
 //set renderer size to be equal to the container element
@@ -71,7 +71,9 @@ function aboutCamDistance(){
         aboutCamera.position.z = 18;      
     }
 }
-window.onload = aboutCamDistance();
+window.onload = () => {
+    setTimeout(aboutCamDistance(), 3000)
+}
 window.addEventListener('resize', aboutCamDistance);
 
 //animate loop

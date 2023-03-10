@@ -25,7 +25,7 @@ export class Project {
     carouselCreation(container){
         function createVideos(index, item){
             let video = document.createElement('video');
-            util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: true});
+            util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: false});
 
             video.classList.add('videos');
 

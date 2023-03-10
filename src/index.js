@@ -15,6 +15,7 @@ const burgerMenuMobile = document.querySelector('#burger-menu');
 const menuContainer = document.createElement('nav');
 const bottomNavBar = document.querySelector('.bar.bottom-bar');
 const curs = document.querySelector('.cursor');
+const printMarkers = document.querySelector('#print-markers')
 const preloader = document.querySelector('#preload-container')
 
 let pageContents = new Page(document.querySelector('#page-contents'), pageBody, pageBody);
@@ -323,7 +324,9 @@ let displayPage = {
         pageSectionOne.clear()
         pageSectionOne.el.className = 'proj-text-container'
         pageSectionTwo.clear()
-        
+
+        printMarkers.style.display = 'none'
+
         pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', 'header small-header');
         // pageHeaderSection.className = 'header-section'
 
@@ -540,6 +543,8 @@ let displayPage = {
         pageSectionOne.clear()
         pageSectionTwo.clear()
 
+        printMarkers.style.display = 'none'
+
         //append THREE scene
         pageSectionTwo.el.appendChild(aboutRenderer.domElement);
         
@@ -630,6 +635,8 @@ let displayPage = {
         pageContents.reset()
         pageSectionOne.clear()
         pageSectionTwo.clear()
+
+        printMarkers.style.display = 'none'
 
         pageSectionTwo.el.appendChild(contactRenderer.domElement);
         

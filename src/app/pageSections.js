@@ -7,14 +7,17 @@ class Page {
     clear(){
         this.el.innerHTML = '';
         this.el.className = '';
+        document.querySelector('#print-markers').style.display = 'flex'
     }
-
+    
     reset(){
         this.el.className = 'grid-container'
-
+        
         document.querySelector('body').style.overflow = 'visible'
         document.querySelector('body').classList.add('grid-background');
         document.querySelector('html').style.overflow = 'visible'
+        document.querySelector('#print-markers').style.display = 'flex'
+
     }
 }
 
