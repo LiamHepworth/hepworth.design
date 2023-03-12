@@ -160,6 +160,7 @@ function navCreation(){
         menuContainer.appendChild(navList.menuList);
         navList.menuListItems[3].appendChild(linkSection); 
         linkSection.append(socialLinks.instagram, socialLinks.linkedIn);
+        feather.replace();
     };
 
     //display the nav style which corresponds to the screen size
@@ -176,8 +177,6 @@ function navCreation(){
     //check screen size
     window.addEventListener('resize', () => {
         displayNav()
-        //update SVG's when desktop nav is loaded
-        feather.replace();
     });
 
     //add a listener to each list item which leads to it's corresponding page
