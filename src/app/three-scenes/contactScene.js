@@ -80,19 +80,19 @@ let clock = new THREE.Clock();
 let time = 0;
 let delta = 0;
 
-// function contactCamDistance(){
-//     if(container.offsetHeight < 300){
-//         contactCamera.position.z = 12;
-//         contactCamera.position.y = -0.5;        
-//     } else {
-//         contactCamera.position.z = 30;
-//         contactCamera.position.y = -0;        
-//     }
-// }
-// window.onload = () => {
-//     setTimeout(contactCamDistance(), 3000)
-// }
-// window.addEventListener('resize', contactCamDistance);
+function contactCamDistance(){
+    if(container.offsetHeight < 300){
+        contactCamera.position.z = 12;
+        contactCamera.position.y = -0.5;        
+    } else {
+        contactCamera.position.z = 30;
+        contactCamera.position.y = -0;        
+    }
+}
+window.onload = () => {
+    setTimeout(contactCamDistance(), 3000)
+}
+window.addEventListener('resize', contactCamDistance);
 
 //animate loop
 function animate() {

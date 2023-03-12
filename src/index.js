@@ -587,14 +587,14 @@ let displayPage = {
             }
             determineLinkPlacement();
 
-            function showHideThreeScene(){
-                if(pageSectionTwo.el.offsetHeight > 200){
-                    document.querySelector('.about-canvas').style.display = 'block'
-                } else {
-                    document.querySelector('.about-canvas').style.display = 'none'
-                }
-            }
-            showHideThreeScene()
+            // function showHideThreeScene(){
+            //     if(pageSectionTwo.el.offsetHeight > 200){
+            //         document.querySelector('.about-canvas').style.display = 'block'
+            //     } else {
+            //         document.querySelector('.about-canvas').style.display = 'none'
+            //     }
+            // }
+            // showHideThreeScene()
 
             function checkAboutWindowSize(){
                 if(window.innerWidth >= 1080){
@@ -621,7 +621,7 @@ let displayPage = {
                 if(history.state === 'about'){
                     checkAboutWindowSize();
                     determineLinkPlacement();
-                    showHideThreeScene();
+                    // showHideThreeScene();
                 }
             });
         };
