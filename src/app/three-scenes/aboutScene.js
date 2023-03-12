@@ -64,17 +64,17 @@ let clock = new THREE.Clock();
 let time = 0;
 let delta = 0;
 
-function aboutCamDistance(){
-    if(container.offsetHeight < 300){
-        aboutCamera.position.z = 13;     
-    } else {
-        aboutCamera.position.z = 18;      
-    }
-}
-window.onload = () => {
-    setTimeout(aboutCamDistance(), 3000)
-}
-window.addEventListener('resize', aboutCamDistance);
+// function aboutCamDistance(){
+//     if(container.offsetHeight < 300){
+//         aboutCamera.position.z = 13;     
+//     } else {
+//         aboutCamera.position.z = 18;      
+//     }
+// }
+// window.onload = () => {
+//     setTimeout(aboutCamDistance(), 3000)
+// }
+// window.addEventListener('resize', aboutCamDistance);
 
 //animate loop
 function animate() {

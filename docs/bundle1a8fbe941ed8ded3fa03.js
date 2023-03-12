@@ -3058,17 +3058,17 @@ let clock = new three__WEBPACK_IMPORTED_MODULE_2__.Clock();
 let time = 0;
 let delta = 0;
 
-function aboutCamDistance(){
-    if(container.offsetHeight < 300){
-        aboutCamera.position.z = 13;     
-    } else {
-        aboutCamera.position.z = 18;      
-    }
-}
-window.onload = () => {
-    setTimeout(aboutCamDistance(), 3000)
-}
-window.addEventListener('resize', aboutCamDistance);
+// function aboutCamDistance(){
+//     if(container.offsetHeight < 300){
+//         aboutCamera.position.z = 13;     
+//     } else {
+//         aboutCamera.position.z = 18;      
+//     }
+// }
+// window.onload = () => {
+//     setTimeout(aboutCamDistance(), 3000)
+// }
+// window.addEventListener('resize', aboutCamDistance);
 
 //animate loop
 function animate() {
@@ -3188,19 +3188,19 @@ let clock = new three__WEBPACK_IMPORTED_MODULE_2__.Clock();
 let time = 0;
 let delta = 0;
 
-function contactCamDistance(){
-    if(container.offsetHeight < 300){
-        contactCamera.position.z = 12;
-        contactCamera.position.y = -0.5;        
-    } else {
-        contactCamera.position.z = 30;
-        contactCamera.position.y = -0;        
-    }
-}
-window.onload = () => {
-    setTimeout(contactCamDistance(), 3000)
-}
-window.addEventListener('resize', contactCamDistance);
+// function contactCamDistance(){
+//     if(container.offsetHeight < 300){
+//         contactCamera.position.z = 12;
+//         contactCamera.position.y = -0.5;        
+//     } else {
+//         contactCamera.position.z = 30;
+//         contactCamera.position.y = -0;        
+//     }
+// }
+// window.onload = () => {
+//     setTimeout(contactCamDistance(), 3000)
+// }
+// window.addEventListener('resize', contactCamDistance);
 
 //animate loop
 function animate() {
@@ -3649,7 +3649,7 @@ class Project {
             
             video.oncanplay = () => {  //ensures video autoplays when page is fully loaded
                 video.muted = true;
-                video.play();
+                window.onload = () => (video.play());
             }
             
             return video;
@@ -3821,7 +3821,7 @@ let util = {
         }
         
         //to ensure width/height/left are accurate for elements which use responsive units
-        window.setTimeout(applyBackdrop, 2);
+        window.setTimeout(applyBackdrop, 10);
         
         window.onresize = () => {
             applyBackdrop();
@@ -62290,4 +62290,4 @@ function toCreasedNormals( geometry, creaseAngle = Math.PI / 3 /* 60 degrees */ 
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=bundle66e19336b6202c508e87.js.map
+//# sourceMappingURL=bundle1a8fbe941ed8ded3fa03.js.map

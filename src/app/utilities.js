@@ -76,7 +76,7 @@ export let util = {
         }
         
         //to ensure width/height/left are accurate for elements which use responsive units
-        window.setTimeout(applyBackdrop, 2);
+        window.setTimeout(applyBackdrop, 10);
         
         window.onresize = () => {
             applyBackdrop();

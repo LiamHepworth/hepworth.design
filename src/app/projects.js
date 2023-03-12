@@ -37,7 +37,7 @@ export class Project {
             
             video.oncanplay = () => {  //ensures video autoplays when page is fully loaded
                 video.muted = true;
-                video.play();
+                window.onload = () => (video.play());
             }
             
             return video;
