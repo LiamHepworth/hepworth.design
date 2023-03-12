@@ -1,9 +1,5 @@
 import { util } from "./utilities";
 
-// const images = util.importAll(require.context('../src/assets/project-images/1-HoloDisk-Reader/', false, '/\.png/'))
-// const image = require('../assets/project-images/1-HoloDisk-Reader/image-01.png')
-
-
 export class Project {
     constructor(name, type, images, videos, embeddedContent, description, thumbnail){
         this.name = name;

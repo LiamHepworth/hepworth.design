@@ -4,7 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: "production",
-    entry: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./node_modules/feather-icons/dist/feather.js")],
+    entry: path.resolve(__dirname, "./src/index.js"),
     output: {
         filename: "bundle[contenthash].js",
         path: path.resolve(__dirname, "docs"),
@@ -50,5 +50,6 @@ module.exports = {
                 { from: 'src/assets', to: 'assets' },
               ]
             }
-          )    ]
+        )    
+    ]
 };

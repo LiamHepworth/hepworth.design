@@ -427,7 +427,7 @@ body {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-image: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, #171717 80%);
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, #171717 80%);
   z-index: 1;
 }
 
@@ -728,7 +728,7 @@ body {
     height: 10rem;
     width: 70%;
     position: absolute;
-    background-image: linear-gradient(180deg, rgba(204, 204, 204, 0) 40%, #171717 80%);
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, #171717 80%);
     pointer-events: none;
   }
 }
