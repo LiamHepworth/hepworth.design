@@ -3638,6 +3638,8 @@ class Project {
         function createVideos(index, item){
             let video = document.createElement('video');
             _utilities__WEBPACK_IMPORTED_MODULE_0__.util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: false});
+            video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+            video.setAttribute('playsinline', 'playsinline');
 
             video.classList.add('videos');
 
@@ -62288,4 +62290,4 @@ function toCreasedNormals( geometry, creaseAngle = Math.PI / 3 /* 60 degrees */ 
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=bundlea7ff097a4d599a3a9de9.js.map
+//# sourceMappingURL=bundle66e19336b6202c508e87.js.map

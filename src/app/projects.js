@@ -26,6 +26,8 @@ export class Project {
         function createVideos(index, item){
             let video = document.createElement('video');
             util.setAttributes(video, {autoplay: 'autoplay', loop: true, controls: false});
+            video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+            video.setAttribute('playsinline', 'playsinline');
 
             video.classList.add('videos');
 
