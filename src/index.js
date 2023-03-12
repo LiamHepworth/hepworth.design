@@ -137,7 +137,11 @@ function navCreation(){
 
     //show mobile menu on burgermenu click
     burgerMenuMobile.addEventListener('click', function(){
-        menuAnimation('play');
+        if(burgerMenuMobile.innerText === 'menu'){
+            menuAnimation('play');
+        } else if(burgerMenuMobile.innerText === 'arrow_back'){
+            window.history.back();
+        }
     });
     
     //hide menu on close button click
@@ -326,8 +330,7 @@ let displayPage = {
 
         printMarkers.style.display = 'none'
 
-        pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'menu', 'header small-header');
-        // pageHeaderSection.className = 'header-section'
+        pageSectionOne.appendHeader(projectList[projectIndex].name.toUpperCase(), 'arrow_back', 'header small-header');
 
         let currentProject = projectList[projectIndex];
 

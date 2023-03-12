@@ -299,7 +299,7 @@ body {
 .menu-container {
   height: 100vh;
   width: 100%;
-  z-index: 2;
+  z-index: 1000;
   position: absolute;
   top: 0;
   left: 100%;
@@ -623,8 +623,8 @@ body {
     top: 0;
     height: 100vh;
     padding-top: 25vh;
-    padding-left: 7vw;
-    padding-right: 1vw;
+    padding-left: 4vw;
+    padding-right: 3vw;
   }
   #page-section-two .carousel-arrows {
     display: none;
@@ -749,8 +749,6 @@ body {
   .proj-text-container {
     position: relative;
     padding-top: 25vh;
-    padding-left: 7vw;
-    padding-right: 2vw;
   }
   .contact-form-container {
     max-width: 50rem;
@@ -823,7 +821,7 @@ body {
 
 .center-children {
   align-self: center;
-  padding: 4rem 4rem 4rem 7rem;
+  padding: 4rem 4rem 4rem 4rem;
 }
 
 .content-split {

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    mode: "production",
+    mode: "development",
     entry: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./node_modules/feather-icons/dist/feather.js")],
     output: {
         filename: "bundle[contenthash].js",
